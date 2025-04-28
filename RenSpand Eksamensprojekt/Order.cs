@@ -19,15 +19,14 @@ namespace RenSpand_Eksamensprojekt
         public DateTime DateDone { get; set; }
 
         public DateTime? TrashCan { get; set; }
-
-    }
-    public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
+    
+        public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
-            Id = id;
-            ServiceItems = serviceItems;
-            TotalPrice = totalPrice;
-            DateStart = dateStart;
-            DateDone = dateDone;
+                Id = id;
+                ServiceItems = serviceItems;
+                TotalPrice = totalPrice;
+                DateStart = dateStart;
+                DateDone = dateDone;
         }
     }
 }
