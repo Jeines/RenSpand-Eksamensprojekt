@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class Rute : Order
+    public class Rute
     {
         public int Id { get; set; }
         public List<Order> orders { get; set; }
-         public Rute(int id, List<Order> ordersList)
+        public Rute(int id, List<Order> ordersList)
         {
             Id = id;
             orders = ordersList;
