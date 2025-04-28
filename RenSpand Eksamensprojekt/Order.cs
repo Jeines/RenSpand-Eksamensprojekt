@@ -20,7 +20,7 @@ namespace RenSpand_Eksamensprojekt
 
         public DateTime? TrashCan { get; set; }
 
-    }
+    
     public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
             Id = id;
