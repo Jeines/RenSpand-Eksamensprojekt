@@ -11,7 +11,7 @@ namespace RenSpand_Eksamensprojekt
     {
         public int Id {  get; set; }
 
-        //public  Image Picture {  get; set; } 
+        //public string placeholder { get; set; }
 
         public string Description { get; set; }
 
