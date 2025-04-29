@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenSpand Eksamensprojekt", "RenSpand Eksamensprojekt\RenSpand Eksamensprojekt.csproj", "{7D6A022C-2311-4F30-9FE4-571B68C4D581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenspandWebsite", "RenspandWebsite\RenspandWebsite.csproj", "{9885A237-24B8-4EB9-855F-2967BC4BA064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenspandWebsite", "RenspandWebsite\RenspandWebsite.csproj", "{9885A237-24B8-4EB9-855F-2967BC4BA064}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
