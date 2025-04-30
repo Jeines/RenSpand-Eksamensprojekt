@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class Profile
+    public class Profile : User
     {
         public string Username { get; set; }
 

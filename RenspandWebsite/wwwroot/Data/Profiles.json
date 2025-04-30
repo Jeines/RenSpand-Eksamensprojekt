@@ -1,0 +1,29 @@
+[
+  {
+    "Username": "admin",
+    "Password": "AQAAAAIAAYagAAAAEKVHJmOzhRZp9b4pu9P4AUJEVLuVjE66CF0M8cky5iAJvWOYsPTTWrKjZmdek6eBVw==",
+    "Id": 0,
+    "Name": null,
+    "Email": null,
+    "PhoneNumber": null,
+    "Role": "Admin"
+  },
+  {
+    "Username": "heho",
+    "Password": "AQAAAAIAAYagAAAAENzfhpFAUeumfMiBZc/xnY6C96FPtcqZpx4p9eRBMzMrOvXWEqbi1rpgWEAcA2rkvg==",
+    "Id": 0,
+    "Name": null,
+    "Email": null,
+    "PhoneNumber": null,
+    "Role": "Admin"
+  },
+  {
+    "Username": "jaef",
+    "Password": "AQAAAAIAAYagAAAAEN5RfZBg/BWMvNa9BjDaC2YpqU2JoC5iDqJL\u002BDdFchXVAV\u002B7HOTa16shG\u002BiW1hEttQ==",
+    "Id": 0,
+    "Name": null,
+    "Email": null,
+    "PhoneNumber": null,
+    "Role": "Private"
+  }
+]
