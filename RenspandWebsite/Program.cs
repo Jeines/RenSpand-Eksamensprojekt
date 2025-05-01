@@ -1,7 +1,23 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<ProfileService, ProfileService>();
+builder.Services.AddTransient<JsonFileService<Profile>>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
+    cookieOptions.LoginPath = "/Login/LogInPage";
+
+});
+builder.Services.AddMvc().AddRazorPagesOptions(options => {
+    options.Conventions.AuthorizeFolder("/Item");
+
+}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 var app = builder.Build();
 
@@ -17,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
