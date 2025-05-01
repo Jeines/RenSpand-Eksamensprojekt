@@ -14,7 +14,7 @@ namespace RenSpand_Eksamensprojekt
 
         public User Buyer { get; set; }
 
-        List<Address> AddressList { get; set; }
+        public List<Address> AddressList { get; set; }
 
         public decimal TotalPrice { get; set; }
 
