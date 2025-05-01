@@ -79,7 +79,18 @@ namespace RenspandWebsite.Service
 
         public void UpdateWork(Work work)
         {
-            throw new NotImplementedException();
+            if (work != null)
+            {
+                foreach (Work w in _work)
+                {
+                    if (w.Id == work.Id)
+                    {
+                        w.Name = work.Name;
+                        w.Price = work.Price;
+                    }
+                }
+                JsonFileService.SaveJsonObjects(_work);
+            }
         }
     }
 }
