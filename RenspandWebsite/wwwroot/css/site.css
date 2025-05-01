@@ -20,3 +20,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.LogInContainer {
+    position: absolute;
+    width: fit-content;
+    transform: translate(-50%, 25%);
+    left: 50%;
+    background-color: rgb(243, 240, 232);
+    scale: 1.35;
+    border-radius: 20px;
+}
+
+.LogInContainerHeader{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    padding: 1px;
+    background-color: #4f977a;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    color: #fff;
+}
+
+.form-group{
+    margin: 20px;
+    
+}
