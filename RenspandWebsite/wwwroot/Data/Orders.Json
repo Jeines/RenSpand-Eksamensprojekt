@@ -145,7 +145,6 @@
         }
       }
     ],
-    "Buyer": {
       "Id": 5,
       "Name": "Eva Tran",
       "Email": "eva@example.com"
