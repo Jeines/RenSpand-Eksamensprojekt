@@ -29,14 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        @{
-                            if (LogInPageModel.CurrentUser != null && LogInPageModel.CurrentUser.Username == "admin")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-page="/Admin/CreateUser">Create User</a>
-                                </li>
-                            }
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Work/GetAllWork">Priser</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         @{
