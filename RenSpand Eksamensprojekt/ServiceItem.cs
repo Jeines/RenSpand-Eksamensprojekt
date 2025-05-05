@@ -8,22 +8,16 @@ namespace RenSpand_Eksamensprojekt
 {
     public class ServiceItem
     {
-        private int Amount { get; set; }
+        public int Amount { get; set; }
 
+        public Service ServiceWork { get; set; }
 
-        public ServiceItem(int amount)
+        public ServiceItem(int amount, Service serviceWork)
         {
             Amount = amount;
+            ServiceWork = serviceWork;
         }
 
         public ServiceItem() { }
-    }
-    public class ServiceItemList
-    {
-        public List<ServiceItem> ServiceItems { get; set; }
-        public ServiceItemList()
-        {
-            ServiceItems = new List<ServiceItem>();
-        }
     }
 }

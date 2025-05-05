@@ -16,6 +16,10 @@ namespace RenspandWebsite.Service
             get { return Path.Combine(WebHostEnvironment.WebRootPath, "Data", typeof(T).Name + "s.json"); }
         }
 
+        /// <summary>
+        /// Saves a list of objects to a JSON file.
+        /// </summary>
+        /// <param name="objs"></param>
         public void SaveJsonObjects(List<T> objs)
         {
             using (FileStream jsonFileWriter = File.Create(JsonFileName))
@@ -29,6 +33,10 @@ namespace RenspandWebsite.Service
             }
         }
 
+        /// <summary>
+        /// Reads the JSON file and deserializes it into a list of objects.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<T> GetJsonObjects()
         {
             using (StreamReader jsonFileReader = File.OpenText(JsonFileName))
