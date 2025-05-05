@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddTransient<JsonFileService<Work>>();
 //TODO: working code if other code break
 // builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
+builder.Services.AddSingleton<OrderService, OrderService>();
+builder.Services.AddTransient<JsonFileService<Order>>();
 
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {

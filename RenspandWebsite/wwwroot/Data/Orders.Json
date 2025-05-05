@@ -8,6 +8,7 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
+          "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -39,6 +40,7 @@
           "Id": 2,
           "Name": "Driveway Pressure Wash",
           "Description": "High-pressure cleaning of driveway surfaces.",
+          "PhoneNumber": "123-456-7890",
           "Price": 49.99
         }
       }
@@ -70,6 +72,7 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
+          "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -101,6 +104,7 @@
           "Id": 3,
           "Name": "Gutter Cleaning",
           "Description": "Manual removal of debris from gutters.",
+          "PhoneNumber": "123-456-7890",
           "Price": 89.50
         }
       },
@@ -110,6 +114,7 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
+          "Phonenumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -141,6 +146,7 @@
           "Id": 2,
           "Name": "Driveway Pressure Wash",
           "Description": "High-pressure cleaning of driveway surfaces.",
+          "PhoneNumber": "123-456-7890",
           "Price": 49.99
         }
       }
