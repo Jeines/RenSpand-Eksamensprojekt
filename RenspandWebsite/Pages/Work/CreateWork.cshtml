@@ -1,0 +1,40 @@
+﻿@page
+@model RenspandWebsite.Pages.Work.CreateWorkModel
+@{
+}
+@{
+    ViewData["Title"] = "Create Work";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Create Work</h1>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Work.Id"></label>
+        <input asp-for="Work.Id" class="form-control" />
+        <span asp-validation-for="Work.Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Work.Name"></label>
+        <input asp-for="Work.Name" class="form-control" />
+        <span asp-validation-for="Work.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Work.Description"></label>
+        <input asp-for="Work.Description" class="form-control" />
+        <span asp-validation-for="Work.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Work.Price"></label>
+        <input asp-for="Work.Price" class="form-control" />
+        <span asp-validation-for="Work.Price" class="text-danger"></span>
+    </div>
+    <p>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </p>
+</form>
+    
