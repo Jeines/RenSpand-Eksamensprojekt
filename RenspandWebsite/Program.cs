@@ -18,6 +18,7 @@ builder.Services.AddTransient<JsonFileService<Work>>();
 builder.Services.AddTransient<JsonFileService<Profile>>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
+builder.Services.AddTransient<OrderServices>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";
