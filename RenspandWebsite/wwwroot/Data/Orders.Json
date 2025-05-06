@@ -3,11 +3,11 @@
     "Id": 1,
     "ServiceItems": [
       {
-        "Amount": 2,
+        "Amount": 1,
         "ServiceWork": {
           "Id": 1,
           "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
+          "Description": "Cleaning of garbage bins",
           "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
@@ -26,22 +26,23 @@
         "ZipCode": "12345"
       }
     ],
-    "TotalPrice": 31.98,
-    "DateStart": "2025-04-25T08:00:00",
-    "DateDone": "2025-04-25T09:00:00",
-    "TrashCanEmptyDate": "2025-04-24T18:00:00"
+    "TotalPrice": 15.99,
+    "DateStart": "2025-05-01T09:00:00",
+    "DateDone": "2025-05-01T10:00:00",
+    "TrashCanEmptyDate": "2025-04-30T18:00:00",
+    "AcceptStatus": 0
   },
   {
     "Id": 2,
     "ServiceItems": [
       {
-        "Amount": 1,
+        "Amount": 2,
         "ServiceWork": {
           "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "PhoneNumber": "123-456-7890",
-          "Price": 49.99
+          "Name": "Window Washing",
+          "Description": "Exterior window cleaning",
+          "PhoneNumber": "987-654-3210",
+          "Price": 25.00
         }
       }
     ],
@@ -58,22 +59,23 @@
         "ZipCode": "23456"
       }
     ],
-    "TotalPrice": 49.99,
-    "DateStart": "2025-04-27T10:00:00",
-    "DateDone": "2025-04-27T11:30:00",
-    "TrashCanEmptyDate": null
+    "TotalPrice": 50.00,
+    "DateStart": "2025-05-02T11:00:00",
+    "DateDone": "2025-05-02T12:30:00",
+    "TrashCanEmptyDate": "2025-05-01T19:00:00",
+    "AcceptStatus": 0
   },
   {
     "Id": 3,
     "ServiceItems": [
       {
-        "Amount": 3,
+        "Amount": 1,
         "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "PhoneNumber": "123-456-7890",
-          "Price": 15.99
+          "Id": 3,
+          "Name": "Gutter Cleaning",
+          "Description": "Cleaning gutters and downspouts",
+          "PhoneNumber": "555-000-1111",
+          "Price": 89.50
         }
       }
     ],
@@ -90,32 +92,23 @@
         "ZipCode": "34567"
       }
     ],
-    "TotalPrice": 47.97,
-    "DateStart": "2025-04-29T07:30:00",
-    "DateDone": "2025-04-29T08:30:00",
-    "TrashCanEmptyDate": "2025-04-28T17:00:00"
+    "TotalPrice": 89.50,
+    "DateStart": "2025-05-03T08:00:00",
+    "DateDone": "2025-05-03T09:00:00",
+    "TrashCanEmptyDate": "2025-05-02T17:30:00",
+    "AcceptStatus": 0
   },
   {
     "Id": 4,
     "ServiceItems": [
       {
-        "Amount": 1,
+        "Amount": 3,
         "ServiceWork": {
-          "Id": 3,
-          "Name": "Gutter Cleaning",
-          "Description": "Manual removal of debris from gutters.",
-          "PhoneNumber": "123-456-7890",
-          "Price": 89.50
-        }
-      },
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Phonenumber": "123-456-7890",
-          "Price": 15.99
+          "Id": 4,
+          "Name": "Lawn Mowing",
+          "Description": "Mowing front and back lawns",
+          "PhoneNumber": "222-333-4444",
+          "Price": 20.00
         }
       }
     ],
@@ -132,22 +125,23 @@
         "ZipCode": "45678"
       }
     ],
-    "TotalPrice": 105.49,
-    "DateStart": "2025-05-01T13:00:00",
-    "DateDone": "2025-05-01T15:00:00",
-    "TrashCanEmptyDate": "2025-04-30T16:00:00"
+    "TotalPrice": 60.00,
+    "DateStart": "2025-05-04T13:00:00",
+    "DateDone": "2025-05-04T14:00:00",
+    "TrashCanEmptyDate": "2025-05-03T16:00:00",
+    "AcceptStatus": 0
   },
   {
     "Id": 5,
     "ServiceItems": [
       {
-        "Amount": 2,
+        "Amount": 1,
         "ServiceWork": {
-          "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "PhoneNumber": "123-456-7890",
-          "Price": 49.99
+          "Id": 5,
+          "Name": "Car Detailing",
+          "Description": "Interior and exterior car detailing",
+          "PhoneNumber": "888-999-0000",
+          "Price": 120.00
         }
       }
     ],
@@ -164,9 +158,10 @@
         "ZipCode": "56789"
       }
     ],
-    "TotalPrice": 99.98,
-    "DateStart": "2025-05-03T14:00:00",
-    "DateDone": "2025-05-03T16:00:00",
-    "TrashCanEmptyDate": null
+    "TotalPrice": 120.00,
+    "DateStart": "2025-05-05T15:00:00",
+    "DateDone": "2025-05-05T17:00:00",
+    "TrashCanEmptyDate": "2025-05-04T18:00:00",
+    "AcceptStatus": 0
   }
 ]

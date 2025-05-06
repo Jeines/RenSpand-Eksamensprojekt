@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
+using RenSpand_Eksamensprojekt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,6 @@ builder.Services.AddTransient<JsonFileService<Work>>();
 builder.Services.AddTransient<JsonFileService<Profile>>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
-
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";

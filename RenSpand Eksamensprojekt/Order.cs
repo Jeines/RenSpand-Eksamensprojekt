@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,19 @@ namespace RenSpand_Eksamensprojekt
         public DateTime DateStart { get; set; }
 
         public DateTime DateDone { get; set; }
+
+
+  // TODO: Se om det virker 
+        //public DateTime? TrashCan { get; set; }
+
+    /// <summary>
+    /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
+    /// </summary>
+        public EnumClass.AcceptStatus AcceptStatus { get; set; } = EnumClass.AcceptStatus.Pending;
+
+
+        //TODO Fjern hvis ikke skal bruges 
+        //public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
 
         public DateTime? TrashCanEmptyDate { get; set; }
     
