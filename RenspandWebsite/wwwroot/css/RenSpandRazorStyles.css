@@ -1,26 +1,36 @@
 ﻿body {
+    /* 
+        der er blevet skrevet vores skrift type ind 
+        og farverne til vores hjemmeside
+    */
     font-family: 'Lato', sans-serif;
     background-color: #ffffff;
     color: #3f3f3f;
-
+}
+header {
+    background-color: #32736D;
+    color: white
 }
 
 footer{
+    /* farve til foooter */
     background-color: #32736D;
 }
 
-.BottonBackgroundColor{
+.BottonBackgroundColor {
+    /* farve til knapper */
     background-color: #50808E;
     color: white;
 }
 
-.CardHeaderColor{
+.CardHeaderColor {
+    /* farve til header i card */
     background-color: #4F977A;
     color: white;
-   
 }
 
-.ColorCream{
+.ColorCream {
+    /* farve */
     background-color: #F3F0E8;
 }
 

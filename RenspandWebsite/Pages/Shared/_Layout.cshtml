@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RenspandWebsite.Pages.LogIn
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
     <header>
@@ -28,6 +30,33 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/OrderServicePage">Order Service</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Work/GetAllWork">Priser</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        @{
+                            if (LogInPageModel.CurrentUser == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item nav-link text-dark me-3">
+                                    User: @LogInPageModel.CurrentUser.Username
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogOutPage">Logout</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

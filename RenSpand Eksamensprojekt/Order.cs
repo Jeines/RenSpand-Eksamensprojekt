@@ -13,24 +13,41 @@ namespace RenSpand_Eksamensprojekt
 
         public List<ServiceItem> ServiceItems { get; set; } = new List<ServiceItem>();
 
+        public User Buyer { get; set; }
+
+        public List<Address> AddressList { get; set; }
+
         public decimal TotalPrice { get; set; }
 
         public DateTime DateStart { get; set; }
 
         public DateTime DateDone { get; set; }
 
-        public DateTime? TrashCan { get; set; }
 
+  // TODO: Se om det virker 
+        //public DateTime? TrashCan { get; set; }
+
+    /// <summary>
+    /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
+    /// </summary>
         public EnumClass.AcceptStatus AcceptStatus { get; set; } = EnumClass.AcceptStatus.Pending;
 
 
-        public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
+        //TODO Fjern hvis ikke skal bruges 
+        //public Order(int id, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
+
+        public DateTime? TrashCanEmptyDate { get; set; }
+    
+        public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
-                Id = id;
-                ServiceItems = serviceItems;
-                TotalPrice = totalPrice;
-                DateStart = dateStart;
-                DateDone = dateDone;
+            Id = id;
+            Buyer = buyer;
+            ServiceItems = serviceItems;
+            TotalPrice = totalPrice;
+            DateStart = dateStart;
+            DateDone = dateDone;
         }
+
+        public Order() { }
     }
 }
