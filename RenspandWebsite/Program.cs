@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenspandWebsite.Service;
+using RenSpand_Eksamensprojekt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
+builder.Services.AddTransient<JsonFileService<Order>>();
+builder.Services.AddTransient<OrderServices, OrderServices>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";

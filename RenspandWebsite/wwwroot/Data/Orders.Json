@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "ServiceItems": [
+      {
+        "Amount": 0,
+        "ServiceWork": null
+      }
+    ],
+    "TotalPrice": 120.00,
+    "DateStart": "2025-05-04T10:00:00Z",
+    "DateDone": "2025-05-04T13:00:00Z",
+    "TrashCan": "2025-05-06T00:00:00Z",
+    "AcceptStatus": 1
+  },
+  {
+    "Id": 2,
+    "ServiceItems": [
+      {
+        "Amount": 0,
+        "ServiceWork": null
+      },
+      {
+        "Amount": 0,
+        "ServiceWork": null
+      }
+    ],
+    "TotalPrice": 400.00,
+    "DateStart": "2025-05-06T08:30:00Z",
+    "DateDone": "2025-05-06T14:00:00Z",
+    "TrashCan": null,
+    "AcceptStatus": 0
+  },
+  {
+    "Id": 3,
+    "ServiceItems": [
+      {
+        "Amount": 0,
+        "ServiceWork": null
+      },
+      {
+        "Amount": 0,
+        "ServiceWork": null
+      }
+    ],
+    "TotalPrice": 350.00,
+    "DateStart": "2025-05-10T09:00:00Z",
+    "DateDone": "2025-05-10T13:30:00Z",
+    "TrashCan": null,
+    "AcceptStatus": 0
+  }
+
+
+
+
+]
