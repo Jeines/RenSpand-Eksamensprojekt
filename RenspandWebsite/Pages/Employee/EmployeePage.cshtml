@@ -35,12 +35,12 @@
                         }
                     }
 
-                </td>
+               </td>
                <td>@order.TotalPrice</td>
                <td>@order.DateStart.ToString("yyyy-MM-dd")</td>
                <td>@order.DateDone.ToString("yyyy-MM-dd")</td>
-               <td>@(order.TrashCan?.ToString("yyyy-MM-dd") ?? "N/A")</td>
-                <td>
+               <td>@(order.TrashCanEmptyDate?.ToString("yyyy-MM-dd") ?? "N/A")</td>
+               <td>
                     @if (order.AcceptStatus == EnumClass.AcceptStatus.Pending)
                     {
                         <form method="post" asp-page-handler="AcceptOrder">
