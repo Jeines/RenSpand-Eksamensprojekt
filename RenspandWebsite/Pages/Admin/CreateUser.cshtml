@@ -1,0 +1,31 @@
+﻿@page
+@model ItemRazorV1.Pages.Admin.CreateUserModel
+
+<h1>Create a new User</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.UserName" class="control-lable"></label>
+                <input asp-for="@Model.UserName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Email" class="control-lable"></label>
+                <input asp-for="@Model.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Password" class="control-lable"></label>
+                <input asp-for="@Model.Password" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="/Item/GetAllItems">Back to List</a>
+</div>

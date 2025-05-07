@@ -3,6 +3,7 @@
 
 namespace RenspandWebsite.Service
 {
+
     public class OrderService
     {
         private List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
@@ -15,14 +16,15 @@ namespace RenspandWebsite.Service
             _orders = JsonFileService.GetJsonObjects().ToList(); // Removed invalid 'Orders.GetOrders()' call.  
         }
 
-        public IEnumerable<Order> Search(string searchTerm)
-        {
-            if (string.IsNullOrEmpty(searchTerm)) return _orders;
+        //TODO: Fix mistakes in this code
+        //public IEnumerable<Order> Search(string searchTerm)
+        //{
+        //    if (string.IsNullOrEmpty(searchTerm)) return _orders;
 
-            return from o in _orders
-                   where o.Customer.Name.ToLower().Contains(searchTerm.ToLower()) ||
-                         o.Customer.Phonenumber.Contains(searchTerm)
-                   select o;
-        }
+        //    return from o in _orders
+        //           where o.Customer.Name.ToLower().Contains(searchTerm.ToLower()) ||
+        //                 o.Customer.Phonenumber.Contains(searchTerm)
+        //           select o;
+        //}
     }
 }
