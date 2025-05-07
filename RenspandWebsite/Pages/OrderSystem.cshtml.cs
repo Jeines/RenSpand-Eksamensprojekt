@@ -102,11 +102,7 @@ namespace RenspandWebsite.Pages
                 return Page();
             }
 
-            //var orders = _jsonFileService.GetJsonObjects().ToList();
-
-
-            // _jsonFileService.SaveJsonObjects(_orders);
-
+            _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             OrderSubmitted = true;
             _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             return Page();
@@ -116,6 +112,7 @@ namespace RenspandWebsite.Pages
         {
             _cleaningService.CreateOrder(Name,Email,PhoneNumber,Street,City,ZipCode,Work,WorkAmount,DateStart,TrashCanEmptyDate,TotalPrice);
             return Page();
+
 
 
         }

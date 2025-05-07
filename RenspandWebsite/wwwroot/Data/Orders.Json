@@ -177,7 +177,7 @@
     "Id": 6,
     "ServiceItems": [
       {
-        "Amount": 1,
+        "Amount": 12,
         "ServiceWork": {
           "Id": 1,
           "Name": "Reng\u00F8ring",
@@ -188,22 +188,22 @@
     ],
     "Buyer": {
       "Id": 0,
-      "Name": "Test",
+      "Name": "Mikkel",
       "Email": null,
-      "PhoneNumber": "Test",
+      "PhoneNumber": "241231",
       "Role": "Admin"
     },
     "AddressList": [
       {
         "Id": 0,
-        "Street": "Test",
-        "City": "Test",
-        "ZipCode": "2222"
+        "Street": "skolevej",
+        "City": "Roskilde",
+        "ZipCode": "4000"
       }
     ],
-    "TotalPrice": 100,
-    "DateStart": "0001-01-01T00:00:00",
-    "DateDone": "0001-01-01T00:00:00",
+    "TotalPrice": 1200,
+    "DateStart": "2025-02-02T00:00:00",
+    "DateDone": "2025-03-02T00:00:00",
     "TrashCanEmptyDate": null
   }
 ]
