@@ -1,9 +1,25 @@
 ﻿namespace RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Pages;
 
 public class CleaningService
 {
     private readonly List<Order> _orders;
+    private readonly List<Service> _services;
+    private readonly JsonFileService<Order> _jsonFileService;
+
+    public CleaningService(JsonFileService<Order> jsonFileService)
+    {
+        _jsonFileService = jsonFileService;
+        //_orders = new List<Order>();
+        _orders = _jsonFileService.GetJsonObjects().ToList();
+        _services = new List<Service>
+        {
+            new Service(1, "Rengøring", "simpel", 100),
+            new Service(2, "Vinduespudsning", "viduer", 200),
+            new Service(3, "Havearbejde", "klip græs", 150)
+        };
+    }
 
     public void OrderCleaing(User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
     {
@@ -35,6 +51,7 @@ public class CleaningService
             Email = email,
             PhoneNumber = phonenumber
         };
+
         //opret adresse
         Address address = new Address
         {
@@ -42,13 +59,14 @@ public class CleaningService
             City = city,
             ZipCode = zipcode
         };
-        //Find den valgte service ud fra servicens id 
-        //Service selectedService = RenSpand_Eksamensprojekt.Service.FirstOrDefault(o => o.Id == work);
-        //if (selectedService == null)
-        //{
-        //    throw new Exception("Service ikke fundet.");
-        //}
-       
+
+        //Find den valgte service ud fra servicens id
+        Service selectedService = _services.FirstOrDefault(o => o.Id == work);
+        if (selectedService == null)
+        {
+            throw new Exception("Service ikke fundet.");
+        }
+
         //Beregn total prisen baseret på mængden af service og serivce prisen.
         decimal totalPrice = selectedService.Price * workamount;
 
@@ -73,6 +91,10 @@ public class CleaningService
 
         //Tilføj den nye ordre til listen
         _orders.Add(newOrder);
+
+        //Gem ordren i JSON filen
+        _jsonFileService.SaveJsonObjects(_orders);
+
 
 
 
@@ -140,6 +162,7 @@ public class CleaningService
 
 
     }
+    
 }
 
 
