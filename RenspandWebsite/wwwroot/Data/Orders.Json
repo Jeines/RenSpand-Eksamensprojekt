@@ -210,7 +210,7 @@
     "Id": 7,
     "ServiceItems": [
       {
-        "Amount": 12,
+        "Amount": 1,
         "ServiceWork": {
           "Id": 1,
           "Name": "Reng\u00F8ring",
@@ -221,22 +221,88 @@
     ],
     "Buyer": {
       "Id": 0,
-      "Name": "Mikkel",
-      "Email": "Jeines@mail",
-      "PhoneNumber": "99999999",
+      "Name": "Jens Friis",
+      "Email": "mrfriis129@hotmail.com",
+      "PhoneNumber": "30361368",
       "Role": "Admin"
     },
     "AddressList": [
       {
         "Id": 0,
-        "Street": "asjdojpjapsj",
-        "City": "KBH",
-        "ZipCode": "2142"
+        "Street": "ingridsvej 104",
+        "City": "Ejby",
+        "ZipCode": "4070"
       }
     ],
-    "TotalPrice": 1200,
-    "DateStart": "2025-09-09T00:00:00",
-    "DateDone": "0001-01-01T00:00:00",
-    "TrashCanEmptyDate": "2025-08-09T00:00:00"
+    "TotalPrice": 100,
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 8,
+    "ServiceItems": [
+      {
+        "Amount": 1,
+        "ServiceWork": {
+          "Id": 1,
+          "Name": "Reng\u00F8ring",
+          "Description": "simpel",
+          "Price": 100
+        }
+      }
+    ],
+    "Buyer": {
+      "Id": 0,
+      "Name": "Jens Friis",
+      "Email": "mrfriis129@hotmail.com",
+      "PhoneNumber": "30361368",
+      "Role": "Admin"
+    },
+    "AddressList": [
+      {
+        "Id": 0,
+        "Street": "ingridsvej 104",
+        "City": "Ejby",
+        "ZipCode": "4070"
+      }
+    ],
+    "TotalPrice": 100,
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 9,
+    "ServiceItems": [
+      {
+        "Amount": 1,
+        "ServiceWork": {
+          "Id": 2,
+          "Name": "Vinduespudsning",
+          "Description": "viduer",
+          "Price": 200
+        }
+      }
+    ],
+    "Buyer": {
+      "Id": 0,
+      "Name": "Test",
+      "Email": "Test@hotmail.com",
+      "PhoneNumber": "30361368",
+      "Role": "Admin"
+    },
+    "AddressList": [
+      {
+        "Id": 0,
+        "Street": "ingridsvej 104",
+        "City": "Ejby",
+        "ZipCode": "4070"
+      }
+    ],
+    "TotalPrice": 200,
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
   }
 ]

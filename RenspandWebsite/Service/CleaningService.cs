@@ -86,6 +86,7 @@ public class CleaningService
             },
             TotalPrice = totalPrice,
             DateStart = datestart,
+            DateDone = datestart.AddDays(8), // Assuming the work is done in one day
             TrashCanEmptyDate = trashcanemptydate,
         };
 
