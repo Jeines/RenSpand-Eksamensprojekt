@@ -8,7 +8,6 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
-          "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -16,7 +15,9 @@
     "Buyer": {
       "Id": 1,
       "Name": "Alice Johnson",
-      "Email": "alice@example.com"
+      "Email": "alice@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -40,7 +41,6 @@
           "Id": 2,
           "Name": "Driveway Pressure Wash",
           "Description": "High-pressure cleaning of driveway surfaces.",
-          "PhoneNumber": "123-456-7890",
           "Price": 49.99
         }
       }
@@ -48,7 +48,9 @@
     "Buyer": {
       "Id": 2,
       "Name": "Bob Smith",
-      "Email": "bob@example.com"
+      "Email": "bob@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -72,7 +74,6 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
-          "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -80,7 +81,9 @@
     "Buyer": {
       "Id": 3,
       "Name": "Carla Vega",
-      "Email": "carla@example.com"
+      "Email": "carla@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -104,7 +107,6 @@
           "Id": 3,
           "Name": "Gutter Cleaning",
           "Description": "Manual removal of debris from gutters.",
-          "PhoneNumber": "123-456-7890",
           "Price": 89.50
         }
       },
@@ -114,7 +116,6 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Exterior and interior cleaning of bins.",
-          "Phonenumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -122,7 +123,9 @@
     "Buyer": {
       "Id": 4,
       "Name": "David Lee",
-      "Email": "david@example.com"
+      "Email": "david@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -146,7 +149,6 @@
           "Id": 2,
           "Name": "Driveway Pressure Wash",
           "Description": "High-pressure cleaning of driveway surfaces.",
-          "PhoneNumber": "123-456-7890",
           "Price": 49.99
         }
       }
@@ -154,7 +156,9 @@
     "Buyer": {
       "Id": 5,
       "Name": "Eva Tran",
-      "Email": "eva@example.com"
+      "Email": "eva@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -167,6 +171,39 @@
     "TotalPrice": 99.98,
     "DateStart": "2025-05-03T14:00:00",
     "DateDone": "2025-05-03T16:00:00",
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 6,
+    "ServiceItems": [
+      {
+        "Amount": 12,
+        "ServiceWork": {
+          "Id": 1,
+          "Name": "Reng\u00F8ring",
+          "Description": "simpel",
+          "Price": 100
+        }
+      }
+    ],
+    "Buyer": {
+      "Id": 0,
+      "Name": "Mikkel",
+      "Email": null,
+      "PhoneNumber": "241231",
+      "Role": "Admin"
+    },
+    "AddressList": [
+      {
+        "Id": 0,
+        "Street": "skolevej",
+        "City": "Roskilde",
+        "ZipCode": "4000"
+      }
+    ],
+    "TotalPrice": 1200,
+    "DateStart": "2025-02-02T00:00:00",
+    "DateDone": "2025-03-02T00:00:00",
     "TrashCanEmptyDate": null
   }
 ]

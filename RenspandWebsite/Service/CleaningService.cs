@@ -6,7 +6,7 @@ public class CleaningService
 {
     private readonly List<Order> _orders;
     private readonly List<Service> _services;
-    private readonly JsonFileService<Order> _jsonFileService;
+    private JsonFileService<Order> _jsonFileService { get; set; }
 
     public CleaningService(JsonFileService<Order> jsonFileService)
     {
@@ -86,7 +86,7 @@ public class CleaningService
             },
             TotalPrice = totalPrice,
             DateStart = datestart,
-            DateDone = trashcanemptydate,
+            TrashCanEmptyDate = trashcanemptydate,
         };
 
         //Tilføj den nye ordre til listen
