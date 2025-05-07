@@ -63,7 +63,7 @@
     "DateStart": "2025-05-02T11:00:00",
     "DateDone": "2025-05-02T12:30:00",
     "TrashCanEmptyDate": "2025-05-01T19:00:00",
-    "AcceptStatus": 0
+    "AcceptStatus": 1
   },
   {
     "Id": 3,
@@ -96,7 +96,7 @@
     "DateStart": "2025-05-03T08:00:00",
     "DateDone": "2025-05-03T09:00:00",
     "TrashCanEmptyDate": "2025-05-02T17:30:00",
-    "AcceptStatus": 0
+    "AcceptStatus": 2
   },
   {
     "Id": 4,
@@ -162,6 +162,6 @@
     "DateStart": "2025-05-05T15:00:00",
     "DateDone": "2025-05-05T17:00:00",
     "TrashCanEmptyDate": "2025-05-04T18:00:00",
-    "AcceptStatus": 0
+    "AcceptStatus": 1
   }
 ]

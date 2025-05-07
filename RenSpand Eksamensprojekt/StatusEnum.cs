@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class EnumClass
+    public class StatusEnum
     {
         public enum AcceptStatus
         {
-            Pending,
-            Accepted,
-            Rejected
+            Pending = 0,
+            Accepted = 1,
+            Rejected = 2
         }
         
 

@@ -41,7 +41,7 @@
                <td>@order.DateDone.ToString("yyyy-MM-dd")</td>
                <td>@(order.TrashCanEmptyDate?.ToString("yyyy-MM-dd") ?? "N/A")</td>
                <td>
-                    @if (order.AcceptStatus == EnumClass.AcceptStatus.Pending)
+                    @if (order.AcceptStatus == StatusEnum.AcceptStatus.Pending)
                     {
                         <form method="post" asp-page-handler="AcceptOrder">
                             <input type="hidden" name="orderId" value="@order.Id" />
@@ -62,13 +62,13 @@
                 <td>
                     @switch (order.AcceptStatus)
                         {
-                            case EnumClass.AcceptStatus.Accepted:
+                            case StatusEnum.AcceptStatus.Accepted:
                                 <span class="badge badge-success">Accepted</span>
                                 break;
-                            case EnumClass.AcceptStatus.Rejected:
+                            case StatusEnum.AcceptStatus.Rejected:
                                 <span class="badge badge-danger">Rejected</span>
                                 break;
-                            case EnumClass.AcceptStatus.Pending:
+                            case StatusEnum.AcceptStatus.Pending:
                                 <span class="badge bg-secondary">Pending</span>
                                 break;
                         }

@@ -26,8 +26,13 @@ namespace RenSpand_Eksamensprojekt
         /// <summary>
         /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
         /// </summary>
-        public EnumClass.AcceptStatus AcceptStatus { get; set; } = EnumClass.AcceptStatus.Pending;
-
+        public StatusEnum.AcceptStatus AcceptStatus { get; set; } = StatusEnum.AcceptStatus.Pending;
+        public enum OrderStatus
+        {
+            Pending = 0,
+            Accepted = 1,
+            Rejected = 2
+        }
         public DateTime? TrashCanEmptyDate { get; set; }
     
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
