@@ -65,7 +65,6 @@ namespace RenspandWebsite.Pages
         public DateTime TrashCanEmptyDate { get; set; }
 
         [BindProperty]
-
         public decimal TotalPrice { get; set; }
 
 
@@ -97,25 +96,24 @@ namespace RenspandWebsite.Pages
         {
 
             Console.WriteLine("TEST TEST TEST");
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                Console.WriteLine("model");
                 return Page();
             }
-
-            _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             OrderSubmitted = true;
             _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             return Page();
         }
 
-        public IActionResult OnPostCreateOrder()
-        {
-            _cleaningService.CreateOrder(Name,Email,PhoneNumber,Street,City,ZipCode,Work,WorkAmount,DateStart,TrashCanEmptyDate,TotalPrice);
-            return Page();
+        //public IActionResult OnPostCreateOrder()
+        //{
+        //    _cleaningService.CreateOrder(Name,Email,PhoneNumber,Street,City,ZipCode,Work,WorkAmount,DateStart,TrashCanEmptyDate,TotalPrice);
+        //    return Page();
 
 
 
-        }
+        //}
 
         
     }
