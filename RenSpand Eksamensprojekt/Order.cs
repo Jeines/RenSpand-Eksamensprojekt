@@ -35,5 +35,18 @@ namespace RenSpand_Eksamensprojekt
         }
 
         public Order() { }
+
+        public override string ToString()
+        {
+            if (ServiceItems != null && ServiceItems.Count > 0)
+            {
+                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: {string.Join(", ", ServiceItems)}, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
+            }
+            else
+            {
+                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
+            }
+        }
+
     }
 }

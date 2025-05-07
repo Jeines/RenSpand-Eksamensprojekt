@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
 builder.Services.AddTransient<JsonFileService<Profile>>();
+builder.Services.AddSingleton<CleaningService, CleaningService>();
+builder.Services.AddSingleton<JsonFileService<Order>>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";
