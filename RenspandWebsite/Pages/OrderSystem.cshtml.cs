@@ -5,6 +5,8 @@ using RenSpand_Eksamensprojekt;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
+
+
 namespace RenspandWebsite.Pages
 {
     public class OrderSystemModel : PageModel
@@ -97,7 +99,7 @@ namespace RenspandWebsite.Pages
         {
 
             Console.WriteLine("TEST TEST TEST");
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }

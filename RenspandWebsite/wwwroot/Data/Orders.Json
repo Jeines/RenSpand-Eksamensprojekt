@@ -205,5 +205,38 @@
     "DateStart": "2025-02-02T00:00:00",
     "DateDone": "2025-03-02T00:00:00",
     "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 7,
+    "ServiceItems": [
+      {
+        "Amount": 12,
+        "ServiceWork": {
+          "Id": 1,
+          "Name": "Reng\u00F8ring",
+          "Description": "simpel",
+          "Price": 100
+        }
+      }
+    ],
+    "Buyer": {
+      "Id": 0,
+      "Name": "Mikkel",
+      "Email": "Jeines@mail",
+      "PhoneNumber": "99999999",
+      "Role": "Admin"
+    },
+    "AddressList": [
+      {
+        "Id": 0,
+        "Street": "asjdojpjapsj",
+        "City": "KBH",
+        "ZipCode": "2142"
+      }
+    ],
+    "TotalPrice": 1200,
+    "DateStart": "2025-09-09T00:00:00",
+    "DateDone": "0001-01-01T00:00:00",
+    "TrashCanEmptyDate": "2025-08-09T00:00:00"
   }
 ]
