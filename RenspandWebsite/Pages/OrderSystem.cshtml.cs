@@ -103,12 +103,12 @@ namespace RenspandWebsite.Pages
             }
 
             //var orders = _jsonFileService.GetJsonObjects().ToList();
-           
 
-           // _jsonFileService.SaveJsonObjects(_orders);
+
+            // _jsonFileService.SaveJsonObjects(_orders);
 
             OrderSubmitted = true;
-
+            _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             return Page();
         }
 
