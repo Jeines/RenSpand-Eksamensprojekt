@@ -16,6 +16,11 @@ builder.Services.AddTransient<JsonFileService<Work>>();
 //TODO: working code if other code break
 // builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
+
+builder.Services.AddSingleton<CleaningService, CleaningService>();
+builder.Services.AddSingleton<JsonFileService<Order>>();
+builder.Services.AddSingleton<JsonFileService<Service>>();
+builder.Services.AddScoped<CleaningService>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
 builder.Services.AddTransient<OrderServices>();
