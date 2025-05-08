@@ -4,7 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Work
+namespace RenspandWebsite.Pages.WorkHandler
 {
     public class GetAllWorkModel : PageModel
     {
@@ -13,7 +13,7 @@ namespace RenspandWebsite.Pages.Work
         {
             _workService = workService;
         }
-        public List<RenSpand_Eksamensprojekt.Work>? Works { get; private set; }
+        public List<Work>? Works { get; private set; }
 
         [BindProperty]
         public int MinPrice { get; set; }

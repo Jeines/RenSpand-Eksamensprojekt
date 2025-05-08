@@ -1,32 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
-using System.Reflection;
 
-namespace RenspandWebsite.Pages.Work
+namespace RenspandWebsite.Pages.WorkHandler
 {
-    public class CreateWorkModel : PageModel
+    public class EditWorkModel : PageModel
     {
         private IWorkService _workService;
-        public CreateWorkModel(IWorkService workService)
+
+        public EditWorkModel(IWorkService workService)
         {
             _workService = workService;
         }
+
         [BindProperty]
         public RenSpand_Eksamensprojekt.Work Work { get; set; }
-
-        public IActionResult OnGet()
+        public IActionResult OnGet(int id)
         {
+            Work = _workService.GetWork(id);
+            if (Work == null)
+                return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
+
             return Page();
         }
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _workService.AddWork(Work);
+
+            _workService.UpdateWork(Work);
             return RedirectToPage("GetAllWork");
         }
     }
