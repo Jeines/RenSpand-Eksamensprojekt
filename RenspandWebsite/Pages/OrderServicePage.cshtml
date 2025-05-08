@@ -1,0 +1,67 @@
+﻿@page
+@model OrderServicePageModel
+<link rel="stylesheet" href="~/css/OrderServiceStyleSheet.css" asp-append-version="true" />
+
+<h1>Ordreliste</h1>
+
+<form method="get" class="search-form">
+    <input type="text" name="searchTerm" value="@Model.SearchTerm" placeholder="Søg efter navn, telefon eller adresse..." class="search-input" />
+    <button type="submit" class="search-button">Søg</button>
+</form>
+
+@if (!Model.FilteredOrders.Any())
+{
+    <p>Ingen ordrer fundet.</p>
+}
+else
+{
+    <table class="order-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Køber</th>
+                <th>Services</th>
+                <th>Adresse</th>
+                <th>Pris</th>
+                <th>Startdato</th>
+                <th>Slutdato</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.FilteredOrders)
+            {
+                var rowClass = order.AcceptStatus switch
+                {
+                    RenSpand_Eksamensprojekt.StatusEnum.AcceptStatus.Pending => "status-pending",
+                    RenSpand_Eksamensprojekt.StatusEnum.AcceptStatus.Accepted => "status-accepted",
+                    RenSpand_Eksamensprojekt.StatusEnum.AcceptStatus.Rejected => "status-rejected",
+                    _ => "status-unknown"
+                };
+
+                <tr class="@rowClass">
+                    <td>@order.Id</td>
+                    <td>@order.Buyer?.Name</td>
+                    <td>
+                        @foreach (var service in order.ServiceItems)
+                        {
+                            <span>@service.ServiceWork?.Name</span>
+
+                            <br />
+                        }
+                    </td>
+                    <td>
+                        @foreach (var address in order.AddressList)
+                        {
+                            <span>@address.Street, @address.City, @address.ZipCode</span>
+
+                            <br />
+                        }
+                    </td>
+                    <td>@order.TotalPrice.ToString("C")</td>
+                    <td>@order.DateStart.ToString("dd-MM-yyyy")</td>
+                    <td>@order.DateDone.ToString("dd-MM-yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

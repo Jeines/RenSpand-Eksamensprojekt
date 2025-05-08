@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,16 @@ namespace RenSpand_Eksamensprojekt
 
         public DateTime DateDone { get; set; }
 
+        /// <summary>
+        /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
+        /// </summary>
+        public StatusEnum.AcceptStatus AcceptStatus { get; set; } = StatusEnum.AcceptStatus.Pending;
+        public enum OrderStatus
+        {
+            Pending = 0,
+            Accepted = 1,
+            Rejected = 2
+        }
         public DateTime? TrashCanEmptyDate { get; set; }
     
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)

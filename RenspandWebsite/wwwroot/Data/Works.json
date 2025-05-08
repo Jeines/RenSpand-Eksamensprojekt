@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "Name": "Container Rens",
+    "Description": "Rensning af 1 affaldscontainer \u2013 basis l\u00F8sning",
+    "Price": 299
+  },
+  {
+    "Id": 2,
+    "Name": "Udvidet Container Rens",
+    "Description": "Rensning af 2 containere \u2013 standard l\u00F8sning med rabat",
+    "Price": 499
+  },
+  {
+    "Id": 3,
+    "Name": "Premium Container Service",
+    "Description": "Rensning af 3 containere med ekstra pleje og desinficering",
+    "Price": 699
+  },
+  {
+    "Id": 4,
+    "Name": "Engangs Rens",
+    "Description": "\u00C9n enkelt rensning af container uden abonnement",
+    "Price": 199
+  },
+  {
+    "Id": 5,
+    "Name": "Abonnement \u2013 M\u00E5nedlig",
+    "Description": "Fast m\u00E5nedlig rensning af \u00E9n container",
+    "Price": 249
+  },
+  {
+    "Id": 6,
+    "Name": "Abonnement \u2013 Kvartalsvis",
+    "Description": "Kvartalsvis rensning af \u00E9n container",
+    "Price": 599
+  },
+  {
+    "Id": 7,
+    "Name": "Ekstra Service",
+    "Description": "Tilvalg: indvendig desinficering og lugtfjernelse",
+    "Price": 149
+  }
+]

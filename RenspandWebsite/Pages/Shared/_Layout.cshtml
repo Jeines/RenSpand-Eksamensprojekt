@@ -1,4 +1,4 @@
-﻿@using RenspandWebsite.Pages.LogIn
+@using RenspandWebsite.Pages.LogIn
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
     <header>
@@ -29,18 +30,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                        @{
-                            if (LogInPageModel.CurrentUser != null && LogInPageModel.CurrentUser.Username == "admin")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-page="/Admin/CreateUser">Create User</a>
-                                </li>
-                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/OrderServicePage">Order Service</a>
+                            </li>
                         }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/OrderSystem">Order System</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Work/GetAllWork">Priser</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         @{

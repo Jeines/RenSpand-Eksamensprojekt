@@ -10,9 +10,9 @@ namespace RenSpand_Eksamensprojekt
     {
         public int Amount { get; set; }
 
-        public Service ServiceWork { get; set; }
+        public Work ServiceWork { get; set; }
 
-        public ServiceItem(int amount, Service serviceWork)
+        public ServiceItem(int amount, Work serviceWork)
         {
             Amount = amount;
             ServiceWork = serviceWork;
