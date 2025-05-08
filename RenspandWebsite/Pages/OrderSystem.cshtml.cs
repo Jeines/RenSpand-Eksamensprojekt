@@ -14,7 +14,7 @@ namespace RenspandWebsite.Pages
         private CleaningService _cleaningService;
         private JsonFileService<Order> _jsonFileService;
         private List<Order> _orders;
-        public List<RenSpand_Eksamensprojekt.Service> WorkList { get; set; }
+        public List<Work> WorkList { get; set; }
 
         [BindProperty]
         public int Work { get; set; } // Gemmer valgt Service Id
@@ -26,11 +26,11 @@ namespace RenspandWebsite.Pages
             _jsonFileService = jsonFileService;
             _orders = _jsonFileService.GetJsonObjects().ToList();
             _cleaningService = cleaningService;
-            WorkList = new List<RenSpand_Eksamensprojekt.Service>
+            WorkList = new List<Work>
             {
-                new RenSpand_Eksamensprojekt.Service(1,"Rengøring","simpel", 100),
-                new RenSpand_Eksamensprojekt.Service(2,"Vinduespudsning","viduer", 200),
-                new RenSpand_Eksamensprojekt.Service(3,"Havearbejde","klip græs", 150)
+                new Work(1,"Rengøring","simpel", 100),
+                new Work(2,"Vinduespudsning","viduer", 200),
+                new Work(3,"Havearbejde","klip græs", 150)
             };
         }
 
@@ -79,7 +79,7 @@ namespace RenspandWebsite.Pages
         public void OnGet()
         {
             Orders = _cleaningService.GetOrders();
-            WorkList = new List<RenSpand_Eksamensprojekt.Service>
+            WorkList = new List<Work>
     {
 
             new (1,"Rengøring","simpel", 100),
@@ -107,107 +107,5 @@ namespace RenspandWebsite.Pages
             _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
             return Page();
         }
-
-        //public IActionResult OnPostCreateOrder()
-        //{
-        //    _cleaningService.CreateOrder(Name,Email,PhoneNumber,Street,City,ZipCode,Work,WorkAmount,DateStart,TrashCanEmptyDate,TotalPrice);
-        //    return Page();
-
-
-
-        //}
-
-        
     }
 }
-
-
-
-
-
-
-
-
-//    public class OrderSystemModel : PageModel
-//    {
-//        private readonly CleaningService _cleaningService;
-
-
-
-//        public bool OrderSubmitted { get; set; } = false;
-
-//        public List<Order> Orders { get; set; } = new List<Order>();
-
-
-//        private readonly JsonFileService<Order> _jsonFileService;
-//        public OrderSystemModel(JsonFileService<Order> jsonFileService)
-//        {
-//            _jsonFileService = jsonFileService;
-//            _cleaningService = new CleaningService();
-//        }
-
-//        //public IActionResult OnPost()
-//        //{
-//        //    if (ModelState.IsValid)
-//        //    {
-//        //        return Page();
-//        //    }
-
-//        //    var order = _jsonFileService.GetJsonObjects().ToList();
-
-//        //    order.Add();
-
-//        //    _jsonFileService.SaveJsonObjects(order);
-
-//        //    OrderSubmitted = true;
-
-//        //    return Page();
-//        //}
-
-//        public IActionResult OnPost()
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                return Page();
-//            }
-
-//            var orders = _jsonFileService.GetJsonObjects().ToList();
-
-//            // Create a new Order object with appropriate values  
-//            var newOrder = new Order
-//            {
-//                Id = orders.Count > 0 ? orders.Max(o => o.Id) + 1 : 1,
-//                ServiceItems = new List<ServiceItem>(),
-//                Buyer = new User(),
-//                AddressList = new List<Address>(),
-//                TotalPrice = 0,
-//                DateStart = DateTime.Now,
-//                DateDone = DateTime.Now.AddDays(1)
-//            };
-
-//            orders.Add(newOrder);
-
-//            _jsonFileService.SaveJsonObjects(orders);
-
-//            OrderSubmitted = true;
-
-//            return Page();
-//        }
-
-
-//        public void OnGet()
-//        {
-//            Orders = _cleaningService.GetOrders();
-//        }
-
-//        public IActionResult OnPostOrderCleaning(User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
-//        {
-//            _cleaningService.OrderCleaing(buyer, serviceItems, totalPrice, dateStart, dateDone);
-//            return RedirectToPage();
-//        }
-
-
-
-
-//    }
-//}

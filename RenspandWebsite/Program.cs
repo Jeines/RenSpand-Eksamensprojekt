@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
-using RenSpand_Eksamensprojekt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +18,7 @@ builder.Services.AddTransient<JsonFileService<Profile>>();
 
 builder.Services.AddSingleton<CleaningService, CleaningService>();
 builder.Services.AddSingleton<JsonFileService<Order>>();
-builder.Services.AddSingleton<JsonFileService<Service>>();
+builder.Services.AddSingleton<JsonFileService<Work>>();
 builder.Services.AddScoped<CleaningService>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
