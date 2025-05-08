@@ -31,7 +31,7 @@ namespace RenspandWebsite.Pages.Work
             if (deletedWork == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 
-            return RedirectToPage("GetAllWork");
+            return RedirectToPage("/Work/GetAllWork");
         }
     }
 }

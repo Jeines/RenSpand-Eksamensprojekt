@@ -34,6 +34,7 @@ namespace RenspandWebsite.Pages.LogIn
 
         public async Task<IActionResult> OnPost()
         {
+
             List<Profile> profiles = _profileService.Profiles;
             foreach (Profile profile in profiles)
             {

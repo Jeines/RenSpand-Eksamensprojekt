@@ -1,0 +1,98 @@
+[
+  {
+    "YearsOfExperians": 5,
+    "Salary": 40000,
+    "Qualifications": [
+      "C#",
+      "SQL",
+      "ASP.NET"
+    ],
+    "Username": "john.doe",
+    "Password": "hashed123",
+    "Id": 1,
+    "Name": "John Doe",
+    "Email": "john@example.com",
+    "PhoneNumber": "12345678",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 3,
+    "Salary": 37000,
+    "Qualifications": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "Username": "jane.smith",
+    "Password": "hashed456",
+    "Id": 2,
+    "Name": "Jane Smith",
+    "Email": "jane@example.com",
+    "PhoneNumber": "87654321",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 20,
+    "Salary": 2000.00,
+    "Qualifications": [
+      "test1",
+      "test2",
+      "test7"
+    ],
+    "Username": "Medarbejder",
+    "Password": "Medarbejder",
+    "Id": 0,
+    "Name": "Test",
+    "Email": "mail@test.dk",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 1,
+    "Salary": 200,
+    "Qualifications": [
+      "test1",
+      "test2",
+      "test3"
+    ],
+    "Username": "Kim",
+    "Password": "kim",
+    "Id": 0,
+    "Name": "TestNavn",
+    "Email": "TestMail@2.dk",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 12,
+    "Salary": 10000,
+    "Qualifications": [
+      "test1",
+      "test2",
+      "test3"
+    ],
+    "Username": "KimTest",
+    "Password": "kim",
+    "Id": 0,
+    "Name": "kimTest",
+    "Email": "test@email.com",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 100,
+    "Salary": 10000,
+    "Qualifications": [
+      "test1",
+      "test2",
+      "test7"
+    ],
+    "Username": "medarbejderTest",
+    "Password": "ad",
+    "Id": 100,
+    "Name": "TestNavn",
+    "Email": "TestEmail@m.dk",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  }
+]

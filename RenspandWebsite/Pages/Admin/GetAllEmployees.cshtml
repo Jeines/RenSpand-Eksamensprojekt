@@ -1,0 +1,62 @@
+﻿@page
+@using RenSpand_Eksamensprojekt
+@model RenspandWebsite.Pages.Admin.GetAllEmployeesModel
+@{
+    ViewData["Title"] = "Se Alle Medarbejder";
+}
+
+<h1>Se Alle Medarbejder</h1>
+
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped bg-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Navn</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                    <th>Erfaring (år)</th>
+                    <th>Løn (DKK)</th>
+                    <th>Kvalifikationer</th>
+                    <th>Handlinger</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Employees != null)
+                {
+                    foreach (var employee in Model.Employees)
+                    {
+                        <tr>
+                            <td>@employee.Id</td>
+                            <td>@employee.Name</td>
+                            <td>@employee.Email</td>
+                            <td>@employee.PhoneNumber</td>
+                            <td>@employee.YearsOfExperians</td>
+                            <td>@employee.Salary.ToString("N0")</td>
+                            <td>
+                                @foreach (var qual in employee.Qualifications)
+                                {
+                                    <span class="badge badge-info mr-1 text-black">@qual</span>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary mr-1" asp-page="EditEmployee" asp-route-id="@employee.Id">
+                                    <i class="fa fa-edit"></i> Rediger
+                                </a>
+                                <a class="btn btn-sm btn-outline-danger" asp-page="/Admin/DeleteEmployee" asp-route-id="@employee.Id">
+                                    <i class="fa fa-trash"></i> Slet
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn btn-success mt-3" asp-page="CreateEmployee">
+        <i class="fa fa-plus"></i> Opret ny medarbejder
+    </a>
+</div>
+

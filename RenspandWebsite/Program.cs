@@ -12,6 +12,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddTransient<JsonFileService<Work>>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddTransient<JsonFileService<Employee>>();
 
 //TODO: working code if other code break
 // builder.Services.AddTransient(typeof(JsonFileService<>));

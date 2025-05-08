@@ -24,6 +24,5 @@ namespace RenspandWebsite.Service
             Profiles.Add(profile);
             JsonFileService.SaveJsonObjects(Profiles);
         }
-
     }
 }

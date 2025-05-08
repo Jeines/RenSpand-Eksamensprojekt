@@ -25,5 +25,32 @@
     "Email": null,
     "PhoneNumber": null,
     "Role": "Private"
+  },
+  {
+    "Username": "testadmin",
+    "Password": "AQAAAAIAAYagAAAAEFptl3\u002BGoULQe4ghQtMGxuHxBtiOlYHb4lmnhVVRXYn9Qn5BBD\u002Bc3P8tdZrNjzTXNg==",
+    "Id": 0,
+    "Name": null,
+    "Email": null,
+    "PhoneNumber": null,
+    "Role": "Admin"
+  },
+  {
+    "Username": "superadmin",
+    "Password": "AQAAAAIAAYagAAAAEGl0PcCtIwPqQsB5B7cZ/WYtr8G4z1cqzWZJmrbdZspIabmHq5GzGB5nLHTb9Vpdcw==",
+    "Id": 5,
+    "Name": "bob",
+    "Email": "bob@bob.com",
+    "PhoneNumber": "11223344",
+    "Role": "Admin"
+  },
+  {
+    "Username": "Bob",
+    "Password": "AQAAAAIAAYagAAAAEHzE2mrsgoVcCHgJ5VSA/3sTdpNGEIZNcgEccW/ZoIMt5QGv5eMJLVRX7MBK\u002BAo4AA==",
+    "Id": 6,
+    "Name": "Bob",
+    "Email": "Test@test.com",
+    "PhoneNumber": "11223344",
+    "Role": "Private"
   }
 ]

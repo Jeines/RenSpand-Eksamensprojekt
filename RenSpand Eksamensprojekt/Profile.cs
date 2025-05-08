@@ -14,9 +14,8 @@ namespace RenSpand_Eksamensprojekt
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
-    
 
-    public Profile(string username, string password)
+        public Profile(string username, string password)
         {
             Username = username;
             Password = password;

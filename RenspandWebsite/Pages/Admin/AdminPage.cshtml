@@ -2,3 +2,27 @@
 @model RenspandWebsite.Pages.Admin.AdminPageModel
 @{
 }
+<div class="card" style="width: 18rem;">
+    <div class="card-header text-white bg-info">Medarbejder Administration</div>
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Du kan vælge mellem:</h6>
+
+        <p class="card-text">
+            <ul>
+                <li>Se Medarbejder: <p>Her får du en liste over alle de Medarbejder der er</p></li>
+                <li>Lave en ny Medarbejder: <p>Her får du lov til at lave en ny Medarbejder</p></li>
+                <li>Slet en bruger: <p>Her får du lov til at slette en bruger</p></li>
+            </ul>
+        </p>
+        <a href="/Admin/GetAllEmployees" class="btn btn-primary">Se Medarbejder</a>
+        <a href="/Admin/CreateEmployee" class="btn btn-success">Lav Medarbejder</a>
+    </div>
+</div>
+
+
+<ul>
+    @foreach (var claim in User.Claims)
+    {
+        <li>@claim.Type: @claim.Value</li>
+    }
+</ul>
