@@ -6,7 +6,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.ComponentModel.DataAnnotations;
 
-namespace ItemRazorV1.Pages.Admin
+namespace RenspandWebsite.Pages.Admin
 {
     [Authorize(Roles = "admin")]    
     public class CreateUserModel : PageModel
@@ -21,9 +21,10 @@ namespace ItemRazorV1.Pages.Admin
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        private ProfileService _userService;
+        //TODO: Update Name
+        private readonly ProfileService _userService;
 
-        private PasswordHasher<string> passwordHasher;
+        private readonly PasswordHasher<string> passwordHasher;
 
         public CreateUserModel(ProfileService userService)
         {
@@ -35,6 +36,7 @@ namespace ItemRazorV1.Pages.Admin
         {
         }
 
+        //TODO: Create Individual OnPost method
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -42,13 +44,12 @@ namespace ItemRazorV1.Pages.Admin
                 return Page();
             }
 
-            Profile newProfile = new Profile
+            Profile newProfile = new()
             {
                 Username = UserName,
                 Email = Email,
                 Password = passwordHasher.HashPassword(null, Password)
             };
-
 
             _userService.AddProfile(newProfile);
             return RedirectToPage("/Index");

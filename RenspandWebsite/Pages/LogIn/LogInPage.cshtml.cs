@@ -12,7 +12,7 @@ namespace RenspandWebsite.Pages.LogIn
 {
     public class LogInPageModel : PageModel
     {
-        private ProfileService _profileService;
+        private readonly ProfileService _profileService;
 
         [BindProperty]
         public string Username { get; set; }
@@ -44,7 +44,7 @@ namespace RenspandWebsite.Pages.LogIn
                     if (passwordHasher.VerifyHashedPassword(null, profile.Password, Password) == PasswordVerificationResult.Success)
                     {
 
-                        var claims = new List<Claim> { new Claim(ClaimTypes.Name, Username) };
+                        var claims = new List<Claim> { new(ClaimTypes.Name, Username) };
                         string redirectPage = "/Index";
 
                         // Set the role claim based on the user's role

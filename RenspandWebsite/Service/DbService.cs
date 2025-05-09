@@ -14,10 +14,8 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task<IEnumerable<T>> GetObjectsAsync()
         {
-            using (var context = new RenSpandDbContext())
-            {
-                return await context.Set<T>().ToListAsync();
-            }
+            using var context = new RenSpandDbContext();
+            return await context.Set<T>().ToListAsync();
         }
 
         /// <summary>
@@ -28,10 +26,8 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task<T> GetObjectByIdAsync(int id)
         {
-            using (var context = new RenSpandDbContext())
-            {
-                return await context.Set<T>().FindAsync(id);
-            }
+            using var context = new RenSpandDbContext();
+            return await context.Set<T>().FindAsync(id);
         }
 
         /// <summary>
@@ -42,11 +38,9 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task AddObjectAsync(T entity)
         {
-            using (var context = new RenSpandDbContext())
-            {
-                context.Set<T>().Add(entity);
-                await context.SaveChangesAsync();
-            }
+            using var context = new RenSpandDbContext();
+            context.Set<T>().Add(entity);
+            await context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -59,11 +53,9 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task UpdateObjectAsync(T entity)
         {
-            using (var context = new RenSpandDbContext())
-            {
-                context.Set<T>().Update(entity);
-                await context.SaveChangesAsync();
-            }
+            using var context = new RenSpandDbContext();
+            context.Set<T>().Update(entity);
+            await context.SaveChangesAsync();
         }
 
 
@@ -76,15 +68,13 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task SaveObjectsAsync(List<T> entities)
         {
-            using (var context = new RenSpandDbContext())
+            using var context = new RenSpandDbContext();
+            foreach (var entity in entities)
             {
-                foreach (var entity in entities)
-                {
-                    context.Set<T>().Add(entity);
-                    context.SaveChanges();
-                }
-                await context.SaveChangesAsync();
+                context.Set<T>().Add(entity);
+                context.SaveChanges();
             }
+            await context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -95,14 +85,12 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public async Task DeleteObjectAsync(int id)
         {
-            using (var context = new RenSpandDbContext())
+            using var context = new RenSpandDbContext();
+            var entity = await context.Set<T>().FindAsync(id);
+            if (entity != null)
             {
-                var entity = await context.Set<T>().FindAsync(id);
-                if (entity != null)
-                {
-                    context.Set<T>().Remove(entity);
-                    await context.SaveChangesAsync();
-                }
+                context.Set<T>().Remove(entity);
+                await context.SaveChangesAsync();
             }
         }
     }

@@ -12,25 +12,21 @@ namespace RenspandWebsite.Service
 
         public async Task<List<Order>> GetOrdersByIdAsync(int userId)
         {
-            using (var context = new RenSpandDbContext())
-            {
-                return await context.Orders
-                .Where(order => order.BuyerId == userId)
-                .Include(order => order.Buyer)
-                .ToListAsync();
-            }
+            using var context = new RenSpandDbContext();
+            return await context.Orders
+            .Where(order => order.BuyerId == userId)
+            .Include(order => order.Buyer)
+            .ToListAsync();
         }
 
         public async Task SaveUserObjects(IEnumerable<Profile> profiles)
         {
-            using (var context = new RenSpandDbContext())
+            using var context = new RenSpandDbContext();
+            //adds json profiles to the database
+            foreach (var profile in profiles)
             {
-                //adds json profiles to the database
-                foreach (var profile in profiles)
-                {
-                    profile.Id = 0; // Reset the ID to 0 before saving to DB
-                    AddObjectAsync(profile).Wait(); // Wait for the task to complete
-                }
+                profile.Id = 0; // Reset the ID to 0 before saving to DB
+                AddObjectAsync(profile).Wait(); // Wait for the task to complete
             }
         }
     }

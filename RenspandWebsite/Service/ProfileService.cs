@@ -7,8 +7,10 @@ namespace RenspandWebsite.Service
     public class ProfileService
     {
         public List<Profile> Profiles { get; }
-        private JsonFileService<Profile> _jsonFileService;
-        private ProfileDbService _userDbService;
+        private readonly JsonFileService<Profile> _jsonFileService;
+
+        //TODO: Update Name
+        private readonly ProfileDbService _userDbService;
 
         public ProfileService(JsonFileService<Profile> jsonFileService, ProfileDbService dbService)
         {
@@ -17,7 +19,7 @@ namespace RenspandWebsite.Service
             //Profiles = _userDbService.GetObjectsAsync().Result.ToList();
             Profiles = _jsonFileService.GetJsonObjects().ToList();
             //_jsonFileService.SaveJsonObjects(Profiles);
-            _userDbService.SaveUserObjects(Profiles);
+            //_userDbService.SaveUserObjects(Profiles);
         }
 
 
@@ -43,17 +45,15 @@ namespace RenspandWebsite.Service
         public async Task AddTestAddressAsync()
         {
             // Somewhere in your service or OnGetAsync
-            using (var context = new RenSpandDbContext())
+            using var context = new RenSpandDbContext();
+            var address = new Address
             {
-                var address = new Address
-                {
-                    Street = "Test Street",
-                    ZipCode = "1234",
-                    City = "Testville"
-                };
-                context.Addresses.Add(address);
-                await context.SaveChangesAsync();
-            }
+                Street = "Test Street",
+                ZipCode = "1234",
+                City = "Testville"
+            };
+            context.Addresses.Add(address);
+            await context.SaveChangesAsync();
         }
 
 
