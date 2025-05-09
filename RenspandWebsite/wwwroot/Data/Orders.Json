@@ -1,176 +1,82 @@
 [
   {
     "Id": 1,
-    "ServiceItems": [
-      {
-        "Amount": 2,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Price": 15.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 1,
-      "Name": "Alice Johnson",
-      "Email": "alice@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 1,
-        "Street": "123 Elm St",
-        "City": "Springfield",
-        "ZipCode": "12345"
-      }
-    ],
-    "TotalPrice": 31.98,
-    "DateStart": "2025-04-25T08:00:00",
-    "DateDone": "2025-04-25T09:00:00",
-    "TrashCanEmptyDate": "2025-04-24T18:00:00"
+    "BuyerId": 1,
+    "TotalPrice": 149.99,
+    "DateStart": "2025-05-01T10:00:00",
+    "DateDone": "2025-05-02T14:00:00",
+    "TrashCanEmptyDate": "2025-05-03T08:00:00"
   },
   {
     "Id": 2,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "Price": 49.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 2,
-      "Name": "Bob Smith",
-      "Email": "bob@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 2,
-        "Street": "456 Oak Rd",
-        "City": "Greendale",
-        "ZipCode": "23456"
-      }
-    ],
-    "TotalPrice": 49.99,
-    "DateStart": "2025-04-27T10:00:00",
-    "DateDone": "2025-04-27T11:30:00",
+    "BuyerId": 2,
+    "TotalPrice": 89.50,
+    "DateStart": "2025-04-20T09:00:00",
+    "DateDone": "2025-04-21T13:00:00",
     "TrashCanEmptyDate": null
   },
   {
     "Id": 3,
-    "ServiceItems": [
-      {
-        "Amount": 3,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Price": 15.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 3,
-      "Name": "Carla Vega",
-      "Email": "carla@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 3,
-        "Street": "789 Maple Ave",
-        "City": "Hillside",
-        "ZipCode": "34567"
-      }
-    ],
-    "TotalPrice": 47.97,
-    "DateStart": "2025-04-29T07:30:00",
-    "DateDone": "2025-04-29T08:30:00",
-    "TrashCanEmptyDate": "2025-04-28T17:00:00"
+    "BuyerId": 3,
+    "TotalPrice": 120.00,
+    "DateStart": "2025-04-25T12:00:00",
+    "DateDone": "2025-04-26T16:00:00",
+    "TrashCanEmptyDate": "2025-04-27T08:30:00"
   },
   {
     "Id": 4,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 3,
-          "Name": "Gutter Cleaning",
-          "Description": "Manual removal of debris from gutters.",
-          "Price": 89.50
-        }
-      },
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Price": 15.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 4,
-      "Name": "David Lee",
-      "Email": "david@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 4,
-        "Street": "1010 Birch Ln",
-        "City": "Riverdale",
-        "ZipCode": "45678"
-      }
-    ],
-    "TotalPrice": 105.49,
-    "DateStart": "2025-05-01T13:00:00",
-    "DateDone": "2025-05-01T15:00:00",
-    "TrashCanEmptyDate": "2025-04-30T16:00:00"
+    "BuyerId": 1,
+    "TotalPrice": 59.99,
+    "DateStart": "2025-05-03T07:30:00",
+    "DateDone": "2025-05-04T10:00:00",
+    "TrashCanEmptyDate": null
   },
   {
     "Id": 5,
-    "ServiceItems": [
-      {
-        "Amount": 2,
-        "ServiceWork": {
-          "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "Price": 49.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 5,
-      "Name": "Eva Tran",
-      "Email": "eva@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 5,
-        "Street": "2020 Pine Ct",
-        "City": "Lakeside",
-        "ZipCode": "56789"
-      }
-    ],
-    "TotalPrice": 99.98,
-    "DateStart": "2025-05-03T14:00:00",
-    "DateDone": "2025-05-03T16:00:00",
+    "BuyerId": 2,
+    "TotalPrice": 200.00,
+    "DateStart": "2025-04-18T11:00:00",
+    "DateDone": "2025-04-19T15:00:00",
+    "TrashCanEmptyDate": "2025-04-20T07:00:00"
+  },
+  {
+    "Id": 6,
+    "BuyerId": 3,
+    "TotalPrice": 75.25,
+    "DateStart": "2025-04-22T08:45:00",
+    "DateDone": "2025-04-23T11:30:00",
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 7,
+    "BuyerId": 1,
+    "TotalPrice": 134.40,
+    "DateStart": "2025-04-27T10:00:00",
+    "DateDone": "2025-04-28T13:00:00",
+    "TrashCanEmptyDate": "2025-04-29T08:15:00"
+  },
+  {
+    "Id": 8,
+    "BuyerId": 2,
+    "TotalPrice": 99.99,
+    "DateStart": "2025-04-29T09:00:00",
+    "DateDone": "2025-04-30T12:00:00",
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 9,
+    "BuyerId": 3,
+    "TotalPrice": 180.75,
+    "DateStart": "2025-05-01T13:00:00",
+    "DateDone": "2025-05-02T17:00:00",
+    "TrashCanEmptyDate": "2025-05-03T09:00:00"
+  },
+  {
+    "Id": 10,
+    "BuyerId": 1,
+    "TotalPrice": 110.10,
+    "DateStart": "2025-04-24T14:00:00",
+    "DateDone": "2025-04-25T18:00:00",
     "TrashCanEmptyDate": null
   },
   {

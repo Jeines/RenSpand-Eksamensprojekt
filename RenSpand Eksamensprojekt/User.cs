@@ -1,14 +1,21 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace RenSpand_Eksamensprojekt
 {
     public class User
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
 
+        [StringLength(100)]
+        public string? Name { get; set; }
+
+        public string Email { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
+        [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public RoleEnum Role { get; set; }
 

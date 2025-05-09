@@ -33,10 +33,16 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/WorkHandler/GetAllWork">Priser</a>
+                            <form method="post" asp-page="/Admin/AdminPage">
+                                <button type="submit" class="btn btn-link nav-link">Get My Orders</button>
+                            </form>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         @{
-                            if(LogInPageModel.CurrentUser != null)
+                            if (Context.User.Identity != null && Context.User.Identity.Name == "admin")
                             {
                                 if (LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Admin || LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Employee)
                                 {
@@ -50,22 +56,23 @@
                     </ul>
                     <ul class="navbar-nav">
                         @{
-                            if (LogInPageModel.CurrentUser == null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
-                                </li>
-                            }
-                            else
+                            @if (Context.User.Identity != null && Context.User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item nav-link text-dark me-3">
-                                    User: @LogInPageModel.CurrentUser.Username
+                                    User: @Context.User.Identity.Name
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogOutPage">Logout</a>
                                 </li>
                             }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
+                                </li>
+                            }
+
                         }
                     </ul>
                 </div>

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.EFDbContext;
 using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
 
@@ -9,12 +10,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
+builder.Services.AddTransient<DbService<Profile>>();
+builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
+
+builder.Services.AddTransient<DbService<User>>();
+builder.Services.AddTransient<DbService<Order>>();
+builder.Services.AddTransient<DbService<Address>>();
+builder.Services.AddTransient<DbService<AddressItem>>();
+builder.Services.AddTransient<DbService<Work>>();
+builder.Services.AddTransient<DbService<ServiceItem>>();
+
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddTransient<JsonFileService<Work>>();
 
 //TODO: working code if other code break
 // builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
+//adds dbservice to program.cs
+builder.Services.AddDbContext<RenSpandDbContext>();
 
 builder.Services.AddSingleton<CleaningService, CleaningService>();
 builder.Services.AddSingleton<JsonFileService<Order>>();

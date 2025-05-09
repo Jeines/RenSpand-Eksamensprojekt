@@ -3,9 +3,10 @@
 
 namespace RenspandWebsite.Service
 {
+
     public class OrderService
     {
-        private List<Order> _orders;  
+        private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
         private JsonFileService<Order> JsonFileService { get; set; }
         //private DbGenericService<Order> _dbService;
