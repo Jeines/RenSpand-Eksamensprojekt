@@ -1,0 +1,103 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminProduct.GetAllProductsModel
+@{
+	ViewData["Title"] = "Produkter";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb custom-breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/Admin/AdminPage" class="breadcrumb-link">Admin</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Se Produkter
+        </li>
+    </ol>
+</nav>
+
+<h1>Se Alle Produkter</h1>
+<!-- Filter -->
+<div class="container mt-4">
+    <div class="card border-secondary shadow-sm mb-4">
+
+        <!-- Hele headeren er klikbar via <a> og data-toggle -->
+        <a class="card-header bg-dark text-white d-flex justify-content-between align-items-center text-decoration-none"
+           data-toggle="collapse"
+           href="#filterCollapse"
+           role="button"
+           aria-expanded="false"
+           aria-controls="filterCollapse">
+            <span><i class="fa fa-filter"></i> Filtrér produkter efter pris</span>
+            <i class="fa fa-chevron-down"></i>
+        </a>
+        <!-- Kollapsbart filterindhold -->
+        <div class="collapse" id="filterCollapse">
+            <div class="card-body">
+                <form method="post" asp-page-handler="PriceFilter">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label asp-for="MinPrice" class="form-label">Minimumspris (DKK)</label>
+                            <input asp-for="MinPrice" class="form-control" />
+                        </div>
+                        <div class="col-md-5">
+                            <label asp-for="MaxPrice" class="form-label">Maksimumspris (DKK)</label>
+                            <input asp-for="MaxPrice" class="form-control" />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-outline-primary w-100">
+                                <i class="fa fa-search"></i> Filtrer
+                            </button>
+                        </div>
+                    </div>
+                    <a asp-page="./GetAllProducts" class="btn btn-outline-secondary mt-2">
+                        <i class="fa fa-times"></i> Nulstil
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Alle Produkter -->
+<div class="container mt-4">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped bg-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Navn</th>
+                    <th>Beskrivelse</th>
+                    <th>Pris</th>
+                    <th>Handlinger</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Products != null)
+                {
+                    foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td>@product.Name</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price</td>
+                            <td>
+                                <a class="btn btn-sm btn-outline-primary mr-1" asp-page="EditProduct" asp-route-id="@product.Id">
+                                    <i class="fa fa-edit"></i> Rediger
+                                </a>
+                                <a class="btn btn-sm btn-outline-danger" asp-page="DeleteProduct" asp-route-id="@product.Id">
+                                    <i class="fa fa-trash"></i> Slet
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn btn-success mt-3" asp-page="CreateProduct">
+        <i class="fa fa-plus"></i> Opret nyt produkt
+    </a>
+</div>

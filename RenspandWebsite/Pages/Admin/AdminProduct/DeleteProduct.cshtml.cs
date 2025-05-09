@@ -3,35 +3,35 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Work
+namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
-    public class DeleteWorkModel : PageModel
+    public class DeleteProductModel : PageModel
     {
-        private IWorkService _workService;
+        private IWorkService _productService;
 
-        public DeleteWorkModel(IWorkService workService)
+        public DeleteProductModel(IWorkService productService)
         {
-            _workService = workService;
+            _productService = productService;
         }
 
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Work Work { get; set; }
+        public RenSpand_Eksamensprojekt.Work Product { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Work = _workService.GetWork(id);
-            if (Work == null)
+            Product = _productService.GetWork(id);
+            if (Product == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 
             return Page();
         }
         public IActionResult OnPost()
         {
-            RenSpand_Eksamensprojekt.Work deletedWork = _workService.DeleteWork(Work.Id);
+            RenSpand_Eksamensprojekt.Work deletedWork = _productService.DeleteWork(Product.Id);
             if (deletedWork == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 
-            return RedirectToPage("/Work/GetAllWork");
+            return RedirectToPage("GetAllProducts");
         }
     }
 }

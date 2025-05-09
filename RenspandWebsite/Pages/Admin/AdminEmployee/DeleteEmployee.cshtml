@@ -1,0 +1,13 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminEmployee.DeleteEmployeeModel
+@{
+	ViewData["Title"] = "Slet Medarbejder";
+}
+<h1>Bekræft sletning</h1>
+<div class="alert alert-danger">
+	<h5>Er du sikker på at du vil slette - @Model.Employee.Name</h5>
+	<form method="post">
+		<button type="submit" class="btn btn-danger">Ja</button>
+		<a class="btn btn-primary" asp-page="/Admin/AdminEmployee/GetAllEmployees">Nej</a>
+	</form>
+</div>

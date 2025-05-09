@@ -1,5 +1,5 @@
 ﻿@page
-@model RenspandWebsite.Pages.Admin.CreateEmployeeModel
+@model RenspandWebsite.Pages.Admin.AdminEmployee.CreateEmployeeModel
 @{
     ViewData["Title"] = "Opret medarbejder";
 }
@@ -63,7 +63,7 @@
 
     <div class="form-group mt-4">
         <button type="submit" class="btn btn-primary">Opret medarbejder</button>
-        <a asp-page="/Admin/GetAllEmployees" class="btn btn-secondary ml-2">Annullér</a>
+        <a asp-page="/Admin/AdminEmployee/GetAllEmployees" class="btn btn-secondary ml-2">Annullér</a>
     </div>
 </form>
 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 
-namespace RenspandWebsite.Pages.Admin
+namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     public class EditEmployeeModel : PageModel
     {

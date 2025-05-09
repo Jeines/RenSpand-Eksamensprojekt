@@ -4,17 +4,17 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Work
+namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
-    public class CreateWorkModel : PageModel
+    public class CreateProductModel : PageModel
     {
-        private IWorkService _workService;
-        public CreateWorkModel(IWorkService workService)
+        private IWorkService _productService;
+        public CreateProductModel(IWorkService productService)
         {
-            _workService = workService;
+            _productService = productService;
         }
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Work Work { get; set; }
+        public RenSpand_Eksamensprojekt.Work Product { get; set; }
 
         public IActionResult OnGet()
         {
@@ -26,8 +26,8 @@ namespace RenspandWebsite.Pages.Work
             {
                 return Page();
             }
-            _workService.AddWork(Work);
-            return RedirectToPage("GetAllWork");
+            _productService.AddWork(Product);
+            return RedirectToPage("GetAllProducts");
         }
     }
 }

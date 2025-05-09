@@ -1,6 +1,6 @@
 ﻿@page
 @using RenSpand_Eksamensprojekt
-@model RenspandWebsite.Pages.Admin.GetAllEmployeesModel
+@model RenspandWebsite.Pages.Admin.AdminEmployee.GetAllEmployeesModel
 @{
     ViewData["Title"] = "Se Alle Medarbejder";
 }
@@ -54,7 +54,7 @@
                                 <a class="btn btn-sm btn-outline-primary mr-1" asp-page="EditEmployee" asp-route-id="@employee.Id">
                                     <i class="fa fa-edit"></i> Rediger
                                 </a>
-                                <a class="btn btn-sm btn-outline-danger" asp-page="/Admin/DeleteEmployee" asp-route-id="@employee.Id">
+                                <a class="btn btn-sm btn-outline-danger" asp-page="/Admin/AdminEmployee/DeleteEmployee" asp-route-id="@employee.Id">
                                     <i class="fa fa-trash"></i> Slet
                                 </a>
                             </td>

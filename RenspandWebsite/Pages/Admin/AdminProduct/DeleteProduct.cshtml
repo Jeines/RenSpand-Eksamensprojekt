@@ -1,0 +1,13 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminProduct.DeleteProductModel
+@{
+	ViewData["Title"] = "Slet Produkt";
+}
+<h1>Bekræft sletning</h1>
+<div class="alert alert-danger">
+	<h5>Er du sikker på at du vil slette produktet - @Model.Product.Name</h5>
+	<form method="post">
+		<button type="submit" class="btn btn-danger">Ja</button>
+		<a class="btn btn-primary" asp-page="GetAllProducts">Nej</a>
+	</form>
+</div>

@@ -4,7 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Collections.Generic;
 
-namespace RenspandWebsite.Pages.Admin
+namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     public class CreateEmployeeModel : PageModel
     {
@@ -73,7 +73,7 @@ namespace RenspandWebsite.Pages.Admin
             // Tilføjer den nye medarbejder til listen og gemmer i JSON
             _EmployeeService.AddEmployee(Employee);
             // Sender brugeren til oversigten over alle medarbejdere
-            return RedirectToPage("/Admin/GetAllEmployees");
+            return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }
 
     }

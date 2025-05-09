@@ -40,5 +40,11 @@
     "Name": "Ekstra Service",
     "Description": "Tilvalg: indvendig desinficering og lugtfjernelse",
     "Price": 149
+  },
+  {
+    "Id": 501,
+    "Name": "Test",
+    "Description": "Test",
+    "Price": 2000
   }
 ]
