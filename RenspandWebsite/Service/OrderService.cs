@@ -8,23 +8,45 @@ namespace RenspandWebsite.Service
     {
         private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
-        private JsonFileService<Order> JsonFileService { get; set; } // Added generic type argument 'Order'.  
-
-        public OrderService(JsonFileService<Order> jsonFileService) // Added generic type argument 'Order'.  
+        private JsonFileService<Order> JsonFileService { get; set; }
+        //private DbGenericService<Order> _dbService;
+        //TODO: Implement database service for order management (,DbGenericService<Order> dbService)
+        public OrderService(JsonFileService<Order> jsonFileService) 
         {
             JsonFileService = jsonFileService;
-            _orders = JsonFileService.GetJsonObjects().ToList(); // Removed invalid 'Orders.GetOrders()' call.  
+            // _dbService = dbService;
+            _orders = JsonFileService.GetJsonObjects().ToList(); 
+            //_orders= _dbService.GetObjectsAsync().Result.ToList();
         }
 
-        //TODO: Fix mistakes in this code
-        //public IEnumerable<Order> Search(string searchTerm)
-        //{
-        //    if (string.IsNullOrEmpty(searchTerm)) return _orders;
 
-        //    return from o in _orders
-        //           where o.Customer.Name.ToLower().Contains(searchTerm.ToLower()) ||
-        //                 o.Customer.Phonenumber.Contains(searchTerm)
-        //           select o;
-        //}
+        /// <summary>
+        /// Søger i listen af ordrer med parametrene navn eller telefonnummer.
+        /// </summary>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        public IEnumerable<Order> Search(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm)) return _orders;
+
+            return from o in _orders
+                   where (o.Buyer != null && o.Buyer.Name != null && o.Buyer.PhoneNumber != null) &&
+                          (o.Buyer.Name.ToLower().Contains(searchTerm.ToLower()) ||
+                           o.Buyer.PhoneNumber.Contains(searchTerm)) ||
+                           (o.AddressList != null && o.AddressList.Any(a => a.Street.ToLower().Contains(searchTerm.ToLower()) ||
+                                a.City.ToLower().Contains(searchTerm.ToLower()) ||
+                                a.ZipCode.ToLower().Contains(searchTerm.ToLower())))
+                    select o;
+        }
+
+        public IEnumerable<Order> GetOrders()
+        {
+            return _orders;
+        }
     }
+    
+    
+
 }
+    
+

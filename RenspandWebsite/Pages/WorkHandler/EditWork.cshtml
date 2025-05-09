@@ -1,0 +1,36 @@
+﻿@page
+@model RenspandWebsite.Pages.WorkHandler.EditWorkModel
+@{
+}
+
+<form method="post">
+	<div class="form-group">
+		<label asp-for="Work.Id" class="control-lable"></label>
+		<input asp-for="Work.Id" class="form-control" readonly="@(true)" />
+	</div>
+	<div class="form-group">
+		<label asp-for="Work.Name" class="control-lable"></label>
+		<input asp-for="Work.Name" class="form-control" />
+		<span asp-validation-for="Work.Name" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Work.Description" class="control-lable"></label>
+		<input asp-for="Work.Description" class="form-control" />
+		<span asp-validation-for="Work.Name" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Work.Price" class="control-lable"></label>
+		<input asp-for="Work.Price" class="form-control" />
+		<span asp-validation-for="Work.Price" class="text-danger"></span>
+	</div>
+
+	<p>
+		<div class="form-group">
+			<input type="submit" value="Update" class="btn btn-primary" />
+		</div>
+	</p>
+</form>
+
+<p>
+	<a asp-page="/Work/GetAllWork">Back to List</a>
+</p>

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
+using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +20,22 @@ builder.Services.AddTransient<DbService<AddressItem>>();
 builder.Services.AddTransient<DbService<Work>>();
 builder.Services.AddTransient<DbService<ServiceItem>>();
 
+builder.Services.AddSingleton<IWorkService, WorkService>();
+builder.Services.AddTransient<JsonFileService<Work>>();
+
+//TODO: working code if other code break
+// builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
 //adds dbservice to program.cs
 builder.Services.AddDbContext<RenSpandDbContext>();
+
+builder.Services.AddSingleton<CleaningService, CleaningService>();
+builder.Services.AddSingleton<JsonFileService<Order>>();
+builder.Services.AddSingleton<JsonFileService<Work>>();
+builder.Services.AddScoped<CleaningService>();
+builder.Services.AddSingleton<OrderService, OrderService>();
+builder.Services.AddTransient<JsonFileService<Order>>();
+builder.Services.AddTransient<OrderServices>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";

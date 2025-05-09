@@ -1,4 +1,4 @@
-﻿@using RenspandWebsite.Pages.LogIn
+@using RenspandWebsite.Pages.LogIn
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
     <header>
@@ -18,14 +19,19 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">RenspandWebsite</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderSystem">Bestil Ordre</a>
+                        </li>
+
                         <li class="nav-item">
                             <form method="post" asp-page="/Admin/AdminPage">
                                 <button type="submit" class="btn btn-link nav-link">Get My Orders</button>
@@ -38,10 +44,14 @@
                         @{
                             if (Context.User.Identity != null && Context.User.Identity.Name == "admin")
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-page="/Admin/CreateUser">Create User</a>
-                                </li>
+                                if (LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Admin || LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Employee)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
+                                    </li>
+                                }  
                             }
+
                         }
                     </ul>
                     <ul class="navbar-nav">
@@ -75,7 +85,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white">
         <div class="container">
             &copy; 2025 - RenspandWebsite - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

@@ -68,7 +68,7 @@ namespace RenspandWebsite.Pages.LogIn
                             case RoleEnum.Private:
                                 claims.Add(new Claim(ClaimTypes.Role, "private"));
                                 claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Private/PrivatePage";
+                                redirectPage = "/Index";
                                 break;
                             default:
                                 claims.Add(new Claim(ClaimTypes.Role, "guest"));

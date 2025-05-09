@@ -1,0 +1,112 @@
+﻿@page
+@using RenSpand_Eksamensprojekt
+@model RenspandWebsite.Pages.WorkHandler.GetAllWorkModel
+@{
+	ViewData["Title"] = "Priser";
+}
+
+<h1 class="display-4 text-center">Priser</h1>
+
+<div class="container my-4">
+	<div class="row justify-content-center">
+		@if (Model.Works != null)
+		{
+			foreach (var work in Model.Works)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card border-secondary shadow h-100 rounded-4">
+						<div class="card-header CardHeaderColor text-center rounded-top-4">
+							@work.Name
+						</div>
+						<div class="card-body d-flex flex-column">
+							<h5 class="card-title text-success text-center">@work.Price.ToString("C")</h5>
+							<p class="card-text">@work.Description</p>
+							<a asp-page="/OrderSystem" class="btn BottonBackgroundColor btn-sm rounded-pill mx-auto mt-auto mb-2 px-3">Bestil</a>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<p class="text-muted text-center">Ingen arbejdstyper fundet.</p>
+		}
+	</div>
+</div>
+
+@* måske brugbart sener 
+ *@
+@* <h5>Filter Price</h5>
+<div class="row">
+	<div class="col-5">
+		<form method="post" class="form-inline">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Min</span>
+				</div>
+				<input asp-for="MinPrice" class="form-control mr-1" />
+				<div class="input-group-prepend">
+					<span class="input-group-text">Max</span>
+				</div>
+				<input asp-for="MaxPrice" class="form-control mr-1" />
+				<input type="submit" asp-page-handler="PriceFilter" value="Filter" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div> *@
+
+
+@* <table class="table table-bordered table-hover table-striped table-opacity" width="60%">
+	<colgroup>
+		<col style="width : 5%">
+		<col style="width : 77%">
+		<col style="width : 9%">
+		<col style="width : 9%">
+	</colgroup>
+	<thead>
+		<tr class="btn-secondary active">
+			<th>
+				Id
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Description
+			</th>
+			<th>
+				Price
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model.Works != null)
+		{
+			foreach (var work in Model.Works)
+			{
+				<tr class="btn-secondary">
+					<td>
+						@work.Id
+					</td>
+					<td>
+						@work.Name
+					</td>
+					<td>
+						@work.Description
+					</td>
+					<td>
+						@work.Price
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm" type="button" title="Edit" asp-page="EditWork" asp-route-id="@work.Id"><i class="fa fa-edit"></i></a>
+						<a class="btn btn-danger btn-sm " type="button" title="Delete" asp-page="DeleteWork" asp-route-id="@work.Id"><i class="fa fa-trash"></i></a>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>
+
+<p>
+	<a class="btn btn-primary" asp-page="CreateWork"> Create a new Item </a>
+</p> *@

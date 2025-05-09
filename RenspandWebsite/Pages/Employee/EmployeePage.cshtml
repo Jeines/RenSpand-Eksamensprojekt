@@ -1,0 +1,83 @@
+﻿@page
+@model RenspandWebsite.Pages.Employee.EmployeePageModel
+@using RenSpand_Eksamensprojekt;
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Orders</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Service</th>
+            <th>Total Price</th>
+            <th>Date Start</th>
+            <th>Date Done</th>
+            <th>Trashcan Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Orders != null)
+        {
+           
+        
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+               <td>@order.Id</td>
+               <td>
+                    @foreach (ServiceItem service in order.ServiceItems)
+                    {
+                        if (service.ServiceWork != null)
+                        {
+                            service.ServiceWork.ToString();
+                        }
+                    }
+
+               </td>
+               <td>@order.TotalPrice</td>
+               <td>@order.DateStart.ToString("yyyy-MM-dd")</td>
+               <td>@order.DateDone.ToString("yyyy-MM-dd")</td>
+               <td>@(order.TrashCanEmptyDate?.ToString("yyyy-MM-dd") ?? "N/A")</td>
+               <td>
+                    @if (order.AcceptStatus == AcceptStatusEnum.Pending)
+                    {
+                        <form method="post" asp-page-handler="AcceptOrder">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <button  class="btn btn-success btn-sm" type="submit" title="Accept">
+                                <i class="fa fa-check"></i> Accept
+                            </button>
+                        </form>
+
+                        <form method="post" asp-page-handler="RejectOrder">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <button  class="btn btn-danger btn-sm" type="submit" title="Reject">
+                                <i class="fa fa-trash"></i> Reject
+                            </button>
+                        </form>
+                    }
+
+                </td>
+                <td>
+                    @switch (order.AcceptStatus)
+                        {
+                            case AcceptStatusEnum.Accepted:
+                                <span class="badge badge-success">Accepted</span>
+                                break;
+                            case AcceptStatusEnum.Rejected:
+                                <span class="badge badge-danger">Rejected</span>
+                                break;
+                            case AcceptStatusEnum.Pending:
+                                <span class="badge bg-secondary">Pending</span>
+                                break;
+                        }
+                </td>
+            </tr>
+        } 
+        }
+    </tbody>
+    
+</table>
+
+

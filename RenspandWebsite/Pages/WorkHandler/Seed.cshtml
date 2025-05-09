@@ -1,0 +1,16 @@
+﻿@page
+@model RenspandWebsite.Pages.WorkHandler.SeedModel
+@{
+    ViewData["Title"] = "Seed Data";
+}
+
+<h2>Seed Work Data</h2>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Seed JSON File with Sample Data</button>
+</form>
+
+@if (Model.Message != null)
+{
+    <p class="text-success">@Model.Message</p>
+}
