@@ -13,16 +13,11 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             _employeeService = employeeService;
         }
 
-        // TODO: Implement the logic to get all employees from Employee
         public List<Employee>? Employees { get; private set; }
 
         public void OnGet()
         {
             Employees = _employeeService.GetEmployees();
         }
-
-        //public IActionResult OnPost()
-        //{
-        //}
     }
 }
