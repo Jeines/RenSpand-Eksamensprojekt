@@ -47,7 +47,6 @@ namespace RenspandWebsite.Pages.LogIn
                         var claims = new List<Claim> { new Claim(ClaimTypes.Name, Username) };
                         string redirectPage = "/Index";
 
-                        Console.WriteLine(profile.Role);
                         switch (profile.Role)
                         {
                             case RoleEnum.Admin:
