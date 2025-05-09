@@ -9,12 +9,6 @@ namespace RenspandWebsite.Pages.Admin
     {
         public IActionResult OnGet()
         {
-            if (User.IsInRole("Admin"))
-            {
-                return Page(); // fortsæt som normalt hvis admin
-            }
-            //return RedirectToPage("/Index"); // redirect til forsiden  
-
             return Page();
         }
     }
