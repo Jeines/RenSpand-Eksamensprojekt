@@ -14,7 +14,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
             _productService = productService;
         }
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Work Product { get; set; }
+        public Work Product { get; set; }
 
         public IActionResult OnGet()
         {

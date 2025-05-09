@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
 
-namespace RenspandWebsite.Pages.Employee
+namespace RenspandWebsite.Pages.EmployeeHandler
 {
     public class EmployeePageModel : PageModel
     {

@@ -1,0 +1,35 @@
+﻿@page
+@using RenSpand_Eksamensprojekt
+@model RenspandWebsite.Pages.WorkHandler.GetAllWorkModel
+@{
+	ViewData["Title"] = "Priser";
+}
+
+<h1 class="display-4 text-center">Priser</h1>
+
+<div class="container my-4">
+	<div class="row justify-content-center">
+		@if (Model.Works != null)
+		{
+			foreach (var work in Model.Works)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card border-secondary shadow h-100 rounded-4">
+						<div class="card-header CardHeaderColor text-center rounded-top-4">
+							@work.Name
+						</div>
+						<div class="card-body d-flex flex-column">
+							<h5 class="card-title text-success text-center">@work.Price.ToString("C")</h5>
+							<p class="card-text">@work.Description</p>
+							<a href="#" class="btn BottonBackgroundColor btn-sm rounded-pill mx-auto mt-auto mb-2 px-3">Bestil</a>
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<p class="text-muted text-center">Ingen arbejdstyper fundet.</p>
+		}
+	</div>
+</div>

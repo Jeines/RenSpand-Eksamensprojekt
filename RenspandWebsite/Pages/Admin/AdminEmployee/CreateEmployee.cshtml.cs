@@ -16,7 +16,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
 
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 

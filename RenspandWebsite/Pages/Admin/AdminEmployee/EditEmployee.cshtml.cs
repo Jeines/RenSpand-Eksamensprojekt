@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
@@ -12,7 +13,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             _employeeService = employeeService;
         }
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
         public IActionResult OnGet(int id)

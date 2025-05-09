@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
@@ -11,7 +12,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         {
             _productService = productService;
         }
-        public List<RenSpand_Eksamensprojekt.Work>? Products { get; private set; }
+        public List<Work>? Products { get; private set; }
 
         [BindProperty]
         public int MinPrice { get; set; }

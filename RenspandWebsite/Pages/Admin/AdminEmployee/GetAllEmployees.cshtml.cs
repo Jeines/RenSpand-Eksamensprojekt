@@ -14,7 +14,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
 
         // TODO: Implement the logic to get all employees from Employee
-        public List<RenSpand_Eksamensprojekt.Employee>? Employees { get; private set; }
+        public List<Employee>? Employees { get; private set; }
 
         public void OnGet()
         {

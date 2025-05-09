@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
@@ -14,7 +15,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         }
 
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Work Product { get; set; }
+        public Work Product { get; set; }
         public IActionResult OnGet(int id)
         {
             Product = _productService.GetWork(id);
