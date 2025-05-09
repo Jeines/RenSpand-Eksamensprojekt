@@ -42,20 +42,20 @@ else
                     <td>@order.Id</td>
                     <td>@order.Buyer?.Name</td>
                     <td>
-                        @foreach (var service in order.ServiceItems)
-                        {
-                            <span>@service.ServiceWork?.Name</span>
+                        @* @foreach (var service in order.ServiceItems) *@
+                        @* { *@
+                        @*     <span>@service.ServiceWork?.Name</span> *@
 
-                            <br />
-                        }
+                        @*     <br /> *@
+                        @* } *@
                     </td>
                     <td>
-                        @foreach (var address in order.AddressList)
-                        {
-                            <span>@address.Street, @address.City, @address.ZipCode</span>
+                        @* @foreach (var address in order.AddressList) *@
+                        @* { *@
+                        @*     <span>@address.Street, @address.City, @address.ZipCode</span> *@
 
-                            <br />
-                        }
+                        @*     <br /> *@
+                        @* } *@
                     </td>
                     <td>@order.TotalPrice.ToString("C")</td>
                     <td>@order.DateStart.ToString("dd-MM-yyyy")</td>

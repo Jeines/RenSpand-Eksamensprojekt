@@ -78,6 +78,7 @@ namespace RenspandWebsite.Pages
 
         public void OnGet()
         {
+            Console.WriteLine("Ordre system Opened");
             Orders = _cleaningService.GetOrders();
             WorkList = new List<Work>
     {

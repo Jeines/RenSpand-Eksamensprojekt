@@ -71,9 +71,9 @@ namespace RenspandWebsite.Pages.Employee
                 FilteredOrders = allOrders
                     .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                                (o.AddressList?.Any(a => a.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
+                                (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                         a.Address.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                         a.Address.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
                     .ToList();
             }
             else

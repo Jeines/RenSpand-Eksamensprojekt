@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RenSpand_Eksamensprojekt;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -49,15 +50,7 @@ namespace RenSpand_Eksamensprojekt
 
         public override string ToString()
         {
-            if (ServiceItems != null && ServiceItems.Count > 0)
-            {
-                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: {string.Join(", ", ServiceItems)}, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
-            }
-            else
-            {
                 return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
-            }
         }
-
     }
 }

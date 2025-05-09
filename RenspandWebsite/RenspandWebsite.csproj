@@ -23,4 +23,9 @@
     <ProjectReference Include="..\RenSpand Eksamensprojekt\RenSpand Eksamensprojekt.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Service\OrdreSystemServices\" />
+    <Folder Include="Service\ProfileServices\" />
+  </ItemGroup>
+
 </Project>

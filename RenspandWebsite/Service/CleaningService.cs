@@ -21,13 +21,12 @@ public class CleaningService
         };
     }
 
-    public void OrderCleaing(User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
+    public void OrderCleaing(User buyer, decimal totalPrice, DateTime dateStart, DateTime dateDone)
     {
         _orders.Add(new Order
         {
             Id = _orders.Count + 1, // Simple ID generation
             Buyer = buyer,
-            ServiceItems = serviceItems,
             TotalPrice = totalPrice,
             DateStart = dateStart,
             DateDone = dateDone,
@@ -60,6 +59,12 @@ public class CleaningService
             ZipCode = zipcode
         };
 
+        AddressItem addressItem = new AddressItem
+        {
+            OrderId = 0, // Assuming this is set later
+            Address = address
+        };
+
         //Find den valgte Work ud fra Workns id
         Work selectedWork = _works.FirstOrDefault(o => o.Id == work);
         if (selectedWork == null)
@@ -73,17 +78,8 @@ public class CleaningService
         //Opret en Order
         Order newOrder = new Order
         {
-            Id = _orders.Count > 0 ? _orders.Max(o => o.Id) + 1 : 1,
             Buyer = user,
-            AddressList = new List<Address> { address },
-            ServiceItems = new List<ServiceItem>
-            {
-                new ServiceItem
-                {
-                    ServiceWork = selectedWork,
-                    Amount = workamount
-                }
-            },
+            AddressItems = new List<AddressItem> { addressItem },
             TotalPrice = totalPrice,
             DateStart = datestart,
             DateDone = datestart.AddDays(8), // Assuming the work is done in one day

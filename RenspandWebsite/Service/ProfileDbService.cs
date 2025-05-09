@@ -14,7 +14,7 @@ namespace RenspandWebsite.Service
         {
             using var context = new RenSpandDbContext();
             return await context.Orders
-            .Where(order => order.BuyerId == userId)
+            .Where(order => order.Buyer.Id == userId)
             .Include(order => order.Buyer)
             .ToListAsync();
         }

@@ -27,13 +27,6 @@
             <tr>
                <td>@order.Id</td>
                <td>
-                    @foreach (ServiceItem service in order.ServiceItems)
-                    {
-                        if (service.ServiceWork != null)
-                        {
-                            service.ServiceWork.ToString();
-                        }
-                    }
 
                </td>
                <td>@order.TotalPrice</td>

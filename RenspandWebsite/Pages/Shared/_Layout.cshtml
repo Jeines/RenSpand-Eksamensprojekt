@@ -42,17 +42,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         @{
-                            if (Context.User.Identity != null && Context.User.Identity.Name == "admin")
+                            if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
-                                if (LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Admin || LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Employee)
+                                if (User.IsInRole("admin") || User.IsInRole("employee"))
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
                                     </li>
-                                }  
+                                }
                             }
-
                         }
+
                     </ul>
                     <ul class="navbar-nav">
                         @{

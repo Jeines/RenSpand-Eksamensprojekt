@@ -33,9 +33,9 @@ namespace RenspandWebsite.Service
                    where (o.Buyer != null && o.Buyer.Name != null && o.Buyer.PhoneNumber != null) &&
                           (o.Buyer.Name.ToLower().Contains(searchTerm.ToLower()) ||
                            o.Buyer.PhoneNumber.Contains(searchTerm)) ||
-                           (o.AddressList != null && o.AddressList.Any(a => a.Street.ToLower().Contains(searchTerm.ToLower()) ||
-                                a.City.ToLower().Contains(searchTerm.ToLower()) ||
-                                a.ZipCode.ToLower().Contains(searchTerm.ToLower())))
+                           (o.AddressItems != null && o.AddressItems.Any(a => a.Address.Street.ToLower().Contains(searchTerm.ToLower()) ||
+                                a.Address.City.ToLower().Contains(searchTerm.ToLower()) ||
+                                a.Address.ZipCode.ToLower().Contains(searchTerm.ToLower())))
                     select o;
         }
 
