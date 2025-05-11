@@ -83,6 +83,9 @@ namespace RenspandWebsite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AcceptStatus")
+                        .HasColumnType("int");
+
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");
 

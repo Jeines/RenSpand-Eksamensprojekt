@@ -76,6 +76,7 @@ namespace RenspandWebsite.Migrations
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateDone = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AcceptStatus = table.Column<int>(type: "int", nullable: false),
                     TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

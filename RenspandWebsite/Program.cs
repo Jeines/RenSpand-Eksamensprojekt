@@ -22,6 +22,9 @@ builder.Services.AddSingleton<CleaningService, CleaningService>();
 builder.Services.AddSingleton<JsonFileService<Order>>();
 builder.Services.AddSingleton<JsonFileService<Work>>();
 builder.Services.AddScoped<CleaningService>();
+builder.Services.AddTransient<OrderSystemDbService, OrderSystemDbService>();
+builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
+
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
 builder.Services.AddTransient<OrderServices>();

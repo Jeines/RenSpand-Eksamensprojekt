@@ -12,7 +12,7 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250507115201_RenSpandRazor")]
+    [Migration("20250509120900_RenSpandRazor")]
     partial class RenSpandRazor
     {
         /// <inheritdoc />
@@ -85,6 +85,9 @@ namespace RenspandWebsite.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcceptStatus")
+                        .HasColumnType("int");
 
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");

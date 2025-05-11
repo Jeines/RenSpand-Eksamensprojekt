@@ -1,10 +1,10 @@
 ﻿@page
 @model RenspandWebsite.Pages.OrderSystemModel
+
 <link rel="stylesheet" href="~/css/OrdersystemStylesheet.css" />
+
 @{
-
     ViewData["Title"] = "Order System";
-
 }
 
 <h1>Bestil Skraldespandsrens</h1>
@@ -12,46 +12,57 @@
 <form method="post">
     <div>
         <label>Navn:</label>
-        @* add name bindproperty *@
         <input asp-for="Name" placeholder="Navn" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-@*     <div>
-        <label>Adresse:</label>
-        <input asp-for="Address" type="text" asp-formaction="Order.Address" />
-    </div> *@
+
     <div>
         <label>Telefonnummer:</label>
-        <input asp-for="PhoneNumber" placeholder="TelefonNummer"  />
+        <input asp-for="PhoneNumber" placeholder="TelefonNummer" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
+
     <div>
         <label>Email:</label>
         <input asp-for="Email" placeholder="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
+
     <div>
         <label>Vej:</label>
         <input asp-for="Street" placeholder="Vej Navn" />
+        <span asp-validation-for="Street" class="text-danger"></span>
     </div>
+
     <div>
         <label>By:</label>
         <input asp-for="City" placeholder="By" />
+        <span asp-validation-for="City" class="text-danger"></span>
     </div>
+
     <div>
         <label>Postnummer:</label>
         <input asp-for="ZipCode" placeholder="Postnummer" />
+        <span asp-validation-for="ZipCode" class="text-danger"></span>
     </div>
+
     <div>
         <label>Produkt</label>
         <select asp-for="Work" asp-items="Model.WorkSelectList" class="form-control">
             <option value="">Vælg produkt</option>
         </select>
+        <span asp-validation-for="Work" class="text-danger"></span>
     </div>
+  @*   Make TrashcanType individual works
     <div>
         <label>Skraldespandstype:</label>
-        <select asp-formaction="Order.TrashCanType">
+        <select asp-for="TrashCanType">
+            <option value="">Vælg type</option>
             <option value="Type1">2 Hjul</option>
             <option value="Type2">4 Hjul</option>
         </select>
-    </div>
+    </div> *@
+
     <div>
         <label>Antal af skraldespande</label>
         <input asp-for="WorkAmount" placeholder="Antal af skraldespande" />
@@ -73,12 +84,3 @@
 
     <button type="submit">Bestil</button>
 </form>
-
-    @if (Model.OrderSubmitted)
-{
-    <div>
-        <h2>Ordrebekræftelse</h2>
-        <p>Tak for din bestilling</p>
-        <p>Vi vil kontakte dig på dit nummer for at bekræfte detaljerne.</p>
-    </div>
-}

@@ -7,11 +7,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace RenSpand_Eksamensprojekt
 {
     public class Order
     {
+        private static readonly List<AddressItem> addressItems = [];
+
         [Key]
         public int Id { get; set; }
 
@@ -24,7 +27,7 @@ namespace RenSpand_Eksamensprojekt
         [Required]
         public decimal TotalPrice { get; set; }
 
-        public List<AddressItem> AddressItems { get; set; } = new List<AddressItem>();
+        public List<AddressItem> AddressItems { get; set; } = addressItems;
 
         [Required]
         public DateTime DateStart { get; set; }
@@ -34,7 +37,10 @@ namespace RenSpand_Eksamensprojekt
         /// <summary>
         /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
         /// </summary>
+        [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
+
         public DateTime? TrashCanEmptyDate { get; set; }
     
         public Order(int id, User buyer, decimal totalPrice, DateTime dateStart, DateTime dateDone)

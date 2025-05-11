@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 
 
@@ -12,28 +13,14 @@ namespace RenspandWebsite.Pages
     public class OrderSystemModel : PageModel
     {
         private CleaningService _cleaningService;
-        private JsonFileService<Order> _jsonFileService;
-        private List<Order> _orders;
         public List<Work> WorkList { get; set; }
-
-        [BindProperty]
-        public int Work { get; set; } // Gemmer valgt Service Id
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
-        public OrderSystemModel(JsonFileService<Order> jsonFileService, CleaningService cleaningService)
+        public OrderSystemModel(CleaningService cleaningService)
         {
-            _jsonFileService = jsonFileService;
-            _orders = _jsonFileService.GetJsonObjects().ToList();
             _cleaningService = cleaningService;
-            WorkList = new List<Work>
-            {
-                new Work(1,"Rengøring","simpel", 100),
-                new Work(2,"Vinduespudsning","viduer", 200),
-                new Work(3,"Havearbejde","klip græs", 150)
-            };
         }
-
 
 
         [BindProperty]
@@ -63,50 +50,48 @@ namespace RenspandWebsite.Pages
         [BindProperty]
         public DateTime DateDone { get; set; }
 
+        [BindProperty, Required(ErrorMessage = "Du skal vælge et produkt.")]
+        public int Work { get; set; }
+
         [BindProperty]
         public DateTime TrashCanEmptyDate { get; set; }
 
         [BindProperty]
         public decimal TotalPrice { get; set; }
 
-
-
-
-
-        public bool OrderSubmitted { get; set; } = false;
-        public List<Order> Orders { get; set; } = new List<Order>();
-
         public void OnGet()
         {
-            Console.WriteLine("Ordre system Opened");
-            Orders = _cleaningService.GetOrders();
-            WorkList = new List<Work>
-    {
-
-            new (1,"Rengøring","simpel", 100),
-            new (2,"Vinduespudsning","viduer", 200),
-            new (3,"Havearbejde","klip græs", 150)
-    };
-
+            WorkList = _cleaningService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
                 Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
             }).ToList();
+
+            //WorkSelectList = WorkList.Select(s => new SelectListItem
+            //{
+            //    Value = s.Id.ToString(),
+            //    Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
+            //}).ToList();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-
-            Console.WriteLine("TEST TEST TEST");
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("model");
+                // If the model state is invalid, re-populate the WorkSelectList and return to the page
+                WorkList = _cleaningService.Works;
+                WorkSelectList = WorkList.Select(s => new SelectListItem
+                {
+                    Value = s.Id.ToString(),
+                    Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
+                }).ToList();
                 return Page();
             }
-            OrderSubmitted = true;
-            _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
-            return Page();
+
+            await _cleaningService.CreateOrderAsync(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate);
+
+            return RedirectToPage("/OrderHandling/OrderConfirmationPage");
         }
     }
 }

@@ -36,11 +36,12 @@ namespace RenspandWebsite.Service
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public async Task AddObjectAsync(T entity)
+        public async Task<T> AddObjectAsync(T entity)
         {
             using var context = new RenSpandDbContext();
             context.Set<T>().Add(entity);
             await context.SaveChangesAsync();
+            return entity;
         }
 
         /// <summary>
