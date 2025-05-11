@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using RenspandWebsite.Service.CreateOrderServices;
 
 
 
@@ -12,12 +12,12 @@ namespace RenspandWebsite.Pages
 {
     public class OrderSystemModel : PageModel
     {
-        private CleaningService _cleaningService;
+        private CreateOrderService _cleaningService;
         public List<Work> WorkList { get; set; }
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
-        public OrderSystemModel(CleaningService cleaningService)
+        public OrderSystemModel(CreateOrderService cleaningService)
         {
             _cleaningService = cleaningService;
         }

@@ -1,23 +1,18 @@
-﻿namespace RenspandWebsite.Service;
+﻿namespace RenspandWebsite.Service.CreateOrderServices;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Pages;
 
-public class CleaningService
+public class CreateOrderService
 {
     public List<Work> Works { get; }
     private JsonFileService<Order> JsonFileService { get; set; }
-    private OrderSystemDbService OrderSystemDbService { get; set; }
+    private CreateOrderDbService OrderSystemDbService { get; set; }
 
-    public CleaningService(JsonFileService<Order> jsonFileService, OrderSystemDbService orderSystemDbService)
+    public CreateOrderService(JsonFileService<Order> jsonFileService, CreateOrderDbService orderSystemDbService)
     {
         OrderSystemDbService = orderSystemDbService;
         Works = OrderSystemDbService.GetAllWorksAsync().Result;
     }
-
-
-
-
-
 
     public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, int workId, int workamount, DateTime datestart, DateTime trashcanemptydate)
     {

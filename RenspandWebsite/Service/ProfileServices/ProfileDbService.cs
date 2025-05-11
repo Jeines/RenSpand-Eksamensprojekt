@@ -2,7 +2,7 @@
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
 
-namespace RenspandWebsite.Service
+namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileDbService : DbService<Profile>
     {

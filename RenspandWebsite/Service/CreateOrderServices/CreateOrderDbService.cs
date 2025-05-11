@@ -2,9 +2,9 @@
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
 
-namespace RenspandWebsite.Service
+namespace RenspandWebsite.Service.CreateOrderServices
 {
-    public class OrderSystemDbService : DbService<Order>
+    public class CreateOrderDbService : DbService<Order>
     {
 
         /// <summary>
@@ -65,10 +65,23 @@ namespace RenspandWebsite.Service
             // 4. Create AddressItem
             var addressItem = new AddressItem
             {
-                Order = order,
+                OrderId = order.Id,
                 Address = address
             };
             context.AddressItems.Add(addressItem);
+            await context.SaveChangesAsync();
+
+            context.Works.Attach(work);
+
+            // 5. Create WorkItem
+            var workItem = new ServiceItem
+            {
+                OrderId = order.Id,
+                ServiceWork = work,
+                Amount = workamount
+            };
+            Console.WriteLine("OrderId: "+order + "ServiceWork: " + work + "Amount: " + workamount);
+            context.ServiceItems.Add(workItem);
             await context.SaveChangesAsync();
 
             return order; // now includes Id
@@ -81,8 +94,6 @@ namespace RenspandWebsite.Service
             List<Work>? works = await context.Works.ToListAsync();
             return works;
         }
-
-
 
         public async Task SaveOrderObjects(IEnumerable<Order> orders)
         {

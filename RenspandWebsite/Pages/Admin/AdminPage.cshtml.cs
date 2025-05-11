@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service;
+using RenspandWebsite.Service.ProfileServices;
 
 namespace RenspandWebsite.Pages.Admin
 {

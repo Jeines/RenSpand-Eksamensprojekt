@@ -13,7 +13,6 @@ namespace RenSpand_Eksamensprojekt
 {
     public class Order
     {
-        private static readonly List<AddressItem> addressItems = [];
 
         [Key]
         public int Id { get; set; }
@@ -27,7 +26,9 @@ namespace RenSpand_Eksamensprojekt
         [Required]
         public decimal TotalPrice { get; set; }
 
-        public List<AddressItem> AddressItems { get; set; } = addressItems;
+        public List<AddressItem> AddressItems { get; set; } = new List<AddressItem>();
+
+        public List<ServiceItem> ServiceItems { get; set; } = new List<ServiceItem>();
 
         [Required]
         public DateTime DateStart { get; set; }

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Service\OrdreSystemServices\**" />
+    <Content Remove="Service\OrdreSystemServices\**" />
+    <EmbeddedResource Remove="Service\OrdreSystemServices\**" />
+    <None Remove="Service\OrdreSystemServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\Assets\RenSpandLogo.png" />
   </ItemGroup>
 
@@ -21,11 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RenSpand Eksamensprojekt\RenSpand Eksamensprojekt.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Service\OrdreSystemServices\" />
-    <Folder Include="Service\ProfileServices\" />
   </ItemGroup>
 
 </Project>

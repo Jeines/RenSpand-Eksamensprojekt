@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service;
+using RenspandWebsite.Service.ProfileServices;
 using System.ComponentModel.DataAnnotations;
 
 namespace RenspandWebsite.Pages.Admin

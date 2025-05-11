@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using RenspandWebsite.Service;
+using RenspandWebsite.Service.ProfileServices;
 
 namespace RenspandWebsite.Pages.LogIn
 {

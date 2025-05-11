@@ -2,7 +2,7 @@
 using RenspandWebsite.EFDbContext;
 using System.Linq.Expressions;
 
-namespace RenspandWebsite.Service
+namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileService
     {
