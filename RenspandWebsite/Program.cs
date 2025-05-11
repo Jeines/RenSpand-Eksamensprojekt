@@ -17,8 +17,6 @@ builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assu
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddTransient<JsonFileService<Work>>();
 
-//TODO: working code if other code break
-// builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
 
 builder.Services.AddSingleton<CreateOrderService, CreateOrderService>();
@@ -32,16 +30,23 @@ builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<OrderDbService, OrderDbService>();
 builder.Services.AddTransient<DbService<Order>, DbService<Order>>(); // Assuming you have a DbService for Order
 
+// Add session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout
+});
 
 builder.Services.AddTransient<JsonFileService<Order>>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";
-
 });
+
 builder.Services.AddMvc().AddRazorPagesOptions(options => {
     options.Conventions.AuthorizeFolder("/Item");
-
 }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 var app = builder.Build();
@@ -56,6 +61,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// **Ensure UseSession is placed before UseRouting**
+app.UseSession(); // Add this line before UseRouting
 
 app.UseRouting();
 app.UseAuthentication();

@@ -1,5 +1,5 @@
 ﻿@page
-@model RenspandWebsite.Pages.OrderSystemModel
+@model RenspandWebsite.Pages.OrderHandling.OrderSystemModel
 
 <link rel="stylesheet" href="~/css/OrdersystemStylesheet.css" />
 
@@ -46,26 +46,13 @@
         <span asp-validation-for="ZipCode" class="text-danger"></span>
     </div>
 
-    <div>
-        <label>Produkt</label>
-        <select asp-for="Work" asp-items="Model.WorkSelectList" class="form-control">
-            <option value="">Vælg produkt</option>
-        </select>
-        <span asp-validation-for="Work" class="text-danger"></span>
-    </div>
-  @*   Make TrashcanType individual works
-    <div>
-        <label>Skraldespandstype:</label>
-        <select asp-for="TrashCanType">
-            <option value="">Vælg type</option>
-            <option value="Type1">2 Hjul</option>
-            <option value="Type2">4 Hjul</option>
-        </select>
-    </div> *@
+    <div class="row mb-3">
+        <label class="col-sm-4 col-form-label">Arbejde</label>
+        <div class="col-sm-8">
+            <select class="form-select" asp-for="SelectedWorkIds" asp-items="Model.WorkSelectList" multiple>
 
-    <div>
-        <label>Antal af skraldespande</label>
-        <input asp-for="WorkAmount" placeholder="Antal af skraldespande" />
+            </select>
+        </div>
     </div>
 
     <div>
@@ -82,5 +69,5 @@
 
     <p>Valgt dato: @Model.TrashCanEmptyDate.ToShortDateString()</p>
 
-    <button type="submit">Bestil</button>
+    <button type="submit">fortsæt</button>
 </form>

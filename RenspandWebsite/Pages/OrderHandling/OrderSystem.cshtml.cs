@@ -1,25 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.CreateOrderServices;
+using System.ComponentModel.DataAnnotations;
 
 
 
 
-namespace RenspandWebsite.Pages
+namespace RenspandWebsite.Pages.OrderHandling
 {
     public class OrderSystemModel : PageModel
     {
-        private CreateOrderService _cleaningService;
+        private readonly CreateOrderService _createOrderService;
         public List<Work> WorkList { get; set; }
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
         public OrderSystemModel(CreateOrderService cleaningService)
         {
-            _cleaningService = cleaningService;
+            _createOrderService = cleaningService;
         }
 
 
@@ -42,16 +42,13 @@ namespace RenspandWebsite.Pages
         public string ZipCode { get; set; }
 
         [BindProperty]
-        public int WorkAmount { get; set; }
+        public List<int> SelectedWorkIds { get; set; }
 
         [BindProperty]
         public DateTime DateStart { get; set; }
 
         [BindProperty]
         public DateTime DateDone { get; set; }
-
-        [BindProperty, Required(ErrorMessage = "Du skal vælge et produkt.")]
-        public int Work { get; set; }
 
         [BindProperty]
         public DateTime TrashCanEmptyDate { get; set; }
@@ -61,18 +58,15 @@ namespace RenspandWebsite.Pages
 
         public void OnGet()
         {
-            WorkList = _cleaningService.Works;
+            DateStart = DateTime.Today;
+            TrashCanEmptyDate = DateTime.Today;
+
+            WorkList = _createOrderService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
-                Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
+                Text = $"{s.Name} - ({s.Price} kr.)"
             }).ToList();
-
-            //WorkSelectList = WorkList.Select(s => new SelectListItem
-            //{
-            //    Value = s.Id.ToString(),
-            //    Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
-            //}).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -80,18 +74,35 @@ namespace RenspandWebsite.Pages
             if (!ModelState.IsValid)
             {
                 // If the model state is invalid, re-populate the WorkSelectList and return to the page
-                WorkList = _cleaningService.Works;
+                WorkList = _createOrderService.Works;
                 WorkSelectList = WorkList.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
-                    Text = $"{s.Name} - {s.Description} ({s.Price} kr.)"
+                    Text = $"{s.Name} - ({s.Price} kr.)"
                 }).ToList();
+                Console.WriteLine("order not created");
                 return Page();
             }
 
-            await _cleaningService.CreateOrderAsync(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate);
+            // Package the form data
+            var draft = new OrderDraft
+            {
+                Name = Name,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                Street = Street,
+                City = City,
+                ZipCode = ZipCode,
+                SelectedWorkIds = SelectedWorkIds,
+                DateStart = DateStart,
+                TrashCanEmptyDate = TrashCanEmptyDate
+            };
 
-            return RedirectToPage("/OrderHandling/OrderConfirmationPage");
+            // Store the draft in the session
+            HttpContext.Session.SetString("OrderDraft", System.Text.Json.JsonSerializer.Serialize(draft));
+
+            return RedirectToPage("/OrderHandling/FinalizeOrder");
         }
+
     }
 }

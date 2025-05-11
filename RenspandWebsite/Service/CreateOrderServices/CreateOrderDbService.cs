@@ -6,7 +6,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
 {
     public class CreateOrderDbService : DbService<Order>
     {
-
+        //TODO: Add method to make order with a logged in user
         /// <summary>
         /// Creates a full order including User, Address, and Order.
         /// </summary>
@@ -16,15 +16,14 @@ namespace RenspandWebsite.Service.CreateOrderServices
         /// <param name="street"></param>
         /// <param name="city"></param>
         /// <param name="zipcode"></param>
-        /// <param name="work"></param>
-        /// <param name="workamount"></param>
+        /// <param name="workAndAmount"></param>
         /// <param name="datestart"></param>
         /// <param name="trashcanemptydate"></param>
         /// <returns></returns>
         public async Task<Order> CreateFullOrderAsync(
             string name, string email, string phonenumber,
             string street, string city, string zipcode,
-            Work work, int workamount,
+            List<int[]> workAndAmount,
             DateTime datestart, DateTime trashcanemptydate)
         {
             using var context = new RenSpandDbContext();
@@ -32,6 +31,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             // 1. Create and save User
             var user = new User
             {
+                Role = RoleEnum.Guest,
                 Name = name,
                 Email = email,
                 PhoneNumber = phonenumber
@@ -49,12 +49,10 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Addresses.Add(address);
             await context.SaveChangesAsync();
 
-            // 3. Calculate price and create Order
-            decimal totalPrice = work.Price * workamount;
+            // 3. Create and save Order
             var order = new Order
             {
                 Buyer = user,
-                TotalPrice = totalPrice,
                 DateStart = datestart,
                 DateDone = datestart.AddDays(8),
                 TrashCanEmptyDate = trashcanemptydate
@@ -71,18 +69,27 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.AddressItems.Add(addressItem);
             await context.SaveChangesAsync();
 
-            context.Works.Attach(work);
-
-            // 5. Create WorkItem
-            var workItem = new ServiceItem
+            // 5. Create WorkItems for each workId and amount
+            foreach (var entry in workAndAmount)
             {
-                OrderId = order.Id,
-                ServiceWork = work,
-                Amount = workamount
-            };
-            Console.WriteLine("OrderId: "+order + "ServiceWork: " + work + "Amount: " + workamount);
-            context.ServiceItems.Add(workItem);
+                int workId = entry[0];
+                int amount = entry[1];
+
+                var work = await context.Works.FindAsync(workId) ?? throw new Exception($"Work with ID {workId} not found.");
+                var workItem = new ServiceItem
+                {
+                    OrderId = order.Id,
+                    ServiceWork = work,
+                    Amount = amount
+                };
+
+                Console.WriteLine($"OrderId: {order.Id}, ServiceWork: {work.Name}, Amount: {amount}");
+
+                context.ServiceItems.Add(workItem);
+            }
+
             await context.SaveChangesAsync();
+
 
             return order; // now includes Id
         }

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
@@ -29,7 +30,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderSystem">Bestil Ordre</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
                         </li>
 
                         <li class="nav-item">
@@ -92,6 +93,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
