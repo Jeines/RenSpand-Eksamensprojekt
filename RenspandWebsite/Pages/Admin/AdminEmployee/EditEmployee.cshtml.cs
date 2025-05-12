@@ -14,22 +14,40 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+
+        
+
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
+
+        private string _originalPassword;
         public IActionResult OnGet(int id)
         {
             Employee = _employeeService.GetEmployee(id);
-            EmployeeQualificationsString = string.Join(", ", Employee.Qualifications);
             if (Employee == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
+
+            _originalPassword = Employee.Password;
+            EmployeeQualificationsString = string.Join(", ", Employee.Qualifications);
             return Page();
         }
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
+                //test for at se hvis der er fejl
+                foreach (var modelState in ModelState)
+                {
+                    foreach (var error in modelState.Value.Errors)
+                    {
+                        Console.WriteLine($"Fejl i felt '{modelState.Key}': {error.ErrorMessage}");
+                    }
+                }
+                Console.WriteLine(Employee.ToString());
                 return Page();
             }
+
+            // Check EmployeeQualificationsString ikke er null
             if (!string.IsNullOrWhiteSpace(EmployeeQualificationsString))
             {
                 string[] split = EmployeeQualificationsString.Split(',');
@@ -47,12 +65,15 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 Employee.Qualifications = trimmedList;
             }
             else
+            
             {
                 Employee.Qualifications = new List<string>();
             }
-
+            var existingEmployee = _employeeService.GetEmployee(Employee.Id);
+            Employee.Password = existingEmployee.Password;
             _employeeService.UpdateEmployee(Employee);
             return RedirectToPage("GetAllEmployees");
+            
         }
     }
 }

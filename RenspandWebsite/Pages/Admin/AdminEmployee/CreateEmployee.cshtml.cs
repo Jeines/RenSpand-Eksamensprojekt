@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
@@ -9,14 +10,17 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
     public class CreateEmployeeModel : PageModel
     {
         private IEmployeeService _EmployeeService;
+        private ProfileService _profileService;
 
-        public CreateEmployeeModel(IEmployeeService employeeService)
+        public CreateEmployeeModel(IEmployeeService employeeService, ProfileService profileService)
         {
             _EmployeeService = employeeService;
+            _profileService = profileService;
         }
 
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Profile Profile { get; set; }
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
@@ -55,13 +59,16 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 foreach (var k in split)
                     kval.Add(k.Trim());
             }
+            // hash password
+            var passwordHasher = new PasswordHasher<RenSpand_Eksamensprojekt.Employee>();
+            string hashedPassword = passwordHasher.HashPassword(null, Employee.Password);
 
             // Opretter et nyt Employee-objekt med de indtastede værdier
             Employee = new RenSpand_Eksamensprojekt.Employee
             {
                 Id = Employee.Id,
                 Username = Employee.Username,
-                Password = Employee.Password,
+                Password = hashedPassword,
                 Name = Employee.Name,
                 Email = Employee.Email,
                 PhoneNumber = Employee.PhoneNumber,
@@ -70,8 +77,22 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 YearsOfExperians = Employee.YearsOfExperians,
                 Qualifications = kval
             };
+
+            Profile = new Profile
+            {
+                Id = Employee.Id,
+                Username = Employee.Username,
+                Password = hashedPassword,
+                Name = Employee.Name,
+                Email = Employee.Email,
+                PhoneNumber = Employee.PhoneNumber,
+                Role = RoleEnum.Employee
+            };
+
             // Tilføjer den nye medarbejder til listen og gemmer i JSON
             _EmployeeService.AddEmployee(Employee);
+            // Tilføjer den nye profil til listen og gemmer i JSON
+            _profileService.AddProfile(Profile);
             // Sender brugeren til oversigten over alle medarbejdere
             return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }
