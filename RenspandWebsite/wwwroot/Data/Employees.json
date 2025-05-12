@@ -81,7 +81,7 @@
   },
   {
     "YearsOfExperians": 100,
-    "Salary": 10000,
+    "Salary": 10000.00,
     "Qualifications": [
       "test1",
       "test2",
