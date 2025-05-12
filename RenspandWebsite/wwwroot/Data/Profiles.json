@@ -25,5 +25,23 @@
     "Email": null,
     "PhoneNumber": null,
     "Role": "Private"
+  },
+  {
+    "Username": "bob",
+    "Password": "AQAAAAIAAYagAAAAEGoZyPjAObOKAdCzuQxJozmT6pVpaJv56bLcxIQU4PdNKjf8/c733FeBbAZX\u002BrcyEA==",
+    "Id": 150,
+    "Name": "bob",
+    "Email": "bob@bob.com",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "Username": "kim",
+    "Password": "AQAAAAIAAYagAAAAEGThBhgzbiuORB8sCuk1T8mH7vZxrqkSKBDqgPU6QhB\u002BtxMQS4Cb4/azJwLlfPaW7A==",
+    "Id": 125,
+    "Name": "kim",
+    "Email": "kim@kim",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
   }
 ]

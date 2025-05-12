@@ -94,5 +94,53 @@
     "Email": "TestEmail@m.dk",
     "PhoneNumber": "11223344",
     "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 12,
+    "Salary": 12000,
+    "Qualifications": [
+      "C#",
+      "SQL",
+      "ASP.NET"
+    ],
+    "Username": "TestPass",
+    "Password": "AQAAAAIAAYagAAAAEP0ezFCzYdxB9APxvIxDAbUEwLWVlSGWONBAGWfxeclPTvqcgUbTySvlp/g9H4RPFg==",
+    "Id": 2000,
+    "Name": "pas",
+    "Email": "pas@pas.dk",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 11,
+    "Salary": 10000.00,
+    "Qualifications": [
+      "C#",
+      "SQL",
+      "ASP.NET"
+    ],
+    "Username": "bob",
+    "Password": "AQAAAAIAAYagAAAAEGoZyPjAObOKAdCzuQxJozmT6pVpaJv56bLcxIQU4PdNKjf8/c733FeBbAZX\u002BrcyEA==",
+    "Id": 150,
+    "Name": "bob",
+    "Email": "bob@bob.com",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
+  },
+  {
+    "YearsOfExperians": 111,
+    "Salary": 111111,
+    "Qualifications": [
+      "C#",
+      "SQL",
+      "ASP.NET"
+    ],
+    "Username": "kim",
+    "Password": "AQAAAAIAAYagAAAAEGThBhgzbiuORB8sCuk1T8mH7vZxrqkSKBDqgPU6QhB\u002BtxMQS4Cb4/azJwLlfPaW7A==",
+    "Id": 125,
+    "Name": "kim",
+    "Email": "kim@kim",
+    "PhoneNumber": "11223344",
+    "Role": "Employee"
   }
 ]

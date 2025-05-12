@@ -15,7 +15,7 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
 
 //TODO: working code if other code break
-// builder.Services.AddTransient(typeof(JsonFileService<>));
+//builder.Services.AddTransient(typeof(JsonFileService<>));
 builder.Services.AddTransient<JsonFileService<Profile>>();
 
 builder.Services.AddSingleton<CleaningService, CleaningService>();
