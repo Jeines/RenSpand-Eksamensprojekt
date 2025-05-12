@@ -7,7 +7,7 @@
         "ServiceWork": {
           "Id": 1,
           "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
+          "Description": "Cleaning of garbage bins",
           "Price": 15.99
         }
       }
@@ -27,96 +27,24 @@
         "ZipCode": "12345"
       }
     ],
-    "TotalPrice": 31.98,
-    "DateStart": "2025-04-25T08:00:00",
-    "DateDone": "2025-04-25T09:00:00",
-    "TrashCanEmptyDate": "2025-04-24T18:00:00"
+    "TotalPrice": 15.99,
+    "DateStart": "2025-05-01T09:00:00",
+    "DateDone": "2025-05-01T10:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-04-30T18:00:00",
+    "EmployeeNote": "hey"
   },
-  {
-    "Id": 2,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "Price": 49.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 2,
-      "Name": "Bob Smith",
-      "Email": "bob@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 2,
-        "Street": "456 Oak Rd",
-        "City": "Greendale",
-        "ZipCode": "23456"
-      }
-    ],
-    "TotalPrice": 49.99,
-    "DateStart": "2025-04-27T10:00:00",
-    "DateDone": "2025-04-27T11:30:00",
-    "TrashCanEmptyDate": null
-  },
-  {
-    "Id": 3,
-    "ServiceItems": [
-      {
-        "Amount": 3,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Price": 15.99
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 3,
-      "Name": "Carla Vega",
-      "Email": "carla@example.com",
-      "PhoneNumber": null,
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 3,
-        "Street": "789 Maple Ave",
-        "City": "Hillside",
-        "ZipCode": "34567"
-      }
-    ],
-    "TotalPrice": 47.97,
-    "DateStart": "2025-04-29T07:30:00",
-    "DateDone": "2025-04-29T08:30:00",
-    "TrashCanEmptyDate": "2025-04-28T17:00:00"
-  },
+  
   {
     "Id": 4,
     "ServiceItems": [
       {
         "Amount": 1,
         "ServiceWork": {
-          "Id": 3,
-          "Name": "Gutter Cleaning",
-          "Description": "Manual removal of debris from gutters.",
-          "Price": 89.50
-        }
-      },
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Bin Cleaning",
-          "Description": "Exterior and interior cleaning of bins.",
-          "Price": 15.99
+          "Id": 4,
+          "Name": "Lawn Mowing",
+          "Description": "Mowing front and back lawns",
+          "Price": 20.00
         }
       }
     ],
@@ -135,10 +63,12 @@
         "ZipCode": "45678"
       }
     ],
-    "TotalPrice": 105.49,
-    "DateStart": "2025-05-01T13:00:00",
-    "DateDone": "2025-05-01T15:00:00",
-    "TrashCanEmptyDate": "2025-04-30T16:00:00"
+    "TotalPrice": 60.00,
+    "DateStart": "2025-05-04T13:00:00",
+    "DateDone": "2025-05-04T14:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-05-03T16:00:00",
+    "EmployeeNote": null
   },
   {
     "Id": 5,
@@ -146,10 +76,10 @@
       {
         "Amount": 2,
         "ServiceWork": {
-          "Id": 2,
-          "Name": "Driveway Pressure Wash",
-          "Description": "High-pressure cleaning of driveway surfaces.",
-          "Price": 49.99
+          "Id": 5,
+          "Name": "Car Detailing",
+          "Description": "Interior and exterior car detailing",
+          "Price": 120.00
         }
       }
     ],
@@ -168,141 +98,11 @@
         "ZipCode": "56789"
       }
     ],
-    "TotalPrice": 99.98,
-    "DateStart": "2025-05-03T14:00:00",
-    "DateDone": "2025-05-03T16:00:00",
-    "TrashCanEmptyDate": null
-  },
-  {
-    "Id": 6,
-    "ServiceItems": [
-      {
-        "Amount": 12,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Reng\u00F8ring",
-          "Description": "simpel",
-          "Price": 100
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 0,
-      "Name": "Mikkel",
-      "Email": null,
-      "PhoneNumber": "241231",
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 0,
-        "Street": "skolevej",
-        "City": "Roskilde",
-        "ZipCode": "4000"
-      }
-    ],
-    "TotalPrice": 1200,
-    "DateStart": "2025-02-02T00:00:00",
-    "DateDone": "2025-03-02T00:00:00",
-    "TrashCanEmptyDate": null
-  },
-  {
-    "Id": 7,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Reng\u00F8ring",
-          "Description": "simpel",
-          "Price": 100
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 0,
-      "Name": "Jens Friis",
-      "Email": "mrfriis129@hotmail.com",
-      "PhoneNumber": "30361368",
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 0,
-        "Street": "ingridsvej 104",
-        "City": "Ejby",
-        "ZipCode": "4070"
-      }
-    ],
-    "TotalPrice": 100,
-    "DateStart": "0001-01-01T00:00:00",
-    "DateDone": "0001-01-09T00:00:00",
-    "TrashCanEmptyDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": 8,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 1,
-          "Name": "Reng\u00F8ring",
-          "Description": "simpel",
-          "Price": 100
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 0,
-      "Name": "Jens Friis",
-      "Email": "mrfriis129@hotmail.com",
-      "PhoneNumber": "30361368",
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 0,
-        "Street": "ingridsvej 104",
-        "City": "Ejby",
-        "ZipCode": "4070"
-      }
-    ],
-    "TotalPrice": 100,
-    "DateStart": "0001-01-01T00:00:00",
-    "DateDone": "0001-01-09T00:00:00",
-    "TrashCanEmptyDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": 9,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 2,
-          "Name": "Vinduespudsning",
-          "Description": "viduer",
-          "Price": 200
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 0,
-      "Name": "Test",
-      "Email": "Test@hotmail.com",
-      "PhoneNumber": "30361368",
-      "Role": "Admin"
-    },
-    "AddressList": [
-      {
-        "Id": 0,
-        "Street": "ingridsvej 104",
-        "City": "Ejby",
-        "ZipCode": "4070"
-      }
-    ],
-    "TotalPrice": 200,
-    "DateStart": "0001-01-01T00:00:00",
-    "DateDone": "0001-01-09T00:00:00",
-    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+    "TotalPrice": 120.00,
+    "DateStart": "2025-05-05T15:00:00",
+    "DateDone": "2025-05-05T17:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-05-04T18:00:00",
+    "EmployeeNote": null
   }
 ]

@@ -53,5 +53,18 @@ namespace RenspandWebsite.Pages.Employee
             _orderServices.RejectOrder(orderId);
             return RedirectToPage();
         }
+
+        /// <summary>
+        /// Saves a note for the order with the given orderId and reloads page
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        public IActionResult OnPostSaveNote(int orderId, string note)
+        {
+            Console.WriteLine("SaveNote");
+            _orderServices.SaveNote(orderId, note);
+            return RedirectToPage();
+        }
     }
 }
