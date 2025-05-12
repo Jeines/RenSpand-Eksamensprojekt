@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MailKit.Net.Smtp;
+using MimeKit;
 
 
 
@@ -14,6 +16,7 @@ namespace RenspandWebsite.Pages
         private CleaningService _cleaningService;
         private JsonFileService<Order> _jsonFileService;
         private List<Order> _orders;
+        private EmailServicecs _emailService;
         public List<Work> WorkList { get; set; }
 
         [BindProperty]
@@ -21,7 +24,7 @@ namespace RenspandWebsite.Pages
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
-        public OrderSystemModel(JsonFileService<Order> jsonFileService, CleaningService cleaningService)
+        public OrderSystemModel(JsonFileService<Order> jsonFileService, CleaningService cleaningService, EmailServicecs emailService)
         {
             _jsonFileService = jsonFileService;
             _orders = _jsonFileService.GetJsonObjects().ToList();
@@ -32,6 +35,7 @@ namespace RenspandWebsite.Pages
                 new Work(2,"Vinduespudsning","viduer", 200),
                 new Work(3,"Havearbejde","klip græs", 150)
             };
+            _emailService = emailService;
         }
 
 
@@ -105,6 +109,7 @@ namespace RenspandWebsite.Pages
             }
             OrderSubmitted = true;
             _cleaningService.CreateOrder(Name, Email, PhoneNumber, Street, City, ZipCode, Work, WorkAmount, DateStart, TrashCanEmptyDate, TotalPrice);
+            _emailService.SendConfirmationEmail(Email, Name);
             return Page();
         }
     }
