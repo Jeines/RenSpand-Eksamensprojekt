@@ -7,6 +7,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
     public class CreateOrderDbService : DbService<Order>
     {
         //TODO: Add method to make order with a logged in user
+        //TODO: calculate price based on work and amount
         /// <summary>
         /// Creates a full order including User, Address, and Order.
         /// </summary>
