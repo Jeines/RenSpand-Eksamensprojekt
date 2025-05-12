@@ -4,7 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Admin.AdminProduct
+namespace RenspandWebsite.Pages.Admin
 {
     public class CreateProductModel : PageModel
     {

@@ -4,7 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Admin.AdminProduct
+namespace RenspandWebsite.Pages.Admin
 {
     public class DeleteProductModel : PageModel
     {
@@ -28,7 +28,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         }
         public IActionResult OnPost()
         {
-            RenSpand_Eksamensprojekt.Work deletedWork = _productService.DeleteWork(Product.Id);
+            Work deletedWork = _productService.DeleteWork(Product.Id);
             if (deletedWork == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 

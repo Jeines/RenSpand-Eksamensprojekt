@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
 
-namespace RenspandWebsite.Pages.EmployeeHandler
+namespace RenspandWebsite.Pages
 {
     public class EmployeePageModel : PageModel
     {
-        public List<Order> Orders { get; private set; } 
+        public List<Order> Orders { get; private set; }
 
         private OrderServices _orderServices;
 

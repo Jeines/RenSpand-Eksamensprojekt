@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
-namespace RenspandWebsite.Pages.Admin.AdminEmployee
+namespace RenspandWebsite.Pages.Admin
 {
     public class DeleteEmployeeModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 
         public IActionResult OnPost()
         {
-            RenSpand_Eksamensprojekt.Employee deletedEmployee = _employeeService.DeleteEmployee(Employee.Id);
+            Employee deletedEmployee = _employeeService.DeleteEmployee(Employee.Id);
             if (deletedEmployee == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
             return RedirectToPage("GetAllEmployees");

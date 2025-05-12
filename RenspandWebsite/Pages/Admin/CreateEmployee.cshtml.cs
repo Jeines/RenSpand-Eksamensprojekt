@@ -4,12 +4,12 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.Collections.Generic;
 
-namespace RenspandWebsite.Pages.Admin.AdminEmployee
+namespace RenspandWebsite.Pages.Admin
 {
     public class CreateEmployeeModel : PageModel
     {
         private IEmployeeService _EmployeeService;
-        
+
         public CreateEmployeeModel(IEmployeeService employeeService)
         {
             _EmployeeService = employeeService;
@@ -44,7 +44,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 // laver en list if den er null
                 Employee.Qualifications = new List<string>();
             }
-           
+
             List<string> kval = new List<string>();
 
             // hvis EmployeeQualificationsString ikker er null eller tom
@@ -57,7 +57,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             }
 
             // Opretter et nyt Employee-objekt med de indtastede værdier
-            Employee = new RenSpand_Eksamensprojekt.Employee
+            Employee = new Employee
             {
                 Id = Employee.Id,
                 Username = Employee.Username,

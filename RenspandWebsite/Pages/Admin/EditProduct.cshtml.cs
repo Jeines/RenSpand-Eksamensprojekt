@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
-namespace RenspandWebsite.Pages.Admin.AdminProduct
+namespace RenspandWebsite.Pages.Admin
 {
     public class EditProductModel : PageModel
     {
