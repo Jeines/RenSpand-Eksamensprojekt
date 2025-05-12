@@ -7,12 +7,13 @@
     background-color: #ffffff;
     color: #3f3f3f;
 }
+
 header {
     background-color: #32736D;
     color: white
 }
 
-footer{
+footer {
     /* farve til foooter */
     background-color: #32736D;
 }
@@ -92,4 +93,17 @@ footer{
     font-family: "Lato", sans-serif;
     font-weight: 900;
     font-style: italic;
+}
+
+.custom-card {
+    border: 2px solid #000;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    background-color: #fff;
+}
+
+.hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class Employee
+    public class Employee : Profile
     {
        public int YearsOfExperians { get; set; }
        
@@ -22,6 +22,29 @@ namespace RenSpand_Eksamensprojekt
         }
 
         public Employee() { }
+
+        public override string ToString()
+        {
+            // Hvis der er nogle kvalifikationer, laver vi en tekst med dem adskilt med komma
+            string kvalifikationerSomTekst = "";
+            if (Qualifications != null)
+            {
+                kvalifikationerSomTekst = string.Join(", ", Qualifications);
+            }
+            else
+            {
+                // Hvis der ikke er nogen kvalifikationer, sætter vi teksten til "Ingen kvalifikationer"
+                kvalifikationerSomTekst = "Ingen kvalifikationer";
+            }
+
+            // Vi laver en tekst som viser alle de vigtige oplysninger
+            string tekst = "Erfaring: " + YearsOfExperians + " år\n";
+            tekst += "Løn: " + Salary + " kr.\n";
+            tekst += "Kvalifikationer: " + kvalifikationerSomTekst;
+
+            // Returnér den færdige tekst
+            return tekst;
+        }
 
     }
 }
