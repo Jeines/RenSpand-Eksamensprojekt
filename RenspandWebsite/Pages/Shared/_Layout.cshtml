@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
@@ -25,50 +26,52 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">View Orders</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderSystem">Bestil Ordre</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/WorkHandler/GetAllWork">Priser</a>
-                        </li>
                         @{
-                            if(LogInPageModel.CurrentUser != null)
+                            if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
-                                if (LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Admin || LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Employee)
+                                if (User.IsInRole("admin") || User.IsInRole("employee"))
                                 {
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
                                     </li>
-                                }  
+                                }
                             }
-
                         }
+
                     </ul>
                     <ul class="navbar-nav">
                         @{
-                            if (LogInPageModel.CurrentUser == null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
-                                </li>
-                            }
-                            else
+                            @if (Context.User.Identity != null && Context.User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item nav-link text-dark me-3">
-                                    User: @LogInPageModel.CurrentUser.Username
+                                    User: @Context.User.Identity.Name
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogOutPage">Logout</a>
                                 </li>
                             }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
+                                </li>
+                            }
+
                         }
                     </ul>
                 </div>
@@ -81,7 +84,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white">
         <div class="container">
             &copy; 2025 - RenspandWebsite - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
@@ -95,6 +98,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

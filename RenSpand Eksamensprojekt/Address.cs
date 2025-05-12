@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +10,16 @@ namespace RenSpand_Eksamensprojekt
 {
     public class Address
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public string Street { get; set; }
+
+        [Required]
         public string City { get; set; }
+
+        [Required]
         public string ZipCode { get; set; }
 
         public Address(int id, string street, string city, string zipCode)
@@ -23,4 +32,5 @@ namespace RenSpand_Eksamensprojekt
 
         public Address() { }
     }
+
 }

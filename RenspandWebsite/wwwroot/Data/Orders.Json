@@ -1,0 +1,213 @@
+<<<<<<< HEAD
+=======
+[
+  {
+    "Id": 1,
+    "BuyerId": 1,
+    "Buyer": null,
+    "TotalPrice": 149.99,
+    "AddressItems": [],
+    "DateStart": "2025-05-01T10:00:00",
+    "DateDone": "2025-05-02T14:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-05-03T08:00:00"
+  },
+  {
+    "Id": 2,
+    "BuyerId": 2,
+    "Buyer": null,
+    "TotalPrice": 89.50,
+    "AddressItems": [],
+    "DateStart": "2025-04-20T09:00:00",
+    "DateDone": "2025-04-21T13:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 3,
+    "BuyerId": 3,
+    "Buyer": null,
+    "TotalPrice": 120.00,
+    "AddressItems": [],
+    "DateStart": "2025-04-25T12:00:00",
+    "DateDone": "2025-04-26T16:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-04-27T08:30:00"
+  },
+  {
+    "Id": 4,
+    "BuyerId": 1,
+    "Buyer": null,
+    "TotalPrice": 59.99,
+    "AddressItems": [],
+    "DateStart": "2025-05-03T07:30:00",
+    "DateDone": "2025-05-04T10:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 5,
+    "BuyerId": 2,
+    "Buyer": null,
+    "TotalPrice": 200.00,
+    "AddressItems": [],
+    "DateStart": "2025-04-18T11:00:00",
+    "DateDone": "2025-04-19T15:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-04-20T07:00:00"
+  },
+  {
+    "Id": 6,
+    "BuyerId": 3,
+    "Buyer": null,
+    "TotalPrice": 75.25,
+    "AddressItems": [],
+    "DateStart": "2025-04-22T08:45:00",
+    "DateDone": "2025-04-23T11:30:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 7,
+    "BuyerId": 1,
+    "Buyer": null,
+    "TotalPrice": 134.40,
+    "AddressItems": [],
+    "DateStart": "2025-04-27T10:00:00",
+    "DateDone": "2025-04-28T13:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-04-29T08:15:00"
+  },
+  {
+    "Id": 8,
+    "BuyerId": 2,
+    "Buyer": null,
+    "TotalPrice": 99.99,
+    "AddressItems": [],
+    "DateStart": "2025-04-29T09:00:00",
+    "DateDone": "2025-04-30T12:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 9,
+    "BuyerId": 3,
+    "Buyer": null,
+    "TotalPrice": 180.75,
+    "AddressItems": [],
+    "DateStart": "2025-05-01T13:00:00",
+    "DateDone": "2025-05-02T17:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "2025-05-03T09:00:00"
+  },
+  {
+    "Id": 10,
+    "BuyerId": 1,
+    "Buyer": null,
+    "TotalPrice": 110.10,
+    "AddressItems": [],
+    "DateStart": "2025-04-24T14:00:00",
+    "DateDone": "2025-04-25T18:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 6,
+    "BuyerId": 0,
+    "Buyer": {
+      "Id": 0,
+      "Name": "Mikkel",
+      "Email": null,
+      "PhoneNumber": "241231",
+      "Role": "Admin"
+    },
+    "TotalPrice": 1200,
+    "AddressItems": [],
+    "DateStart": "2025-02-02T00:00:00",
+    "DateDone": "2025-03-02T00:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": null
+  },
+  {
+    "Id": 7,
+    "BuyerId": 0,
+    "Buyer": {
+      "Id": 0,
+      "Name": "Jens Friis",
+      "Email": "mrfriis129@hotmail.com",
+      "PhoneNumber": "30361368",
+      "Role": "Admin"
+    },
+    "TotalPrice": 100,
+    "AddressItems": [],
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 8,
+    "BuyerId": 0,
+    "Buyer": {
+      "Id": 0,
+      "Name": "Jens Friis",
+      "Email": "mrfriis129@hotmail.com",
+      "PhoneNumber": "30361368",
+      "Role": "Admin"
+    },
+    "TotalPrice": 100,
+    "AddressItems": [],
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 9,
+    "BuyerId": 0,
+    "Buyer": {
+      "Id": 0,
+      "Name": "Test",
+      "Email": "Test@hotmail.com",
+      "PhoneNumber": "30361368",
+      "Role": "Admin"
+    },
+    "TotalPrice": 200,
+    "AddressItems": [],
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  },
+  {
+    "Id": 0,
+    "BuyerId": 0,
+    "Buyer": {
+      "Id": 0,
+      "Name": "qewe",
+      "Email": "testemail@asdasd",
+      "PhoneNumber": "12341234",
+      "Role": "Admin"
+    },
+    "TotalPrice": 600,
+    "AddressItems": [
+      {
+        "Id": 0,
+        "OrderId": 0,
+        "Order": null,
+        "AddressId": 0,
+        "Address": {
+          "Id": 0,
+          "Street": "QQWER",
+          "City": "WEQWRER",
+          "ZipCode": "1234"
+        }
+      }
+    ],
+    "DateStart": "0001-01-01T00:00:00",
+    "DateDone": "0001-01-09T00:00:00",
+    "AcceptStatus": 0,
+    "TrashCanEmptyDate": "0001-01-01T00:00:00"
+  }
+]
+>>>>>>> database-integration
