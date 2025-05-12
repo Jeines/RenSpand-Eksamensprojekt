@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RenSpand_Eksamensprojekt
+﻿namespace RenSpand_Eksamensprojekt
 {
     public class Employee : Profile
     {
-       public int YearsOfExperians { get; set; }
-       
+        public int YearsOfExperians { get; set; }
+
         public decimal Salary { get; set; }
 
         public List<string> Qualifications { get; set; } = new List<string>();

@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
-using System.Reflection;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {

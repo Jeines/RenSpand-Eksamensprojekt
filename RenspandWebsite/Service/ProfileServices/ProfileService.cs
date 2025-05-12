@@ -1,6 +1,5 @@
 ﻿using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
-using System.Linq.Expressions;
 
 namespace RenspandWebsite.Service.ProfileServices
 {

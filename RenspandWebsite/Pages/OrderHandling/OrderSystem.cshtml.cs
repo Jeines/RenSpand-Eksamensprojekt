@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.CreateOrderServices;
-using System.ComponentModel.DataAnnotations;
 
 
 
@@ -21,7 +20,6 @@ namespace RenspandWebsite.Pages.OrderHandling
         {
             _createOrderService = cleaningService;
         }
-
 
         [BindProperty]
         public string Name { get; set; }
@@ -58,9 +56,11 @@ namespace RenspandWebsite.Pages.OrderHandling
 
         public void OnGet()
         {
+            // Set default values for the form fields
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
+            // Populate the work select list
             WorkList = _createOrderService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
@@ -69,7 +69,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             }).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -103,6 +103,5 @@ namespace RenspandWebsite.Pages.OrderHandling
 
             return RedirectToPage("/OrderHandling/FinalizeOrder");
         }
-
     }
 }

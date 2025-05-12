@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using RenSpand_Eksamensprojekt;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 
 namespace RenSpand_Eksamensprojekt
@@ -44,7 +37,8 @@ namespace RenSpand_Eksamensprojekt
 
         public DateTime? TrashCanEmptyDate { get; set; }
 
-        public string? EmployeeNote { get; set; }
+        //TODO: Fix employee note and reactivate 
+        //public string? EmployeeNote { get; set; }
 
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
@@ -59,7 +53,7 @@ namespace RenSpand_Eksamensprojekt
 
         public override string ToString()
         {
-                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
+            return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
         }
     }
 }

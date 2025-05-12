@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
@@ -21,14 +15,14 @@ namespace RenSpand_Eksamensprojekt
 
         [ForeignKey("AddressId")]
         public Address? Address { get; set; }
-    
 
-    public Profile(string username, string password)
+
+        public Profile(string username, string password)
         {
             Username = username;
             Password = password;
         }
 
-        public Profile(){}
+        public Profile() { }
     }
 }

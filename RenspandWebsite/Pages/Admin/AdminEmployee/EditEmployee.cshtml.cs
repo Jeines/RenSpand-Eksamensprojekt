@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
@@ -15,7 +14,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
-        
+
 
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
@@ -65,7 +64,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 Employee.Qualifications = trimmedList;
             }
             else
-            
+
             {
                 Employee.Qualifications = new List<string>();
             }
@@ -73,7 +72,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             Employee.Password = existingEmployee.Password;
             _employeeService.UpdateEmployee(Employee);
             return RedirectToPage("GetAllEmployees");
-            
+
         }
     }
 }

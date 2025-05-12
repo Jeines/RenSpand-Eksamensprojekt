@@ -1,14 +1,12 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service;
 using RenspandWebsite.Service.OrderServices;
 
 namespace RenspandWebsite.Pages.Employee
 {
     public class EmployeePageModel : PageModel
     {
-        public List<Order> Orders { get; private set; } 
+        public List<Order> Orders { get; private set; }
 
         private readonly OrderService _orderService;
 
@@ -44,29 +42,30 @@ namespace RenspandWebsite.Pages.Employee
         //    return RedirectToPage();
         //}
 
-        /// <summary>
-        /// Rejects order with the given orderId and reloads page
-        /// </summary>
-        /// <param name="orderId"></param>
-        /// <returns></returns>
-        public IActionResult OnPostRejectOrder(int orderId)
-        {
-            Console.WriteLine("RejectOrder");
-            _orderServices.RejectOrder(orderId);
-            return RedirectToPage();
-        }
+        ///// <summary>
+        ///// Rejects order with the given orderId and reloads page
+        ///// </summary>
+        ///// <param name="orderId"></param>
+        ///// <returns></returns>
+        //public IActionResult OnPostRejectOrder(int orderId)
+        //{
+        //    Console.WriteLine("RejectOrder");
+        //    _orderService.RejectOrder(orderId);
+        //    return RedirectToPage();
+        //}
 
+        //TODO: FIX SaveNote and update in the database
         /// <summary>
         /// Saves a note for the order with the given orderId and reloads page
         /// </summary>
         /// <param name="orderId"></param>
         /// <param name="note"></param>
         /// <returns></returns>
-        public IActionResult OnPostSaveNote(int orderId, string note)
-        {
-            Console.WriteLine("SaveNote");
-            _orderServices.SaveNote(orderId, note);
-            return RedirectToPage();
-        }
+        //public IActionResult OnPostSaveNote(int orderId, string note)
+        //{
+        //    Console.WriteLine("SaveNote");
+        //    _orderService.SaveNote(orderId, note);
+        //    return RedirectToPage();
+        //}
     }
 }

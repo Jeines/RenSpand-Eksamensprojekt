@@ -10,7 +10,7 @@ namespace RenspandWebsite.Service.OrderServices
         private JsonFileService<Order> JsonFileService { get; set; }
         private readonly OrderDbService _orderDbService;
 
-        public OrderService(JsonFileService<Order> jsonFileService, OrderDbService orderDbService) 
+        public OrderService(JsonFileService<Order> jsonFileService, OrderDbService orderDbService)
         {
             //JsonFileService = jsonFileService;
             _orderDbService = orderDbService;
@@ -36,7 +36,7 @@ namespace RenspandWebsite.Service.OrderServices
                            o.AddressItems != null && o.AddressItems.Any(a => a.Address.Street.ToLower().Contains(searchTerm.ToLower()) ||
                                 a.Address.City.ToLower().Contains(searchTerm.ToLower()) ||
                                 a.Address.ZipCode.ToLower().Contains(searchTerm.ToLower()))
-                    select o;
+                   select o;
         }
 
         /// <summary>
@@ -92,5 +92,5 @@ namespace RenspandWebsite.Service.OrderServices
         //}
     }
 }
-    
+
 

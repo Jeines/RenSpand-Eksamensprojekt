@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RenspandWebsite.Pages.Admin
 {
-    [Authorize(Roles = "admin")]    
+    [Authorize(Roles = "admin")]
     public class CreateUserModel : PageModel
 
     {

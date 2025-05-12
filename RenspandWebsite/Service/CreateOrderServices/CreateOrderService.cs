@@ -1,14 +1,12 @@
 ﻿namespace RenspandWebsite.Service.CreateOrderServices;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Pages;
 
 public class CreateOrderService
 {
     public List<Work> Works { get; }
-    private JsonFileService<Order> JsonFileService { get; set; }
     private CreateOrderDbService OrderSystemDbService { get; set; }
 
-    public CreateOrderService(JsonFileService<Order> jsonFileService, CreateOrderDbService orderSystemDbService)
+    public CreateOrderService(CreateOrderDbService orderSystemDbService)
     {
         OrderSystemDbService = orderSystemDbService;
         Works = OrderSystemDbService.GetAllWorksAsync().Result;
@@ -18,7 +16,7 @@ public class CreateOrderService
     {
 
         // Use the OrderSystemDbService to create the full order
-        var order = await OrderSystemDbService.CreateFullOrderAsync(
+        await OrderSystemDbService.CreateFullOrderAsync(
             name, email, phonenumber,
             street, city, zipcode,
             workAndAmount,

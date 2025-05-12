@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.CreateOrderServices;
 using RenspandWebsite.Service.OrderServices;
@@ -46,15 +45,16 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddTransient<JsonFileService<Order>>();
-builder.Services.AddTransient<OrderServices>();
 builder.Services.AddSingleton<EmailServicecs, EmailServicecs>();
 builder.Services.AddScoped<EmailServicecs>();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
+{
     cookieOptions.LoginPath = "/Login/LogInPage";
 });
 
-builder.Services.AddMvc().AddRazorPagesOptions(options => {
+builder.Services.AddMvc().AddRazorPagesOptions(options =>
+{
     options.Conventions.AuthorizeFolder("/Item");
 }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
