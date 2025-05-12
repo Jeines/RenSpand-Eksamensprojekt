@@ -1,5 +1,5 @@
 ﻿body {
-    /* Styling for the search form */
+     Styling for the search form 
     .search-form
 
 {
@@ -30,7 +30,7 @@
         background-color: #0056b3;
     }
 
-/* Styling for the table */
+ Styling for the table 
 .order-table {
     width: 100%;
     border-collapse: collapse;
@@ -57,4 +57,22 @@
         background-color: #f1f1f1;
     }
 
-}
+    .status-pending {
+        background-color: #fff3cd;
+    }
+
+    .status-accepted {
+        background-color: #d4edda;
+    }
+
+    .status-rejected {
+        background-color: #f8d7da;
+    }
+
+    .status-unknown {
+        background-color: #9e9e9e;
+    }
+    
+
+
+

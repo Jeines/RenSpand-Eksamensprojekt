@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenspandWebsite.Service;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Employee
 {
@@ -24,10 +24,12 @@ namespace RenspandWebsite.Pages.Employee
 
             }
         }
+
         public EmployeePageModel(OrderServices orderServices)
         {
             _orderServices = orderServices;
         }
+
         /// <summary>
         /// Accepts order with the given orderId and reloads page
         /// </summary>
@@ -39,6 +41,7 @@ namespace RenspandWebsite.Pages.Employee
             _orderServices.AcceptOrder(orderId);
             return RedirectToPage();
         }
+
         /// <summary>
         /// Rejects order with the given orderId and reloads page
         /// </summary>

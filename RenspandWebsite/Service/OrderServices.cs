@@ -37,7 +37,7 @@ namespace RenspandWebsite.Service
             {
                 if (order.Id == orderid)
                 {
-                    order.AcceptStatus = EnumClass.AcceptStatus.Accepted;
+                    order.AcceptStatus = AcceptStatusEnum.Accepted;
                     break;
                 }
             }

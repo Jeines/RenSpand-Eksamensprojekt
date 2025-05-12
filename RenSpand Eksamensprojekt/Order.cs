@@ -26,8 +26,7 @@ namespace RenSpand_Eksamensprojekt
         /// <summary>
         /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
         /// </summary>
-        public EnumClass.AcceptStatus AcceptStatus { get; set; } = EnumClass.AcceptStatus.Pending;
-
+        public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
         public DateTime? TrashCanEmptyDate { get; set; }
 
         public string? EmployeeNote { get; set; }
@@ -43,5 +42,18 @@ namespace RenSpand_Eksamensprojekt
         }
 
         public Order() { }
+
+        public override string ToString()
+        {
+            if (ServiceItems != null && ServiceItems.Count > 0)
+            {
+                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: {string.Join(", ", ServiceItems)}, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
+            }
+            else
+            {
+                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
+            }
+        }
+
     }
 }

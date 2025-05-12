@@ -3,7 +3,7 @@
     "Id": 1,
     "ServiceItems": [
       {
-        "Amount": 1,
+        "Amount": 2,
         "ServiceWork": {
           "Id": 1,
           "Name": "Bin Cleaning",
@@ -39,7 +39,7 @@
     "Id": 4,
     "ServiceItems": [
       {
-        "Amount": 3,
+        "Amount": 1,
         "ServiceWork": {
           "Id": 4,
           "Name": "Lawn Mowing",
@@ -74,7 +74,7 @@
     "Id": 5,
     "ServiceItems": [
       {
-        "Amount": 1,
+        "Amount": 2,
         "ServiceWork": {
           "Id": 5,
           "Name": "Car Detailing",

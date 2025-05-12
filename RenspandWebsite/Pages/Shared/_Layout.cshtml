@@ -1,4 +1,4 @@
-﻿@using RenspandWebsite.Pages.LogIn
+@using RenspandWebsite.Pages.LogIn
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,7 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">RenspandWebsite</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -30,13 +30,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/OrderServicePage">Order Service</a>
-                            </li>
-                        }
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Work/GetAllWork">Priser</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderSystem">Bestil Ordre</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/WorkHandler/GetAllWork">Priser</a>
+                        </li>
+                        @{
+                            if(LogInPageModel.CurrentUser != null)
+                            {
+                                if (LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Admin || LogInPageModel.CurrentUser.Role == RenSpand_Eksamensprojekt.RoleEnum.Employee)
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
+                                    </li>
+                                }  
+                            }
+
+                        }
                     </ul>
                     <ul class="navbar-nav">
                         @{

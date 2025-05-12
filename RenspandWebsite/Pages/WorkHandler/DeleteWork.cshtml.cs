@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service;
 using System.Reflection;
 
-namespace RenspandWebsite.Pages.Work
+namespace RenspandWebsite.Pages.WorkHandler
 {
     public class DeleteWorkModel : PageModel
     {

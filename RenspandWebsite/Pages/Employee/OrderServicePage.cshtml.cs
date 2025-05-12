@@ -5,7 +5,7 @@ using RenspandWebsite.Service;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace RenspandWebsite.Pages
+namespace RenspandWebsite.Pages.Employee
 {
     public class OrderServicePageModel : PageModel
     {
