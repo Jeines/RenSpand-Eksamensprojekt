@@ -1,32 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using RenSpand_Eksamensprojekt;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace RenSpand_Eksamensprojekt
 {
     public class Order
     {
+
+        [Key]
         public int Id { get; set; }
+
+        [Required]
+        public int BuyerId { get; set; }
+
+        [ForeignKey("BuyerId")]
+        public User Buyer { get; set; }
+
+        [Required]
+        public decimal TotalPrice { get; set; }
+
+        public List<AddressItem> AddressItems { get; set; } = new List<AddressItem>();
 
         public List<ServiceItem> ServiceItems { get; set; } = new List<ServiceItem>();
 
-        public User Buyer { get; set; }
-
-        public List<Address> AddressList { get; set; }
-
-        public decimal TotalPrice { get; set; }
-
+        [Required]
         public DateTime DateStart { get; set; }
 
+        [Required]
         public DateTime DateDone { get; set; }
-
         /// <summary>
         /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
         /// </summary>
+        [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
+
         public DateTime? TrashCanEmptyDate { get; set; }
 
         public string? EmployeeNote { get; set; }
@@ -35,7 +50,6 @@ namespace RenSpand_Eksamensprojekt
         {
             Id = id;
             Buyer = buyer;
-            ServiceItems = serviceItems;
             TotalPrice = totalPrice;
             DateStart = dateStart;
             DateDone = dateDone;
@@ -45,15 +59,7 @@ namespace RenSpand_Eksamensprojekt
 
         public override string ToString()
         {
-            if (ServiceItems != null && ServiceItems.Count > 0)
-            {
-                return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: {string.Join(", ", ServiceItems)}, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
-            }
-            else
-            {
                 return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";
-            }
         }
-
     }
 }

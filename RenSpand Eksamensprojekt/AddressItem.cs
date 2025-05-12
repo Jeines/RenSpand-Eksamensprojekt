@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class ServiceItem
+    public class AddressItem
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public int Amount { get; set; }
 
         [Required]
         public int OrderId { get; set; }
@@ -22,20 +20,19 @@ namespace RenSpand_Eksamensprojekt
         public Order Order { get; set; }
 
         [Required]
-        public int ServiceWorkId { get; set; }
+        public int AddressId { get; set; }
 
-        [ForeignKey("ServiceWorkId")]
-        public Work ServiceWork { get; set; }
+        [ForeignKey("AddressId")]
+        public Address Address { get; set; }
 
-        public ServiceItem(int amount, int orderId, int serviceWorkId, Order order = null, Work work = null)
+        public AddressItem(int orderId, int addressId, Order order = null, Address address = null)
         {
-            Amount = amount;
             OrderId = orderId;
-            ServiceWorkId = serviceWorkId;
+            AddressId = addressId;
             Order = order;
-            ServiceWork = work;
+            Address = address;
         }
 
-        public ServiceItem() { }
+        public AddressItem() { }
     }
 }

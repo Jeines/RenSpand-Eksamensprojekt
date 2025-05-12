@@ -22,15 +22,13 @@ namespace RenspandWebsite.Service
         /// <param name="objs"></param>
         public void SaveJsonObjects(List<T> objs)
         {
-            using (FileStream jsonFileWriter = File.Create(JsonFileName))
+            using FileStream jsonFileWriter = File.Create(JsonFileName);
+            Utf8JsonWriter jsonWriter = new(jsonFileWriter, new JsonWriterOptions()
             {
-                Utf8JsonWriter jsonWriter = new Utf8JsonWriter(jsonFileWriter, new JsonWriterOptions()
-                {
-                    SkipValidation = false,
-                    Indented = true
-                });
-                JsonSerializer.Serialize<T[]>(jsonWriter, objs.ToArray());
-            }
+                SkipValidation = false,
+                Indented = true
+            });
+            JsonSerializer.Serialize<T[]>(jsonWriter, objs.ToArray());
         }
 
         /// <summary>
@@ -39,10 +37,8 @@ namespace RenspandWebsite.Service
         /// <returns></returns>
         public IEnumerable<T> GetJsonObjects()
         {
-            using (StreamReader jsonFileReader = File.OpenText(JsonFileName))
-            {
-                return JsonSerializer.Deserialize<T[]>(jsonFileReader.ReadToEnd());
-            }
+            using StreamReader jsonFileReader = File.OpenText(JsonFileName);
+            return JsonSerializer.Deserialize<T[]>(jsonFileReader.ReadToEnd());
         }
     }
 }
