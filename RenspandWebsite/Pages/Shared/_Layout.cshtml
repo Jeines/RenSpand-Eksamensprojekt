@@ -1,4 +1,4 @@
-@using RenspandWebsite.Pages.LogIn
+﻿@using RenspandWebsite.Pages.LogIn
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/RenspandWebsite.styles.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> @*Lige tilføjet (Mikkel)*@
     @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
@@ -38,6 +39,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/WorkHandler/GetAllWork">Priser</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
                         @{
                             if(LogInPageModel.CurrentUser != null)
                             {
@@ -81,11 +84,22 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - RenspandWebsite - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="border-top footer text-muted py-2 mt-4">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <span class="me-3">&copy; 2025 - RenspandWebsite</span>
+                <a href="tel:+4531626924" class="text-muted text-decoration-none me-3">📞 +45 31626924</a>
+                <a href="mailto:anders@renspand.dk" class="text-muted text-decoration-none">✉️ anders@renspand.dk</a>
+            </div>
+            <div>
+                <a asp-area="" asp-page="/CompanyInformationSite" class="text-muted text-decoration-none me-3">Om os</a>
+                <a asp-area="" asp-page="/Privacy" class="text-muted text-decoration-none">Privatlivspolitik</a>
+            </div>
         </div>
     </footer>
+
+    
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
