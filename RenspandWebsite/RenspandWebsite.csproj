@@ -18,4 +18,8 @@
     <ProjectReference Include="..\RenSpand Eksamensprojekt\RenSpand Eksamensprojekt.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Admin\AdminEmployee\" />
+  </ItemGroup>
+
 </Project>
