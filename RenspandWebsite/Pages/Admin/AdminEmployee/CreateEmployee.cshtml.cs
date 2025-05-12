@@ -10,12 +10,15 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
     public class CreateEmployeeModel : PageModel
     {
         private IEmployeeService _EmployeeService;
-        private ProfileService _profileService;
 
-        public CreateEmployeeModel(IEmployeeService employeeService, ProfileService profileService)
+        //TODO : ADD Profile
+        //private ProfileService _profileService;
+        // ProfileService profileService
+
+        public CreateEmployeeModel(IEmployeeService employeeService)
         {
             _EmployeeService = employeeService;
-            _profileService = profileService;
+            //_profileService = profileService;
         }
 
         [BindProperty]
@@ -92,7 +95,8 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             // Tilføjer den nye medarbejder til listen og gemmer i JSON
             _EmployeeService.AddEmployee(Employee);
             // Tilføjer den nye profil til listen og gemmer i JSON
-            _profileService.AddProfile(Profile);
+            // TODO: ADD Profile
+            //_profileService.AddProfile(Profile);
             // Sender brugeren til oversigten over alle medarbejdere
             return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }

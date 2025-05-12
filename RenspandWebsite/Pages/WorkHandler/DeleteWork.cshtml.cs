@@ -9,12 +9,15 @@ namespace RenspandWebsite.Pages.WorkHandler
     public class DeleteWorkModel : PageModel
     {
         private IWorkService _workService;
-        private ProfileService _profileService;
 
-        public DeleteWorkModel(IWorkService workService, ProfileService profileService)
+        //TODO: Find ud af om vi skal have ProfileService her
+        //private ProfileService _profileService;
+        //ProfileService profileService
+
+        public DeleteWorkModel(IWorkService workService)
         {
             _workService = workService;
-            _profileService = profileService;
+            
         }
 
         [BindProperty]
