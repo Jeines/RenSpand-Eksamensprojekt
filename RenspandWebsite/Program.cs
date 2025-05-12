@@ -23,6 +23,8 @@ builder.Services.AddScoped<CleaningService>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<JsonFileService<Order>>();
 builder.Services.AddTransient<OrderServices>();
+builder.Services.AddSingleton<EmailServicecs, EmailServicecs>();
+builder.Services.AddScoped<EmailServicecs>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
     cookieOptions.LoginPath = "/Login/LogInPage";
