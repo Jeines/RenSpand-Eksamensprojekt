@@ -1,0 +1,20 @@
+﻿@page
+@model RenspandWebsite.Pages.Profiles.ProfileRedirectionModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Du er blevet omdirigeret til Log ind om 5 sekunder..</p>
+            <a asp-page="/LogIn/LogInPage">Tryk her for at tilgå Log ind</a>
+        </div>
+    </div>
+
+
+    <script>
+        // skubber brugeren tilbage til log ind siden
+        setTimeout(function () {
+            window.location.href = '/LogIn/LogInPage';
+        }, 5000);
+    </script>

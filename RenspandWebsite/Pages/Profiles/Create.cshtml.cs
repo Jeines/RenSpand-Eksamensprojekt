@@ -1,17 +1,18 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.EFDbContext;
 using RenspandWebsite.Service;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 
-namespace RenspandWebsite.Pages.Admin
+namespace RenspandWebsite.Pages.Profiles
 {
-    [Authorize(Roles = "admin")]
-    public class CreateUserModel : PageModel
-
+    //TODO Skal tjekkes igennem da den ikke virker til at oprette en profil med.
+    public class CreateModel : PageModel
     {
+
         [BindProperty]
         public string UserName { get; set; }
 
@@ -25,7 +26,7 @@ namespace RenspandWebsite.Pages.Admin
 
         private PasswordHasher<string> passwordHasher;
 
-        public CreateUserModel(ProfileService userService)
+        public CreateModel(ProfileService userService)
         {
             _userService = userService;
             passwordHasher = new PasswordHasher<string>();
@@ -46,12 +47,17 @@ namespace RenspandWebsite.Pages.Admin
             {
                 Username = UserName,
                 Email = Email,
+                Role = RoleEnum.Private,
                 Password = passwordHasher.HashPassword(null, Password)
             };
 
 
             _userService.AddProfile(newProfile);
-            return RedirectToPage("/Index");
+            
+            return RedirectToPage("/Profiles/ProfileRedirection");
         }
+
+        
+
     }
 }

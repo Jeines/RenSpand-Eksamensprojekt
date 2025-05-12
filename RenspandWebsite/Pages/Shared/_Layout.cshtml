@@ -44,26 +44,35 @@
                             }
                         }
                     </ul>
+                   
+                </div>
+                <div>
                     <ul class="navbar-nav">
-                        @{
-                            @if (Context.User.Identity != null && Context.User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item nav-link text-dark me-3">
-                                    User: @Context.User.Identity.Name
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogOutPage">Logout</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
-                                </li>
-                            }
-
+                        @if (Context.User.Identity != null && Context.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="profileDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle"></i> @Context.User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Profiles/ProfileSite">Profile</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/LogIn/LogOutPage">Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
                         }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/LogIn/LogInPage">Login</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

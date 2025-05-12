@@ -1,0 +1,25 @@
+﻿@page
+@model RenspandWebsite.Pages.Profiles.CreateModel
+
+<h2>Opret Profil</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Email" class="control-lable"></label>
+        <input asp-for="@Model.Email" class="form-control" />
+    </div>
+    
+    <button type="submit" class="btn btn-success">Opret Profil</button>
+
+    
+    
+</form>

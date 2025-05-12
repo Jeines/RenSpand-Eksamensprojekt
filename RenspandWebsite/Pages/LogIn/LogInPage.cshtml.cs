@@ -53,22 +53,26 @@ namespace RenspandWebsite.Pages.LogIn
                             case RoleEnum.Admin:
                                 claims.Add(new Claim(ClaimTypes.Role, "admin"));
                                 claims.Add(new Claim(ClaimTypes.Name, profile.Username));
+                                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Id.ToString()));
                                 redirectPage = "/Admin/AdminPage";
                                 break;
                             case RoleEnum.Employee:
                                 claims.Add(new Claim(ClaimTypes.Role, "employee"));
                                 claims.Add(new Claim(ClaimTypes.Name, profile.Username));
+                                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Id.ToString()));
                                 redirectPage = "/Employee/EmployeePage";
                                 break;
                             case RoleEnum.Business:
                                 claims.Add(new Claim(ClaimTypes.Role, "business"));
                                 claims.Add(new Claim(ClaimTypes.Name, profile.Username));
+                                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Id.ToString()));
                                 redirectPage = "/Business/BusinessPage";
                                 break;
                             case RoleEnum.Private:
                                 claims.Add(new Claim(ClaimTypes.Role, "private"));
                                 claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Private/PrivatePage";
+                                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Id.ToString()));
+                                redirectPage = "/Index";
                                 break;
                             default:
                                 claims.Add(new Claim(ClaimTypes.Role, "guest"));

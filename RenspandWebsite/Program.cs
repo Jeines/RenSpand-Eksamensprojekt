@@ -11,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
 builder.Services.AddTransient<DbService<Profile>>();
 builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
+builder.Services.AddTransient<DbService<Profile>>();
 
 builder.Services.AddTransient<DbService<User>>();
 builder.Services.AddTransient<DbService<Order>>();
@@ -19,12 +20,13 @@ builder.Services.AddTransient<DbService<AddressItem>>();
 builder.Services.AddTransient<DbService<Work>>();
 builder.Services.AddTransient<DbService<ServiceItem>>();
 
+
 builder.Services.AddTransient<JsonFileService<Profile>>();
 //adds dbservice to program.cs
 builder.Services.AddDbContext<RenSpandDbContext>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions => {
-    cookieOptions.LoginPath = "/Login/LogInPage";
+    cookieOptions.LoginPath = "/LogIn/LogInPage";
 
 });
 builder.Services.AddMvc().AddRazorPagesOptions(options => {

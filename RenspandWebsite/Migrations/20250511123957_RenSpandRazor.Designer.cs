@@ -12,7 +12,7 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250507115201_RenSpandRazor")]
+    [Migration("20250511123957_RenSpandRazor")]
     partial class RenSpandRazor
     {
         /// <inheritdoc />
