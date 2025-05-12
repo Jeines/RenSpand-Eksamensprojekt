@@ -29,7 +29,9 @@ namespace RenSpand_Eksamensprojekt
         public EnumClass.AcceptStatus AcceptStatus { get; set; } = EnumClass.AcceptStatus.Pending;
 
         public DateTime? TrashCanEmptyDate { get; set; }
-    
+
+        public string? EmployeeNote { get; set; }
+
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
             Id = id;

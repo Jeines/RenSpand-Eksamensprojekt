@@ -8,7 +8,6 @@
           "Id": 1,
           "Name": "Bin Cleaning",
           "Description": "Cleaning of garbage bins",
-          "PhoneNumber": "123-456-7890",
           "Price": 15.99
         }
       }
@@ -16,7 +15,9 @@
     "Buyer": {
       "Id": 1,
       "Name": "Alice Johnson",
-      "Email": "alice@example.com"
+      "Email": "alice@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -29,75 +30,11 @@
     "TotalPrice": 15.99,
     "DateStart": "2025-05-01T09:00:00",
     "DateDone": "2025-05-01T10:00:00",
+    "AcceptStatus": 0,
     "TrashCanEmptyDate": "2025-04-30T18:00:00",
-    "AcceptStatus": 0
+    "EmployeeNote": "hey"
   },
-  {
-    "Id": 2,
-    "ServiceItems": [
-      {
-        "Amount": 2,
-        "ServiceWork": {
-          "Id": 2,
-          "Name": "Window Washing",
-          "Description": "Exterior window cleaning",
-          "PhoneNumber": "987-654-3210",
-          "Price": 25.00
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 2,
-      "Name": "Bob Smith",
-      "Email": "bob@example.com"
-    },
-    "AddressList": [
-      {
-        "Id": 2,
-        "Street": "456 Oak Rd",
-        "City": "Greendale",
-        "ZipCode": "23456"
-      }
-    ],
-    "TotalPrice": 50.00,
-    "DateStart": "2025-05-02T11:00:00",
-    "DateDone": "2025-05-02T12:30:00",
-    "TrashCanEmptyDate": "2025-05-01T19:00:00",
-    "AcceptStatus": 0
-  },
-  {
-    "Id": 3,
-    "ServiceItems": [
-      {
-        "Amount": 1,
-        "ServiceWork": {
-          "Id": 3,
-          "Name": "Gutter Cleaning",
-          "Description": "Cleaning gutters and downspouts",
-          "PhoneNumber": "555-000-1111",
-          "Price": 89.50
-        }
-      }
-    ],
-    "Buyer": {
-      "Id": 3,
-      "Name": "Carla Vega",
-      "Email": "carla@example.com"
-    },
-    "AddressList": [
-      {
-        "Id": 3,
-        "Street": "789 Maple Ave",
-        "City": "Hillside",
-        "ZipCode": "34567"
-      }
-    ],
-    "TotalPrice": 89.50,
-    "DateStart": "2025-05-03T08:00:00",
-    "DateDone": "2025-05-03T09:00:00",
-    "TrashCanEmptyDate": "2025-05-02T17:30:00",
-    "AcceptStatus": 0
-  },
+  
   {
     "Id": 4,
     "ServiceItems": [
@@ -107,7 +44,6 @@
           "Id": 4,
           "Name": "Lawn Mowing",
           "Description": "Mowing front and back lawns",
-          "PhoneNumber": "222-333-4444",
           "Price": 20.00
         }
       }
@@ -115,7 +51,9 @@
     "Buyer": {
       "Id": 4,
       "Name": "David Lee",
-      "Email": "david@example.com"
+      "Email": "david@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -128,8 +66,9 @@
     "TotalPrice": 60.00,
     "DateStart": "2025-05-04T13:00:00",
     "DateDone": "2025-05-04T14:00:00",
+    "AcceptStatus": 0,
     "TrashCanEmptyDate": "2025-05-03T16:00:00",
-    "AcceptStatus": 0
+    "EmployeeNote": null
   },
   {
     "Id": 5,
@@ -140,7 +79,6 @@
           "Id": 5,
           "Name": "Car Detailing",
           "Description": "Interior and exterior car detailing",
-          "PhoneNumber": "888-999-0000",
           "Price": 120.00
         }
       }
@@ -148,7 +86,9 @@
     "Buyer": {
       "Id": 5,
       "Name": "Eva Tran",
-      "Email": "eva@example.com"
+      "Email": "eva@example.com",
+      "PhoneNumber": null,
+      "Role": "Admin"
     },
     "AddressList": [
       {
@@ -161,7 +101,8 @@
     "TotalPrice": 120.00,
     "DateStart": "2025-05-05T15:00:00",
     "DateDone": "2025-05-05T17:00:00",
+    "AcceptStatus": 0,
     "TrashCanEmptyDate": "2025-05-04T18:00:00",
-    "AcceptStatus": 0
+    "EmployeeNote": null
   }
 ]
