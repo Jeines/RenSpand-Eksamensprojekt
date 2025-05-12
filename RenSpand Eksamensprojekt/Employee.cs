@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RenSpand_Eksamensprojekt
 {
-    public class Employee
+    public class Employee : Profile
     {
        public int YearsOfExperians { get; set; }
        
