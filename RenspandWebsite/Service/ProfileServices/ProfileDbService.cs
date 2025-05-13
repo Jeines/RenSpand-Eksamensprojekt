@@ -6,6 +6,9 @@ namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileDbService : DbService<Profile>
     {
+        public ProfileDbService(RenSpandDbContext context) : base(context)
+        {
+        }
         //TODO: add comment to the methods
 
 
