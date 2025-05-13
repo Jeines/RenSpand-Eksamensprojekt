@@ -3,6 +3,9 @@
 
 namespace RenspandWebsite.Service.OrderServices
 {
+    /// <summary>
+    /// Service class for handling order-related operations.
+    /// </summary>
     public class OrderService
     {
         private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
@@ -40,7 +43,7 @@ namespace RenspandWebsite.Service.OrderServices
         }
 
         /// <summary>
-        /// Returns list of orders
+        /// returner alle ordrer
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Order> GetOrders()
@@ -49,47 +52,60 @@ namespace RenspandWebsite.Service.OrderServices
         }
 
 
-        //TODO: FIX AcceptOrder and RejectOrder and update in the database
         /// <summary>
-        /// updates order acceptstatus to accepted
+        /// Sætter status til Accept for en order med et givet id og opdaterer ordren i databasen
         /// </summary>
-        /// <param name="orderid"></param>
-        //public void AcceptOrder(int orderid)
-        //{
-        //    Console.WriteLine("Acceptorder1");
-        //    foreach (var order in _orders)
-        //    {
-        //        if (order.Id == orderid)
-        //        {
-        //            order.AcceptStatus = AcceptStatusEnum.Accepted;
-        //            break;
-        //        }
-        //    }
-        //    JsonFileOrderService.SaveJsonObjects(_orders);
-        //}
+        /// <param name="id"></param>
+        public void AcceptOrder(int id) {
+            foreach (Order order in _orders)
+            {
+                if (order.Id == id)
+                {
+                    // Order bliver sat til accepted
+                    order.AcceptStatus = AcceptStatusEnum.Accepted;
+                    // updated order in database
+                    _orderDbService.UpdateObjectAsync(order);
+                    break;
+                }
+            }
+        }
 
-        ///// <summary>
-        ///// removes order from list
-        ///// </summary>
-        ///// <param name="orderid"></param>
-        //public void RejectOrder(int orderid)
-        //{
-        //    Console.WriteLine("RejectOrder1");
-        //    Order orderRemove = null;
-        //    foreach (var order in _orders)
-        //    {
-        //        if (order.Id == orderid)
-        //        {
-        //            orderRemove = order;
-        //            break;
-        //        }
-        //    }
-        //    if (orderRemove != null)
-        //    {
-        //        _orders.Remove(orderRemove);
-        //        JsonFileOrderService.SaveJsonObjects(_orders);
-        //    }
-        //}
+        /// <summary>
+        /// Sætter status til Rejects order with the given orderId and updates the order in the database
+        /// </summary>
+        /// <param name="id"></param>
+        public void RejectOrder(int id)
+        {
+            foreach (Order order in _orders)
+            {
+                if (order.Id == id)
+                {
+                    order.AcceptStatus = AcceptStatusEnum.Rejected;
+                    // Order bliver sat til rejected
+                    _orderDbService.UpdateObjectAsync(order);
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sætter en note til en order med et givet id og opdaterer ordren i databasen
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="note"></param>
+        public void SaveNote(int Id, string note) 
+        {
+            foreach (Order order in _orders)
+            {
+                if (order.Id == Id)
+                {
+                    order.EmployeeNote = note;
+                    // Orders Note bliver gemt i database hvis valgt ellers er den empty
+                    _orderDbService.UpdateObjectAsync(order);
+                    break;
+                }
+            }
+        }
     }
 }
     

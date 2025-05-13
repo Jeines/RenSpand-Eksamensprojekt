@@ -46,7 +46,6 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddTransient<JsonFileService<Order>>();
-builder.Services.AddTransient<OrderServices>();
 builder.Services.AddSingleton<EmailServicecs, EmailServicecs>();
 builder.Services.AddScoped<EmailServicecs>();
 

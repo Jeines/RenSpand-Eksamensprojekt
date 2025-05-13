@@ -31,18 +31,19 @@ namespace RenspandWebsite.Pages.Employee
             _orderService = orderServices;
         }
 
+
         //TODO: FIX AcceptOrder and RejectOrder and update in the database
         ///// <summary>
         ///// Accepts order with the given orderId and reloads page
         ///// </summary>
         ///// <param name="orderId"></param>
         ///// <returns></returns>
-        //public IActionResult OnPostAcceptOrder(int orderId)
-        //{
-        //    Console.WriteLine("Acceptorder - ID: " + orderId);
-        //    _orderServices.AcceptOrder(orderId);
-        //    return RedirectToPage();
-        //}
+        public IActionResult OnPostAcceptOrder(int orderId)
+        {
+            Console.WriteLine("Acceptorder - ID: " + orderId);
+            _orderService.AcceptOrder(orderId);
+            return RedirectToPage();
+        }
 
         /// <summary>
         /// Rejects order with the given orderId and reloads page
@@ -52,7 +53,7 @@ namespace RenspandWebsite.Pages.Employee
         public IActionResult OnPostRejectOrder(int orderId)
         {
             Console.WriteLine("RejectOrder");
-            _orderServices.RejectOrder(orderId);
+            _orderService.RejectOrder(orderId);
             return RedirectToPage();
         }
 
@@ -65,7 +66,7 @@ namespace RenspandWebsite.Pages.Employee
         public IActionResult OnPostSaveNote(int orderId, string note)
         {
             Console.WriteLine("SaveNote");
-            _orderServices.SaveNote(orderId, note);
+            _orderService.SaveNote(orderId, note);
             return RedirectToPage();
         }
     }
