@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RenSpand_Eksamensprojekt;
+using RenspandWebsite.EFDbContext;
 using RenspandWebsite.Pages.Shared;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.ProfileServices;
@@ -9,9 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<ProfileService, ProfileService>();
-builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
-builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assuming you have a DbService for Profile   
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddTransient<JsonFileService<Work>>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
@@ -25,11 +24,24 @@ builder.Services.AddTransient<JsonFileService<Profile>>();
 
 builder.Services.AddSingleton<JsonFileService<Order>>();
 builder.Services.AddSingleton<JsonFileService<Work>>();
-builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
+//builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
 
-builder.Services.AddSingleton<OrderService, OrderService>();
-builder.Services.AddTransient<OrderDbService, OrderDbService>();
-builder.Services.AddTransient<DbService<Order>, DbService<Order>>(); // Assuming you have a DbService for Order
+// I Program.cs, konfigurer din DbContext til at bruge en fabrik
+//builder.Services.AddDbContext<RenSpandDbContext>(options =>
+//    options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RenSpandDB; Integrated Security=True; Connect Timeout=30; Encrypt=False"));
+
+// Profile services (Scoped for DB-tilgang)
+builder.Services.AddScoped<DbService<Profile>, DbService<Profile>>();
+builder.Services.AddScoped<ProfileDbService>();
+builder.Services.AddScoped<ProfileService>();
+
+// Order services (samme her)
+builder.Services.AddScoped<DbService<Order>, DbService<Order>>();
+builder.Services.AddScoped<OrderDbService>();
+builder.Services.AddScoped<OrderService>();
+
+
+
 
 // Add session
 builder.Services.AddDistributedMemoryCache();

@@ -6,8 +6,10 @@ namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileDbService : DbService<Profile>
     {
+        private readonly RenSpandDbContext _context;
         public ProfileDbService(RenSpandDbContext context) : base(context)
         {
+            _context = context;
         }
         //TODO: add comment to the methods
 
@@ -34,3 +36,5 @@ namespace RenspandWebsite.Service.ProfileServices
         }
     }
 }
+
+

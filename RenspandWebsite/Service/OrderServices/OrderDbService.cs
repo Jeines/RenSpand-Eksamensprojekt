@@ -16,6 +16,7 @@ namespace RenspandWebsite.Service
         // Constructor, der initialiserer OrderDbService med en instans af RenSpandDbContext
         public OrderDbService(RenSpandDbContext context) : base(context)
         {
+
         }
 
         /// <summary>
