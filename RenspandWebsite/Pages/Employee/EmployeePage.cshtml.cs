@@ -20,8 +20,11 @@ namespace RenspandWebsite.Pages.Employee
         /// Asynchront metode til at hente alle ordrer og gemme dem i Orders-listen.
         /// </summary>
         /// <returns></returns>
+
+
         public async Task OnGetAsync()
         {
+            Orders = _orderService.GetAllOrdersAsync().Result;
             Orders = await _orderService.GetAllOrdersAsync();
 
             // Uncomment the following lines to see the order details in the console
