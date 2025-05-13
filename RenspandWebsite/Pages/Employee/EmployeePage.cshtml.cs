@@ -64,11 +64,11 @@ namespace RenspandWebsite.Pages.Employee
         /// <param name="orderId"></param>
         /// <param name="note"></param>
         /// <returns></returns>
-        public IActionResult OnPostSaveNote(int orderId, string note)
-        {
-            Console.WriteLine("SaveNote");
-            _orderService.SaveNote(orderId, note);
-            return RedirectToPage();
-        }
+        //public IActionResult OnPostSaveNote(int orderId, string note)
+        //{
+        //    Console.WriteLine("SaveNote");
+        //    _orderService.SaveNote(orderId, note);
+        //    return RedirectToPage();
+        //}
     }
 }

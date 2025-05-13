@@ -93,19 +93,19 @@ namespace RenspandWebsite.Service.OrderServices
         /// </summary>
         /// <param name="Id"></param>
         /// <param name="note"></param>
-        public void SaveNote(int Id, string note) 
-        {
-            foreach (Order order in _orders)
-            {
-                if (order.Id == Id)
-                {
-                    order.EmployeeNote = note;
-                    // Orders Note bliver gemt i database hvis valgt ellers er den empty
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
-            }
-        }
+        //public void SaveNote(int Id, string note) 
+        //{
+        //    foreach (Order order in _orders)
+        //    {
+        //        if (order.Id == Id)
+        //        {
+        //            order.EmployeeNote = note;
+        //            // Orders Note bliver gemt i database hvis valgt ellers er den empty
+        //            _orderDbService.UpdateObjectAsync(order);
+        //            break;
+        //        }
+        //    }
+        //}
     }
 }
 
