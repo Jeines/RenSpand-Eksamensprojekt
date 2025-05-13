@@ -29,30 +29,31 @@ namespace RenspandWebsite.Pages.Employee
             _orderService = orderServices;
         }
 
+
         //TODO: FIX AcceptOrder and RejectOrder and update in the database
         ///// <summary>
         ///// Accepts order with the given orderId and reloads page
         ///// </summary>
         ///// <param name="orderId"></param>
         ///// <returns></returns>
-        //public IActionResult OnPostAcceptOrder(int orderId)
-        //{
-        //    Console.WriteLine("Acceptorder - ID: " + orderId);
-        //    _orderServices.AcceptOrder(orderId);
-        //    return RedirectToPage();
-        //}
+        public IActionResult OnPostAcceptOrder(int orderId)
+        {
+            Console.WriteLine("Acceptorder - ID: " + orderId);
+            _orderService.AcceptOrder(orderId);
+            return RedirectToPage();
+        }
 
-        ///// <summary>
-        ///// Rejects order with the given orderId and reloads page
-        ///// </summary>
-        ///// <param name="orderId"></param>
-        ///// <returns></returns>
-        //public IActionResult OnPostRejectOrder(int orderId)
-        //{
-        //    Console.WriteLine("RejectOrder");
-        //    _orderService.RejectOrder(orderId);
-        //    return RedirectToPage();
-        //}
+        /// <summary>
+        /// Rejects order with the given orderId and reloads page
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public IActionResult OnPostRejectOrder(int orderId)
+        {
+            Console.WriteLine("RejectOrder");
+            _orderServices.RejectOrder(orderId);
+            return RedirectToPage();
+        }
 
         //TODO: FIX SaveNote and update in the database
         /// <summary>
@@ -61,11 +62,11 @@ namespace RenspandWebsite.Pages.Employee
         /// <param name="orderId"></param>
         /// <param name="note"></param>
         /// <returns></returns>
-        //public IActionResult OnPostSaveNote(int orderId, string note)
-        //{
-        //    Console.WriteLine("SaveNote");
-        //    _orderService.SaveNote(orderId, note);
-        //    return RedirectToPage();
-        //}
+        public IActionResult OnPostSaveNote(int orderId, string note)
+        {
+            Console.WriteLine("SaveNote");
+            _orderServices.SaveNote(orderId, note);
+            return RedirectToPage();
+        }
     }
 }
