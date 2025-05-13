@@ -1,112 +1,213 @@
-﻿using RenSpand_Eksamensprojekt;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using RenSpand_Eksamensprojekt;
+using RenspandWebsite.EFDbContext;
 
-
-namespace RenspandWebsite.Service.OrderServices
+namespace RenspandWebsite.Service
 {
     /// <summary>
-    /// Service class for handling order-related operations.
+    /// Serviceklasse for håndtering af forretningslogik relateret til ordrer.
     /// </summary>
     public class OrderService
     {
-        private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
-
-        private JsonFileService<Order> JsonFileService { get; set; }
         private readonly OrderDbService _orderDbService;
 
-        public OrderService(JsonFileService<Order> jsonFileService, OrderDbService orderDbService) 
+        // Constructor, der tager OrderDbService som parameter for at interagere med databasen.
+        public OrderService(OrderDbService orderDbService)
         {
-            //JsonFileService = jsonFileService;
             _orderDbService = orderDbService;
-            //_orders = JsonFileService.GetJsonObjects().ToList(); 
-            //_orders = _orderDbService.GetObjectsAsync().Result.ToList();
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
-
         /// <summary>
-        /// Søger i listen af ordrer med parametrene navn eller telefonnummer.
+        /// Opretter en ny ordre baseret på de oplysninger, der gives.
+        /// Denne metode indeholder forretningslogik som prisberegning.
         /// </summary>
-        /// <param name="searchTerm"></param>
-        /// <returns></returns>
-        public IEnumerable<Order> Search(string searchTerm)
+        public async Task<Order> CreateOrderAsync(
+        string name, string email, string phonenumber,
+        string street, string city, string zipcode,
+        List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
         {
-            if (string.IsNullOrEmpty(searchTerm)) return _orders;
+            using var context = new RenSpandDbContext();
 
-            return from o in _orders
-                   where o.Buyer != null && o.Buyer.Name != null && o.Buyer.PhoneNumber != null &&
-                          (o.Buyer.Name.ToLower().Contains(searchTerm.ToLower()) ||
-                           o.Buyer.PhoneNumber.Contains(searchTerm)) ||
-                           o.AddressItems != null && o.AddressItems.Any(a => a.Address.Street.ToLower().Contains(searchTerm.ToLower()) ||
-                                a.Address.City.ToLower().Contains(searchTerm.ToLower()) ||
-                                a.Address.ZipCode.ToLower().Contains(searchTerm.ToLower()))
-                    select o;
+            // Beregn prisen baseret på arbejdet og mængden
+            decimal totalPrice = CalculateTotalPrice(workAndAmount);
+
+            // 1. Opretter og gemmer en ny bruger
+            var user = new User
+            {
+                Role = RoleEnum.Guest,
+                Name = name,
+                Email = email,
+                PhoneNumber = phonenumber
+            };
+            context.Users.Add(user);
+            await context.SaveChangesAsync(); // Gemmer brugeren
+
+            // 2. Opretter og gemmer en ny adresse
+            var address = new Address
+            {
+                Street = street,
+                City = city,
+                ZipCode = zipcode
+            };
+            context.Addresses.Add(address);
+            await context.SaveChangesAsync(); // Gemmer adressen
+
+            // 3. Opretter og gemmer en ny ordre
+            var order = new Order
+            {
+                BuyerId = user.Id, // Brugerens ID tilknyttes ordren
+                Buyer = user, // Relaterer ordren til brugeren
+                TotalPrice = totalPrice, // Tilføjer den beregnede pris
+                DateStart = datestart,
+                DateDone = datestart.AddDays(8),  // Beregner slutdato
+                TrashCanEmptyDate = trashcanemptydate
+            };
+            context.Orders.Add(order);
+            await context.SaveChangesAsync(); // Gemmer ordren
+
+            // 4. Opretter og gemmer et AddressItem for at forbinde adressen med ordren
+            var addressItem = new AddressItem
+            {
+                OrderId = order.Id, // Relaterer ordren til adressen
+                Address = address
+            };
+            context.AddressItems.Add(addressItem);
+            await context.SaveChangesAsync(); // Gemmer AddressItem
+
+            // 5. Opretter og gemmer et ServiceItem for hver work
+            foreach (var entry in workAndAmount)
+            {
+                int workId = entry[0];
+                int amount = entry[1];
+
+                // Henter arbejdet baseret på workId
+                var work = await context.Works.FindAsync(workId) ?? throw new Exception($"Work with ID {workId} not found.");
+
+                // Opretter og gemmer ServiceItem
+                var workItem = new ServiceItem
+                {
+                    OrderId = order.Id,  // Relaterer arbejdet til ordren
+                    ServiceWork = work,   // Relaterer arbejdet til serviceitem
+                    Amount = amount       // Angiver mængden af arbejdet
+                };
+
+                context.ServiceItems.Add(workItem);
+            }
+
+            await context.SaveChangesAsync(); // Gemmer alle ServiceItems
+
+            // Returnerer den oprettede ordre, som nu inkluderer ID
+            return order;
         }
 
+
         /// <summary>
-        /// returner alle ordrer
+        /// Beregner den samlede pris for en ordre baseret på arbejdet og mængden.
         /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Order> GetOrders()
+        private decimal CalculateTotalPrice(List<int[]> workAndAmount)
         {
-            return _orders;
+            decimal totalPrice = 0;
+
+            // Antag at du har adgang til en liste af works, her skal du hente priserne på de forskellige works.
+            // (F.eks. fra en database eller en hardcoded liste)
+            foreach (var entry in workAndAmount)
+            {
+                int workId = entry[0];
+                int amount = entry[1];
+
+                // Find arbejdet og beregn prisen
+                // Her simulerer vi en fast pris per enhed, for demo
+                decimal pricePerWork = 100m;  // Fastsat pris pr. arbejde
+                totalPrice += pricePerWork * amount;
+            }
+
+            return totalPrice;
         }
 
+        /// <summary>
+        /// Henter alle ordrer fra databasen.
+        /// </summary>
+        public async Task<List<Order>> GetAllOrdersAsync()
+        {
+            return await _orderDbService.GetAllOrdersAsync();
+        }
 
         /// <summary>
-        /// Sætter status til Accept for en order med et givet id og opdaterer ordren i databasen
+        /// Henter en specifik ordre baseret på ID.
+        /// </summary>
+        public async Task<Order> GetOrderByIdAsync(int id)
+        {
+            return await _orderDbService.GetOrderByIdAsync(id);
+        }
+
+        /// <summary>
+        /// Opdaterer en eksisterende ordre.
+        /// </summary>
+        public async Task UpdateOrderAsync(Order order)
+        {
+            await _orderDbService.UpdateOrderAsync(order);
+        }
+
+        /// <summary>
+        /// Sletter en ordre baseret på ID.
+        /// </summary>
+        public async Task DeleteOrderAsync(int id)
+        {
+            await _orderDbService.DeleteOrderAsync(id);
+        }
+
+        /// <summary>
+        /// Accepterer en ordre baseret på ID.
         /// </summary>
         /// <param name="id"></param>
-        public void AcceptOrder(int id) {
-            foreach (Order order in _orders)
-            {
-                if (order.Id == id)
-                {
-                    // Order bliver sat til accepted
-                    order.AcceptStatus = AcceptStatusEnum.Accepted;
-                    // updated order in database
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
-            }
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task AcceptOrderAsync(int id)
+        {
+            var order = await _orderDbService.GetOrderByIdAsync(id);
+            if (order == null)
+                throw new Exception($"Order with ID {id} not found.");
+
+            order.AcceptStatus = AcceptStatusEnum.Accepted;
+            await _orderDbService.UpdateOrderAsync(order);
         }
 
         /// <summary>
-        /// Sætter status til Rejects order with the given orderId and updates the order in the database
+        /// Afviser en ordre baseret på ID.
         /// </summary>
         /// <param name="id"></param>
-        public void RejectOrder(int id)
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task RejectOrderAsync(int id)
         {
-            foreach (Order order in _orders)
-            {
-                if (order.Id == id)
-                {
-                    order.AcceptStatus = AcceptStatusEnum.Rejected;
-                    // Order bliver sat til rejected
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
-            }
+            var order = await _orderDbService.GetOrderByIdAsync(id);
+            if (order == null)
+                throw new Exception($"Order with ID {id} not found.");
+
+            order.AcceptStatus = AcceptStatusEnum.Rejected;
+            await _orderDbService.UpdateOrderAsync(order);
         }
 
         /// <summary>
-        /// Sætter en note til en order med et givet id og opdaterer ordren i databasen
+        /// Gemmer en note til en ordre baseret på ID.
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <param name="note"></param>
-        public void SaveNote(int Id, string note) 
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task SaveNoteAsync(int id, string note)
         {
-            foreach (Order order in _orders)
-            {
-                if (order.Id == Id)
-                {
-                    order.EmployeeNote = note;
-                    // Orders Note bliver gemt i database hvis valgt ellers er den empty
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
-            }
+            var order = await _orderDbService.GetOrderByIdAsync(id);
+            if (order == null)
+                throw new Exception($"Order with ID {id} not found.");
+
+            order.EmployeeNote = note;
+            await _orderDbService.UpdateOrderAsync(order);
         }
+
+
     }
 }
-    
-
