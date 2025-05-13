@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
 
@@ -218,6 +219,17 @@ namespace RenspandWebsite.Service
             using var context = new RenSpandDbContext();
             return await context.Works.FindAsync(workId);
         }
+
+        /// <summary>
+        /// Henter alle works fra databasen.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Work>> GetAllWorksAsync()
+        {
+            using var context = new RenSpandDbContext();
+            return await context.Works.ToListAsync();  // Eller en passende metode til at hente works
+        }
+
 
 
     }
