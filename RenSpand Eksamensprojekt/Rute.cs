@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RenSpand_Eksamensprojekt
+﻿namespace RenSpand_Eksamensprojekt
 {
     public class Rute
     {
@@ -47,7 +41,7 @@ namespace RenSpand_Eksamensprojekt
 
         public override string ToString()
         {
-            String ordersString = string.Join(", ",Orders);
+            String ordersString = string.Join(", ", Orders);
             return $"Rute ID: {Id}, {ordersString}";
         }
 

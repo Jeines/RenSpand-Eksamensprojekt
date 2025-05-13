@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service;
-using System.Linq;
-using System.Collections.Generic;
+using RenspandWebsite.Service.OrderServices;
 
 namespace RenspandWebsite.Pages.Employee
 {
@@ -71,19 +68,36 @@ namespace RenspandWebsite.Pages.Employee
                 FilteredOrders = allOrders
                     .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                                (o.AddressList?.Any(a => a.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
+                                (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                         a.Address.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                                                         a.Address.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
                     .ToList();
             }
             else
             {
                 // Hvis ingen søgeterm er angivet, returneres alle ordrer
                 FilteredOrders = allOrders.ToList(); // Konverter IEnumerable til List
-
-
             }
         }
+
+        //TODO: use database istead og json
+        /// <summary>
+        /// Saves a note to the order with the given orderId
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="note"></param>
+        //public void SaveNote(int orderId, string note)
+        //{
+        //    foreach (var order in _Orders)
+        //    {
+        //        if (order.Id == orderId)
+        //        {
+        //            order.EmployeeNote = note;
+        //            break;
+        //        }
+        //    }
+        //    JsonFileOrderService.SaveJsonObjects(_Orders);
+        //}
     }
 }
 

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RenSpand_Eksamensprojekt
 {
@@ -14,16 +10,19 @@ namespace RenSpand_Eksamensprojekt
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
-    
 
-    public Profile(string username, string password)
+        public int? AddressId { get; set; }
+
+        [ForeignKey("AddressId")]
+        public Address? Address { get; set; }
+
+
+        public Profile(string username, string password)
         {
             Username = username;
             Password = password;
         }
 
-        public Profile()
-        {
-        }
+        public Profile() { }
     }
 }

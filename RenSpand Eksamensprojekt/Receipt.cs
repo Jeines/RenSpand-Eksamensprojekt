@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace RenSpand_Eksamensprojekt
+﻿namespace RenSpand_Eksamensprojekt
 {
     public class Receipt
     {
-        public int Id {  get; set; }
+        public int Id { get; set; }
 
         //public string placeholder { get; set; }
 
@@ -24,11 +17,11 @@ namespace RenSpand_Eksamensprojekt
             Description = description;
             Order = order;
 
-        } 
+        }
         public Receipt() { }
         public override string ToString()
         {
-            return$"{Id} {Description} {Order}";
+            return $"{Id} {Description} {Order}";
         }
 
     }

@@ -1,0 +1,69 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminEmployee.CreateEmployeeModel
+@{
+    ViewData["Title"] = "Opret medarbejder";
+}
+
+<h2>Opret medarbejder</h2>
+
+
+<form method="post" class="p-4 bg-light rounded shadow-sm">
+
+    <div class="form-group">
+        <label asp-for="Employee.Id">ID</label>
+        <input asp-for="Employee.Id" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Username">Brugernavn</label>
+        <input asp-for="Employee.Username" class="form-control" />
+        <span asp-validation-for="Employee.Username" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Password">Adgangskode</label>
+        <input asp-for="Employee.Password" type="password" class="form-control" />
+        <span asp-validation-for="Employee.Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Name">Navn</label>
+        <input asp-for="Employee.Name" class="form-control" />
+        <span asp-validation-for="Employee.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Email">Email</label>
+        <input asp-for="Employee.Email" class="form-control" />
+        <span asp-validation-for="Employee.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.PhoneNumber">Telefonnummer</label>
+        <input asp-for="Employee.PhoneNumber" class="form-control" />
+        <span asp-validation-for="Employee.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.YearsOfExperians">Erfaring (år)</label>
+        <input asp-for="Employee.YearsOfExperians" class="form-control" />
+        <span asp-validation-for="Employee.YearsOfExperians" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Employee.Salary">Løn (kr.)</label>
+        <input asp-for="Employee.Salary" class="form-control" />
+        <span asp-validation-for="Employee.Salary" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EmployeeQualificationsString">Kvalifikationer <small class="text-muted">(adskil med komma)</small></label>
+        <input asp-for="EmployeeQualificationsString" class="form-control" placeholder="f.eks. Kundeservice, Lagerstyring, Truckcertifikat" />
+    </div>
+
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary">Opret medarbejder</button>
+        <a asp-page="/Admin/AdminEmployee/GetAllEmployees" class="btn btn-secondary ml-2">Annullér</a>
+    </div>
+</form>
+

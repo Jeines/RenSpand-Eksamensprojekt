@@ -1,4 +1,97 @@
 ﻿@page
 @model RenspandWebsite.Pages.Admin.AdminPageModel
 @{
+    ViewData["Title"] = "Admin Kontrolpanel";
 }
+<h2 class="mb-4 font-weight-bold">Admin Kontrolpanel</h2>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Medarbejder -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="/Admin/AdminEmployee/GetAllEmployees" class="text-decoration-none">
+                <div class="card custom-card h-100 p-4 hover-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <i class="fas fa-users fa-2x text-primary mx-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-dark mb-1">Medarbejder administration</h5>
+                            <p class="mb-0 text-muted">Administrer Medarbejder, Lav, Slet eller ændringer</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Ordrer -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="/Admin/Orders" class="text-decoration-none">
+                <div class="card custom-card h-100 p-4 hover-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <i class="fas fa-box fa-2x text-success mx-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-dark mb-1">Ordrer</h5>
+                            <p class="mb-0 text-muted">Se og håndter kundeordrer</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Produkter -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="/Admin/AdminProduct/GetAllProducts" class="text-decoration-none">
+                <div class="card custom-card h-100 p-4 hover-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <i class="fas fa-tags fa-2x text-info mx-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-dark mb-1">Produkter</h5>
+                            <p class="mb-0 text-muted">Administrer produkter</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Indstillinger -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="/Admin/Settings" class="text-decoration-none">
+                <div class="card custom-card h-100 p-4 hover-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <i class="fas fa-cogs fa-2x text-warning mx-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-dark mb-1">Indstillinger</h5>
+                            <p class="mb-0 text-muted">Systemopsætning og kontrol</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Rapporter -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="/Admin/Reports" class="text-decoration-none">
+                <div class="card custom-card h-100 p-4 hover-card">
+                    <div class="d-flex align-items-center">
+                        <div class="mr-3">
+                            <i class="fas fa-chart-line fa-2x text-danger mx-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-dark mb-1">Rapporter</h5>
+                            <p class="mb-0 text-muted">Vis data, statistik og grafer</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -27,13 +27,6 @@
             <tr>
                <td>@order.Id</td>
                <td>
-                    @foreach (ServiceItem service in order.ServiceItems)
-                    {
-                        if (service.ServiceWork != null)
-                        {
-                            service.ServiceWork.ToString();
-                        }
-                    }
 
                </td>
                <td>@order.TotalPrice</td>
@@ -73,13 +66,14 @@
                                 break;
                         }
                 </td>
-                <td>
-                    <form method="post" asp-page-handler="SaveNote">
-                        <input type="hidden" name="orderId" value="@order.Id" />
-                        <textarea name="note" class="form-control">@order.EmployeeNote</textarea>
-                        <button class="btn btn-primary btn-sm mt-1" type="submit">Save Notes</button>
-                    </form>
-                </td>
+
+                @* <td> *@
+                @*     <form method="post" asp-page-handler="SaveNote"> *@
+                @*         <input type="hidden" name="orderId" value="@order.Id" /> *@
+                @*         <textarea name="note" class="form-control">@order.EmployeeNote</textarea> *@
+                @*         <button class="btn btn-primary btn-sm mt-1" type="submit">Save Notes</button> *@
+                @*     </form> *@
+                @* </td> *@
             </tr>
         } 
         }

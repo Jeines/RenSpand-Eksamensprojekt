@@ -8,7 +8,7 @@ namespace RenspandWebsite.Service
         //TODO Skal lige kigges på efter vi har fået sat programmet op til databasen/simply
         public void SendConfirmationEmail(string email, string name)
         {
-           // Console.WriteLine(email);
+            // Console.WriteLine(email);
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Renspand", "renspandprojekt@gmail.com")); //skal havede lavet en mail til Renspand og insættes
             message.To.Add(new MailboxAddress(name, email)); // modtageren af mailen 

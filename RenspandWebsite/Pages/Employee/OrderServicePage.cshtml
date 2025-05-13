@@ -45,16 +45,15 @@ else
                         @foreach (var service in order.ServiceItems)
                         {
                             <span>@service.ServiceWork?.Name</span>
-
                             <br />
                         }
                     </td>
                     <td>
-                        @foreach (var address in order.AddressList)
-                        {
-                            <span>@address.Street, @address.City, @address.ZipCode</span>
+                         @foreach (var address in order.AddressItems)
+                         {
+                             <span>@address.Address.Street, @address.Address.City, @address.Address.ZipCode</span>
 
-                            <br />
+                             <br />
                         }
                     </td>
                     <td>@order.TotalPrice.ToString("C")</td>

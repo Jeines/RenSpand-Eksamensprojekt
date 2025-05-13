@@ -1,0 +1,19 @@
+﻿@page
+@model RenspandWebsite.Pages.OrderHandling.FinalizeOrderModel
+
+<h1>Finalize Your Order</h1>
+
+<form method="post">
+    @foreach (var work in Model.SelectedWorks)
+    {
+        <div>
+            <h3>@work.Name</h3>
+            <p>@work.Description</p>
+            <p>Price: @work.Price kr.</p>
+            <label for="workAmount_@work.Id">Amount for @work.Name:</label>
+            <input type="number" id="workAmount_@work.Id" name="WorkAndAmount[@work.Id][1]" min="1" value="1" />
+        </div>
+    }
+
+    <button type="submit">Complete Order</button>
+</form>
