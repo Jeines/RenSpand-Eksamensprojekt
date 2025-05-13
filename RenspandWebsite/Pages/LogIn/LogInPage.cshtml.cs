@@ -19,6 +19,7 @@ namespace RenspandWebsite.Pages.LogIn
 
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; }
+
         public string ErrorMessage { get; set; }
 
         public LogInPageModel(ProfileService profileService)
@@ -26,63 +27,70 @@ namespace RenspandWebsite.Pages.LogIn
             _profileService = profileService;
         }
 
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
 
-        // This method is called when the user submits the login form
         public async Task<IActionResult> OnPost()
         {
-            List<Profile> profiles = _profileService.Profiles;
-            foreach (Profile profile in profiles)
+            // finder profilen ud fra username og tjekker om den eksisterer
+            var profile = _profileService.Profiles.FirstOrDefault(p => p.Username == Username);
+            if (profile == null)
             {
-                // Check if the username matches
-                if (Username == profile.Username)
-                {
-                    // Verify the password using PasswordHasher
-                    var passwordHasher = new PasswordHasher<string>();
-                    if (passwordHasher.VerifyHashedPassword(null, profile.Password, Password) == PasswordVerificationResult.Success)
-                    {
-
-                        var claims = new List<Claim> { new(ClaimTypes.Name, Username) };
-                        string redirectPage = "/Index";
-
-                        // Set the role claim based on the user's role
-                        switch (profile.Role)
-                        {
-                            case RoleEnum.Admin:
-                                claims.Add(new Claim(ClaimTypes.Role, "admin"));
-                                claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Admin/AdminPage";
-                                break;
-                            case RoleEnum.Employee:
-                                claims.Add(new Claim(ClaimTypes.Role, "employee"));
-                                claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Employee/EmployeePage";
-                                break;
-                            case RoleEnum.Business:
-                                claims.Add(new Claim(ClaimTypes.Role, "business"));
-                                claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Business/BusinessPage";
-                                break;
-                            case RoleEnum.Private:
-                                claims.Add(new Claim(ClaimTypes.Role, "private"));
-                                claims.Add(new Claim(ClaimTypes.Name, profile.Username));
-                                redirectPage = "/Index";
-                                break;
-                            default:
-                                claims.Add(new Claim(ClaimTypes.Role, "guest"));
-                                break;
-                        }
-                        // Create the claims identity and sign in the user
-                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                        return RedirectToPage(redirectPage);
-                    }
-                }
+                ErrorMessage = "Invalid attempt";
+                return Page();
             }
-            ErrorMessage = "Invalid attempt";
-            return Page();
+
+            // Opretter en PasswordHasher
+            var passwordHasher = new PasswordHasher<string>();
+
+            // Verificerer passwordet
+            var verificationResult = passwordHasher.VerifyHashedPassword(null, profile.Password, Password);
+
+            // hvis passwordet ikke er korrekt, returner fejl
+            if (verificationResult != PasswordVerificationResult.Success)
+            {
+                ErrorMessage = "Invalid attempt";
+                return Page();
+            }
+
+            // Tilføjer claims til claimsIdentity
+            var claims = BuildClaims(profile);
+
+            // Opretter en ClaimsIdentity og logger brugeren ind
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+            // Redirecter til den relevante side baseret på brugerens rolle
+            return RedirectToPage(GetRedirectPage(profile.Role));
+        }
+
+        /// <summary>
+        /// Laver claims ud fra profilen der er logget ind
+        /// </summary>
+        /// <param name="profile">Profilen der er logget ind</param>
+        /// <returns></returns>
+        private List<Claim> BuildClaims(Profile profile)
+        {
+            return new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, profile.Username),
+                new Claim(ClaimTypes.Role, profile.Role.ToString().ToLower())
+            };
+        }
+
+        /// <summary>
+        /// Giver den relevante side baseret på brugerens rolle
+        /// </summary>
+        /// <param name="role">Rolle som briger har i databasen</param>
+        /// <returns></returns>
+        private string GetRedirectPage(RoleEnum role)
+        {
+            return role switch
+            {
+                RoleEnum.Admin => "/Admin/AdminPage",
+                RoleEnum.Employee => "/Employee/EmployeePage",
+                RoleEnum.Business => "/Business/BusinessPage",
+                RoleEnum.Private => "/Index",
+                _ => "/Index"
+            };
         }
     }
 }

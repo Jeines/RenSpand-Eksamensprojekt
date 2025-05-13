@@ -21,14 +21,13 @@ namespace RenspandWebsite.Pages.Admin
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //TODO: Update Name
-        private readonly ProfileService _userService;
+        private readonly ProfileService _profileService;
 
         private readonly PasswordHasher<string> passwordHasher;
 
         public CreateUserModel(ProfileService userService)
         {
-            _userService = userService;
+            _profileService = userService;
             passwordHasher = new PasswordHasher<string>();
         }
 
@@ -36,7 +35,6 @@ namespace RenspandWebsite.Pages.Admin
         {
         }
 
-        //TODO: Create Individual OnPost method
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -51,7 +49,7 @@ namespace RenspandWebsite.Pages.Admin
                 Password = passwordHasher.HashPassword(null, Password)
             };
 
-            _userService.AddProfile(newProfile);
+            _profileService.AddProfile(newProfile);
             return RedirectToPage("/Index");
         }
     }

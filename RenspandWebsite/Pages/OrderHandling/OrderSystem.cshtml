@@ -46,12 +46,10 @@
         <span asp-validation-for="ZipCode" class="text-danger"></span>
     </div>
 
-    <div class="row mb-3">
-        <label class="col-sm-4 col-form-label">Arbejde</label>
-        <div class="col-sm-8">
-            <select class="form-select" asp-for="SelectedWorkIds" asp-items="Model.WorkSelectList" multiple>
-
-            </select>
+    <div class="mb-3">
+        <label class="col-sm-4 col-form-label">Arbejde:</label>
+        <div>
+            <select class="form-select" asp-for="SelectedWorkIds" asp-items="Model.WorkSelectList" multiple></select>
         </div>
     </div>
 

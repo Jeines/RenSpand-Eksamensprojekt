@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.OrderServices;
@@ -35,7 +36,8 @@ namespace RenspandWebsite.Pages.Employee
         ///// Accepts order with the given orderId and reloads page
         ///// </summary>
         ///// <param name="orderId"></param>
-        ///// <returns></returns>
+        ///// <returns></returns
+
         public IActionResult OnPostAcceptOrder(int orderId)
         {
             Console.WriteLine("Acceptorder - ID: " + orderId);
@@ -51,7 +53,7 @@ namespace RenspandWebsite.Pages.Employee
         public IActionResult OnPostRejectOrder(int orderId)
         {
             Console.WriteLine("RejectOrder");
-            _orderServices.RejectOrder(orderId);
+            _orderService.RejectOrder(orderId);
             return RedirectToPage();
         }
 
@@ -65,7 +67,7 @@ namespace RenspandWebsite.Pages.Employee
         public IActionResult OnPostSaveNote(int orderId, string note)
         {
             Console.WriteLine("SaveNote");
-            _orderServices.SaveNote(orderId, note);
+            _orderService.SaveNote(orderId, note);
             return RedirectToPage();
         }
     }

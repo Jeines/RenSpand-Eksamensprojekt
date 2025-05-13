@@ -56,11 +56,11 @@ namespace RenspandWebsite.Pages.OrderHandling
 
         public void OnGet()
         {
-            // Set default values for the form fields
+            // Sætter værdien af DateStart og TrashCanEmptyDate til dagens dato
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
-            // Populate the work select list
+            // Henter arbejderne fra CreateOrderService(Databasen)
             WorkList = _createOrderService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
@@ -73,18 +73,17 @@ namespace RenspandWebsite.Pages.OrderHandling
         {
             if (!ModelState.IsValid)
             {
-                // If the model state is invalid, re-populate the WorkSelectList and return to the page
+                // Hvis model state er invalid, repopulate WorkSelectList og returner til siden
                 WorkList = _createOrderService.Works;
                 WorkSelectList = WorkList.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
                     Text = $"{s.Name} - ({s.Price} kr.)"
                 }).ToList();
-                Console.WriteLine("order not created");
                 return Page();
             }
 
-            // Package the form data
+            // Laver en OrderDraft objekt med info fra formularen
             var draft = new OrderDraft
             {
                 Name = Name,
@@ -98,7 +97,7 @@ namespace RenspandWebsite.Pages.OrderHandling
                 TrashCanEmptyDate = TrashCanEmptyDate
             };
 
-            // Store the draft in the session
+            // Gemmer OrderDraft objektet i sessionen
             HttpContext.Session.SetString("OrderDraft", System.Text.Json.JsonSerializer.Serialize(draft));
 
             return RedirectToPage("/OrderHandling/FinalizeOrder");

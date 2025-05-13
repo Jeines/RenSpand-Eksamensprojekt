@@ -7,9 +7,9 @@ namespace RenspandWebsite.Service
     {
 
         /// <summary>
-        /// Generic Get all items of a specific type from the database
+        /// Generisk metode til at hente alle objekter af en bestemt type fra databasen
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
+        /// <typeparam name="T">Klasse</typeparam>
         /// <returns></returns>
         public async Task<IEnumerable<T>> GetObjectsAsync()
         {
@@ -18,9 +18,9 @@ namespace RenspandWebsite.Service
         }
 
         /// <summary>
-        /// Generic Get an item by its ID from the database
+        /// Generisk metode til at hente et objekt fra databasen ud fra dets ID
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
+        /// <typeparam name="T">Klasse</typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<T> GetObjectByIdAsync(int id)
@@ -30,7 +30,7 @@ namespace RenspandWebsite.Service
         }
 
         /// <summary>
-        /// Generic method to add a new item to the database
+        /// Generisk metode til at tilføje et nyt objekt til databasen
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
@@ -44,11 +44,11 @@ namespace RenspandWebsite.Service
         }
 
         /// <summary>
-        /// Generic method to update an existing item in the database.
-        /// The methode checks if the item exists in the database before updating it.
-        /// It uses the primary to determine if the item exists.
+        /// Generisk metode til at opdatere et eksisterende objekt i databasen.
+        /// Metoden tjekker om objektet findes i databasen før det opdateres.
+        /// Den bruger primærnøglen til at afgøre om objektet findes.
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
+        /// <typeparam name="T">Klasse</typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
         public async Task UpdateObjectAsync(T entity)
@@ -59,11 +59,11 @@ namespace RenspandWebsite.Service
         }
 
 
-        //TODO: Find out why this method is not working. the items are not being saved to the database.
+        //TODO: Find ud af hvorfor denne metode ikke virker. Elementerne bliver ikke gemt i databasen.
         /// <summary>
-        /// Generic method to save a list of items to the database.
+        /// Generisk metode til at gemme en liste af objekter i databasen.
         /// </summary>
-        /// <typeparam name="T">List of classes</typeparam>
+        /// <typeparam name="T">Liste af klasser</typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
         public async Task SaveObjectsAsync(List<T> entities)
@@ -78,10 +78,10 @@ namespace RenspandWebsite.Service
         }
 
         /// <summary>
-        /// Generic method to delete an item from the database by the id of the object
+        /// Generisk metode til at slette et objekt fra databasen ud fra objektets id
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
-        /// <param name="id">Primary key of the class</param>
+        /// <typeparam name="T">Klasse</typeparam>
+        /// <param name="id">Primærnøgle for klassen</param>
         /// <returns></returns>
         public async Task DeleteObjectAsync(int id)
         {

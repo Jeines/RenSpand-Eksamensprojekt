@@ -36,9 +36,7 @@ namespace RenSpand_Eksamensprojekt
         public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
 
         public DateTime? TrashCanEmptyDate { get; set; }
-
-        //TODO: Fix employee note and reactivate 
-        //public string? EmployeeNote { get; set; }
+        public string? EmployeeNote { get; set; }
 
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {

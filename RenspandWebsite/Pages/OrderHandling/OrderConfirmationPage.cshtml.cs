@@ -6,7 +6,7 @@ namespace RenspandWebsite.Pages.OrderHandling
     {
         public void OnGet()
         {
-            // Clear the OrderDraft from session after successful order completion
+            // Fjernelse af OrderDraft fra sessionen efter ordren er gennemført
             HttpContext.Session.Remove("OrderDraft");
 
         }

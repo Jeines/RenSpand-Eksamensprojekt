@@ -17,7 +17,7 @@ namespace RenspandWebsite.Pages.OrderHandling
         [BindProperty]
         public OrderDraft Draft { get; set; }
 
-        // WorkAndAmount will hold pairs of work IDs and amounts (only amounts need to be entered)
+        // WorkAndAmount er en list med id'et på arbejdet og antallet af arbejdet
         [BindProperty]
         public List<int[]> WorkAndAmount { get; set; } = new List<int[]>();
 
@@ -33,15 +33,18 @@ namespace RenspandWebsite.Pages.OrderHandling
         private DateTime TrashCanEmptyDate { get; set; }
         private DateTime DateDone { get; set; }
         private decimal TotalPrice { get; set; }
-        // This method is called when the page is 
 
         public void OnGet()
         {
-            // Retrieve the OrderDraft from session
+            // Henter data fra sessionen
             var draftJson = HttpContext.Session.GetString("OrderDraft");
+
+            // Deserialiserer JSON-strengen til OrderDraft objektet
             if (!string.IsNullOrEmpty(draftJson))
             {
                 Draft = System.Text.Json.JsonSerializer.Deserialize<OrderDraft>(draftJson);
+
+                // Sætter værdierne fra Draft objektet til de private variabler
                 Email = Draft.Email;
                 PhoneNumber = Draft.PhoneNumber;
                 Street = Draft.Street;
@@ -51,14 +54,12 @@ namespace RenspandWebsite.Pages.OrderHandling
                 TrashCanEmptyDate = Draft.TrashCanEmptyDate;
                 Name = Draft.Name;
             }
-
             ConvertWorkIdsToWorks();
         }
 
-
-
-
-        // Convert the selected work IDs to a list of works
+        /// <summary>
+        /// Konverter de valgte workId'er til Work objekter og tilføjer dem til SelectedWorks listen.
+        /// </summary>
         public void ConvertWorkIdsToWorks()
         {
             foreach (var workId in Draft.SelectedWorkIds)
@@ -70,36 +71,26 @@ namespace RenspandWebsite.Pages.OrderHandling
                 }
             }
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
+            // Henter data fra sessionen
             var draftJson = HttpContext.Session.GetString("OrderDraft");
+            // Deserialiserer JSON-strengen til OrderDraft objektet
             if (!string.IsNullOrEmpty(draftJson))
             {
                 Draft = System.Text.Json.JsonSerializer.Deserialize<OrderDraft>(draftJson);
             }
 
 
-            // Process WorkAndAmount data (workId, amount)
+            // Henter data fra formularen
             foreach (var item in WorkAndAmount)
             {
-                var workId = item[0];  // work ID
-                var amount = item[1];   // amount
+                var workId = item[0];
+                var amount = item[1];
             }
-            Console.WriteLine("Start");
-            Console.WriteLine(Draft.Name);
-            Console.WriteLine(Draft.Email);
-            Console.WriteLine(Draft.PhoneNumber);
-            Console.WriteLine(Draft.Street);
-            Console.WriteLine(Draft.City);
-            Console.WriteLine(Draft.ZipCode);
-            Console.WriteLine(Draft.DateStart);
-            Console.WriteLine(Draft.TrashCanEmptyDate);
-            Console.WriteLine(WorkAndAmount);
-            Console.WriteLine("End");
 
-
-
-            // Create the order using the OrderSystemDbService
+            // Laver en Ordre med info fra formularen
             await _createOrderService.CreateOrderAsync(
                 Draft.Name,
                 Draft.Email,
@@ -113,7 +104,5 @@ namespace RenspandWebsite.Pages.OrderHandling
 
             return RedirectToPage("/OrderHandling/OrderConfirmationPage");
         }
-
-
     }
 }

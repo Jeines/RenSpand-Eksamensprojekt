@@ -6,10 +6,11 @@ namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileDbService : DbService<Profile>
     {
-        //TODO: add comment to the methods
-
-
-
+        /// <summary>
+        /// Henter alle ordrer fra databasen for en given bruger.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<List<Order>> GetOrdersByIdAsync(int userId)
         {
             using var context = new RenSpandDbContext();
@@ -17,17 +18,6 @@ namespace RenspandWebsite.Service.ProfileServices
             .Where(order => order.Buyer.Id == userId)
             .Include(order => order.Buyer)
             .ToListAsync();
-        }
-
-        public async Task SaveUserObjects(IEnumerable<Profile> profiles)
-        {
-            using var context = new RenSpandDbContext();
-            //adds json profiles to the database
-            foreach (var profile in profiles)
-            {
-                profile.Id = 0; // Reset the ID to 0 before saving to DB
-                AddObjectAsync(profile).Wait(); // Wait for the task to complete
-            }
         }
     }
 }

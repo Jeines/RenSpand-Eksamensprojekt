@@ -9,27 +9,28 @@ namespace RenspandWebsite.Service.CreateOrderServices
         //TODO: Add method to make order with a logged in user
         //TODO: calculate price based on work and amount
         /// <summary>
-        /// Creates a full order including User, Address, and Order.
+        /// Laver en ny ordre i databasen.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="email"></param>
-        /// <param name="phonenumber"></param>
-        /// <param name="street"></param>
-        /// <param name="city"></param>
-        /// <param name="zipcode"></param>
-        /// <param name="workAndAmount"></param>
-        /// <param name="datestart"></param>
-        /// <param name="trashcanemptydate"></param>
-        /// <returns></returns>
+        /// <param name="name">Navn på køber</param>
+        /// <param name="email">Email på køber</param>
+        /// <param name="phonenumber">TelefonNummer på køber</param>
+        /// <param name="street">Vejnavn på køber addresse</param>
+        /// <param name="city">By på køber addresse</param>
+        /// <param name="zipcode">PostNummer på køber addresse</param>
+        /// <param name="workAndAmount">Listen med hvilket og hvor meget arbejde der er bestilt</param>
+        /// <param name="datestart">Dato'en ordren er købt fra</param>
+        /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
+        /// <returns>Ordre fra databasen med sit Id</returns>
         public async Task<Order> CreateFullOrderAsync(
             string name, string email, string phonenumber,
             string street, string city, string zipcode,
             List<int[]> workAndAmount,
             DateTime datestart, DateTime trashcanemptydate)
         {
+            // Laver en ny instans af RenSpandDbContext (forbindelse til database)
             using var context = new RenSpandDbContext();
 
-            // 1. Create and save User
+            // 1. Laver en ny bruger og gemmer den i databasen
             var user = new User
             {
                 Role = RoleEnum.Guest,
@@ -40,7 +41,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            // 2. Create and save Address
+            // 2. Laver en ny adresse og gemmer den i databasen
             var address = new Address
             {
                 Street = street,
@@ -50,7 +51,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Addresses.Add(address);
             await context.SaveChangesAsync();
 
-            // 3. Create and save Order
+            // 3. Laver en ny ordre og gemmer den i databasen
             var order = new Order
             {
                 Buyer = user,
@@ -61,7 +62,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Orders.Add(order);
             await context.SaveChangesAsync();
 
-            // 4. Create AddressItem
+            // 4. Laver AddressItem og gemmer den i databasen
             var addressItem = new AddressItem
             {
                 OrderId = order.Id,
@@ -70,7 +71,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.AddressItems.Add(addressItem);
             await context.SaveChangesAsync();
 
-            // 5. Create WorkItems for each workId and amount
+            // 5. Laver ServiceItem for hver work og gemmer dem i databasen
             foreach (var entry in workAndAmount)
             {
                 int workId = entry[0];
@@ -83,35 +84,23 @@ namespace RenspandWebsite.Service.CreateOrderServices
                     ServiceWork = work,
                     Amount = amount
                 };
-
-                Console.WriteLine($"OrderId: {order.Id}, ServiceWork: {work.Name}, Amount: {amount}");
-
                 context.ServiceItems.Add(workItem);
             }
 
+            // 6. Gemmer alle ændringer i databasen
             await context.SaveChangesAsync();
-
-
-            return order; // now includes Id
+            return order;
         }
 
-
+        /// <summary>
+        /// Henter alle works fra databasen.
+        /// </summary>
+        /// <returns>Liste af Works</returns>
         public async Task<List<Work>> GetAllWorksAsync()
         {
             using var context = new RenSpandDbContext();
             List<Work>? works = await context.Works.ToListAsync();
             return works;
-        }
-
-        public async Task SaveOrderObjects(IEnumerable<Order> orders)
-        {
-            using var context = new RenSpandDbContext();
-            //adds json profiles to the database
-            foreach (var order in orders)
-            {
-                order.Id = 0; // Reset the ID to 0 before saving to DB
-                AddObjectAsync(order).Wait(); // Wait for the task to complete
-            }
         }
     }
 }

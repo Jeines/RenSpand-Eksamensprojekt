@@ -14,18 +14,13 @@ builder.Services.AddSingleton<ProfileService, ProfileService>();
 builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
 builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assuming you have a DbService for Profile   
 builder.Services.AddSingleton<IWorkService, WorkService>();
-builder.Services.AddTransient<JsonFileService<Work>>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
 
 
-//TODO: working code if other code break
-//builder.Services.AddTransient(typeof(JsonFileService<>));
-
 builder.Services.AddTransient<JsonFileService<Profile>>();
 
 builder.Services.AddSingleton<CreateOrderService, CreateOrderService>();
-builder.Services.AddSingleton<JsonFileService<Order>>();
 builder.Services.AddSingleton<JsonFileService<Work>>();
 builder.Services.AddScoped<CreateOrderService>();
 builder.Services.AddTransient<CreateOrderDbService, CreateOrderDbService>();
