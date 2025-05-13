@@ -1,97 +1,91 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
 
 namespace RenspandWebsite.Service
 {
+    /// <summary>
+    /// Generic service klass for håndtering af CRUD-operationer i databasen.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class DbService<T> : IService<T> where T : class
     {
+        private readonly RenSpandDbContext _context;
 
         /// <summary>
-        /// Generic Get all items of a specific type from the database
+        /// Constructor der initialiserer DbService med en instans af RenSpandDbContext.
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
-        /// <returns></returns>
-        public async Task<IEnumerable<T>> GetObjectsAsync()
+        /// <param name="context"></param>
+        public DbService(RenSpandDbContext context)
         {
-            using var context = new RenSpandDbContext();
-            return await context.Set<T>().ToListAsync();
+            _context = context;
         }
 
         /// <summary>
-        /// Generic Get an item by its ID from the database
+        /// Henter alle objekter af type T fra databasen.
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
+        /// <returns></returns>
+        public async Task<IEnumerable<T>> GetObjectsAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
+
+        /// <summary>
+        /// Henter et objekt af type T fra databasen baseret på dets ID.
+        /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<T> GetObjectByIdAsync(int id)
         {
-            using var context = new RenSpandDbContext();
-            return await context.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id);
         }
 
         /// <summary>
-        /// Generic method to add a new item to the database
+        /// Tilføjer et nyt objekt af type T til databasen.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
         public async Task<T> AddObjectAsync(T entity)
         {
-            using var context = new RenSpandDbContext();
-            context.Set<T>().Add(entity);
-            await context.SaveChangesAsync();
+            await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         /// <summary>
-        /// Generic method to update an existing item in the database.
-        /// The methode checks if the item exists in the database before updating it.
-        /// It uses the primary to determine if the item exists.
+        /// Opdaterer et eksisterende objekt af type T i databasen.
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
         public async Task UpdateObjectAsync(T entity)
         {
-            using var context = new RenSpandDbContext();
-            context.Set<T>().Update(entity);
-            await context.SaveChangesAsync();
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
 
 
-        //TODO: Find out why this method is not working. the items are not being saved to the database.
         /// <summary>
-        /// Generic method to save a list of items to the database.
+        /// Tilføjer en liste af objekter af type T til databasen.
         /// </summary>
-        /// <typeparam name="T">List of classes</typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
         public async Task SaveObjectsAsync(List<T> entities)
         {
-            using var context = new RenSpandDbContext();
-            foreach (var entity in entities)
-            {
-                context.Set<T>().Add(entity);
-                context.SaveChanges();
-            }
-            await context.SaveChangesAsync();
+            await _context.Set<T>().AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Generic method to delete an item from the database by the id of the object
+        /// Sletter et objekt af type T fra databasen baseret på dets ID.
         /// </summary>
-        /// <typeparam name="T">Class</typeparam>
-        /// <param name="id">Primary key of the class</param>
+        /// <param name="id"></param>
         /// <returns></returns>
         public async Task DeleteObjectAsync(int id)
         {
-            using var context = new RenSpandDbContext();
-            var entity = await context.Set<T>().FindAsync(id);
+            var entity = await _context.Set<T>().FindAsync(id);
             if (entity != null)
             {
-                context.Set<T>().Remove(entity);
-                await context.SaveChangesAsync();
+                _context.Set<T>().Remove(entity);
+                await _context.SaveChangesAsync();
             }
         }
     }
