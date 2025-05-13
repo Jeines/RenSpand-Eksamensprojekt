@@ -208,6 +208,17 @@ namespace RenspandWebsite.Service
             await _orderDbService.UpdateOrderAsync(order);
         }
 
+        /// <summary>
+        /// Henter alle works fra databasen.
+        /// </summary>
+        /// <param name="workId"></param>
+        /// <returns></returns>
+        public async Task<Work> GetWorkByIdAsync(int workId)
+        {
+            using var context = new RenSpandDbContext();
+            return await context.Works.FindAsync(workId);
+        }
+
 
     }
 }
