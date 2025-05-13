@@ -6,6 +6,7 @@ namespace RenspandWebsite.Service.OrderServices
 {
     public class OrderDbService : DbService<Order>
     {
+
         public async Task<List<Order>> GetOrdersWithJoinsAsync()
         {
             using var context = new RenSpandDbContext();

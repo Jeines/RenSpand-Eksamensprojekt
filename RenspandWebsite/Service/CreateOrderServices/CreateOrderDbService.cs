@@ -9,7 +9,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
         //TODO: Add method to make order with a logged in user
         //TODO: calculate price based on work and amount
         /// <summary>
-        /// Creates a full order including User, Address, and Order.
+        /// laver den fuldstændige order med alle dens properties
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
@@ -29,7 +29,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
         {
             using var context = new RenSpandDbContext();
 
-            // 1. Create and save User
+            // 1. laver og gemmer en ny bruger
             var user = new User
             {
                 Role = RoleEnum.Guest,
@@ -40,7 +40,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            // 2. Create and save Address
+            // 2. laver og gemmer en ny adresse
             var address = new Address
             {
                 Street = street,
@@ -50,7 +50,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Addresses.Add(address);
             await context.SaveChangesAsync();
 
-            // 3. Create and save Order
+            // 3. laver og gemmer en ny ordre
             var order = new Order
             {
                 Buyer = user,
@@ -61,7 +61,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.Orders.Add(order);
             await context.SaveChangesAsync();
 
-            // 4. Create AddressItem
+            // 4. laver og gemmer en ny AddressItem
             var addressItem = new AddressItem
             {
                 OrderId = order.Id,
@@ -70,7 +70,7 @@ namespace RenspandWebsite.Service.CreateOrderServices
             context.AddressItems.Add(addressItem);
             await context.SaveChangesAsync();
 
-            // 5. Create WorkItems for each workId and amount
+            // 5. laver og gemmer en ny ServiceItem for hver work
             foreach (var entry in workAndAmount)
             {
                 int workId = entry[0];
