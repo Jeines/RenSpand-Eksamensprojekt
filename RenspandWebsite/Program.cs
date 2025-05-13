@@ -26,9 +26,6 @@ builder.Services.AddSingleton<JsonFileService<Order>>();
 builder.Services.AddSingleton<JsonFileService<Work>>();
 //builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
 
-// I Program.cs, konfigurer din DbContext til at bruge en fabrik
-//builder.Services.AddDbContext<RenSpandDbContext>(options =>
-//    options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RenSpandDB; Integrated Security=True; Connect Timeout=30; Encrypt=False"));
 
 // Profile services (Scoped for DB-tilgang)
 builder.Services.AddScoped<DbService<Profile>, DbService<Profile>>();
@@ -39,8 +36,6 @@ builder.Services.AddScoped<ProfileService>();
 builder.Services.AddScoped<DbService<Order>, DbService<Order>>();
 builder.Services.AddScoped<OrderDbService>();
 builder.Services.AddScoped<OrderService>();
-
-
 
 
 // Add session
