@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
+    [Authorize(Roles = "admin")]
     /// <summary>
     /// This class handles the creation of a new employee.
     /// </summary>

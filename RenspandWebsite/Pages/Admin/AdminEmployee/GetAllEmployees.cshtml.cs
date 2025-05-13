@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
@@ -5,6 +6,7 @@ using RenspandWebsite.Service;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
+    [Authorize(Roles = "admin")]
     /// <summary>
     /// This class handles the retrieval of all employees.
     /// </summary>
