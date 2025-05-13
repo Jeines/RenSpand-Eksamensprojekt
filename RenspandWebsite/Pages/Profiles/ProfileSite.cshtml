@@ -4,54 +4,68 @@
 @{
 }
 
-<div class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-    <a class="navbar-brand" href="#">ProfileSite</a>
+<div class="profile-navbar">
+    <a href="/" class="brand">ProfileSite</a>
 </div>
 
-<div class="container">
-    <form method="post" asp-page-handler="SaveChanges">
-        <div class="profile-section mb-4">
-            <div class="profile-info mb-3">  
-            </div>
-            <div class="input-group mb-3">
-                <label asp-for="Username" class="form-label"></label>
-                <input asp-for="Username" class="form-control" disabled />
-            </div>
-            <div class="input-group mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" disabled />
-            </div>
-            <div class="input-group mb-3">
-                <label asp-for="PhoneNumber" class="form-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-            </div>
-            @* <div class="input-group mb-3"> *@
-            @*     <label asp-for="Address" class="form-label"></label> *@
-            @*     <input asp-for="Address" class="form-control" /> *@
-            @* </div> *@
-            <button class="btn btn-success">Save Changes</button>
+<div class="profile-container">
+    <form method="post" asp-page-handler="SaveChanges" class="profile-card">
+        <h2>Profile Information</h2>
+
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-input" disabled />
+            <span asp-validation-for="Username" class="error-text"></span>
         </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-input" disabled />
+            <span asp-validation-for="Email" class="error-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-input" />
+            <span asp-validation-for="Name" class="error-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input asp-for="PhoneNumber" class="form-input" />
+            <span asp-validation-for="PhoneNumber" class="error-text"></span>
+        </div>
+
+        <button class="btn primary">Save Changes</button>
     </form>
 
-    <form method="post" asp-page-handler="ChangePassword">
-        <div class="password-section">
-            <h3>Change Password</h3>
-            <div class="password-fields">
-                <div class="input-group mb-3">
-                    <label asp-for="CurrentPassword" class="form-label"></label>
-                    <input asp-for="CurrentPassword" type="password" class="form-control" />
-                </div>
-                <div class="input-group mb-3">
-                    <label asp-for="NewPassword" class="form-label"></label>
-                    <input asp-for="NewPassword" type="password" class="form-control" />
-                </div>
-                <div class="input-group mb-3">
-                    <label asp-for="ConfirmPassword" class="form-label"></label>
-                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
-                </div>
-            </div>
+    <form method="post" asp-page-handler="ChangePassword" class="profile-card">
+        <h2>Change Password</h2>
 
-            <button type="submit" class="btn btn-primary">Change Password</button>
+        <div class="form-group">
+            <label asp-for="CurrentPassword"></label>
+            <input asp-for="CurrentPassword" type="password" class="form-input" />
+            <span asp-validation-for="CurrentPassword" class="error-text"></span>
         </div>
+
+        <div class="form-group">
+            <label asp-for="NewPassword"></label>
+            <input asp-for="NewPassword" type="password" class="form-input" />
+            <span asp-validation-for="NewPassword" class="error-text"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" type="password" class="form-input" />
+            <span asp-validation-for="ConfirmPassword" class="error-text"></span>
+        </div>
+
+        <button type="submit" class="btn secondary">Change Password</button>
+    </form>
+
+    <form method="post" asp-page-handler="DeleteProfile" class="profile-card danger-card">
+        <h2>Delete Profile</h2>
+        <p>This action cannot be undone.</p>
+        <button type="submit" class="btn danger">Delete Profile</button>
     </form>
 </div>

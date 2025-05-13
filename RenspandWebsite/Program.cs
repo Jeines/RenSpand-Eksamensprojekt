@@ -20,7 +20,6 @@ builder.Services.AddTransient<DbService<AddressItem>>();
 builder.Services.AddTransient<DbService<Work>>();
 builder.Services.AddTransient<DbService<ServiceItem>>();
 
-
 builder.Services.AddTransient<JsonFileService<Profile>>();
 //adds dbservice to program.cs
 builder.Services.AddDbContext<RenSpandDbContext>();

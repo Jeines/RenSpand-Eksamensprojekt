@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -10,10 +12,6 @@ using System.Security.Claims;
 
 namespace RenspandWebsite.Pages.Profiles
 {
-
-    //TODO: Kig på alt logikken i OnGet og OnPost metoderne, da de ikke virker til at opdatere profilen.
-    //TODO: Vær sikker på at de rette elementer bliver rettet og hvad der rent faktisk skal opdateres. 
-    //(Password, PhoneNumber, Address) Alt anden føles som unødvendigt og uden for normer brugt i dag på andre websites.
     public class ProfileSiteModel : PageModel
     {
         [BindProperty]
@@ -55,78 +53,118 @@ namespace RenspandWebsite.Pages.Profiles
         {
             _profileService = profileService;
         }
-
         public void OnGet()
         {
-            if (User.Identity.IsAuthenticated)
+            //Tjekker om brugeren er logget ind
+            if (!User.Identity.IsAuthenticated)
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                Console.WriteLine("Logged in user ID: " + userId);
-                Console.WriteLine(_profileService.GetUserData(Int32.Parse(userId)));
+                RedirectToPage("/LogIn/LogInPage");
+            }
 
-                Email = _profileService.GetUserData(Int32.Parse(userId)).Email;
-                Username = _profileService.GetUserData(Int32.Parse(userId)).Username;
-                PhoneNumber = _profileService.GetUserData(Int32.Parse(userId)).PhoneNumber;
-                Name = _profileService.GetUserData(Int32.Parse(userId)).Name;
-            }
-            else
-            {
-                Console.WriteLine("User is not authenticated.");
-            }
+            // Tjekker for ugyldigt user ID
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Henter id'et fra brugeren der er logget ind
+            var user = _profileService.GetUserData(int.Parse(userIdClaim));
+
+            // sætter felter på siden til brugerens data
+            Username = user.Username;
+            Email = user.Email;
+            PhoneNumber = user.PhoneNumber;
+            Name = user.Name;
         }
 
-
+        /// <summary>
+        /// Opdaterer brugerens profiloplysninger.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostSaveChanges()
         {
-            Console.WriteLine("OnPostSaveChanges");
+            // Fjerner validering for felter, der ikke er relevante for denne handling
+            ModelState.Remove(nameof(Username));
+            ModelState.Remove(nameof(Email));
+            ModelState.Remove(nameof(CurrentPassword));
+            ModelState.Remove(nameof(NewPassword));
+            ModelState.Remove(nameof(ConfirmPassword));
+
+            // Validerer modelen
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _profileService.UpdateUserData(Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)), new Profile
+            // Opretter et nyt Profile-objekt med de opdaterede oplysninger
+            var updatedProfile = new Profile
             {
                 Username = Username,
                 Email = Email,
                 PhoneNumber = PhoneNumber,
                 Name = Name
-            });
+            };
 
-            // Logic to save changes to the user's profile
-            // Example: Update the database with the new data
-            TempData["Message"] = "Profile changes saved successfully!";
+            //Henter userens ID fra claims
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            // Opdaterer brugerens data i databasen
+            _profileService.UpdateUserData(userId, updatedProfile);
+
             return RedirectToPage();
         }
 
+
+        /// <summary>
+        /// Opdaterer brugerens adgangskode.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostChangePassword()
         {
-            Console.WriteLine("onpostChangePassword");
+            // Fjerner validering for felter, der ikke er relevante for denne handling
+            ModelState.Remove(nameof(Name));
+            ModelState.Remove(nameof(PhoneNumber));
+            ModelState.Remove(nameof(Email));
+            ModelState.Remove(nameof(Username));
+
+            // Validerer modelen
             if (!ModelState.IsValid)
             {
-                foreach (var modelStateEntry in ModelState)
-                {
-                    var key = modelStateEntry.Key;
-                    foreach (var error in modelStateEntry.Value.Errors)
-                    {
-                        Console.WriteLine($"ModelState error for '{key}': {error.ErrorMessage}");
-                    }
-                }
-                Console.WriteLine("Du er Her");
                 return Page();
             }
 
-            Console.WriteLine(_profileService.GetPassword(Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
-, CurrentPassword));
-            Console.WriteLine("Update Passwerd");
-            _profileService.UpdatePassWord(Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
-, NewPassword);
+            //Henter userens ID fra claims
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
 
+            // Tjekker om den nuværende adgangskode er korrekt
+            bool validPassword = _profileService.ValidatePassword(userId, CurrentPassword);
 
-            // Logic to change the user's password
-            // Example: Validate current password and update to new password
-            TempData["Message"] = "Password changed successfully!";
+            // Hvis den nuværende adgangskode ikke er korrekt, tilføj en fejl til ModelState
+            if (!validPassword)
+            {
+                ModelState.AddModelError(nameof(CurrentPassword), "Fokert adgangskode");
+                return Page();
+            }
+
+            // Opdaterer adgangskoden med den nye adgangskode
+            _profileService.UpdatePassWord(userId, NewPassword);
             return RedirectToPage();
+        }
+
+        /// <summary>
+        /// Sletter brugerens profil og logger dem ud.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> OnPostDeleteProfileAsync()
+        {
+
+            //Henter userens ID fra claims
+            var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            // Fjerner profilen fra databasen
+            _profileService.RemoveProfile(userId);
+
+            // Logger brugeren ud
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToPage("/index");
         }
     }
 }
