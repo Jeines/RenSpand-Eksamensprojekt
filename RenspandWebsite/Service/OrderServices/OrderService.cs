@@ -10,14 +10,12 @@ namespace RenspandWebsite.Service.OrderServices
     {
         private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
-        private JsonFileService<Order> JsonFileService { get; set; }
         private readonly OrderDbService _orderDbService;
 
-        public OrderService(JsonFileService<Order> jsonFileService, OrderDbService orderDbService)
+        public OrderService(OrderDbService orderDbService)
         {
             //JsonFileService = jsonFileService;
             _orderDbService = orderDbService;
-            //_orders = JsonFileService.GetJsonObjects().ToList(); 
             //_orders = _orderDbService.GetObjectsAsync().Result.ToList();
             _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }

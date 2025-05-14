@@ -38,6 +38,15 @@ namespace RenspandWebsite.Pages.Employee
 
             // Hent alle ordrer fra OrderService
             var allOrders = _orderService.GetOrders();
+            foreach (var order in allOrders)
+            {
+                Console.WriteLine("51");
+                foreach ( var serviceItem in order.ServiceItems)
+                {
+                    Console.WriteLine("1");
+                    Console.WriteLine(serviceItem);
+                }
+            }
 
             /// <summary>  
             /// StringComparison.OrdinalIgnoreCase er en enum-værdi, der bruges til at angive  
