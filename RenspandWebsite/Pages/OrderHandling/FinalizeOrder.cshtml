@@ -4,16 +4,20 @@
 <h1>Finalize Your Order</h1>
 
 <form method="post">
-    @foreach (var work in Model.SelectedWorks)
+    @for (int i = 0; i < Model.SelectedWorks.Count; i++)
     {
+        var work = Model.SelectedWorks[i];
         <div>
             <h3>@work.Name</h3>
             <p>@work.Description</p>
             <p>Price: @work.Price kr.</p>
-            <label for="workAmount_@work.Id">Amount for @work.Name:</label>
-            <input type="number" id="workAmount_@work.Id" name="WorkAndAmount[@work.Id][1]" min="1" value="1" />
+
+            <input type="hidden" name="WorkAndAmount[@i][0]" value="@work.Id" />
+            <label for="workAmount_@i">Amount for @work.Name:</label>
+            <input type="number" id="workAmount_@i" name="WorkAndAmount[@i][1]" min="1" value="1" />
         </div>
     }
+
 
     <button type="submit">Complete Order</button>
 </form>

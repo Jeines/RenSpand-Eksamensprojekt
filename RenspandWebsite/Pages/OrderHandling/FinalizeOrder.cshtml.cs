@@ -82,7 +82,6 @@ namespace RenspandWebsite.Pages.OrderHandling
                 Draft = System.Text.Json.JsonSerializer.Deserialize<OrderDraft>(draftJson);
             }
 
-
             // Henter data fra formularen
             foreach (var item in WorkAndAmount)
             {

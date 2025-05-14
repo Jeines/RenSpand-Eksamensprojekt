@@ -72,22 +72,22 @@ namespace RenspandWebsite.Service.CreateOrderServices
             await context.SaveChangesAsync();
 
             // 5. Laver ServiceItem for hver work og gemmer dem i databasen
+            var serviceItems = new List<ServiceItem>();
             foreach (var entry in workAndAmount)
             {
                 int workId = entry[0];
                 int amount = entry[1];
 
-                var work = await context.Works.FindAsync(workId) ?? throw new Exception($"Work with ID {workId} not found.");
-                var workItem = new ServiceItem
+                serviceItems.Add(new ServiceItem
                 {
                     OrderId = order.Id,
-                    ServiceWork = work,
+                    ServiceWorkId = workId,
                     Amount = amount
-                };
-                context.ServiceItems.Add(workItem);
+                });
             }
 
             // 6. Gemmer alle ændringer i databasen
+            context.ServiceItems.AddRange(serviceItems);
             await context.SaveChangesAsync();
             return order;
         }

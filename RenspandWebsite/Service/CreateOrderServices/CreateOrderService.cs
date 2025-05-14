@@ -27,6 +27,13 @@ public class CreateOrderService
     /// <returns></returns>
     public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
     {
+        foreach (var w in workAndAmount)
+        {
+            foreach (var w2 in w)
+            {
+                Console.WriteLine("WorkAndAmount: " + w2);
+            }
+        }
 
         // Bruger OrderSystemDbService til at lave en ny ordre i databasen
         await OrderSystemDbService.CreateFullOrderAsync(
