@@ -55,10 +55,10 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// Handles the POST request for filtering products by price.
         /// </summary>
         /// <returns></returns>
-        //public IActionResult OnPostPriceFilter()
-        //{
-        //    Products = _productService.PriceFilter(MaxPrice, MinPrice).ToList();
-        //    return Page();
-        //}
+        public IActionResult OnPostPriceFilter()
+        {
+            Products = _workService.PriceFilter(MaxPrice, MinPrice).ToList();
+            return Page();
+        }
     }
 }
