@@ -9,6 +9,7 @@ using RenspandWebsite.Service;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Security.Claims;
+using RenspandWebsite.Service.ProfileServices;
 
 namespace RenspandWebsite.Pages.Profiles
 {

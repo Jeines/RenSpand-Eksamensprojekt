@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.ProfileServices;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 

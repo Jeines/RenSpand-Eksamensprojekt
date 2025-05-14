@@ -10,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
-builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
 builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assuming you have a DbService for Profile   
+builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
