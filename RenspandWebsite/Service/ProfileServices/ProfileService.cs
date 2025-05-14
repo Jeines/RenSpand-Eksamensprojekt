@@ -1,60 +1,137 @@
-﻿using RenSpand_Eksamensprojekt;
+﻿using Microsoft.AspNetCore.Identity;
+using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
+using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileService
     {
-        public List<Profile> Profiles { get; }
-        private readonly JsonFileService<Profile> _jsonFileService;
+        public List<Profile> Profiles { get; set; }
 
-        //TODO: Update Name
-        private readonly ProfileDbService _userDbService;
+        private readonly ProfileDbService _profileDbService;
 
-        public ProfileService(JsonFileService<Profile> jsonFileService, ProfileDbService dbService)
+        public ProfileService(ProfileDbService dbService)
         {
-            _jsonFileService = jsonFileService;
-            _userDbService = dbService;
-            //Profiles = _userDbService.GetObjectsAsync().Result.ToList();
-            Profiles = _jsonFileService.GetJsonObjects().ToList();
-            //_jsonFileService.SaveJsonObjects(Profiles);
-            //_userDbService.SaveUserObjects(Profiles);
+            _profileDbService = dbService;
+
+            // Henter profilerne fra databasen
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
         }
 
+        /// <summary>
+        /// Validerer om passworded til en bruger er korrekt.
+        /// </summary>
+        /// <param name="id">Id'et på Profilen </param>
+        /// <param name="inputPassword">Adgangskode i hash'et format</param>
+        /// <returns></returns>
+        public bool ValidatePassword(int id, string inputPassword)
+        {
+            // opdaterer listen af profiler
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
 
-
+            // Finder profilen med det givne id
+            Profile profile = Profiles.FirstOrDefault(p => p.Id == id);
+            // Hvis profilen findes, validerer vi adgangskoden
+            if (profile != null)
+            {
+                // Opretter en PasswordHasher
+                var passwordHasher = new PasswordHasher<string>();
+                // Verificerer adgangskoden
+                var result = passwordHasher.VerifyHashedPassword(null, profile.Password, inputPassword);
+                // Hvis adgangskoden er korrekt, returnerer vi true
+                return result == PasswordVerificationResult.Success;
+            }
+            return false;
+        }
 
         /// <summary>
-        /// Adds profile to the list of profiles and saves it to the JSON file.
+        /// Henter brugerens data baseret på id.
         /// </summary>
+        /// <param name="id">Id'et på Profilen</param>
+        /// <returns></returns>
+        public Profile GetUserData(int id)
+        {
+            // opdaterer listen af profiler
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+
+            // Returnerer profilen med det givne id
+            return Profiles.FirstOrDefault(p => p.Id == id);
+        }
+
+        /// <summary>
+        /// Opdaterer brugerens data i databasen og opdaterer listen af profiler.
+        /// </summary>
+        /// <param name="id">Id'et på Profilen</param>
         /// <param name="profile"></param>
+        public void UpdateUserData(int id, Profile profile)
+        {
+            // Find the profile with the given ID
+            Profile existingProfile = Profiles.FirstOrDefault(p => p.Id == id);
+            if (existingProfile != null)
+            {
+                existingProfile.PhoneNumber = profile.PhoneNumber;
+                existingProfile.Name = profile.Name;
+                existingProfile.Address = profile.Address;
+
+                _profileDbService.UpdateObjectAsync(existingProfile).Wait();
+            }
+            // Opdaterer listen af profiler
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+        }
+
+        /// <summary>
+        /// tilføjer en ny profil til databasen og opdaterer listen af profiler.
+        /// </summary>
+        /// <param name="profile">Profil objekt</param>
         public void AddProfile(Profile profile)
         {
             Profiles.Add(profile);
-            //_jsonFileService.SaveJsonObjects(Profiles);
-            _userDbService.AddObjectAsync(profile).Wait();
+            _profileDbService.AddObjectAsync(profile).Wait();           
         }
 
+        /// <summary>
+        /// Opdaterer passwordet for en bruger i databasen og opdaterer listen af profiler.
+        /// </summary>
+        /// <param name="id">Id'et på Profilen</param>
+        /// <param name="newPassword">Nyt Password</param>
+        public void UpdatePassWord(int id, string newPassword)
+        {
+            // Opretter en PasswordHasher
+            var passwordHasher = new PasswordHasher<string>();
+
+            // Hash'er det nye password
+            var hashedPassword = passwordHasher.HashPassword(null, newPassword);
+
+            // Opdaterer passwordet i databasen
+            _profileDbService.UpdatePasswordAsync(id, hashedPassword).Wait();
+
+            // Opdaterer listen af profiler
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+        }
+
+        /// <summary>
+        /// Henter alle ordrer for en given bruger.
+        /// </summary>
+        /// <param name="userId">Id'et på Profilen</param>
+        /// <returns></returns>
         public async Task<List<Order>> GetUserOrders(int userId)
         {
-            return await _userDbService.GetOrdersByIdAsync(userId);
+            return await _profileDbService.GetOrdersByIdAsync(userId);
         }
 
-        //method to add default address to the database so you can add a profile to without an address
-        public async Task AddTestAddressAsync()
+        /// <summary>
+        /// Fjerner en Profil fra Databasen ud fra profilens id.
+        /// </summary>
+        /// <param name="id">Id'et på Profilen</param>
+        public void RemoveProfile(int id)
         {
-            // Somewhere in your service or OnGetAsync
-            using var context = new RenSpandDbContext();
-            var address = new Address
-            {
-                Street = "Test Street",
-                ZipCode = "1234",
-                City = "Testville"
-            };
-            context.Addresses.Add(address);
-            await context.SaveChangesAsync();
+            // Fjerner Profilen fra databasen
+            _profileDbService.DeleteObjectAsync(id).Wait();
+
+            // Opdaterer listen af profiler
+            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
         }
-
-
     }
 }

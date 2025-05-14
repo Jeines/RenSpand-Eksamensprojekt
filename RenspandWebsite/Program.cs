@@ -15,6 +15,7 @@ builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assu
 builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
+builder.Services.AddTransient<DbService<Profile>>();
 
 
 builder.Services.AddTransient<JsonFileService<Profile>>();

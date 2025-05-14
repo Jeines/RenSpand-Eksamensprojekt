@@ -73,6 +73,7 @@ namespace RenspandWebsite.Pages.LogIn
             {
                 new Claim(ClaimTypes.Name, profile.Username),
                 new Claim(ClaimTypes.Role, profile.Role.ToString().ToLower())
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Id.ToString()));
             };
         }
 

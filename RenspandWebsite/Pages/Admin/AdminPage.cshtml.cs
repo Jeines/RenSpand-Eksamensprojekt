@@ -16,6 +16,37 @@ namespace RenspandWebsite.Pages.Admin
         }
         public void OnGetAsync()
         {
+            var profiles = _profileService.Profiles; 
+            //await _profileService.AddTestAddressAsync();
+
+            var profiles = _profileService.Profiles; 
+            foreach (var profile in profiles)
+            {
+                Console.WriteLine($"Id: {profile.Id}, Username: {profile.Username}, Email: {profile.Email}");
+            }
+
+
+            //Console.WriteLine("\nFrom Database:");
+            //var dbProfiles = await _profileService.GetProfilesFromDb();
+            //foreach (var profile in dbProfiles)
+            //{
+            //    Console.WriteLine(profile.ToString());
+            //}
+            //await _profileService.AddTestAddressAsync();
+
+            var profiles = _profileService.Profiles; 
+            foreach (var profile in profiles)
+            {
+                Console.WriteLine($"Id: {profile.Id}, Username: {profile.Username}, Email: {profile.Email}");
+            }
+
+
+            //Console.WriteLine("\nFrom Database:");
+            //var dbProfiles = await _profileService.GetProfilesFromDb();
+            //foreach (var profile in dbProfiles)
+            //{
+            //    Console.WriteLine(profile.ToString());
+            //}
         }
     }
 }
