@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service.CreateOrderServices;
+using RenspandWebsite.Service.OrderServices;
 
 
 
@@ -11,14 +11,14 @@ namespace RenspandWebsite.Pages.OrderHandling
 {
     public class OrderSystemModel : PageModel
     {
-        private readonly CreateOrderService _createOrderService;
+        private readonly OrderService _orderService;
         public List<Work> WorkList { get; set; }
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
-        public OrderSystemModel(CreateOrderService cleaningService)
+        public OrderSystemModel(OrderService orderService)
         {
-            _createOrderService = cleaningService;
+            _orderService = orderService;
         }
 
         [BindProperty]
@@ -61,7 +61,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             TrashCanEmptyDate = DateTime.Today;
 
             // Henter arbejderne fra CreateOrderService(Databasen)
-            WorkList = _createOrderService.Works;
+            WorkList = _orderService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
@@ -74,7 +74,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             if (!ModelState.IsValid)
             {
                 // Hvis model state er invalid, repopulate WorkSelectList og returner til siden
-                WorkList = _createOrderService.Works;
+                WorkList = _orderService.Works;
                 WorkSelectList = WorkList.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),

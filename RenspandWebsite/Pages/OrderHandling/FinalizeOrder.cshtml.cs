@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
-using RenspandWebsite.Service.CreateOrderServices;
+using RenspandWebsite.Service.OrderServices;
 
 namespace RenspandWebsite.Pages.OrderHandling
 {
     public class FinalizeOrderModel : PageModel
     {
-        private CreateOrderService _createOrderService;
+        private OrderService _orderService;
 
-        public FinalizeOrderModel(CreateOrderService cleaningService)
+        public FinalizeOrderModel(OrderService orderService)
         {
-            _createOrderService = cleaningService;
+            _orderService = orderService;
         }
 
         [BindProperty]
@@ -64,7 +64,7 @@ namespace RenspandWebsite.Pages.OrderHandling
         {
             foreach (var workId in Draft.SelectedWorkIds)
             {
-                var work = _createOrderService.Works.FirstOrDefault(w => w.Id == workId);
+                var work = _orderService.Works.FirstOrDefault(w => w.Id == workId);
                 if (work != null)
                 {
                     SelectedWorks.Add(work);
@@ -90,7 +90,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             }
 
             // Laver en Ordre med info fra formularen
-            await _createOrderService.CreateOrderAsync(
+            await _orderService.CreateOrderAsync(
                 Draft.Name,
                 Draft.Email,
                 Draft.PhoneNumber,

@@ -8,16 +8,16 @@ namespace RenspandWebsite.Service.OrderServices
     /// </summary>
     public class OrderService
     {
+        public List<Work> Works { get; }
         private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
         private readonly OrderDbService _orderDbService;
 
         public OrderService(OrderDbService orderDbService)
         {
-            //JsonFileService = jsonFileService;
             _orderDbService = orderDbService;
-            //_orders = _orderDbService.GetObjectsAsync().Result.ToList();
             _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+            Works = _orderDbService.GetAllWorksAsync().Result;
         }
 
 
@@ -85,6 +85,53 @@ namespace RenspandWebsite.Service.OrderServices
                 }
             }
         }
+
+        /// <summary>
+        /// Laver en ny ordre i databasen ved brug af OrderSystemDbService.
+        /// </summary>
+        /// <param name="name">Navn på køber</param>
+        /// <param name="email">Email på køber</param>
+        /// <param name="phonenumber">TelefonNummer på køber</param>
+        /// <param name="street">Vejnavn på køber addresse</param>
+        /// <param name="city">By på køber addresse</param>
+        /// <param name="zipcode">PostNummer på køber addresse</param>
+        /// <param name="workAndAmount">Listen med hvilket og hvor meget arbejde der er bestilt</param>
+        /// <param name="datestart">Dato'en ordren er købt fra</param>
+        /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
+        /// <returns></returns>
+        public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
+        {
+
+            // Bruger OrderSystemDbService til at lave en ny ordre i databasen
+            await _orderDbService.CreateFullOrderAsync(
+                name, email, phonenumber,
+                street, city, zipcode,
+                workAndAmount,
+                datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount));
+        }
+
+
+        private decimal CalculateTotalPrice(List<int[]> workAndAmount)
+        {
+            decimal totalPrice = 0;
+
+            // Antag at du har adgang til en liste af works, her skal du hente priserne på de forskellige works.
+            // (F.eks. fra en database eller en hardcoded liste)
+            foreach (var entry in workAndAmount)
+            {
+                int workId = entry[0];
+                int amount = entry[1];
+
+                Work work = Works.FirstOrDefault(w => w.Id == workId);
+                // Find arbejdet og beregn prisen
+                // Her simulerer vi en fast pris per enhed, for demo
+                decimal pricePerWork = work.Price;  // Fastsat pris pr. arbejde
+                totalPrice += pricePerWork * amount;
+            }
+
+            return totalPrice;
+        }
+
 
         /// <summary>
         /// Sætter en note til en order med et givet id og opdaterer ordren i databasen
