@@ -9,7 +9,7 @@ namespace RenspandWebsite.Service.OrderServices
     public class OrderService
     {
         public List<Work> Works { get; }
-        private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
+        private List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
         private readonly OrderDbService _orderDbService;
 
@@ -66,6 +66,7 @@ namespace RenspandWebsite.Service.OrderServices
                     break;
                 }
             }
+            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>
@@ -74,16 +75,14 @@ namespace RenspandWebsite.Service.OrderServices
         /// <param name="id"></param>
         public void RejectOrder(int id)
         {
-            foreach (Order order in _orders)
+            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            if (order != null)
             {
-                if (order.Id == id)
-                {
-                    order.AcceptStatus = AcceptStatusEnum.Rejected;
-                    // Order bliver sat til rejected
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
+                order.AcceptStatus = AcceptStatusEnum.Rejected;
+                // Order bliver sat til rejected
+                _orderDbService.UpdateObjectAsync(order);
             }
+            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>

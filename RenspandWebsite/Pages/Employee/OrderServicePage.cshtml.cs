@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.OrderServices;
@@ -16,6 +17,8 @@ namespace RenspandWebsite.Pages.Employee
         public List<Order> FilteredOrders { get; set; } = new List<Order>();
         public string SearchTerm { get; set; }
 
+        public List<Order> Orders { get; set; } = new List<Order>();
+
         /// <summary>
         /// Håndterer get-forespørgsler og filtrerer ordrer via. et søgeterm.
         /// </summary>
@@ -31,13 +34,36 @@ namespace RenspandWebsite.Pages.Employee
         /// - Adresselisten (gade, by og postnummer)
         /// Hvis søgetermen er tom eller null, returneres alle ordrer.
         /// </remarks>
-        public void OnGet(string searchTerm)
+        public void OnGet()
+        {
+            Orders = _orderService.GetOrders().ToList();
+        }
+
+        //TODO : Fix issue where sometimes order not updated
+        public IActionResult OnPostAcceptOrder(int orderId)
+        {
+            _orderService.AcceptOrder(orderId);
+            Orders = _orderService.GetOrders().ToList();
+            return RedirectToPage();
+        }
+
+        //TODO : Fix issue where sometimes order not updated
+        /// <summary>
+        /// Rejects order with the given orderId and reloads page
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public IActionResult OnPostRejectOrder(int orderId)
+        {
+            _orderService.RejectOrder(orderId);
+            Orders = _orderService.GetOrders().ToList();
+            return RedirectToPage();
+        }
+
+        public void OnPostSearch(string searchTerm)
         {
             // Gem søgetermen for brug i visningen
             SearchTerm = searchTerm;
-
-            // Hent alle ordrer fra OrderService
-            var allOrders = _orderService.GetOrders();
 
             /// <summary>  
             /// StringComparison.OrdinalIgnoreCase er en enum-værdi, der bruges til at angive  
@@ -65,7 +91,7 @@ namespace RenspandWebsite.Pages.Employee
             // Filtrer ordrer baseret på søgetermen
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                FilteredOrders = allOrders
+                FilteredOrders = _orderService.GetOrders()
                     .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
@@ -76,7 +102,7 @@ namespace RenspandWebsite.Pages.Employee
             else
             {
                 // Hvis ingen søgeterm er angivet, returneres alle ordrer
-                FilteredOrders = allOrders.ToList(); // Konverter IEnumerable til List
+                FilteredOrders = _orderService.GetOrders().ToList(); // Konverter IEnumerable til List
             }
         }
 

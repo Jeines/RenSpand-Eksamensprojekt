@@ -38,25 +38,6 @@
     font-size: 14px;
 }
 
-    .order-table th, .order-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .order-table th {
-        background-color: #f4f4f4;
-        font-weight: bold;
-    }
-
-    .order-table tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    .order-table tr:hover {
-        background-color: #f1f1f1;
-    }
-
     .status-pending {
         background-color: #fff3cd;
     }

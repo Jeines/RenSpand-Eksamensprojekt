@@ -42,6 +42,8 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         [BindProperty]
         public int MaxPrice { get; set; }
 
+        //TODO: Fix Sorting of products
+
         /// <summary>
         /// Handles the GET request for retrieving all products.
         /// </summary>
