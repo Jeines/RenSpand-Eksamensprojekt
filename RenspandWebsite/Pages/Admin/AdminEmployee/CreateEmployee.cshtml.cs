@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using System.Text.RegularExpressions;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
@@ -97,6 +98,14 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             // hash password
             var passwordHasher = new PasswordHasher<RenSpand_Eksamensprojekt.Employee>();
             string hashedPassword = passwordHasher.HashPassword(null, Employee.Password);
+
+            // Tjekker om Email er i valid format
+            Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
+            if (!validateEmailRegex.IsMatch(Employee.Email))
+            {
+                ModelState.AddModelError("Email", "Invalid email format.");
+                return Page();
+            }
 
             // Opretter et nyt Employee-objekt med de indtastede værdier
             Employee = new RenSpand_Eksamensprojekt.Employee

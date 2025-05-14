@@ -7,19 +7,20 @@
     <div class="form-group">
         <label asp-for="UserName"></label>
         <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <label asp-for="Password"></label>
         <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.Email" class="control-lable"></label>
-        <input asp-for="@Model.Email" class="form-control" />
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-    
-    <button type="submit" class="btn btn-success">Opret Profil</button>
 
-    
-    
+    <button type="submit" class="btn btn-success">Opret Profil</button>
 </form>
