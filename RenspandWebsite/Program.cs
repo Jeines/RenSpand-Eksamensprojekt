@@ -4,6 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
+using RenspandWebsite.Service.WorkServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +13,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ProfileService, ProfileService>();
 builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assuming you have a DbService for Profile   
 builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
-builder.Services.AddSingleton<IWorkService, WorkService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
 builder.Services.AddTransient<DbService<Profile>>();
+
+builder.Services.AddTransient<WorkService, WorkService>();
+builder.Services.AddTransient<WorkDbService, WorkDbService>();
+
 
 
 builder.Services.AddTransient<JsonFileService<Profile>>();

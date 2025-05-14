@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.WorkServices;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
@@ -13,15 +14,15 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <summary>
         /// The product service used to manage product data.
         /// </summary>
-        private IWorkService _productService;
+        private WorkService _workService;
 
         /// <summary>
         /// Initializes a new instance of the GetAllProductsModel class.
         /// </summary>
         /// <param name="productService"></param>
-        public GetAllProductsModel(IWorkService productService)
+        public GetAllProductsModel(WorkService workService)
         {
-            _productService = productService;
+            _workService = workService;
         }
 
         /// <summary>
@@ -46,16 +47,16 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// </summary>
         public void OnGet()
         {
-            Products = _productService.GetWorks();
+            Products = _workService.GetWorks();
         }
         /// <summary>
         /// Handles the POST request for filtering products by price.
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPostPriceFilter()
-        {
-            Products = _productService.PriceFilter(MaxPrice, MinPrice).ToList();
-            return Page();
-        }
+        //public IActionResult OnPostPriceFilter()
+        //{
+        //    Products = _productService.PriceFilter(MaxPrice, MinPrice).ToList();
+        //    return Page();
+        //}
     }
 }

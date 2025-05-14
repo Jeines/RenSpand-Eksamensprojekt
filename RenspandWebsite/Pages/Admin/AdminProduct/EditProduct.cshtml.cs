@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.WorkServices;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
@@ -13,16 +14,16 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <summary>
         /// The product service used to manage product data.
         /// </summary>
-        private IWorkService _productService;
+        private WorkService _workService;
 
 
         /// <summary>
         /// Initializes a new instance of the EditProductModel class.
         /// </summary>
         /// <param name="productService"></param>
-        public EditProductModel(IWorkService productService)
+        public EditProductModel(WorkService workService)
         {
-            _productService = productService;
+            _workService = workService;
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <returns></returns>
         public IActionResult OnGet(int id)
         {
-            Product = _productService.GetWork(id);
+            Product = _workService.GetWork(id);
             if (Product == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 
@@ -57,7 +58,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
                 return Page();
             }
 
-            _productService.UpdateWork(Product);
+            _workService.UpdateWork(Product);
             return RedirectToPage("GetAllProducts");
         }
     }

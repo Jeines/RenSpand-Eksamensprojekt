@@ -26,37 +26,40 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">View Orders</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
                         @{
+                            if (!User.IsInRole("admin") && !User.IsInRole("employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
+                                </li>
+                            }
+
                             if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
+                                if (User.IsInRole("admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">Admin Panel</a>
+                                    </li>
+                                }
+
                                 if (User.IsInRole("admin") || User.IsInRole("employee"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">View All Orders</a>
                                     </li>
                                 }
                             }
                         }
-
                     </ul>
-                   
                 </div>
                 <div>
                     <ul class="navbar-nav">

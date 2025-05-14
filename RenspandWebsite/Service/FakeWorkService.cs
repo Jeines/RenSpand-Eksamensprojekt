@@ -2,13 +2,13 @@
 
 namespace RenspandWebsite.Service
 {
-    public class WorkService : IWorkService
+    public class FakeWorkService : IWorkService
     {
         private List<Work> _work;
 
         private JsonFileService<Work> JsonFileService { get; set; }
 
-        public WorkService(JsonFileService<Work> jsonFileService)
+        public FakeWorkService(JsonFileService<Work> jsonFileService)
         {
             JsonFileService = jsonFileService;
             _work = JsonFileService.GetJsonObjects().ToList();
