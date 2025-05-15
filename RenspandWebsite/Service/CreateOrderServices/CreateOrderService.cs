@@ -24,8 +24,9 @@ public class CreateOrderService
     /// <param name="workAndAmount">Listen med hvilket og hvor meget arbejde der er bestilt</param>
     /// <param name="datestart">Dato'en ordren er købt fra</param>
     /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
+    /// <param name="customerNote">Note til køber</param>
     /// <returns></returns>
-    public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
+    public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate, string customerNote)
     {
 
         // Bruger OrderSystemDbService til at lave en ny ordre i databasen
@@ -33,7 +34,7 @@ public class CreateOrderService
             name, email, phonenumber,
             street, city, zipcode,
             workAndAmount,
-            datestart, trashcanemptydate);
+            datestart, trashcanemptydate,customerNote);
     }
 }
 

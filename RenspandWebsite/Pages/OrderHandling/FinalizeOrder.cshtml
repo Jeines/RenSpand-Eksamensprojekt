@@ -14,6 +14,16 @@
             <input type="number" id="workAmount_@work.Id" name="WorkAndAmount[@work.Id][1]" min="1" value="1" />
         </div>
     }
+    <div class="form-group mt-4">
+        <label for="customerNote">Ekstra noter til Order (Optional):</label>
+        <textarea id="customernote"
+            name="CustomerNote"
+            class="form-control"
+            rows="4"
+            placeholder="Ekstra noter til din ordre (f.eks. specielle ønsker, ændringer osv.)">
+        </textarea>
+
+    </div>
 
     <button type="submit">Complete Order</button>
 </form>
