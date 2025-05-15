@@ -12,6 +12,7 @@
         public List<int> SelectedWorkIds { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime TrashCanEmptyDate { get; set; }
+        public string CustomerNote { get; set; }
     }
 
 }

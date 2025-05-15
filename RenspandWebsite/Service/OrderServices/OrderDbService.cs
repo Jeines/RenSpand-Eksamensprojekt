@@ -56,7 +56,7 @@ namespace RenspandWebsite.Service.OrderServices
             string name, string email, string phonenumber,
             string street, string city, string zipcode,
             List<int[]> workAndAmount,
-            DateTime datestart, DateTime trashcanemptydate, decimal totalPrice)
+            DateTime datestart, DateTime trashcanemptydate, decimal totalPrice, string customerNote)
         {
             // Laver en ny instans af RenSpandDbContext (forbindelse til database)
             using var context = new RenSpandDbContext();
@@ -89,7 +89,8 @@ namespace RenspandWebsite.Service.OrderServices
                 DateStart = datestart,
                 DateDone = datestart.AddDays(8),
                 TrashCanEmptyDate = trashcanemptydate,
-                TotalPrice = totalPrice
+                TotalPrice = totalPrice,
+                CustomerNote = customerNote
             };
             context.Orders.Add(order);
             await context.SaveChangesAsync();

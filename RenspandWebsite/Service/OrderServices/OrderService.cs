@@ -98,7 +98,7 @@ namespace RenspandWebsite.Service.OrderServices
         /// <param name="datestart">Dato'en ordren er købt fra</param>
         /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
         /// <returns></returns>
-        public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
+        public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate, string customerNote)
         {
 
             // Bruger OrderSystemDbService til at lave en ny ordre i databasen
@@ -106,7 +106,7 @@ namespace RenspandWebsite.Service.OrderServices
                 name, email, phonenumber,
                 street, city, zipcode,
                 workAndAmount,
-                datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount));
+                datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount), customerNote);
         }
 
 

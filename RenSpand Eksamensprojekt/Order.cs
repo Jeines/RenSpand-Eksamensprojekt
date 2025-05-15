@@ -39,8 +39,9 @@ namespace RenSpand_Eksamensprojekt
 
         //TODO: Tilføj Denne property når resten af implementeringen er klar
 
+        [StringLength(100)]
         public string? EmployeeNote { get; set; }
-
+        [StringLength(100)]
         public string? CustomerNote { get; set; }
 
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
