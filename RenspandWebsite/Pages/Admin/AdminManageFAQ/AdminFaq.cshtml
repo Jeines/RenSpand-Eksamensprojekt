@@ -1,0 +1,34 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminManageFAQ.AdminFaq
+@{
+    ViewData["Title"] = "Administrer FAQ";
+}
+
+<h2>Administrer FAQ</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Spørgsmål</th>
+            <th>Svar</th>
+            <th>Handlinger</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var faq in Model.Faqs)
+        {
+            <tr>
+                <td>@faq.Question</td>
+                <td>@faq.Answer</td>
+                <td>
+                    <a asp-page="/Admin/AdminManageFAQ/EditFaq" asp-route-id="@faq.Id" class="btn btn-warning btn-sm">Rediger</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@faq.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Slet</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Admin/AdminManageFAQ/CreateFaq" class="btn btn-success">Tilføj ny FAQ</a>

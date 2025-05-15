@@ -35,7 +35,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">View Orders</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">Admin Side</a>
                         </li>
 
                         <li class="nav-item">
@@ -43,6 +43,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
+                        </li>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/FaqSite">FAQ</a>
                         @{
                             if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
