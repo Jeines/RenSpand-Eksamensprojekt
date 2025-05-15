@@ -38,7 +38,10 @@ namespace RenSpand_Eksamensprojekt
         public DateTime? TrashCanEmptyDate { get; set; }
 
         //TODO: Tilføj Denne property når resten af implementeringen er klar
-        //public string? EmployeeNote { get; set; }
+
+        public string? EmployeeNote { get; set; }
+
+        public string? CustomerNote { get; set; }
 
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {

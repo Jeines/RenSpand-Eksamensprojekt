@@ -17,6 +17,9 @@ namespace RenspandWebsite.Pages.OrderHandling
         [BindProperty]
         public OrderDraft Draft { get; set; }
 
+        [BindProperty]
+        public string CustomerNote { get; set; }
+
         // WorkAndAmount er en list med id'et på arbejdet og antallet af arbejdet
         [BindProperty]
         public List<int[]> WorkAndAmount { get; set; } = new List<int[]>();
@@ -99,7 +102,8 @@ namespace RenspandWebsite.Pages.OrderHandling
                 Draft.ZipCode,
                 WorkAndAmount,
                 Draft.DateStart,
-                Draft.TrashCanEmptyDate);
+                Draft.TrashCanEmptyDate,
+                CustomerNote);
 
             return RedirectToPage("/OrderHandling/OrderConfirmationPage");
         }
