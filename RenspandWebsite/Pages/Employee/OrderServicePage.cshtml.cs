@@ -40,10 +40,9 @@ namespace RenspandWebsite.Pages.Employee
         }
 
         //TODO : Fix issue where sometimes order not updated
-        public IActionResult OnPostAcceptOrder(int orderId)
+        public async Task<IActionResult> OnPostAcceptOrderAsync(int orderId)
         {
-            _orderService.AcceptOrder(orderId);
-            Orders = _orderService.GetOrders().ToList();
+            await _orderService.AcceptOrderAsync(orderId);
             return RedirectToPage();
         }
 
@@ -53,10 +52,9 @@ namespace RenspandWebsite.Pages.Employee
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public IActionResult OnPostRejectOrder(int orderId)
+        public async Task<IActionResult> OnPostRejectOrderAsync(int orderId)
         {
-            _orderService.RejectOrder(orderId);
-            Orders = _orderService.GetOrders().ToList();
+            await _orderService.RejectOrderAsync(orderId);
             return RedirectToPage();
         }
 

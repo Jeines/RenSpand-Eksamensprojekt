@@ -54,35 +54,32 @@ namespace RenspandWebsite.Service.OrderServices
         /// Sætter status til Accept for en order med et givet id og opdaterer ordren i databasen
         /// </summary>
         /// <param name="id"></param>
-        public void AcceptOrder(int id) {
-            foreach (Order order in _orders)
+        public async Task AcceptOrderAsync(int id)
+        {
+            var order = _orders.FirstOrDefault(o => o.Id == id);
+            if (order != null)
             {
-                if (order.Id == id)
-                {
-                    // Order bliver sat til accepted
-                    order.AcceptStatus = AcceptStatusEnum.Accepted;
-                    // updated order in database
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
+                order.AcceptStatus = AcceptStatusEnum.Accepted;
+                await _orderDbService.UpdateObjectAsync(order); // <-- await it
             }
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+
+            _orders = (await _orderDbService.GetOrdersWithJoinsAsync()).ToList(); // <-- await here too
         }
 
         /// <summary>
         /// Sætter status til Rejects order with the given orderId and updates the order in the database
         /// </summary>
         /// <param name="id"></param>
-        public void RejectOrder(int id)
+        public async Task RejectOrderAsync(int id)
         {
-            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            var order = _orders.FirstOrDefault(o => o.Id == id);
             if (order != null)
             {
                 order.AcceptStatus = AcceptStatusEnum.Rejected;
-                // Order bliver sat til rejected
-                _orderDbService.UpdateObjectAsync(order);
+                await _orderDbService.UpdateObjectAsync(order); // <-- await it
             }
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+
+            _orders = (await _orderDbService.GetOrdersWithJoinsAsync()).ToList(); // <-- await here too
         }
 
         /// <summary>

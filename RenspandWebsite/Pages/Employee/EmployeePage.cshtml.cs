@@ -38,10 +38,9 @@ namespace RenspandWebsite.Pages.Employee
         ///// <param name="orderId"></param>
         ///// <returns></returns
 
-        public IActionResult OnPostAcceptOrder(int orderId)
+        public async Task<IActionResult> OnPostAcceptOrderAsync(int orderId)
         {
-            Console.WriteLine("Acceptorder - ID: " + orderId);
-            _orderService.AcceptOrder(orderId);
+            await _orderService.AcceptOrderAsync(orderId);
             return RedirectToPage();
         }
 
@@ -50,10 +49,9 @@ namespace RenspandWebsite.Pages.Employee
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public IActionResult OnPostRejectOrder(int orderId)
+        public async Task<IActionResult> OnPostRejectOrderAsync(int orderId)
         {
-            Console.WriteLine("RejectOrder");
-            _orderService.RejectOrder(orderId);
+            await _orderService.RejectOrderAsync(orderId);
             return RedirectToPage();
         }
 
