@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace RenSpand_Eksamensprojekt
@@ -36,6 +37,11 @@ namespace RenSpand_Eksamensprojekt
         public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
 
         public DateTime? TrashCanEmptyDate { get; set; }
+
+        [AllowNull]
+        public int RuteId { get; set; }
+        [ForeignKey("RuteId")]
+        public Rute Rute { get; set; } = new Rute();
 
         //TODO: Tilføj Denne property når resten af implementeringen er klar
         //public string? EmployeeNote { get; set; }

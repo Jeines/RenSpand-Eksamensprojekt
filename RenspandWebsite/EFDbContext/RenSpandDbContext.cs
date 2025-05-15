@@ -30,5 +30,6 @@ namespace RenspandWebsite.EFDbContext
         public DbSet<Work> Works { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AddressItem> AddressItems { get; set; }
+        public DbSet<Rute> Rutes { get; set; }
     }
 }

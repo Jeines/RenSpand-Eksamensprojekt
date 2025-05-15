@@ -10,9 +10,7 @@
             Orders = ordersList;
         }
 
-        public Rute()
-        {
-        }
+        public Rute() { }
 
 
         public void AddOrder(Order order)

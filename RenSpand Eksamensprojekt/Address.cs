@@ -25,6 +25,12 @@ namespace RenSpand_Eksamensprojekt
         }
 
         public Address() { }
+
+        public override string ToString()
+        {
+            return $"{Street}, {ZipCode} {City}, Denmark";
+        }
+
     }
 
 }

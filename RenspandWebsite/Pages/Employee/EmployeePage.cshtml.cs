@@ -21,7 +21,6 @@ namespace RenspandWebsite.Pages.Employee
             {
                 Console.WriteLine("Order ID: " + order.Id);
                 Console.WriteLine("Order Status: " + order.AcceptStatus);
-
             }
         }
 

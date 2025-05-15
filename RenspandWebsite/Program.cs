@@ -4,6 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
+using RenspandWebsite.Service.RuteServices;
 using RenspandWebsite.Service.WorkServices;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,11 +21,9 @@ builder.Services.AddTransient<DbService<Profile>>();
 builder.Services.AddTransient<WorkService, WorkService>();
 builder.Services.AddTransient<WorkDbService, WorkDbService>();
 
+builder.Services.AddSingleton<RuteService, RuteService>();
+builder.Services.AddTransient<RuteDbService, RuteDbService>();
 
-
-builder.Services.AddTransient<JsonFileService<Profile>>();
-
-builder.Services.AddSingleton<JsonFileService<Work>>();
 builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
 
 builder.Services.AddSingleton<OrderService, OrderService>();
