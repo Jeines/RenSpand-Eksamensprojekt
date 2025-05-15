@@ -17,6 +17,9 @@ namespace RenspandWebsite.Pages.OrderHandling
         [BindProperty]
         public OrderDraft Draft { get; set; }
 
+        /// <summary>
+        /// customerNote er en string der indeholder en note fra kunden.
+        /// </summary>
         [BindProperty]
         public string CustomerNote { get; set; }
 
