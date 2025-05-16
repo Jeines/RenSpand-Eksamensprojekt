@@ -27,6 +27,8 @@ else
                 <th>Startdato</th>
                 <th>Slutdato</th>
                 <th>Status</th>
+                <th>Noter (Medarbejder)</th>
+                <th>Noter (Bruger)</th>
             </tr>
         </thead>
         <tbody>
@@ -79,6 +81,16 @@ else
                             </form>
                         }
 
+                    </td>
+                    <td>
+                        <form method="post" asp-page-handler="SaveNote">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <textarea name="note" class="form-control">@order.EmployeeNote</textarea>
+                            <button class="btn btn-primary btn-sm mt-1" type="submit">Save Notes</button>
+                        </form>
+                    </td>
+                    <td>
+                        <textarea class="form-control" readonly>@order.CustomerNote</textarea>
                     </td>
                 </tr>
             }
