@@ -37,6 +37,12 @@ namespace RenspandWebsite.Service.WorkServices
             _workDbService.DeleteObjectAsync(id).Wait();
         }
 
+        public List<Work> PriceFilter(int maxPrice, int minPrice)
+        {
+            var allProducts = _workDbService.GetObjectsAsync().Result.ToList();
+            var filteredProducts = allProducts.Where(p => p.Price >= minPrice && p.Price <= maxPrice).ToList();
+            return filteredProducts;
+        }
 
     }
 }
