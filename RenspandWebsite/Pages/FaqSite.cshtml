@@ -1,0 +1,27 @@
+﻿@page
+@model RenspandWebsite.Pages.FaqSiteModel
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<h2 class="mb-4">Ofte stillede spørgsmål</h2>
+
+<div class="accordion" id="faqAccordion">
+    @foreach (var faq in Model.FAQs)
+    {
+        <div class="accordion-item mb-2 border rounded">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@faq.Id" aria-expanded="false" aria-controls="collapse-@faq.Id">
+                    @faq.Question
+                </button>
+            </h2>
+            <div id="collapse-@faq.Id" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    @faq.Answer
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
