@@ -21,6 +21,11 @@ namespace RenspandWebsite.EFDbContext
                 .WithMany()
                 .HasForeignKey(ai => ai.OrderId)
                 .OnDelete(DeleteBehavior.Restrict);
+            // Seed initialisere FAQ data  
+            modelBuilder.Entity<FAQ>().HasData(
+                new FAQ { Id = -1, Question = "Hvordan kontakter jeg virksomhenden?", Answer = "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet." }
+            );
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Order> Orders { get; set; }
@@ -30,5 +35,7 @@ namespace RenspandWebsite.EFDbContext
         public DbSet<Work> Works { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AddressItem> AddressItems { get; set; }
+        public DbSet<FAQ> FAQs { get; set; }
+
     }
 }
