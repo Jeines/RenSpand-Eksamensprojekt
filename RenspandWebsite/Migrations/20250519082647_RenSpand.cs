@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RenspandWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class Renspandrazor : Migration
+    public partial class RenSpand : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -91,7 +91,9 @@ namespace RenspandWebsite.Migrations
                     DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateDone = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AcceptStatus = table.Column<int>(type: "int", nullable: false),
-                    TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CustomerNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
