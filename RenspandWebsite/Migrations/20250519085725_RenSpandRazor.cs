@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RenspandWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class RenSpand : Migration
+    public partial class RenSpandRazor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

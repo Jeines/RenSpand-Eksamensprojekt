@@ -12,8 +12,8 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250519082647_RenSpand")]
-    partial class RenSpand
+    [Migration("20250519085725_RenSpandRazor")]
+    partial class RenSpandRazor
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
