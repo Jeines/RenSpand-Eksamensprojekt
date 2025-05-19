@@ -13,6 +13,7 @@
     <link href="/css/RenSpandRazorStyles.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> @*Lige tilføjet (Mikkel)*@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/css/RenSpandRazorStyles.css" rel="stylesheet" />
     @* <link href="~/css/OrderServicePage.css" rel="stylesheet" type="text/css" /> *@
 </head>
 <body>
@@ -26,13 +27,17 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
-                        </li>
+                        @{
+                            if (!User.IsInRole("admin") && !User.IsInRole("employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/OrderHandling/OrderSystem">Bestil Ordre</a>
+                                </li>
+
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">Admin Side</a>
@@ -45,20 +50,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
                         </li>
                         <a class="nav-link text-dark" asp-area="" asp-page="/FaqSite">FAQ</a>
-                        @{
+                  
                             if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
+                                if (User.IsInRole("admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Admin/AdminPage">Admin Panel</a>
+                                    </li>
+                                }
+
                                 if (User.IsInRole("admin") || User.IsInRole("employee"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Order Service</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">View All Orders</a>
                                     </li>
                                 }
                             }
                         }
-
                     </ul>
-                   
                 </div>
                 <div>
                     <ul class="navbar-nav">

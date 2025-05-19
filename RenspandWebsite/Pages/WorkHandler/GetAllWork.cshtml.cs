@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.WorkServices;
 
 namespace RenspandWebsite.Pages.WorkHandler
 {
     public class GetAllWorkModel : PageModel
     {
-        private IWorkService _workService;
-        public GetAllWorkModel(IWorkService workService)
+        private WorkService _workService;
+        public GetAllWorkModel(WorkService workService)
         {
             _workService = workService;
         }
@@ -24,10 +25,10 @@ namespace RenspandWebsite.Pages.WorkHandler
         {
             Works = _workService.GetWorks();
         }
-        public IActionResult OnPostPriceFilter()
-        {
-            Works = _workService.PriceFilter(MaxPrice, MinPrice).ToList();
-            return Page();
-        }
+        //public IActionResult OnPostPriceFilter()
+        //{
+        //    Works = _workService.PriceFilter(MaxPrice, MinPrice).ToList();
+        //    return Page();
+        //}
     }
 }

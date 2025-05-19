@@ -9,7 +9,7 @@ namespace RenspandWebsite.Service.OrderServices
     public class OrderService
     {
         public List<Work> Works { get; }
-        private readonly List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
+        private List<Order> _orders; // Corrected type from 'Orders' to 'Order'.  
 
         private readonly OrderDbService _orderDbService;
 
@@ -66,6 +66,7 @@ namespace RenspandWebsite.Service.OrderServices
                     break;
                 }
             }
+            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>
@@ -74,16 +75,14 @@ namespace RenspandWebsite.Service.OrderServices
         /// <param name="id"></param>
         public void RejectOrder(int id)
         {
-            foreach (Order order in _orders)
+            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            if (order != null)
             {
-                if (order.Id == id)
-                {
-                    order.AcceptStatus = AcceptStatusEnum.Rejected;
-                    // Order bliver sat til rejected
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
+                order.AcceptStatus = AcceptStatusEnum.Rejected;
+                // Order bliver sat til rejected
+                _orderDbService.UpdateObjectAsync(order);
             }
+            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace RenspandWebsite.Service.OrderServices
         /// <param name="datestart">Dato'en ordren er købt fra</param>
         /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
         /// <returns></returns>
-        public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate)
+        public async Task CreateOrderAsync(string name, string email, string phonenumber, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate, string customerNote)
         {
 
             // Bruger OrderSystemDbService til at lave en ny ordre i databasen
@@ -107,7 +106,7 @@ namespace RenspandWebsite.Service.OrderServices
                 name, email, phonenumber,
                 street, city, zipcode,
                 workAndAmount,
-                datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount));
+                datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount), customerNote);
         }
 
 

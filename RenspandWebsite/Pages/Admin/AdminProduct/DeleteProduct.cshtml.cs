@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.WorkServices;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
@@ -13,16 +14,16 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <summary>
         /// The product service used to manage product data.
         /// </summary>
-        private IWorkService _productService;
+        private WorkService _workService;
 
 
         /// <summary>
         /// Initializes a new instance of the DeleteProductModel class.
         /// </summary>
         /// <param name="productService"></param>
-        public DeleteProductModel(IWorkService productService)
+        public DeleteProductModel(WorkService workService)
         {
-            _productService = productService;
+            _workService = workService;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <returns></returns>
         public IActionResult OnGet(int id)
         {
-            Product = _productService.GetWork(id);
+            Product = _workService.GetWork(id);
             if (Product == null)
                 return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
 
@@ -52,10 +53,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <returns></returns>
         public IActionResult OnPost()
         {
-            RenSpand_Eksamensprojekt.Work deletedWork = _productService.DeleteWork(Product.Id);
-            if (deletedWork == null)
-                return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
-
+            _workService.DeleteWork(Product.Id);
             return RedirectToPage("GetAllProducts");
         }
     }
