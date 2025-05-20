@@ -21,7 +21,7 @@ namespace RenSpand_Eksamensprojekt
 
         public User(int id, string name, string email, string phoneNumber)
         {
-            Id = id;
+            //Id = id;
             Name = name;
             Email = email;
             PhoneNumber = phoneNumber;

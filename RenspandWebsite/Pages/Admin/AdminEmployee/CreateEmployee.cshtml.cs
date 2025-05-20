@@ -110,7 +110,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             // Opretter et nyt Employee-objekt med de indtastede værdier
             Employee = new RenSpand_Eksamensprojekt.Employee
             {
-                Id = Employee.Id,
+                //Id = Employee.Id,
                 Username = Employee.Username,
                 Password = hashedPassword,
                 Name = Employee.Name,
