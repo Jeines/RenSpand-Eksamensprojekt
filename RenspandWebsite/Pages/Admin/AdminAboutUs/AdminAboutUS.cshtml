@@ -1,0 +1,13 @@
+﻿@page
+@model RenspandWebsite.Pages.Admin.AdminAboutUs.AdminAboutUs
+
+<h2>Administrer 'Om os' side</h2>
+
+
+<form method="post">
+    <label>Titel</label>
+    <input asp-for="AboutUs.Titel" class="form-control" />
+    <label>Indhold</label>
+    <textarea asp-for="AboutUs.Content" class="form-control" rows="5"></textarea>
+    <button type="submit" class="btn btn-primary mt-3">Gem ændringer</button>
+</form>

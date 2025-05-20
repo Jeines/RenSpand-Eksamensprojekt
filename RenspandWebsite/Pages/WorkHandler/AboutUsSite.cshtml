@@ -1,0 +1,34 @@
+﻿@page
+@model RenspandWebsite.Pages.WorkHandler.AboutUsSite
+<link rel="icon" type="image/png" href="/Assets/RenSpandLogo.png" />
+@{
+    ViewData["Title"] = "Om Renspand";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">@Model.AboutContent.Titel</h1>
+        <p class="lead">Din lokale løsning til rene og velduftende skraldespande i Køge og omegn</p>
+    </div>
+
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <img src="/Assets/RenSpandLogo.png" width="500"  alt="Renspand billede">
+        </div>
+        <div class="col-md-6">
+            <h2>Lidt om os</h2>
+            <p>@Model.AboutContent.Content</p>
+            <ul class="list-unstyled mt-4">
+                <li><strong>Område:</strong> Køge og omegn</li>
+                <li><strong>Speciale:</strong> Rensning af affaldsbeholdere</li>
+                <li><strong>Telefon:</strong> +45 31626924</li>
+                <li><strong>Email:</strong> anders@renspand.dk</li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="tel:+4531626924" class="btn btn-primary btn-lg">Ring og book en tid</a>
+    </div>
+</div>
