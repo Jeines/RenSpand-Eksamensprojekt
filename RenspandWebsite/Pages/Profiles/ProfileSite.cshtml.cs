@@ -78,7 +78,7 @@ namespace RenspandWebsite.Pages.Profiles
         /// <summary>
         /// Opdaterer brugerens profiloplysninger.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>En IActionResult, der enten genindlæser siden eller viser valideringsfejl.</returns>
         public IActionResult OnPostSaveChanges()
         {
             // Fjerner validering for felter, der ikke er relevante for denne handling
@@ -88,7 +88,7 @@ namespace RenspandWebsite.Pages.Profiles
             ModelState.Remove(nameof(NewPassword));
             ModelState.Remove(nameof(ConfirmPassword));
 
-            // Validerer modelen
+            // Validerer modellen
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -103,7 +103,7 @@ namespace RenspandWebsite.Pages.Profiles
                 Name = Name
             };
 
-            //Henter userens ID fra claims
+            // Henter brugerens ID fra claims
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Opdaterer brugerens data i databasen
@@ -116,7 +116,7 @@ namespace RenspandWebsite.Pages.Profiles
         /// <summary>
         /// Opdaterer brugerens adgangskode.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>En IActionResult, der enten genindlæser siden eller viser valideringsfejl.</returns>
         public IActionResult OnPostChangePassword()
         {
             // Fjerner validering for felter, der ikke er relevante for denne handling
@@ -125,15 +125,14 @@ namespace RenspandWebsite.Pages.Profiles
             ModelState.Remove(nameof(Email));
             ModelState.Remove(nameof(Username));
 
-            // Validerer modelen
+            // Validerer modellen
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            //Henter userens ID fra claims
+            // Henter brugerens ID fra claims
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
 
             // Tjekker om den nuværende adgangskode er korrekt
             bool validPassword = _profileService.ValidatePassword(userId, CurrentPassword);
@@ -141,7 +140,7 @@ namespace RenspandWebsite.Pages.Profiles
             // Hvis den nuværende adgangskode ikke er korrekt, tilføj en fejl til ModelState
             if (!validPassword)
             {
-                ModelState.AddModelError(nameof(CurrentPassword), "Fokert adgangskode");
+                ModelState.AddModelError(nameof(CurrentPassword), "Forkert adgangskode");
                 return Page();
             }
 
@@ -151,13 +150,13 @@ namespace RenspandWebsite.Pages.Profiles
         }
 
         /// <summary>
-        /// Sletter brugerens profil og logger dem ud.
+        /// Sletter brugerens profil og logger brugeren ud.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>En Task<IActionResult>, der omdirigerer til forsiden efter sletning og logud.</returns>
         public async Task<IActionResult> OnPostDeleteProfileAsync()
         {
 
-            //Henter userens ID fra claims
+            // Henter brugerens ID fra claims
             var userId = Int32.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Fjerner profilen fra databasen

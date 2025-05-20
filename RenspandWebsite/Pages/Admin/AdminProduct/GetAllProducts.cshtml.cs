@@ -7,52 +7,53 @@ using RenspandWebsite.Service.WorkServices;
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
     /// <summary>
-    /// This class handles the retrieval of all products.
+    /// Denne klasse håndterer hentning af alle produkter.
     /// </summary>
     public class GetAllProductsModel : PageModel
     {
         /// <summary>
-        /// The product service used to manage product data.
+        /// Produktservicen der bruges til at håndtere produktdata.
         /// </summary>
         private WorkService _workService;
 
         /// <summary>
-        /// Initializes a new instance of the GetAllProductsModel class.
+        /// Initialiserer en ny instans af GetAllProductsModel-klassen.
         /// </summary>
-        /// <param name="productService"></param>
+        /// <param name="workService"></param>
         public GetAllProductsModel(WorkService workService)
         {
             _workService = workService;
         }
 
         /// <summary>
-        /// Represents the list of products.
+        /// Repræsenterer listen af produkter.
         /// </summary>
         public List<Work>? Products { get; private set; }
 
         /// <summary>
-        /// Handles the GET request for retrieving all products.
+        /// Håndterer GET-anmodningen for at hente alle produkter.
         /// </summary>
         [BindProperty]
         public int MinPrice { get; set; }
 
         /// <summary>
-        /// Represents the maximum price for filtering products.
+        /// Repræsenterer maksimumsprisen for filtrering af produkter.
         /// </summary>
         [BindProperty]
         public int MaxPrice { get; set; }
 
-        //TODO: Fix Sorting of products
+        //TODO: Fix sortering af produkter
 
         /// <summary>
-        /// Handles the GET request for retrieving all products.
+        /// Håndterer GET-anmodningen for at hente alle produkter.
         /// </summary>
         public void OnGet()
         {
             Products = _workService.GetWorks();
         }
+
         /// <summary>
-        /// Handles the POST request for filtering products by price.
+        /// Håndterer POST-anmodningen for at filtrere produkter efter pris.
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPostPriceFilter()

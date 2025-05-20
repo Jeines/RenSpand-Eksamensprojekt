@@ -6,52 +6,55 @@ using RenspandWebsite.Service;
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
-    /// <summary>
-    /// This class handles the deletion of an employee.
-    /// </summary>
+    /// <summary>  
+    /// Denne klasse håndterer sletning af en medarbejder.  
+    /// </summary>  
     public class DeleteEmployeeModel : PageModel
     {
-        /// <summary>
-        /// The employee service used to manage employee data.
-        /// </summary>
+        /// <summary>  
+        /// Medarbejder-servicen, der bruges til at administrere medarbejderdata.  
+        /// </summary>  
         private IEmployeeService _employeeService;
-        /// <summary>
-        /// Initializes a new instance of the DeleteEmployeeModel class.
-        /// </summary>
-        /// <param name="employeeService"></param>
+
+        /// <summary>  
+        /// Initialiserer en ny instans af DeleteEmployeeModel-klassen.  
+        /// </summary>  
+        /// <param name="employeeService">Servicen til medarbejderhåndtering.</param>  
         public DeleteEmployeeModel(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
-        /// <summary>
-        /// Represents the employee to be deleted.
-        /// </summary>
+
+        /// <summary>  
+        /// Repræsenterer den medarbejder, der skal slettes.  
+        /// </summary>  
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
-        /// <summary>
-        /// Handles the GET request for deleting an employee.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <summary>  
+        /// Håndterer GET-anmodningen for at slette en medarbejder.  
+        /// </summary>  
+        /// <param name="id">Id'et på medarbejderen, der skal slettes.</param>  
+        /// <returns>En IActionResult, der repræsenterer resultatet af operationen.</returns>  
         public IActionResult OnGet(int id)
         {
             Employee = _employeeService.GetEmployee(id);
             if (Employee == null)
-                return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
+                return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu  
 
             return Page();
         }
 
-        /// <summary>
-        /// Handles the POST request for deleting an employee.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary>  
+        /// Håndterer POST-anmodningen for at slette en medarbejder.  
+        /// </summary>  
+        /// <returns>En IActionResult, der repræsenterer resultatet af operationen.</returns>  
         public IActionResult OnPost()
         {
             RenSpand_Eksamensprojekt.Employee deletedEmployee = _employeeService.DeleteEmployee(Employee.Id);
             if (deletedEmployee == null)
-                return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
+                return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu  
+
             return RedirectToPage("GetAllEmployees");
         }
     }

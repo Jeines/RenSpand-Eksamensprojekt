@@ -54,13 +54,14 @@ namespace RenspandWebsite.Pages.OrderHandling
         [BindProperty]
         public decimal TotalPrice { get; set; }
 
+        /// <summary>
+        /// Sætter værdierne for DateStart og TrashCanEmptyDate til dags dato og henter listen af arbejder fra OrderService.
+        /// </summary>
         public void OnGet()
         {
-            // Sætter værdien af DateStart og TrashCanEmptyDate til dagens dato
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
-            // Henter arbejderne fra CreateOrderService(Databasen)
             WorkList = _orderService.Works;
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
@@ -69,11 +70,15 @@ namespace RenspandWebsite.Pages.OrderHandling
             }).ToList();
         }
 
+        /// <summary>
+        /// Håndterer POST-request fra formularen. Validerer model, gemmer OrderDraft i session og viderestiller til FinalizeOrder-siden.
+        /// </summary>
+        /// <returns>Redirect til FinalizeOrder eller returnerer siden ved fejl</returns>
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
-                // Hvis model state er invalid, repopulate WorkSelectList og returner til siden
+                // Hvis model state er ugyldig, genopbyg WorkSelectList og returner til siden
                 WorkList = _orderService.Works;
                 WorkSelectList = WorkList.Select(s => new SelectListItem
                 {
@@ -83,7 +88,7 @@ namespace RenspandWebsite.Pages.OrderHandling
                 return Page();
             }
 
-            // Laver en OrderDraft objekt med info fra formularen
+            // Opretter et OrderDraft-objekt med information fra formularen
             var draft = new OrderDraft
             {
                 Name = Name,
@@ -97,7 +102,7 @@ namespace RenspandWebsite.Pages.OrderHandling
                 TrashCanEmptyDate = TrashCanEmptyDate
             };
 
-            // Gemmer OrderDraft objektet i sessionen
+            // Gemmer OrderDraft-objektet i sessionen
             HttpContext.Session.SetString("OrderDraft", System.Text.Json.JsonSerializer.Serialize(draft));
 
             return RedirectToPage("/OrderHandling/FinalizeOrder");
