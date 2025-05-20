@@ -12,7 +12,7 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250519104306_RenSpand")]
+    [Migration("20250520122122_RenSpand")]
     partial class RenSpand
     {
         /// <inheritdoc />
@@ -105,6 +105,35 @@ namespace RenspandWebsite.Migrations
                     b.HasIndex("OrderId1");
 
                     b.ToTable("AddressItems");
+                });
+
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.FAQ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FAQs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Answer = "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet.",
+                            Question = "Hvordan kontakter jeg virksomhenden?"
+                        });
                 });
 
             modelBuilder.Entity("RenSpand_Eksamensprojekt.Order", b =>

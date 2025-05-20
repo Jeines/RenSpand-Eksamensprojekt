@@ -29,12 +29,17 @@ namespace RenspandWebsite.Service.AboutServices
             // Opdaterer felterne i den eksisterende AboutUs
             //_dbService.UpdateAboutUsAsync(aboutUs).Wait();
             var existingAboutUs = _dbService.GetObjectByIdAsync(id).Result;
-            if (existingAboutUs != null) {
+            if (existingAboutUs != null)
+            {
                 existingAboutUs.Titel = aboutUs.Titel;
                 existingAboutUs.Content = aboutUs.Content;
                 //existingAboutUs.ImageUrl = aboutUs.ImageUrl;
                 _dbService.UpdateObjectAsync(existingAboutUs).Wait();
             }
+            //else
+            //{
+            //    throw new Exception("AboutUs not found");
+            //}
         }
 
         //public void UpdateAbout(int id, string title, string content)
