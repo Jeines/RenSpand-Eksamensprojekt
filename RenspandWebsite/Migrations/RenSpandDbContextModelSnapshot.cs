@@ -280,6 +280,23 @@ namespace RenspandWebsite.Migrations
                     b.HasDiscriminator().HasValue("Profile");
                 });
 
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.Employee", b =>
+                {
+                    b.HasBaseType("RenSpand_Eksamensprojekt.Profile");
+
+                    b.PrimitiveCollection<string>("Qualifications")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("YearsOfExperians")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Employee");
+                });
+
             modelBuilder.Entity("RenSpand_Eksamensprojekt.AddressItem", b =>
                 {
                     b.HasOne("RenSpand_Eksamensprojekt.Address", "Address")
