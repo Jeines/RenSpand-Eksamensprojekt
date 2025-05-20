@@ -82,7 +82,10 @@ namespace RenspandWebsite.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true)
+                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    YearsOfExperians = table.Column<int>(type: "int", nullable: true),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Qualifications = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

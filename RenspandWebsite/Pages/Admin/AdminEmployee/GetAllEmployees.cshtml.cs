@@ -1,41 +1,36 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenspandWebsite.Service;
+using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Service.EmployeeServices;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// Denne klasse håndterer hentning af alle medarbejdere.
+    /// Denne klasse hÃ¥ndterer hentningen af alle medarbejdere.
     /// </summary>
     public class GetAllEmployeesModel : PageModel
     {
-        /// <summary>
-        /// Employee-servicen der bruges til at administrere medarbejderdata.
-        /// </summary>
-        private IEmployeeService _employeeService;
+        private readonly EmployeeService _employeeService;
 
-        /// <summary>
-        /// Initialiserer en ny instans af GetAllEmployeesModel-klassen.
-        /// </summary>
-        /// <param name="employeeService">Service til håndtering af medarbejdere.</param>
-        public GetAllEmployeesModel(IEmployeeService employeeService)
+        public GetAllEmployeesModel(EmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
 
         /// <summary>
-        /// Listen over alle medarbejdere.
+        /// ReprÃ¦senterer listen af medarbejdere.
         /// </summary>
         public List<RenSpand_Eksamensprojekt.Employee>? Employees { get; private set; }
 
         /// <summary>
-        /// Håndterer GET-anmodningen for at hente alle medarbejdere.
+        /// HÃ¥ndterer GET-anmodningen for at hente alle medarbejdere.
         /// </summary>
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Employees = _employeeService.GetEmployees();
+            Employees = await _employeeService.GetEmployeesAsync();
         }
     }
 }

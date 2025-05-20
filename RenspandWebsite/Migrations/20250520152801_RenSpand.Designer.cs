@@ -12,7 +12,7 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250520122122_RenSpand")]
+    [Migration("20250520152801_RenSpand")]
     partial class RenSpand
     {
         /// <inheritdoc />
@@ -281,6 +281,23 @@ namespace RenspandWebsite.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasDiscriminator().HasValue("Profile");
+                });
+
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.Employee", b =>
+                {
+                    b.HasBaseType("RenSpand_Eksamensprojekt.Profile");
+
+                    b.PrimitiveCollection<string>("Qualifications")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("YearsOfExperians")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("RenSpand_Eksamensprojekt.AddressItem", b =>

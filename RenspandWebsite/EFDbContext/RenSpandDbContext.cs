@@ -42,6 +42,9 @@ namespace RenspandWebsite.EFDbContext
             base.OnModelCreating(modelBuilder);
         }
 
+        /// <summary>
+        /// DbSet for the database context.
+        /// </summary>
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
@@ -51,6 +54,7 @@ namespace RenspandWebsite.EFDbContext
         public DbSet<AddressItem> AddressItems { get; set; }
         public DbSet<AboutUs> AboutUss { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
     }
 }

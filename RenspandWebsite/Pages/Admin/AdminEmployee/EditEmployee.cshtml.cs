@@ -1,70 +1,61 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenspandWebsite.Service;
+using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Service.EmployeeServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
-    [Authorize(Roles = "admin")]  
-
+    [Authorize(Roles = "admin")]
+    /// <summary>
+    /// Denne klasse hÃ¥ndterer redigering af en medarbejder.
+    /// </summary>
     public class EditEmployeeModel : PageModel
     {
-        /// <summary>  
-        /// Tjenesten til håndtering af medarbejderdata.  
-        /// </summary>  
-        private IEmployeeService _employeeService;
+        private readonly EmployeeService _employeeService;
 
-        /// <summary>  
-        /// Initialiserer en ny instans af EditEmployeeModel-klassen.  
-        /// </summary>  
-        /// <param name="employeeService">Tjenesten til medarbejderhåndtering.</param>  
-        public EditEmployeeModel(IEmployeeService employeeService)
+        public EditEmployeeModel(EmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
 
-        /// <summary>  
-        /// Repræsenterer den medarbejder, der skal redigeres.  
-        /// </summary>  
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
-        /// <summary>  
-        /// Repræsenterer medarbejderens kvalifikationer som en kommasepareret streng.  
-        /// </summary>  
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
-        /// <summary>  
-        /// Den oprindelige adgangskode for medarbejderen.  
-        /// </summary>  
         private string _originalPassword;
 
-        /// <summary>  
-        /// Håndterer GET-anmodningen for redigering af en medarbejder.  
-        /// </summary>  
-        /// <param name="id">Id'et på den medarbejder, der skal redigeres.</param>  
-        /// <returns>En IActionResult, der repræsenterer resultatet af anmodningen.</returns>  
-        public IActionResult OnGet(int id)
+        /// <summary>
+        /// HÃ¥ndterer GET-anmodningen til redigering af medarbejder.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Employee = _employeeService.GetEmployee(id);
+            Employee = await _employeeService.GetEmployeeAsync(id);
             if (Employee == null)
-                return RedirectToPage("/NotFound"); // NotFound-siden er ikke defineret endnu.  
+                return RedirectToPage("/NotFound");
 
-            _originalPassword = Employee.Password;
-            EmployeeQualificationsString = string.Join(", ", Employee.Qualifications);
+            //_originalPassword = Employee.Password;
+            EmployeeQualificationsString = string.Join(", ", Employee.Qualifications ?? new List<string>());
             return Page();
         }
 
-        /// <summary>  
-        /// Håndterer POST-anmodningen for redigering af en medarbejder.  
-        /// </summary>  
-        /// <returns>En IActionResult, der repræsenterer resultatet af anmodningen.</returns>  
-        public IActionResult OnPost()
+        /// <summary>
+        /// HÃ¥ndterer POST-anmodningen til opdatering af medarbejder.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                // Log fejl til konsollen  
+                // Log fejlene
                 foreach (var modelState in ModelState)
                 {
                     foreach (var error in modelState.Value.Errors)
@@ -75,35 +66,42 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 return Page();
             }
 
-            // Håndter kvalifikationer  
+            // Hent eksisterende medarbejder fra DB for at bevare originalt password
+            var existingEmployee = await _employeeService.GetEmployeeAsync(Employee.Id);
+            if (existingEmployee == null)
+                return RedirectToPage("/NotFound");
+
+            // Opdater medarbejderens oplysninger
+            existingEmployee.Username = Employee.Username;
+            existingEmployee.Name = Employee.Name;
+            existingEmployee.Email = Employee.Email;
+            existingEmployee.PhoneNumber = Employee.PhoneNumber;
+            existingEmployee.Username = Employee.Username;
+            existingEmployee.YearsOfExperians = Employee.YearsOfExperians;
+            existingEmployee.Salary = Employee.Salary;
+
+            // HÃ¥ndtering af kvalifikationer
             if (!string.IsNullOrWhiteSpace(EmployeeQualificationsString))
             {
-                // Split strengen ved komma og trim hver kvalifikation  
-                string[] split = EmployeeQualificationsString.Split(',');
-                List<string> trimmedList = new List<string>();
-
-                foreach (string q in split)
-                {
-                    string trimmed = q.Trim();
-                    if (!string.IsNullOrEmpty(trimmed))
-                    {
-                        trimmedList.Add(trimmed);
-                    }
-                }
-                Employee.Qualifications = trimmedList;
+                existingEmployee.Qualifications = EmployeeQualificationsString
+                    .Split(',')
+                    .Select(q => q.Trim())
+                    .Where(q => !string.IsNullOrEmpty(q))
+                    .ToList();
             }
             else
             {
-                Employee.Qualifications = new List<string>();
+                existingEmployee.Qualifications = new List<string>();
             }
 
-            // Behold den oprindelige adgangskode, hvis den ikke er ændret  
-            var existingEmployee = _employeeService.GetEmployee(Employee.Id);
+            // Bevar originalt password hvis det ikke er Ã¦ndret via UI
             Employee.Password = existingEmployee.Password;
 
-            // Opdater medarbejderen i databasen/JSON  
-            _employeeService.UpdateEmployee(Employee);
+
+            await _employeeService.UpdateEmployeeAsync(existingEmployee);
             return RedirectToPage("GetAllEmployees");
         }
     }
 }
+
+
