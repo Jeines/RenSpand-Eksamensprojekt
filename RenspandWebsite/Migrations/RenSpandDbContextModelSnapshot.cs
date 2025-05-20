@@ -22,6 +22,35 @@ namespace RenspandWebsite.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.AboutUs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AboutUss");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "We are a company that cleans trash cans in the Køge area.",
+                            Titel = "About Us"
+                        });
+                });
+
             modelBuilder.Entity("RenSpand_Eksamensprojekt.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -89,11 +118,19 @@ namespace RenspandWebsite.Migrations
                     b.Property<int>("BuyerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CustomerNote")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime>("DateDone")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeNote")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");

@@ -12,6 +12,20 @@ namespace RenspandWebsite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AboutUss",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AboutUss", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
@@ -77,7 +91,9 @@ namespace RenspandWebsite.Migrations
                     DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateDone = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AcceptStatus = table.Column<int>(type: "int", nullable: false),
-                    TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    CustomerNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,6 +165,11 @@ namespace RenspandWebsite.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AboutUss",
+                columns: new[] { "Id", "Content", "Titel" },
+                values: new object[] { 1, "We are a company that cleans trash cans in the Køge area.", "About Us" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AddressItems_AddressId",
                 table: "AddressItems",
@@ -188,6 +209,9 @@ namespace RenspandWebsite.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AboutUss");
+
             migrationBuilder.DropTable(
                 name: "AddressItems");
 

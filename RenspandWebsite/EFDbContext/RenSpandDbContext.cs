@@ -21,6 +21,17 @@ namespace RenspandWebsite.EFDbContext
                 .WithMany()
                 .HasForeignKey(ai => ai.OrderId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AboutUs>().HasData(
+                new AboutUs
+                {
+                    Id = 1,
+                    Titel = "About Us",
+                    Content = "We are a company that cleans trash cans in the Køge area.",
+                    //ImageUrl = "/Assets/RenSpandLogo.png"
+                }
+            );
+
         }
 
         public DbSet<Order> Orders { get; set; }
@@ -30,5 +41,10 @@ namespace RenspandWebsite.EFDbContext
         public DbSet<Work> Works { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<AddressItem> AddressItems { get; set; }
+        public DbSet<AboutUs> AboutUss { get; set; }
+
+
+
+
     }
 }

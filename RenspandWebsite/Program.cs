@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.AboutServices;
+using RenspandWebsite.Service.AboutUsService;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
 using RenspandWebsite.Service.WorkServices;
@@ -16,6 +18,10 @@ builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<JsonFileService<Employee>>();
 builder.Services.AddTransient<DbService<Profile>>();
+
+builder.Services.AddSingleton<AboutUsService, AboutUsService>();
+builder.Services.AddTransient<DbService<AboutUs>, DbService<AboutUs>>(); // Assuming you have a DbService for AboutUs
+builder.Services.AddTransient<AboutUsDbServices, AboutUsDbServices>();
 
 builder.Services.AddTransient<WorkService, WorkService>();
 builder.Services.AddTransient<WorkDbService, WorkDbService>();
