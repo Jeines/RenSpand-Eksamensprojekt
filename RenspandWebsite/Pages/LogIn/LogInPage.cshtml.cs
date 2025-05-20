@@ -28,10 +28,14 @@ namespace RenspandWebsite.Pages.LogIn
         }
 
         public void OnGet() { }
-
+        /// <summary>  
+        /// Håndterer POST-anmodningen for login-siden.  
+        /// Validerer brugerens legitimationsoplysninger og logger brugeren ind, hvis de er korrekte.  
+        /// </summary>  
+        /// <returns>En IActionResult, der enten returnerer login-siden med en fejlmeddelelse eller omdirigerer til en side baseret på brugerens rolle.</returns>  
         public async Task<IActionResult> OnPost()
         {
-            // finder profilen ud fra username og tjekker om den eksisterer
+            // Finder profilen ud fra brugernavnet og tjekker, om den eksisterer  
             var profile = _profileService.Profiles.FirstOrDefault(p => p.Username == Username);
             if (profile == null)
             {

@@ -28,16 +28,28 @@ namespace RenspandWebsite.Pages.Profiles
 
         private PasswordHasher<string> passwordHasher;
 
+        /// <summary>
+        /// Konstruktør for CreateModel. Initialiserer ProfileService og PasswordHasher.
+        /// </summary>
+        /// <param name="userService">Service til håndtering af profiler</param>
         public CreateModel(ProfileService userService)
         {
             _profileService = userService;
             passwordHasher = new PasswordHasher<string>();
         }
 
+        /// <summary>
+        /// Håndterer GET-anmodninger til siden.
+        /// </summary>
         public void OnGet()
         {
         }
 
+        /// <summary>
+        /// Håndterer POST-anmodninger for at oprette en ny profil.
+        /// Validerer input og opretter profil hvis alt er gyldigt.
+        /// </summary>
+        /// <returns>Redirect til profilside eller returnerer siden med fejl</returns>
         public IActionResult OnPost()
         {
             // Tjekker om brugeren allerede eksisterer
@@ -54,7 +66,7 @@ namespace RenspandWebsite.Pages.Profiles
                 return Page();
             }
 
-            // Tjekker om passworder længere end 8 karakterer
+            // Tjekker om password er længere end 8 karakterer
             if (Password.Length < 8)
             {
                 ModelState.AddModelError("Password", "Password must be at least 8 characters long.");
@@ -63,7 +75,7 @@ namespace RenspandWebsite.Pages.Profiles
 
             // Tjekker om Email er i valid format
             Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
-            if(!validateEmailRegex.IsMatch(Email))
+            if (!validateEmailRegex.IsMatch(Email))
             {
                 ModelState.AddModelError("Email", "Invalid email format.");
                 return Page();
@@ -83,7 +95,7 @@ namespace RenspandWebsite.Pages.Profiles
             };
 
             _profileService.AddProfile(newProfile);
-            
+
             return RedirectToPage("/Profiles/ProfileRedirection");
         }
     }

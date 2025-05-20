@@ -7,31 +7,31 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// This class handles the retrieval of all employees.
+    /// Denne klasse håndterer hentning af alle medarbejdere.
     /// </summary>
     public class GetAllEmployeesModel : PageModel
     {
         /// <summary>
-        /// The employee service used to manage employee data.
+        /// Employee-servicen der bruges til at administrere medarbejderdata.
         /// </summary>
         private IEmployeeService _employeeService;
 
         /// <summary>
-        /// Initializes a new instance of the GetAllEmployeesModel class.
+        /// Initialiserer en ny instans af GetAllEmployeesModel-klassen.
         /// </summary>
-        /// <param name="employeeService"></param>
+        /// <param name="employeeService">Service til håndtering af medarbejdere.</param>
         public GetAllEmployeesModel(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
         }
 
         /// <summary>
-        /// Represents the list of employees.
+        /// Listen over alle medarbejdere.
         /// </summary>
         public List<RenSpand_Eksamensprojekt.Employee>? Employees { get; private set; }
 
         /// <summary>
-        /// Handles the GET request for retrieving all employees.
+        /// Håndterer GET-anmodningen for at hente alle medarbejdere.
         /// </summary>
         public void OnGet()
         {

@@ -1,5 +1,8 @@
 ﻿namespace RenSpand_Eksamensprojekt
 {
+    /// <summary>
+    /// Enum ræpresentere status for dens stadige AcceptStatusEnum som kan være "pending", "accepted" eller "rejected".
+    /// </summary>
     public enum AcceptStatusEnum
     {
         Pending = 0,

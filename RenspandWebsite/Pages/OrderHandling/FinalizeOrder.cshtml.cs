@@ -40,6 +40,9 @@ namespace RenspandWebsite.Pages.OrderHandling
         private DateTime DateDone { get; set; }
         private decimal TotalPrice { get; set; }
 
+        /// <summary>
+        /// Håndterer GET-anmodningen for at indlæse siden.
+        /// </summary>
         public void OnGet()
         {
             // Henter data fra sessionen
@@ -77,7 +80,11 @@ namespace RenspandWebsite.Pages.OrderHandling
                 }
             }
         }
-
+        /// <summary>
+        /// Håndterer POST-anmodningen for at afslutte ordren.
+        /// Henter data fra sessionen, deserialiserer OrderDraft-objektet, og opretter en ny ordre med oplysninger fra formularen.
+        /// </summary>
+        /// <returns>Redirects til bekræftelsessiden for ordren.</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             // Henter data fra sessionen

@@ -5,14 +5,15 @@ namespace RenspandWebsite.EFDbContext
 {
     public class RenSpandDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+    
+         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RenSpandDB; Integrated Security=True; Connect Timeout=30; Encrypt=False");
         }
 
-        /// <summary>
-        /// using Fluent API to configure the relationship between AddressItem and Order
-        /// </summary>
+        /// <summary>  
+        /// Brug af Fluent API til at konfigurere relationen mellem AddressItem og Order  
+        /// </summary>  
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,7 +23,7 @@ namespace RenspandWebsite.EFDbContext
                 .HasForeignKey(ai => ai.OrderId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
+            
             modelBuilder.Entity<AboutUs>().HasData(
                 new AboutUs
                 {
@@ -34,7 +35,7 @@ namespace RenspandWebsite.EFDbContext
             );
 
 
-            // Seed initialisere FAQ data  
+            // Seed initialisere FAQ data så når databasen bliver oprette vil der altid eksistere en enkelt FAQ som forklare om hvordan du kan kontakte firmaet.  
             modelBuilder.Entity<FAQ>().HasData(
                 new FAQ { Id = -1, Question = "Hvordan kontakter jeg virksomhenden?", Answer = "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet." }
             );

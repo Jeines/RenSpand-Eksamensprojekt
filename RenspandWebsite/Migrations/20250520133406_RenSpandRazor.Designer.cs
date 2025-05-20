@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RenspandWebsite.EFDbContext;
 
@@ -11,9 +12,11 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    partial class RenSpandDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250520133406_RenSpandRazor")]
+    partial class RenSpandRazor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
