@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RenspandWebsite.EFDbContext;
 
@@ -11,9 +12,11 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    partial class RenSpandDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250519104306_RenSpand")]
+    partial class RenSpand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,35 +105,6 @@ namespace RenspandWebsite.Migrations
                     b.HasIndex("OrderId1");
 
                     b.ToTable("AddressItems");
-                });
-
-            modelBuilder.Entity("RenSpand_Eksamensprojekt.FAQ", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Question")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FAQs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            Answer = "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet.",
-                            Question = "Hvordan kontakter jeg virksomhenden?"
-                        });
                 });
 
             modelBuilder.Entity("RenSpand_Eksamensprojekt.Order", b =>
