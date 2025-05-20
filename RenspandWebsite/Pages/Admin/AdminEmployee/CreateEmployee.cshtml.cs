@@ -23,11 +23,15 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             _employeeService = employeeService;
         }
 
+        /// <summary>
+        /// Repræsenterer medarbejderen der skal oprettes.
+        /// </summary>
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
-        public Profile Profile { get; set; }
-
+        /// <summary>
+        /// Repræsenterer medarbejderens kvalifikationer som en kommasepareret streng.
+        /// </summary>
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
@@ -36,10 +40,17 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             return Page();
         }
 
+
+        /// <summary>
+        /// Håndterer POST-anmodningen til oprettelse af medarbejder.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
+            // Validering af model
             if (!ModelState.IsValid)
             {
+                // Log fejlene
                 foreach (var modelState in ModelState)
                 {
                     foreach (var error in modelState.Value.Errors)
@@ -91,10 +102,9 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 Qualifications = kvalifikationer
             };
 
+            // Tilføj medarbejder til databasen
             await _employeeService.AddEmployeeAsync(newEmployee);
-
-            // TODO: Tilføj oprettelse af Profile hvis nødvendigt via en separat ProfileService
-
+            // Redirect til siden med alle medarbejdere
             return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }
     }

@@ -23,13 +23,18 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             _employeeService = employeeService;
         }
 
+        /// <summary>
+        /// Repræsenterer medarbejderen der skal redigeres.
+        /// </summary>
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
+        /// <summary>
+        /// Repræsenterer medarbejderens kvalifikationer som en kommasepareret streng.
+        /// </summary>
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
-        private string _originalPassword;
 
         /// <summary>
         /// Håndterer GET-anmodningen til redigering af medarbejder.
@@ -42,7 +47,6 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             if (Employee == null)
                 return RedirectToPage("/NotFound");
 
-            //_originalPassword = Employee.Password;
             EmployeeQualificationsString = string.Join(", ", Employee.Qualifications ?? new List<string>());
             return Page();
         }

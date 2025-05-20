@@ -7,6 +7,9 @@ namespace RenspandWebsite.Service.EmployeeServices
 {
     public class EmployeeDbService : DbService<Employee>
     {
+        /// <summary>
+        /// Denne klasse håndterer databaseoperationer for medarbejdere.
+        /// </summary>
         private RenSpandDbContext _context = new RenSpandDbContext();
         public EmployeeDbService() { }
         public EmployeeDbService(RenSpandDbContext context)
@@ -21,7 +24,7 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task<Employee?> GetEmployeeByIdAsync(int id)
         {
-            return await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            return await _context.Employees.FindAsync(id);
         }
 
         /// <summary>
@@ -51,7 +54,6 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task UpdateEmployeeAsync(Employee emp)
         {
-            //_context.Employees.Update(emp);
             await _context.SaveChangesAsync();
         }
 
@@ -62,12 +64,18 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task DeleteEmployeeAsync(int id)
         {
+            // Find medarbejderen i databasen
             var employee = await _context.Employees.FindAsync(id);
+            // Hvis medarbejderen findes, slet den
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 await _context.SaveChangesAsync();
             }
+            //else
+            //{
+            //    throw new Exception("Employee not found");
+            //}
         }
 
 

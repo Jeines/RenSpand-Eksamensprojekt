@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
+
     [Authorize(Roles = "admin")]
     /// <summary>
     /// Denne klasse håndterer sletning af en medarbejder.
@@ -37,10 +38,13 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// <returns></returns>
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            // Hent medarbejderen fra databasen
             Employee = await _employeeService.GetEmployeeAsync(id);
+            // Hvis medarbejderen ikke findes, returner til NotFound siden
             if (Employee == null)
                 return RedirectToPage("/NotFound"); // Husk at oprette denne side
 
+            // Returner til siden med medarbejderoplysninger
             return Page();
         }
 
@@ -50,10 +54,27 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
+            // Validering af model
+            if (!ModelState.IsValid)
+            {
+                // Log fejlene
+                foreach (var modelState in ModelState)
+                {
+                    foreach (var error in modelState.Value.Errors)
+                    {
+                        Console.WriteLine($"Fejl i felt '{modelState.Key}': {error.ErrorMessage}");
+                    }
+                }
+                return Page();
+            }
+            // Hent medarbejderen fra databasen
             var employee = await _employeeService.GetEmployeeAsync(Employee.Id);
+
+            // Hvis medarbejderen ikke findes, returner til NotFound siden
             if (employee == null)
                 return RedirectToPage("/NotFound"); // Husk at oprette denne side
 
+            // Slet medarbejderen
             await _employeeService.DeleteEmployeeAsync(Employee.Id);
             return RedirectToPage("GetAllEmployees");
         }
