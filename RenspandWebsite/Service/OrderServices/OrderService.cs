@@ -104,6 +104,8 @@ namespace RenspandWebsite.Service.OrderServices
                 datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount), customerNote);
         }
 
+
+
         /// <summary>
         /// Udregner den samlede pris for en ordre baseret på valgte arbejder og mængder.
         /// </summary>
