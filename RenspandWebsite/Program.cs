@@ -4,6 +4,7 @@ using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.AboutServices;
 using RenspandWebsite.Service.AboutUsService;
+using RenspandWebsite.Service.FaqServices;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
 using RenspandWebsite.Service.WorkServices;
@@ -22,6 +23,10 @@ builder.Services.AddTransient<DbService<Profile>>();
 builder.Services.AddSingleton<AboutUsService, AboutUsService>();
 builder.Services.AddTransient<DbService<AboutUs>, DbService<AboutUs>>(); // Assuming you have a DbService for AboutUs
 builder.Services.AddTransient<AboutUsDbServices, AboutUsDbServices>();
+
+builder.Services.AddTransient<DbService<FAQ>, DbService<FAQ>>();
+builder.Services.AddSingleton<FaqService, FaqService>();
+builder.Services.AddTransient<FaqDbService, FaqDbService>();
 
 builder.Services.AddTransient<WorkService, WorkService>();
 builder.Services.AddTransient<WorkDbService, WorkDbService>();

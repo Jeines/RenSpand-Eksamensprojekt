@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+@model RenspandWebsite.Pages.Admin.AdminManageFAQ.EditFaqModel
+@{
+    ViewData["Title"] = "Rediger FAQ";
+}
+
+<h2>Rediger FAQ</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label>Spørgsmål</label>
+        <input asp-for="Question" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Svar</label>
+        <textarea asp-for="Answer" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Gem ændringer</button>
+    <a asp-page="AdminFaq" class="btn btn-secondary">Tilbage</a>
+</form>

@@ -42,7 +42,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-page="/WorkHandler/AboutUsSite">Om os</a>
                                 </li>
                             }
-
+                  
                             if (User.Identity != null && User.Identity.IsAuthenticated)
                             {
                                 if (User.IsInRole("admin"))
@@ -55,10 +55,14 @@
                                 if (User.IsInRole("admin") || User.IsInRole("employee"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">View All Orders</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/employee/OrderServicePage">Se alle bestillinger</a>
                                     </li>
                                 }
                             }
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/CompanyInformationSite">Om os</a>
+                            </li>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/FaqSite">FAQ</a>
                         }
                     </ul>
                 </div>

@@ -1,0 +1,67 @@
+﻿body {
+    <style> .accordion
+
+{
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.accordion-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.accordion-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 1rem;
+    background-color: #fff;
+}
+
+    .accordion-answer p {
+        margin: 1rem 0;
+    }
+
+.accordion-item.open .accordion-answer {
+    max-height: 500px; /* nok til langt svar */
+    padding-bottom: 1rem;
+}
+
+.accordion-item.open .icon {
+    transform: rotate(45deg); /* + bliver til X */
+}
+
+.icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+</style >
+
+<script >
+function toggleAccordion(button) {
+    const item = button.closest('.accordion-item');
+    item .classList.toggle('open');
+}
+</script >
+
+}
