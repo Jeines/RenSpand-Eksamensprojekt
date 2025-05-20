@@ -7,32 +7,32 @@ using RenspandWebsite.Service.WorkServices;
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
     /// <summary>
-    /// This class handles the creation of a new product.
+    /// Denne klasse håndterer oprettelsen af et nyt produkt.
     /// </summary>
     public class CreateProductModel : PageModel
     {
         /// <summary>
-        /// The product service used to manage product data.
+        /// Produktservicen der bruges til at håndtere produktdata.
         /// </summary>
         private WorkService _workService;
 
         /// <summary>
-        /// Initializes a new instance of the CreateProductModel class.
+        /// Initialiserer en ny instans af CreateProductModel-klassen.
         /// </summary>
-        /// <param name="productService"></param>
+        /// <param name="workService"></param>
         public CreateProductModel(WorkService workService)
         {
             _workService = workService;
         }
 
         /// <summary>
-        /// Represents the product to be created.
+        /// Repræsenterer det produkt, der skal oprettes.
         /// </summary>
         [BindProperty]
         public Work Product { get; set; }
 
         /// <summary>
-        /// Handles the GET request for creating a new product.
+        /// Håndterer GET-anmodningen for at oprette et nyt produkt.
         /// </summary>
         /// <returns></returns>
         public IActionResult OnGet()
@@ -41,7 +41,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         }
 
         /// <summary>
-        /// Handles the POST request for creating a new product.
+        /// Håndterer POST-anmodningen for at oprette et nyt produkt.
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPost()

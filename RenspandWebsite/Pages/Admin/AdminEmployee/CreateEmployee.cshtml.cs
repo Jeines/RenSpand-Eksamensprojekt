@@ -9,65 +9,65 @@ using System.Text.RegularExpressions;
 namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
-    /// <summary>
-    /// This class handles the creation of a new employee.
-    /// </summary>
+    /// <summary>  
+    /// Denne klasse håndterer oprettelsen af en ny medarbejder.  
+    /// </summary>  
     public class CreateEmployeeModel : PageModel
     {
-        /// <summary>
-        /// The employee service used to manage employee data.
-        /// </summary>
+        /// <summary>  
+        /// Tjenesten til håndtering af medarbejderdata.  
+        /// </summary>  
         private IEmployeeService _EmployeeService;
 
-        //TODO : ADD Profile
-        //private ProfileService _profileService;
-        // ProfileService profileService
+        //TODO : Tilføj profil  
+        //private ProfileService _profileService;  
+        // ProfileService profileService  
 
-        /// <summary>
-        /// Initializes a new instance of the CreateEmployeeModel class.
-        /// </summary>
-        /// <param name="employeeService"></param>
+        /// <summary>  
+        /// Initialiserer en ny instans af CreateEmployeeModel-klassen.  
+        /// </summary>  
+        /// <param name="employeeService">Tjenesten til medarbejderhåndtering.</param>  
         public CreateEmployeeModel(IEmployeeService employeeService)
         {
-            
             _EmployeeService = employeeService;
-            //_profileService = profileService;
+            //_profileService = profileService;  
         }
 
-        /// <summary>
-        /// Represents the employee to be created.
-        /// </summary>
+        /// <summary>  
+        /// Repræsenterer den medarbejder, der skal oprettes.  
+        /// </summary>  
         [BindProperty]
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
-        /// <summary>
-        /// Represents the profile of the employee.
-        /// </summary>
+        /// <summary>  
+        /// Repræsenterer medarbejderens profil.  
+        /// </summary>  
         public Profile Profile { get; set; }
 
-        /// <summary>
-        /// A string representation of the employee's qualifications.
-        /// </summary>
+        /// <summary>  
+        /// En strengrepræsentation af medarbejderens kvalifikationer.  
+        /// </summary>  
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
-        /// <summary>
-        /// Handles the GET request for creating a new employee.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary>  
+        /// Håndterer GET-anmodningen for oprettelse af en ny medarbejder.  
+        /// </summary>  
+        /// <returns>Returnerer siden.</returns>  
         public IActionResult OnGet()
         {
             return Page();
         }
-        /// <summary>
-        /// Handles the POST request for creating a new employee.
-        /// </summary>
-        /// <returns></returns>
+
+        /// <summary>  
+        /// Håndterer POST-anmodningen for oprettelse af en ny medarbejder.  
+        /// </summary>  
+        /// <returns>Returnerer en side eller omdirigerer til en anden side.</returns>  
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
-                // Hvis der er fejl i modelstate, så udskriv fejlene til konsollen
+                // Hvis der er fejl i ModelState, udskriv fejlene til konsollen  
                 foreach (var modelState in ModelState)
                 {
                     foreach (var error in modelState.Value.Errors)
@@ -75,39 +75,42 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                         Console.WriteLine($"Fejl i felt '{modelState.Key}': {error.ErrorMessage}");
                     }
                 }
-                // Returner til den samme side for at vise fejlene
+                // Returner til den samme side for at vise fejlene  
                 return Page();
             }
-            // Check Employee er null
+
+            // Tjek om Employee er null  
             if (Employee.Qualifications == null)
             {
-                // laver en list if den er null
+                // Opret en liste, hvis den er null  
                 Employee.Qualifications = new List<string>();
             }
-            // Opretter en liste til kvalifikationer
+
+            // Opret en liste til kvalifikationer  
             List<string> kval = new List<string>();
 
-            // hvis EmployeeQualificationsString ikker er null eller tom
+            // Hvis EmployeeQualificationsString ikke er null eller tom  
             if (!string.IsNullOrWhiteSpace(EmployeeQualificationsString))
             {
-                //Opdel strengen med komma og fjern mellemrum fra hver kvalifikation
+                // Opdel strengen med komma og fjern mellemrum fra hver kvalifikation  
                 var split = EmployeeQualificationsString.Split(',');
                 foreach (var k in split)
                     kval.Add(k.Trim());
             }
-            // hash password
+
+            // Hash password  
             var passwordHasher = new PasswordHasher<RenSpand_Eksamensprojekt.Employee>();
             string hashedPassword = passwordHasher.HashPassword(null, Employee.Password);
 
-            // Tjekker om Email er i valid format
+            // Tjek om email er i gyldigt format  
             Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
             if (!validateEmailRegex.IsMatch(Employee.Email))
             {
-                ModelState.AddModelError("Email", "Invalid email format.");
+                ModelState.AddModelError("Email", "Ugyldigt email-format.");
                 return Page();
             }
 
-            // Opretter et nyt Employee-objekt med de indtastede værdier
+            // Opret en ny Employee-instans med de indtastede værdier  
             Employee = new RenSpand_Eksamensprojekt.Employee
             {
                 Id = Employee.Id,
@@ -122,7 +125,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 Qualifications = kval
             };
 
-            // Opretter et nyt Profile-objekt med de indtastede værdier
+            // Opret en ny Profile-instans med de indtastede værdier  
             Profile = new Profile
             {
                 Id = Employee.Id,
@@ -134,14 +137,14 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 Role = RoleEnum.Employee
             };
 
-            // Tilføjer den nye medarbejder til listen og gemmer i JSON
+            // Tilføj den nye medarbejder til listen og gem i JSON  
             _EmployeeService.AddEmployee(Employee);
-            // Tilføjer den nye profil til listen og gemmer i JSON
-            // TODO: ADD Profile
-            //_profileService.AddProfile(Profile);
-            // Sender brugeren til oversigten over alle medarbejdere
+            // Tilføj den nye profil til listen og gem i JSON  
+            // TODO: Tilføj profil  
+            //_profileService.AddProfile(Profile);  
+
+            // Omdiriger brugeren til oversigten over alle medarbejdere  
             return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }
-
     }
 }

@@ -12,6 +12,20 @@ namespace RenspandWebsite.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AboutUss",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Titel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AboutUss", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Addresses",
                 columns: table => new
                 {
@@ -166,6 +180,11 @@ namespace RenspandWebsite.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AboutUss",
+                columns: new[] { "Id", "Content", "Titel" },
+                values: new object[] { 1, "We are a company that cleans trash cans in the Køge area.", "About Us" });
+
+            migrationBuilder.InsertData(
                 table: "FAQs",
                 columns: new[] { "Id", "Answer", "Question" },
                 values: new object[] { -1, "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet.", "Hvordan kontakter jeg virksomhenden?" });
@@ -209,6 +228,9 @@ namespace RenspandWebsite.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AboutUss");
+
             migrationBuilder.DropTable(
                 name: "AddressItems");
 

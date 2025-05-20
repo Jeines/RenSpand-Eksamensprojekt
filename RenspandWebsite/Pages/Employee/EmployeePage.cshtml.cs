@@ -12,7 +12,7 @@ namespace RenspandWebsite.Pages.Employee
         private readonly OrderService _orderService;
 
         /// <summary>
-        /// loads all orders when page is loaded with a Get request
+        /// Indlæser alle ordrer, når siden indlæses med en GET-anmodning.
         /// </summary>
         public void OnGet()
         {
@@ -21,7 +21,6 @@ namespace RenspandWebsite.Pages.Employee
             {
                 Console.WriteLine("Order ID: " + order.Id);
                 Console.WriteLine("Order Status: " + order.AcceptStatus);
-
             }
         }
 
@@ -29,15 +28,12 @@ namespace RenspandWebsite.Pages.Employee
         {
             _orderService = orderServices;
         }
-
-
         //TODO: FIX AcceptOrder and RejectOrder and update in the database
-        ///// <summary>
-        ///// Accepts order with the given orderId and reloads page
-        ///// </summary>
-        ///// <param name="orderId"></param>
-        ///// <returns></returns
-
+        /// <summary>
+        /// Accepterer en ordre med det givne orderId og genindlæser siden.
+        /// </summary>
+        /// <param name="orderId">Id på ordren der skal accepteres</param>
+        /// <returns>Redirect til siden</returns>
         public IActionResult OnPostAcceptOrder(int orderId)
         {
             Console.WriteLine("Acceptorder - ID: " + orderId);
@@ -46,10 +42,10 @@ namespace RenspandWebsite.Pages.Employee
         }
 
         /// <summary>
-        /// Rejects order with the given orderId and reloads page
+        /// Afviser en ordre med det givne orderId og genindlæser siden.
         /// </summary>
-        /// <param name="orderId"></param>
-        /// <returns></returns>
+        /// <param name="orderId">Id på ordren der skal afvises</param>
+        /// <returns>Redirect til siden</returns>
         public IActionResult OnPostRejectOrder(int orderId)
         {
             Console.WriteLine("RejectOrder");
@@ -57,13 +53,13 @@ namespace RenspandWebsite.Pages.Employee
             return RedirectToPage();
         }
 
-        //TODO: FIX SaveNote and update in the database
+        //TODO: FIX SaveNote og opdater i databasen
         /// <summary>
-        /// Saves a note for the order with the given orderId and reloads page
+        /// Gemmer en note for ordren med det givne orderId og genindlæser siden.
         /// </summary>
-        /// <param name="orderId"></param>
-        /// <param name="note"></param>
-        /// <returns></returns>
+        /// <param name="orderId">Id på ordren</param>
+        /// <param name="note">Noten der skal gemmes</param>
+        /// <returns>Redirect til siden</returns>
         //public IActionResult OnPostSaveNote(int orderId, string note)
         //{
         //    Console.WriteLine("SaveNote");

@@ -12,15 +12,15 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250519104306_RenSpand")]
-    partial class RenSpand
+    [Migration("20250520133406_RenSpandRazor")]
+    partial class RenSpandRazor
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -105,6 +105,35 @@ namespace RenspandWebsite.Migrations
                     b.HasIndex("OrderId1");
 
                     b.ToTable("AddressItems");
+                });
+
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.FAQ", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FAQs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Answer = "Du kan kontakte os via vores hjemmeside hvor Email og Telefonnummer er angivet.",
+                            Question = "Hvordan kontakter jeg virksomhenden?"
+                        });
                 });
 
             modelBuilder.Entity("RenSpand_Eksamensprojekt.Order", b =>
