@@ -7,50 +7,48 @@ using RenspandWebsite.Service.WorkServices;
 namespace RenspandWebsite.Pages.Admin.AdminProduct
 {
     /// <summary>
-    /// This class handles the editing of a product.
+    /// Denne klasse håndterer redigering af et produkt.
     /// </summary>
     public class EditProductModel : PageModel
     {
         /// <summary>
-        /// The product service used to manage product data.
+        /// Service til håndtering af produktdata.
         /// </summary>
         private WorkService _workService;
 
-
         /// <summary>
-        /// Initializes a new instance of the EditProductModel class.
+        /// Initialiserer en ny instans af EditProductModel-klassen.
         /// </summary>
-        /// <param name="productService"></param>
+        /// <param name="workService">Service til produkter</param>
         public EditProductModel(WorkService workService)
         {
             _workService = workService;
         }
 
         /// <summary>
-        /// Represents the product to be edited.
+        /// Repræsenterer det produkt, der skal redigeres.
         /// </summary>
         [BindProperty]
         public Work Product { get; set; }
 
         /// <summary>
-        /// Handles the GET request for editing a product.
+        /// Håndterer GET-anmodningen for at redigere et produkt.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Produktets id</param>
+        /// <returns>Viser siden eller redirecter til NotFound</returns>
         public IActionResult OnGet(int id)
         {
             Product = _workService.GetWork(id);
             if (Product == null)
-                return RedirectToPage("/NotFound"); //NotFound er ikke defineret endnu
+                return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu
 
             return Page();
         }
 
-
         /// <summary>
-        /// Handles the POST request for editing a product.
+        /// Håndterer POST-anmodningen for at redigere et produkt.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Redirecter til oversigtssiden hvis succes, ellers vises siden igen</returns>
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)

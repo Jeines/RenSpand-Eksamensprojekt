@@ -9,14 +9,14 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// Denne klasse håndterer sletning af en medarbejder.
+    /// Denne klasse hÃ¥ndterer sletning af en medarbejder.
     /// </summary>
     public class DeleteEmployeeModel : PageModel
     {
         private readonly EmployeeService _employeeService;
 
         /// <summary>
-        /// Konstruktør for DeleteEmployeeModel.
+        /// KonstruktÃ¸r for DeleteEmployeeModel.
         /// </summary>
         /// <param name="employeeService"></param>
         public DeleteEmployeeModel(EmployeeService employeeService)
@@ -31,7 +31,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
 
         /// <summary>
-        /// Håndterer GET-anmodningen for sletning af medarbejder.
+        /// HÃ¥ndterer GET-anmodningen for sletning af medarbejder.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
 
         /// <summary>
-        /// Håndterer POST-anmodningen for sletning af medarbejder.
+        /// HÃ¥ndterer POST-anmodningen for sletning af medarbejder.
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()

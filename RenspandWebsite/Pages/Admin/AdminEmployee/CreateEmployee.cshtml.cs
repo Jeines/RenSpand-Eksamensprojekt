@@ -12,7 +12,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// Denne klasse håndterer oprettelsen af en ny medarbejder.
+    /// Denne klasse hÃ¥ndterer oprettelsen af en ny medarbejder.
     /// </summary>
     public class CreateEmployeeModel : PageModel
     {
@@ -93,7 +93,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 
             await _employeeService.AddEmployeeAsync(newEmployee);
 
-            // TODO: Tilføj oprettelse af Profile hvis nødvendigt via en separat ProfileService
+            // TODO: TilfÃ¸j oprettelse af Profile hvis nÃ¸dvendigt via en separat ProfileService
 
             return RedirectToPage("/Admin/AdminEmployee/GetAllEmployees");
         }

@@ -6,16 +6,20 @@ namespace RenspandWebsite.Service.OrderServices
 {
     public class OrderDbService : DbService<Order>
     {
+        /// <summary>
+        /// Henter alle ordrer fra databasen inklusiv relaterede Buyer, AddressItems og ServiceItems.
+        /// </summary>
+        /// <returns>Liste af ordrer med tilhørende data</returns>
         public async Task<List<Order>> GetOrdersWithJoinsAsync()
         {
             using var context = new RenSpandDbContext();
 
-            // First, load all Orders with Buyer included
+            // Først hentes alle ordrer med tilhørende køber
             var orders = await context.Orders
                 .Include(o => o.Buyer)
                 .ToListAsync();
 
-            // Get all related AddressItems and ServiceItems by OrderId
+            // Hent alle relaterede AddressItems og ServiceItems baseret på OrderId
             var orderIds = orders.Select(o => o.Id).ToList();
 
             var addressItems = await context.AddressItems
@@ -28,7 +32,7 @@ namespace RenspandWebsite.Service.OrderServices
                 .Where(si => orderIds.Contains(si.OrderId))
                 .ToListAsync();
 
-            // Match AddressItems and ServiceItems back to Orders
+            // Matcher AddressItems og ServiceItems tilbage til ordrerne
             foreach (var order in orders)
             {
                 order.AddressItems = addressItems.Where(ai => ai.OrderId == order.Id).ToList();
@@ -37,20 +41,21 @@ namespace RenspandWebsite.Service.OrderServices
             return orders;
         }
 
-
-        //TODO: Add method to make order with a logged in user
+        //TODO: Tilføj metode til at oprette ordre med en logget ind bruger
         /// <summary>
-        /// Laver en ny ordre i databasen.
+        /// Opretter en ny ordre i databasen.
         /// </summary>
         /// <param name="name">Navn på køber</param>
         /// <param name="email">Email på køber</param>
-        /// <param name="phonenumber">TelefonNummer på køber</param>
-        /// <param name="street">Vejnavn på køber addresse</param>
-        /// <param name="city">By på køber addresse</param>
-        /// <param name="zipcode">PostNummer på køber addresse</param>
-        /// <param name="workAndAmount">Listen med hvilket og hvor meget arbejde der er bestilt</param>
-        /// <param name="datestart">Dato'en ordren er købt fra</param>
-        /// <param name="trashcanemptydate">Dato'en køber får tømt skraldespand</param>
+        /// <param name="phonenumber">Telefonnummer på køber</param>
+        /// <param name="street">Vejnavn på købers adresse</param>
+        /// <param name="city">By på købers adresse</param>
+        /// <param name="zipcode">Postnummer på købers adresse</param>
+        /// <param name="workAndAmount">Liste med hvilke og hvor mange opgaver der er bestilt</param>
+        /// <param name="datestart">Dato hvor ordren starter</param>
+        /// <param name="trashcanemptydate">Dato hvor skraldespanden tømmes</param>
+        /// <param name="totalPrice">Samlet pris for ordren</param>
+        /// <param name="customerNote">Evt. kommentar fra kunden</param>
         /// <returns>Ordre fra databasen med sit Id</returns>
         public async Task<Order> CreateFullOrderAsync(
             string name, string email, string phonenumber,
@@ -58,10 +63,10 @@ namespace RenspandWebsite.Service.OrderServices
             List<int[]> workAndAmount,
             DateTime datestart, DateTime trashcanemptydate, decimal totalPrice, string customerNote)
         {
-            // Laver en ny instans af RenSpandDbContext (forbindelse til database)
+            // Opretter en ny instans af RenSpandDbContext (forbindelse til database)
             using var context = new RenSpandDbContext();
 
-            // 1. Laver en ny bruger og gemmer den i databasen
+            // 1. Opretter en ny bruger og gemmer den i databasen
             var user = new User
             {
                 Role = RoleEnum.Guest,
@@ -72,7 +77,7 @@ namespace RenspandWebsite.Service.OrderServices
             context.Users.Add(user);
             await context.SaveChangesAsync();
 
-            // 2. Laver en ny adresse og gemmer den i databasen
+            // 2. Opretter en ny adresse og gemmer den i databasen
             var address = new Address
             {
                 Street = street,
@@ -82,7 +87,7 @@ namespace RenspandWebsite.Service.OrderServices
             context.Addresses.Add(address);
             await context.SaveChangesAsync();
 
-            // 3. Laver en ny ordre og gemmer den i databasen
+            // 3. Opretter en ny ordre og gemmer den i databasen
             var order = new Order
             {
                 Buyer = user,
@@ -95,7 +100,7 @@ namespace RenspandWebsite.Service.OrderServices
             context.Orders.Add(order);
             await context.SaveChangesAsync();
 
-            // 4. Laver AddressItem og gemmer den i databasen
+            // 4. Opretter AddressItem og gemmer den i databasen
             var addressItem = new AddressItem
             {
                 OrderId = order.Id,
@@ -104,7 +109,7 @@ namespace RenspandWebsite.Service.OrderServices
             context.AddressItems.Add(addressItem);
             await context.SaveChangesAsync();
 
-            // 5. Laver ServiceItem for hver work og gemmer dem i databasen
+            // 5. Opretter ServiceItem for hver opgave og gemmer dem i databasen
             var serviceItems = new List<ServiceItem>();
             foreach (var entry in workAndAmount)
             {
@@ -126,16 +131,14 @@ namespace RenspandWebsite.Service.OrderServices
         }
 
         /// <summary>
-        /// Henter alle works fra databasen.
+        /// Henter alle opgaver (works) fra databasen.
         /// </summary>
-        /// <returns>Liste af Works</returns>
+        /// <returns>Liste af opgaver</returns>
         public async Task<List<Work>> GetAllWorksAsync()
         {
             using var context = new RenSpandDbContext();
             List<Work>? works = await context.Works.ToListAsync();
             return works;
         }
-
-
     }
 }

@@ -9,33 +9,37 @@ namespace RenspandWebsite.Service.ProfileServices
         /// <summary>
         /// Henter alle ordrer fra databasen for en given bruger.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="userId">Brugerens ID</param>
+        /// <returns>Liste af ordrer for brugeren</returns>
         public async Task<List<Order>> GetOrdersByIdAsync(int userId)
         {
             using var context = new RenSpandDbContext();
             return await context.Orders
-            .Where(order => order.Buyer.Id == userId)
-            .Include(order => order.Buyer)
-            .ToListAsync();
+                .Where(order => order.Buyer.Id == userId)
+                .Include(order => order.Buyer)
+                .ToListAsync();
         }
 
         /// <summary>
-        /// Tjekker om passwordet er korrekt.
+        /// Validerer om det angivne password matcher en profil i databasen.
         /// </summary>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="password">Password der skal valideres</param>
+        /// <returns>Profil hvis password matcher, ellers null</returns>
         public async Task<Profile> PasswordValidation(string password)
         {
             using (var context = new RenSpandDbContext())
             {
                 var profile = await context.Profiles
-                    .Include(p => p.Password)
                     .FirstOrDefaultAsync(p => p.Password == password);
                 return profile;
             }
         }
 
+        /// <summary>
+        /// Opdaterer brugerens password i databasen.
+        /// </summary>
+        /// <param name="userId">Brugerens ID</param>
+        /// <param name="hashedPassword">Det nye (hash'ede) password</param>
         public async Task UpdatePasswordAsync(int userId, string hashedPassword)
         {
             using (var context = new RenSpandDbContext())
@@ -50,18 +54,19 @@ namespace RenspandWebsite.Service.ProfileServices
             }
         }
 
+        /// <summary>
+        /// Gemmer ændringer på en profil og returnerer den opdaterede profil.
+        /// </summary>
+        /// <param name="id">Profilens ID</param>
+        /// <returns>Den opdaterede profil</returns>
         public async Task<Profile> SaveProfileChanges(int id)
         {
             using (var context = new RenSpandDbContext())
             {
                 var profile = await context.Profiles
                     .Include(p => p.Address)
-                    .Include(p => p.Password)
                     .Include(p => p.PhoneNumber)
                     .Include(p => p.Name)
-                    //.Include(p => p.Address.Street)
-                    //.Include(p => p.Address.ZipCode) // til fremtiden hvis Anders vil udvide hans salgs areal.
-                    //.Include(p => p.Address.City) // til fremtiden hvis Anders vil udvide hans salgs areal.
                     .FirstOrDefaultAsync(p => p.Id == id);
                 if (profile != null)
                 {
@@ -72,6 +77,11 @@ namespace RenspandWebsite.Service.ProfileServices
             }
         }
 
+        /// <summary>
+        /// Henter en profil fra databasen ud fra ID.
+        /// </summary>
+        /// <param name="id">Profilens ID</param>
+        /// <returns>Profil med det angivne ID</returns>
         public async Task<Profile> GetProfileByIdAsync(int id)
         {
             using (var context = new RenSpandDbContext())

@@ -12,7 +12,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// Denne klasse håndterer redigering af en medarbejder.
+    /// Denne klasse hÃ¥ndterer redigering af en medarbejder.
     /// </summary>
     public class EditEmployeeModel : PageModel
     {
@@ -32,7 +32,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         private string _originalPassword;
 
         /// <summary>
-        /// Håndterer GET-anmodningen til redigering af medarbejder.
+        /// HÃ¥ndterer GET-anmodningen til redigering af medarbejder.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -48,7 +48,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
 
         /// <summary>
-        /// Håndterer POST-anmodningen til opdatering af medarbejder.
+        /// HÃ¥ndterer POST-anmodningen til opdatering af medarbejder.
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
@@ -80,7 +80,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             existingEmployee.YearsOfExperians = Employee.YearsOfExperians;
             existingEmployee.Salary = Employee.Salary;
 
-            // Håndtering af kvalifikationer
+            // HÃ¥ndtering af kvalifikationer
             if (!string.IsNullOrWhiteSpace(EmployeeQualificationsString))
             {
                 existingEmployee.Qualifications = EmployeeQualificationsString
@@ -94,7 +94,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
                 existingEmployee.Qualifications = new List<string>();
             }
 
-            // Bevar originalt password hvis det ikke er ændret via UI
+            // Bevar originalt password hvis det ikke er Ã¦ndret via UI
             Employee.Password = existingEmployee.Password;
 
 

@@ -9,7 +9,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
 {
     [Authorize(Roles = "admin")]
     /// <summary>
-    /// Denne klasse håndterer hentningen af alle medarbejdere.
+    /// Denne klasse hÃ¥ndterer hentningen af alle medarbejdere.
     /// </summary>
     public class GetAllEmployeesModel : PageModel
     {
@@ -21,12 +21,12 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         }
 
         /// <summary>
-        /// Repræsenterer listen af medarbejdere.
+        /// ReprÃ¦senterer listen af medarbejdere.
         /// </summary>
         public List<RenSpand_Eksamensprojekt.Employee>? Employees { get; private set; }
 
         /// <summary>
-        /// Håndterer GET-anmodningen for at hente alle medarbejdere.
+        /// HÃ¥ndterer GET-anmodningen for at hente alle medarbejdere.
         /// </summary>
         public async Task OnGetAsync()
         {

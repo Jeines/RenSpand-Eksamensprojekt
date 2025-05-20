@@ -39,20 +39,24 @@ namespace RenspandWebsite.Pages.Employee
             Orders = _orderService.GetOrders().ToList();
         }
 
-        //TODO : Fix issue where sometimes order not updated
+        /// <summary>  
+        /// Accepterer en ordre med det angivne orderId og genindlæser siden.  
+        /// </summary>  
+        /// <param name="orderId">ID'et på den ordre, der skal accepteres.</param>  
+        /// <returns>En omdirigering til den aktuelle side.</returns>  
         public IActionResult OnPostAcceptOrder(int orderId)
         {
             _orderService.AcceptOrder(orderId);
             Orders = _orderService.GetOrders().ToList();
             return RedirectToPage();
         }
-
+        
         //TODO : Fix issue where sometimes order not updated
         /// <summary>
-        /// Rejects order with the given orderId and reloads page
+        /// Afviser en ordre med det angivne orderId og genindlæser siden
         /// </summary>
-        /// <param name="orderId"></param>
-        /// <returns></returns>
+        /// <param name="orderId">ID'et på den ordre, der skal afvises.</param>
+        /// <returns>En omdirigering til den aktuelle side.</returns>
         public IActionResult OnPostRejectOrder(int orderId)
         {
             _orderService.RejectOrder(orderId);

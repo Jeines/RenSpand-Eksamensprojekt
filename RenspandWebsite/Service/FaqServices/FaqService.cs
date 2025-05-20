@@ -45,7 +45,7 @@ namespace RenspandWebsite.Service.FaqServices
         }
 
         /// <summary>
-        /// Opdaterer en eksisterende FAQ og listen
+        /// Opdaterer en eksisterende FAQ og opdaterer listen
         /// </summary>
         public void UpdateFAQ(int id, string question, string answer)
         {
