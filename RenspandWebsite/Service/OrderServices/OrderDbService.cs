@@ -41,7 +41,7 @@ namespace RenspandWebsite.Service.OrderServices
             return orders;
         }
 
-        //TODO: Tilføj metode til at oprette ordre med en logget ind bruger
+        
         /// <summary>
         /// Opretter en ny ordre i databasen.
         /// </summary>
@@ -139,6 +139,82 @@ namespace RenspandWebsite.Service.OrderServices
             using var context = new RenSpandDbContext();
             List<Work>? works = await context.Works.ToListAsync();
             return works;
+        }
+
+        /// <summary>
+        /// Opretter en ny ordre i databasen for en bruger, der allerede er logget ind.
+        /// </summary>
+        /// <param name="buyer"></param>
+        /// <param name="street"></param>
+        /// <param name="city"></param>
+        /// <param name="zipcode"></param>
+        /// <param name="workAndAmount"></param>
+        /// <param name="datestart"></param>
+        /// <param name="trashcanemptydate"></param>
+        /// <param name="totalPrice"></param>
+        /// <param name="customerNote"></param>
+        /// <returns></returns>
+        public async Task<Order> CreateOrderAsUserAsync(
+            User buyer, string street, string city, string zipcode,
+            List<int[]> workAndAmount,
+            DateTime datestart, DateTime trashcanemptydate, decimal totalPrice, string customerNote)
+        {
+            // Opretter en ny instans af RenSpandDbContext (forbindelse til database)
+            using var context = new RenSpandDbContext();
+            
+
+
+            // 1. Opretter en ny adresse og gemmer den i databasen
+            var address = new Address
+            {
+                Street = street,
+                City = city,
+                ZipCode = zipcode
+            };
+            context.Addresses.Add(address);
+            await context.SaveChangesAsync();
+
+            // 2. Opretter en ny ordre og gemmer den i databasen
+            var order = new Order
+            {
+                BuyerId = buyer.Id,
+                DateStart = datestart,
+                DateDone = datestart.AddDays(8),
+                TrashCanEmptyDate = trashcanemptydate,
+                TotalPrice = totalPrice,
+                CustomerNote = customerNote
+            };
+            context.Orders.Add(order);
+            await context.SaveChangesAsync();
+
+            // 3. Opretter AddressItem og gemmer den i databasen
+            var addressItem = new AddressItem
+            {
+                OrderId = order.Id,
+                Address = address
+            };
+            context.AddressItems.Add(addressItem);
+            await context.SaveChangesAsync();
+
+            // 4. Opretter ServiceItem for hver opgave og gemmer dem i databasen
+            var serviceItems = new List<ServiceItem>();
+            foreach (var entry in workAndAmount)
+            {
+                int workId = entry[0];
+                int amount = entry[1];
+
+                serviceItems.Add(new ServiceItem
+                {
+                    OrderId = order.Id,
+                    ServiceWorkId = workId,
+                    Amount = amount
+                });
+            }
+
+            // 5. Gemmer alle ændringer i databasen
+            context.ServiceItems.AddRange(serviceItems);
+            await context.SaveChangesAsync();
+            return order;
         }
     }
 }

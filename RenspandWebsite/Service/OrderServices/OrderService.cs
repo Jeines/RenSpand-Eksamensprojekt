@@ -108,7 +108,24 @@ namespace RenspandWebsite.Service.OrderServices
                 datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount), customerNote);
         }
 
+        /// <summary>
+        /// Opretter en ordre for en bruger med de angivne oplysninger.
+        /// </summary>
+        /// <param name="buyer"></param>
+        /// <param name="street"></param>
+        /// <param name="city"></param>
+        /// <param name="zipcode"></param>
+        /// <param name="workAndAmount"></param>
+        /// <param name="datestart"></param>
+        /// <param name="trashcanemptydate"></param>
+        /// <param name="customerNote"></param>
+        /// <returns></returns>
+        public async Task CreateOrderIsUser(User buyer, string street, string city, string zipcode, List<int[]> workAndAmount, DateTime datestart, DateTime trashcanemptydate, string customerNote)
+        {
+            await _orderDbService.CreateOrderAsUserAsync(
+                buyer, street, city, zipcode, workAndAmount, datestart, trashcanemptydate, CalculateTotalPrice(workAndAmount), customerNote);
 
+        }
 
         /// <summary>
         /// Udregner den samlede pris for en ordre baseret på valgte arbejder og mængder.
