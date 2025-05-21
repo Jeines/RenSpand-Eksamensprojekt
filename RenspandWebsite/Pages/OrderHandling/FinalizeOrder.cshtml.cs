@@ -2,16 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.OrderServices;
+using RenspandWebsite.Service.ProfileServices;
+using System.Security.Claims;
 
 namespace RenspandWebsite.Pages.OrderHandling
 {
     public class FinalizeOrderModel : PageModel
     {
         private OrderService _orderService;
+        private readonly ProfileService _profileService;
 
-        public FinalizeOrderModel(OrderService orderService)
+        public FinalizeOrderModel(OrderService orderService, ProfileService profileService)
         {
             _orderService = orderService;
+            _profileService = profileService;
         }
 
         [BindProperty]
@@ -101,20 +105,40 @@ namespace RenspandWebsite.Pages.OrderHandling
                 var workId = item[0];
                 var amount = item[1];
             }
+            if (User.Identity.IsAuthenticated)
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var profile = _profileService.GetUserData(int.Parse(userIdClaim));
 
-            // Laver en Ordre med info fra formularen
-            await _orderService.CreateOrderAsync(
-                Draft.Name,
-                Draft.Email,
-                Draft.PhoneNumber,
-                Draft.Street,
-                Draft.City,
-                Draft.ZipCode,
-                WorkAndAmount,
-                Draft.DateStart,
-                Draft.TrashCanEmptyDate,
-                CustomerNote);
-
+                // Henter brugerens data
+                Name = profile.Name;
+                Email = profile.Email;
+                PhoneNumber = profile.PhoneNumber;
+                Street = Draft.Street;
+                City = Draft.City;
+                ZipCode = Draft.ZipCode;
+                DateStart = Draft.DateStart;
+                TrashCanEmptyDate = Draft.TrashCanEmptyDate;
+                
+                // Opretter ordren som bruger
+                await _orderService.CreateOrderIsUser(
+                    profile, Draft.Street, Draft.City, Draft.ZipCode, WorkAndAmount, Draft.DateStart, Draft.TrashCanEmptyDate, CustomerNote);
+            }
+            else
+            {
+                // Laver en Ordre med info fra formularen
+                await _orderService.CreateOrderAsync(
+                    Draft.Name,
+                    Draft.Email,
+                    Draft.PhoneNumber,
+                    Draft.Street,
+                    Draft.City,
+                    Draft.ZipCode,
+                    WorkAndAmount,
+                    Draft.DateStart,
+                    Draft.TrashCanEmptyDate,
+                    CustomerNote);
+            }
             return RedirectToPage("/OrderHandling/OrderConfirmationPage");
         }
     }

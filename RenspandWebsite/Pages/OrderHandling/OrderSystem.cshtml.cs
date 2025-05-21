@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.OrderServices;
+using RenspandWebsite.Service.ProfileServices;
+using System.Security.Claims;
 
 
 
@@ -12,13 +14,15 @@ namespace RenspandWebsite.Pages.OrderHandling
     public class OrderSystemModel : PageModel
     {
         private readonly OrderService _orderService;
+        private readonly ProfileService _profileService;
         public List<Work> WorkList { get; set; }
 
         public List<SelectListItem> WorkSelectList { get; set; }
 
-        public OrderSystemModel(OrderService orderService)
+        public OrderSystemModel(OrderService orderService, ProfileService profileService)
         {
             _orderService = orderService;
+            _profileService = profileService;
         }
 
         [BindProperty]
@@ -59,7 +63,17 @@ namespace RenspandWebsite.Pages.OrderHandling
         /// </summary>
         public void OnGet()
         {
+            // Henter Profil data hvis logget ind
+            if (User.Identity.IsAuthenticated)
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var profile = _profileService.GetUserData(int.Parse(userIdClaim));
+                Name = profile.Name;
+                Email = profile.Email;
+                PhoneNumber = profile.PhoneNumber;
+            }
 
+            // Sætter standardværdier for datoer
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
