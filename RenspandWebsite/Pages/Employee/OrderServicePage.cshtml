@@ -83,6 +83,14 @@ else
 
                     </td>
                     <td>
+                        <form method="post" asp-page-handler="ToggleDone">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <button type="submit" class="btn btn-sm @(order.IsDone ? "btn-success" : "btn-warning")">
+                                @(order.IsDone ? "Færdig" : "Ikke færdig - klik for at færdiggøre")
+                            </button>
+                        </form>
+                    </td>
+                    <td>
                         <form method="post" asp-page-handler="SaveNote">
                             <input type="hidden" name="orderId" value="@order.Id" />
                             <textarea name="note" class="form-control">@order.EmployeeNote</textarea>

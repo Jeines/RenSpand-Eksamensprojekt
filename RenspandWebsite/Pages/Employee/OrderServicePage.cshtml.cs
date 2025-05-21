@@ -124,6 +124,13 @@ namespace RenspandWebsite.Pages.Employee
         //    }
         //    JsonFileOrderService.SaveJsonObjects(_Orders);
         //}
+
+        // Kalder Orderservice metoden som skifter IsDone status på ordren og gemmer det i databasen
+        public async Task<IActionResult> OnPostToggleDoneAsync(int orderId)
+        {
+            await _orderService.ToggleDoneAsync(orderId);
+            return RedirectToPage();
+        }
     }
 }
 

@@ -44,6 +44,8 @@ namespace RenSpand_Eksamensprojekt
         [StringLength(100)]
         public string? CustomerNote { get; set; }
 
+        public bool IsDone { get; set; } = false;
+
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
             Id = id;
