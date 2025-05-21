@@ -102,6 +102,7 @@ namespace RenspandWebsite.Pages.OrderHandling
                 var amount = item[1];
             }
 
+           
             // Laver en Ordre med info fra formularen
             await _orderService.CreateOrderAsync(
                 Draft.Name,

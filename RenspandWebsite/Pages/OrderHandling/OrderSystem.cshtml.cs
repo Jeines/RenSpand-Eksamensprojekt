@@ -7,6 +7,7 @@ using RenspandWebsite.Service.OrderServices;
 
 
 
+
 namespace RenspandWebsite.Pages.OrderHandling
 {
     public class OrderSystemModel : PageModel
@@ -87,9 +88,12 @@ namespace RenspandWebsite.Pages.OrderHandling
                 }).ToList();
                 return Page();
             }
+            // Hvis model state er gyldig, fortsæt med at oprette en ordre
+            var draft = new OrderDraft();
 
-            // Opretter et OrderDraft-objekt med information fra formularen
-            var draft = new OrderDraft
+            //TODO : Implementer logik til at oprette en ordre med en logget ind bruger
+            // Opretter et OrderDraft-objekt med information fra formularen hvis ikke logget ind
+            draft = new OrderDraft
             {
                 Name = Name,
                 Email = Email,
@@ -101,6 +105,7 @@ namespace RenspandWebsite.Pages.OrderHandling
                 DateStart = DateStart,
                 TrashCanEmptyDate = TrashCanEmptyDate
             };
+
 
             // Gemmer OrderDraft-objektet i sessionen
             HttpContext.Session.SetString("OrderDraft", System.Text.Json.JsonSerializer.Serialize(draft));
