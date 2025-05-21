@@ -164,7 +164,21 @@ namespace RenspandWebsite.Service.OrderServices
         //        }
         //    }
         //}
+
+        // ledder efter en ordre med et givet id og ændre IsDone status på ordren, hvis den er Accepted.
+        // Gemmer det i databasen
+        public async Task ToggleDoneAsync(int orderId)
+        {
+            Order order = _orders.FirstOrDefault(o => o.Id == orderId);
+            if (order != null && order.AcceptStatus == AcceptStatusEnum.Accepted)
+            {
+                order.IsDone = !order.IsDone;
+                await _orderDbService.UpdateObjectAsync(order);
+            }
+        }
     }
+
+
 }
 
 
