@@ -1,4 +1,6 @@
 ﻿using RenSpand_Eksamensprojekt;
+using RenspandWebsite.EFDbContext;
+using System.ComponentModel;
 
 
 namespace RenspandWebsite.Service.OrderServices
@@ -43,9 +45,11 @@ namespace RenspandWebsite.Service.OrderServices
         /// Returnerer alle ordrer.
         /// </summary>
         /// <returns>Liste af ordrer</returns>
+        
         public IEnumerable<Order> GetOrders()
         {
-            return _orders;
+            //return _orders;
+            return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>
