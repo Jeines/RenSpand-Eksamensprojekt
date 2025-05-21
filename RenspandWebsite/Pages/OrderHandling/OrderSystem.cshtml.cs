@@ -59,6 +59,7 @@ namespace RenspandWebsite.Pages.OrderHandling
         /// </summary>
         public void OnGet()
         {
+
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
