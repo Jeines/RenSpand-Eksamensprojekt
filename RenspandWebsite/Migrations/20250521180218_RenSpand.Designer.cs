@@ -12,8 +12,8 @@ using RenspandWebsite.EFDbContext;
 namespace RenspandWebsite.Migrations
 {
     [DbContext(typeof(RenSpandDbContext))]
-    [Migration("20250520133406_RenSpandRazor")]
-    partial class RenSpandRazor
+    [Migration("20250521180218_RenSpand")]
+    partial class RenSpand
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,9 @@ namespace RenspandWebsite.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -281,6 +284,23 @@ namespace RenspandWebsite.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasDiscriminator().HasValue("Profile");
+                });
+
+            modelBuilder.Entity("RenSpand_Eksamensprojekt.Employee", b =>
+                {
+                    b.HasBaseType("RenSpand_Eksamensprojekt.Profile");
+
+                    b.PrimitiveCollection<string>("Qualifications")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("YearsOfExperians")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("RenSpand_Eksamensprojekt.AddressItem", b =>

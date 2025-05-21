@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RenspandWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class RenSpandRazor : Migration
+    public partial class RenSpand : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,7 +82,10 @@ namespace RenspandWebsite.Migrations
                     Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: true)
+                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    YearsOfExperians = table.Column<int>(type: "int", nullable: true),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Qualifications = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,7 +110,8 @@ namespace RenspandWebsite.Migrations
                     AcceptStatus = table.Column<int>(type: "int", nullable: false),
                     TrashCanEmptyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EmployeeNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CustomerNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
+                    CustomerNote = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    IsDone = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
