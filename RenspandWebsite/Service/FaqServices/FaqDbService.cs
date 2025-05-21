@@ -25,9 +25,9 @@ namespace RenspandWebsite.Service.FaqServices
         /// </summary>
         /// <param name="id">FAQ'ens ID</param>
         /// <returns>FAQ-objekt eller null hvis ikke fundet</returns>
-        public async Task<FAQ> GetFAQByIdAsync(int id)
+        public async Task<FAQ> GetFAQByIdAsync(RenSpandDbContext context,int id)
         {
-            using var context = new RenSpandDbContext();
+            
             return await context.FAQs.FindAsync(id);
         }
 
@@ -57,7 +57,7 @@ namespace RenspandWebsite.Service.FaqServices
         public async Task UpdateFAQAsync(int id, string question, string answer)
         {
             using var context = new RenSpandDbContext();
-            var faq = await GetFAQByIdAsync(id);
+            var faq = await GetFAQByIdAsync(context,id);
             if (faq != null)
             {
                 faq.Question = question;
@@ -73,7 +73,7 @@ namespace RenspandWebsite.Service.FaqServices
         public async Task DeleteFAQAsync(int id)
         {
             using var context = new RenSpandDbContext();
-            var faq = await GetFAQByIdAsync(id);
+            var faq = await GetFAQByIdAsync(context, id);
             if (faq != null)
             {
                 context.FAQs.Remove(faq);
