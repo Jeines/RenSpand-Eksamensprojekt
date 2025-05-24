@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.EmployeeServices;
 using System.Threading.Tasks;
 
@@ -29,7 +28,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// Den medarbejder der skal slettes.
         /// </summary>
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Models.Employee Employee { get; set; }
 
         /// <summary>
         /// Håndterer GET-anmodningen for sletning af medarbejder.

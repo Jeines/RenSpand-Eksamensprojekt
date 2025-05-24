@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.WorkServices;
 

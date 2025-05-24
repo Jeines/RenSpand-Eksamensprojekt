@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.EmployeeServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// <summary>
         /// Repræsenterer listen af medarbejdere.
         /// </summary>
-        public List<RenSpand_Eksamensprojekt.Employee>? Employees { get; private set; }
+        public List<Models.Employee>? Employees { get; private set; }
 
         /// <summary>
         /// Håndterer GET-anmodningen for at hente alle medarbejdere.

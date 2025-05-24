@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.EFDbContext;
 
 namespace RenspandWebsite.Service.OrderServices
@@ -10,38 +10,53 @@ namespace RenspandWebsite.Service.OrderServices
         /// Henter alle ordrer fra databasen inklusiv relaterede Buyer, AddressItems og ServiceItems.
         /// </summary>
         /// <returns>Liste af ordrer med tilhørende data</returns>
+        //public async Task<List<Order>> GetOrdersWithJoinsAsync()
+        //{
+        //    using var context = new RenSpandDbContext();
+
+        //    // Først hentes alle ordrer med tilhørende køber
+        //    var orders = await context.Orders
+        //        .Include(o => o.Buyer)
+        //        .ToListAsync();
+
+        //    // Hent alle relaterede AddressItems og ServiceItems baseret på OrderId
+        //    var orderIds = orders.Select(o => o.Id).ToList();
+
+        //    var addressItems = await context.AddressItems
+        //        .Include(ai => ai.Address)
+        //        .Where(ai => orderIds.Contains(ai.OrderId))
+        //        .ToListAsync();
+
+        //    var serviceItems = await context.ServiceItems
+        //        .Include(si => si.ServiceWork)
+        //        .Where(si => orderIds.Contains(si.OrderId))
+        //        .ToListAsync();
+
+        //    // Matcher AddressItems og ServiceItems tilbage til ordrerne
+        //    foreach (var order in orders)
+        //    {
+        //        order.AddressItems = addressItems.Where(ai => ai.OrderId == order.Id).ToList();
+        //        order.ServiceItems = serviceItems.Where(si => si.OrderId == order.Id).ToList();
+        //    }
+        //    return orders;
+        //}
+
         public async Task<List<Order>> GetOrdersWithJoinsAsync()
         {
             using var context = new RenSpandDbContext();
 
-            // Først hentes alle ordrer med tilhørende køber
             var orders = await context.Orders
                 .Include(o => o.Buyer)
+                .Include(o => o.AddressItems)
+                    .ThenInclude(ai => ai.Address)
+                .Include(o => o.ServiceItems)
+                    .ThenInclude(si => si.ServiceWork)
                 .ToListAsync();
 
-            // Hent alle relaterede AddressItems og ServiceItems baseret på OrderId
-            var orderIds = orders.Select(o => o.Id).ToList();
-
-            var addressItems = await context.AddressItems
-                .Include(ai => ai.Address)
-                .Where(ai => orderIds.Contains(ai.OrderId))
-                .ToListAsync();
-
-            var serviceItems = await context.ServiceItems
-                .Include(si => si.ServiceWork)
-                .Where(si => orderIds.Contains(si.OrderId))
-                .ToListAsync();
-
-            // Matcher AddressItems og ServiceItems tilbage til ordrerne
-            foreach (var order in orders)
-            {
-                order.AddressItems = addressItems.Where(ai => ai.OrderId == order.Id).ToList();
-                order.ServiceItems = serviceItems.Where(si => si.OrderId == order.Id).ToList();
-            }
             return orders;
         }
 
-        
+
         /// <summary>
         /// Opretter en ny ordre i databasen.
         /// </summary>

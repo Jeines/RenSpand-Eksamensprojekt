@@ -1,5 +1,5 @@
-﻿using RenSpand_Eksamensprojekt;
-using RenspandWebsite.EFDbContext;
+﻿using RenspandWebsite.EFDbContext;
+using RenspandWebsite.Models;
 using System.ComponentModel;
 
 
@@ -10,7 +10,8 @@ namespace RenspandWebsite.Service.OrderServices
     /// </summary>
     public class OrderService
     {
-        public List<Work> Works { get; }
+        // Modify the Works property to include a private setter so it can be assigned internally.
+        public List<Work> Works { get; private set; }
         private List<Order> _orders;
 
         private readonly OrderDbService _orderDbService;
@@ -18,8 +19,16 @@ namespace RenspandWebsite.Service.OrderServices
         public OrderService(OrderDbService orderDbService)
         {
             _orderDbService = orderDbService;
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
-            Works = _orderDbService.GetAllWorksAsync().Result;
+            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result; // Use .Result to resolve the Task
+            Works = _orderDbService.GetAllWorksAsync().Result; // Use .Result to resolve the Task
+        }
+
+        public static async Task<OrderService> CreateAsync(OrderDbService orderDbService)
+        {
+            var service = new OrderService(orderDbService);
+            service._orders = await orderDbService.GetOrdersWithJoinsAsync();
+            service.Works = await orderDbService.GetAllWorksAsync();
+            return service;
         }
 
         /// <summary>
@@ -48,8 +57,20 @@ namespace RenspandWebsite.Service.OrderServices
         
         public IEnumerable<Order> GetOrders()
         {
+            {
+                try
+                {
+                    return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+                }
+                catch (AggregateException ex)
+                {
+                    Console.WriteLine("Fejl: " + ex.InnerException?.Message);
+                    Console.WriteLine("StackTrace: " + ex.InnerException?.StackTrace);
+                    throw;
+                }
+            }
             //return _orders;
-            return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+            //return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.EFDbContext;
 
 namespace RenspandWebsite.Service.FaqServices

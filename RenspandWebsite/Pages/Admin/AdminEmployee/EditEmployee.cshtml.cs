@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.EmployeeServices;
 using System;
 using System.Collections.Generic;
@@ -27,7 +26,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// Repræsenterer medarbejderen der skal redigeres.
         /// </summary>
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Models.Employee Employee { get; set; }
 
         /// <summary>
         /// Repræsenterer medarbejderens kvalifikationer som en kommasepareret streng.

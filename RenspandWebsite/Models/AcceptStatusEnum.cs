@@ -1,4 +1,4 @@
-﻿namespace RenSpand_Eksamensprojekt
+﻿namespace RenspandWebsite.Models
 {
     /// <summary>
     /// Enum ræpresentere status for dens stadige AcceptStatusEnum som kan være "pending", "accepted" eller "rejected".

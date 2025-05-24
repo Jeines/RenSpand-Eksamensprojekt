@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.EmployeeServices;
+using RenspandWebsite.Models;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,7 +27,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// Repræsenterer medarbejderen der skal oprettes.
         /// </summary>
         [BindProperty]
-        public RenSpand_Eksamensprojekt.Employee Employee { get; set; }
+        public Models.Employee Employee { get; set; }
 
         /// <summary>
         /// Repræsenterer medarbejderens kvalifikationer som en kommasepareret streng.
@@ -85,11 +85,11 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
             }
 
             // Hash password
-            var passwordHasher = new PasswordHasher<RenSpand_Eksamensprojekt.Employee>();
+            var passwordHasher = new PasswordHasher<Models.Employee>();
             string hashedPassword = passwordHasher.HashPassword(null, Employee.Password);
 
             // Opret nyt Employee-objekt
-            var newEmployee = new RenSpand_Eksamensprojekt.Employee
+            var newEmployee = new Models.Employee
             {
                 Username = Employee.Username,
                 Password = hashedPassword,
