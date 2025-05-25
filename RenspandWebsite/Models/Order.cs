@@ -1,12 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace RenSpand_Eksamensprojekt
+namespace RenspandWebsite.Models
 {
+    /// <summary>
+    /// Repræsenterer en ordre, der indeholder oplysninger om køberen, serviceartikler og adresser.
+    /// </summary>
     public class Order
     {
-
+        /// <summary>
+        /// Propertys til at repræsentere attributterne i Order.
+        /// </summary>
         [Key]
         public int Id { get; set; }
 
@@ -28,16 +33,13 @@ namespace RenSpand_Eksamensprojekt
 
         [Required]
         public DateTime DateDone { get; set; }
-        /// <summary>
-        /// Indicates the current status of the order (Pending, Accepted, Rejected, etc.).
-        /// </summary>
+
+        //Identifies the status of the order. (Pending = 0, Accepted = 1, Rejected = 2)
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public AcceptStatusEnum AcceptStatus { get; set; } = AcceptStatusEnum.Pending;
 
         public DateTime? TrashCanEmptyDate { get; set; }
-
-        //TODO: Tilføj Denne property når resten af implementeringen er klar
 
         [StringLength(100)]
         public string? EmployeeNote { get; set; }
@@ -46,6 +48,15 @@ namespace RenSpand_Eksamensprojekt
 
         public bool IsDone { get; set; } = false;
 
+        /// <summary>
+        /// Initialiserer en ny instans af Order med angivne værdier.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="buyer"></param>
+        /// <param name="serviceItems"></param>
+        /// <param name="totalPrice"></param>
+        /// <param name="dateStart"></param>
+        /// <param name="dateDone"></param>
         public Order(int id, User buyer, List<ServiceItem> serviceItems, decimal totalPrice, DateTime dateStart, DateTime dateDone)
         {
             Id = id;
@@ -55,8 +66,15 @@ namespace RenSpand_Eksamensprojekt
             DateDone = dateDone;
         }
 
+        /// <summary>
+        /// Initialiserer en ny instans af Order uden angivne værdier.
+        /// </summary>
         public Order() { }
 
+        /// <summary>
+        /// Giver en strengrepræsentation af ordren, der indeholder oplysninger om køberen, serviceartikler, totalpris og datoer.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"Id: {Id}, Buyer: {Buyer}, ServiceItems: No service items, TotalPrice: {TotalPrice}, DateStart: {DateStart}, DateDone: {DateDone}";

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.WorkServices;
 
@@ -28,6 +29,8 @@ namespace RenspandWebsite.Pages.WorkHandler
         [BindProperty]
         public int MaxPrice { get; set; }
 
+
+
         // Henter alle "Work"-objekter ved GET-request.
         public void OnGet()
         {
@@ -42,3 +45,6 @@ namespace RenspandWebsite.Pages.WorkHandler
         //}
     }
 }
+
+
+

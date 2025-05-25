@@ -1,4 +1,4 @@
-﻿using RenSpand_Eksamensprojekt;
+﻿using RenspandWebsite.Models;
 using RenspandWebsite.Service.ProfileServices;
 
 namespace RenspandWebsite.Service.WorkServices

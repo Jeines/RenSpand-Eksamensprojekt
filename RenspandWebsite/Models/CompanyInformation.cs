@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RenSpand_Eksamensprojekt
+﻿namespace RenspandWebsite.Models
 {
+    /// <summary>
+    /// Repræsenterer oplysninger om en virksomhed, herunder navn, kontaktoplysninger og beskrivelse.
+    /// </summary>
     public class CompanyInformation
     {
-
-
+        /// <summary>
+        /// Propertys til at repræsentere attributterne i CompanyInformation.
+        /// </summary>
         public string CompanyName { get; set; }
         public string MobileNumber { get; set; }
         public string OfficeNumber { get; set; }
@@ -18,7 +16,9 @@ namespace RenSpand_Eksamensprojekt
         public string ImageUrl { get; set; }
         public string Description { get; set; }
 
-
+        /// <summary>
+        /// Initialiserer en ny instans af CompanyInformation med angivne værdier.
+        /// </summary>
         public void OnGet()
         {
             CompanyName = "Renspand";
@@ -31,5 +31,3 @@ namespace RenSpand_Eksamensprojekt
         }
     }
 }
-
-

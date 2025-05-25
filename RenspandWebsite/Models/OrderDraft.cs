@@ -1,8 +1,15 @@
-﻿namespace RenSpand_Eksamensprojekt
+﻿namespace RenspandWebsite.Models
 {
-    //class to transfer data from one site to another
+    /// <summary>
+    /// Repræsenterer en ordreudkast, der indeholder oplysninger om køberen, serviceartikler og adresser.
+    /// Udkastet bruges til at indsamle oplysninger fra brugeren, før ordren sendes.
+    /// Bliver brugt i OrderServicePageModel.
+    /// </summary>
     public class OrderDraft
     {
+        /// <summary>
+        /// Propertys til at repræsentere attributterne i OrderDraft.
+        /// </summary>
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
@@ -14,5 +21,4 @@
         public DateTime TrashCanEmptyDate { get; set; }
         public string CustomerNote { get; set; }
     }
-
 }
