@@ -147,6 +147,8 @@ namespace RenspandWebsite.Service.OrderServices
             return totalPrice;
         }
 
+        
+
         /// <summary>
         /// Sætter en note til en ordre med et givent id og opdaterer ordren i databasen.
         /// </summary>
