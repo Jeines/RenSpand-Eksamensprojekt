@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RenSpand_Eksamensprojekt;
+using Microsoft.EntityFrameworkCore;
+using RenspandWebsite.EFDbContext;
+using RenspandWebsite.MockData;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.AboutServices;
 using RenspandWebsite.Service.AboutUsService;
@@ -9,6 +13,7 @@ using RenspandWebsite.Service.FaqServices;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
 using RenspandWebsite.Service.WorkServices;
+using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +46,7 @@ builder.Services.AddTransient<FaqDbService, FaqDbService>();
 // add services Work
 builder.Services.AddTransient<WorkService, WorkService>();
 builder.Services.AddTransient<WorkDbService, WorkDbService>();
-
+builder.Services.AddTransient<DbService<Work>, DbService<Work>>(); // Assuming you have a DbService for Work
 
 //builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
 
@@ -49,6 +54,7 @@ builder.Services.AddTransient<WorkDbService, WorkDbService>();
 builder.Services.AddSingleton<OrderService, OrderService>();
 builder.Services.AddTransient<OrderDbService, OrderDbService>();
 builder.Services.AddTransient<DbService<Order>, DbService<Order>>(); // Assuming you have a DbService for Order
+
 
 // add services JsonFileService
 builder.Services.AddSingleton<JsonFileService<Work>>();
@@ -67,6 +73,8 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddSingleton<EmailServicecs, EmailServicecs>();
 builder.Services.AddScoped<EmailServicecs>();
+
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
 {
@@ -100,4 +108,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+//MockProfiles.GetMockProfiles();
+
 app.Run();
+
+

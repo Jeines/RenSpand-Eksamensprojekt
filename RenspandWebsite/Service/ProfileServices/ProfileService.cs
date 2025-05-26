@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
+using RenspandWebsite.MockData;
+using RenspandWebsite.Models;
 using System.Linq.Expressions;
 using System.Security.Claims;
 
@@ -18,8 +19,8 @@ namespace RenspandWebsite.Service.ProfileServices
 
             // Henter profilerne fra databasen
             Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            
         }
-
         /// <summary>
         /// Validerer om passworded til en bruger er korrekt.
         /// </summary>
@@ -68,7 +69,7 @@ namespace RenspandWebsite.Service.ProfileServices
         public void UpdateUserData(int id, Profile profile)
         {
             // Find the profile with the given ID
-            Profile existingProfile = Profiles.FirstOrDefault(p => p.Id == id);
+            RenspandWebsite.Models.Profile existingProfile = Profiles.FirstOrDefault(p => p.Id == id);
             if (existingProfile != null)
             {
                 existingProfile.PhoneNumber = profile.PhoneNumber;

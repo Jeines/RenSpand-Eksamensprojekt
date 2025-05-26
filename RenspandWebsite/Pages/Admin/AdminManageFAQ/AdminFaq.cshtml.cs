@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service.FaqServices;
+using RenspandWebsite.Models;
 
 namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
 {

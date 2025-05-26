@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
 using System.Security.Claims;
@@ -11,20 +11,45 @@ using System.Security.Claims;
 
 namespace RenspandWebsite.Pages.OrderHandling
 {
+    /// <summary>
+    /// Model for OrderSystem-siden.
+    /// </summary>
     public class OrderSystemModel : PageModel
     {
+        /// <summary>
+        /// Service til håndtering af ordrer.
+        /// </summary>
         private readonly OrderService _orderService;
+
+        /// <summary>
+        /// Service til håndtering af brugerprofiler.
+        /// </summary>
         private readonly ProfileService _profileService;
+
+        /// <summary>
+        /// Liste over arbejder, der kan vælges i bestillingssystemet.
+        /// </summary>
         public List<Work> WorkList { get; set; }
 
+        /// <summary>
+        /// Liste over arbejder, der kan vælges i dropdown-menuen.
+        /// </summary>
         public List<SelectListItem> WorkSelectList { get; set; }
 
+        /// <summary>
+        /// Initialiserer en ny instans af OrderSystemModel med de angivne services.
+        /// </summary>
+        /// <param name="orderService"></param>
+        /// <param name="profileService"></param>
         public OrderSystemModel(OrderService orderService, ProfileService profileService)
         {
             _orderService = orderService;
             _profileService = profileService;
         }
 
+        /// <summary>
+        /// Repræsenterer de data, der skal indsamles fra brugeren i bestillingssystemet.
+        /// </summary>
         [BindProperty]
         public string Name { get; set; }
 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service.AboutServices;
 
 namespace RenspandWebsite.Pages.Admin.AdminAboutUs
@@ -39,7 +39,7 @@ namespace RenspandWebsite.Pages.Admin.AdminAboutUs
                 return Page();
             }
 
-            // Opdaterer "About Us"-informationen med ID 1 ved hjælp af AboutUsService.  
+            // Opdaterer "About Us"-informationen med ID 1 ved hjælp af AboutUsService.
             _aboutService.UpdateAboutUS(1, AboutUs);
 
             // Omdirigerer brugeren til siden "/workHandler/AboutUsSite".  

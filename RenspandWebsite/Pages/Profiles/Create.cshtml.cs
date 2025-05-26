@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.EFDbContext;
+using RenspandWebsite.Models;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.ProfileServices;
 using System.ComponentModel.DataAnnotations;

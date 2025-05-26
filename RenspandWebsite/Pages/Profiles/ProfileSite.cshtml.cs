@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RenSpand_Eksamensprojekt;
 using RenspandWebsite.Service;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Security.Claims;
 using RenspandWebsite.Service.ProfileServices;
+using RenspandWebsite.Models;
 
 namespace RenspandWebsite.Pages.Profiles
 {

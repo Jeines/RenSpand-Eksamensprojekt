@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace RenSpand_Eksamensprojekt
+namespace RenspandWebsite.Models
 {
     /// <summary>
     /// Viser de forskellige roller som en bruger kan have i systemet 

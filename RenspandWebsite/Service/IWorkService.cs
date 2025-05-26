@@ -1,4 +1,4 @@
-﻿using RenSpand_Eksamensprojekt;
+﻿using RenspandWebsite.Models;
 
 namespace RenspandWebsite.Service
 {

@@ -1,5 +1,5 @@
 ﻿using RenspandWebsite.EFDbContext;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using System;
 using RenspandWebsite.Service.AboutUsService;
 

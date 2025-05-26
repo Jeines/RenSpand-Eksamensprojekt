@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0395ccac-dedb-4340-91c0-2fb8fac2c382</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,10 +29,6 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.12.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RenSpand Eksamensprojekt\RenSpand Eksamensprojekt.csproj" />
   </ItemGroup>
 
 </Project>

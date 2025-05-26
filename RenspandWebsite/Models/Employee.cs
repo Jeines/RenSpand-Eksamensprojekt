@@ -1,13 +1,25 @@
-﻿namespace RenSpand_Eksamensprojekt
+﻿
+namespace RenspandWebsite.Models
 {
+    /// <summary>
+    /// Repræsenterer en medarbejderprofil, der arver fra Profile-klassen.
+    /// </summary>
     public class Employee : Profile
     {
+        /// <summary>
+        /// Propertys til at repræsentere attributterne i Employee.
+        /// </summary>
         public int YearsOfExperians { get; set; }
 
         public decimal Salary { get; set; }
 
         public List<string> Qualifications { get; set; } = new List<string>();
-
+        /// <summary>
+        /// Konstruktør til Employee-klassen.
+        /// </summary>
+        /// <param name="yearsOfExperians"></param>
+        /// <param name="salary"></param>
+        /// <param name="qualifications"></param>
         public Employee(int yearsOfExperians, decimal salary, List<string> qualifications)
         {
             YearsOfExperians = yearsOfExperians;
@@ -17,6 +29,10 @@
 
         public Employee() { }
 
+        /// <summary>
+        /// Overrider ToString metoden for at returnere en streng repræsentation af Employee objektet.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             // Hvis der er nogle kvalifikationer, laver vi en tekst med dem adskilt med komma

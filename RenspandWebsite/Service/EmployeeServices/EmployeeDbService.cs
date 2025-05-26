@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Tls;
-using RenSpand_Eksamensprojekt;
+using RenspandWebsite.Models;
 using RenspandWebsite.EFDbContext;
 
 namespace RenspandWebsite.Service.EmployeeServices
