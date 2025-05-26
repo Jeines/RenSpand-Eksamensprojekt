@@ -14,7 +14,7 @@ namespace RenspandWebsite.EFDbContext
         {
             options.UseSqlServer(@"Data Source=mssql6.unoeuro.com;Initial Catalog=devnoter_dk_db_renspand;User ID=devnoter_dk;Password=dhcED6fzFnR3A94GyHxb;Encrypt=True;TrustServerCertificate=True;");
             //options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RenSpandDB; Integrated Security=True; Connect Timeout=30; Encrypt=False");
-            
+
         }
 
         /// <summary>  

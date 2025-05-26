@@ -34,9 +34,9 @@ namespace RenspandWebsite.Pages.Employee
         /// - Adresselisten (gade, by og postnummer)
         /// Hvis søgetermen er tom eller null, returneres alle ordrer.
         /// </remarks>
-        public void OnGet()
+        public async Task OnGet()
         {
-            Orders = _orderService.GetOrders().ToList();
+            Orders = (await _orderService.GetOrders()).ToList();
         }
 
         /// <summary>  
@@ -44,10 +44,10 @@ namespace RenspandWebsite.Pages.Employee
         /// </summary>  
         /// <param name="orderId">ID'et på den ordre, der skal accepteres.</param>  
         /// <returns>En omdirigering til den aktuelle side.</returns>  
-        public IActionResult OnPostAcceptOrder(int orderId)
+        public async Task<IActionResult> OnPostAcceptOrder(int orderId)
         {
             _orderService.AcceptOrder(orderId);
-            Orders = _orderService.GetOrders().ToList();
+            Orders = (await _orderService.GetOrders()).ToList();
             return RedirectToPage();
         }
         
@@ -57,14 +57,14 @@ namespace RenspandWebsite.Pages.Employee
         /// </summary>
         /// <param name="orderId">ID'et på den ordre, der skal afvises.</param>
         /// <returns>En omdirigering til den aktuelle side.</returns>
-        public IActionResult OnPostRejectOrder(int orderId)
+        public async Task<IActionResult> OnPostRejectOrder(int orderId)
         {
             _orderService.RejectOrder(orderId);
-            Orders = _orderService.GetOrders().ToList();
+            Orders = (await _orderService.GetOrders()).ToList();
             return RedirectToPage();
         }
 
-        public void OnPostSearch(string searchTerm)
+        public async Task OnPostSearch(string searchTerm)
         {
             // Gem søgetermen for brug i visningen
             SearchTerm = searchTerm;
@@ -95,7 +95,7 @@ namespace RenspandWebsite.Pages.Employee
             // Filtrer ordrer baseret på søgetermen
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                FilteredOrders = _orderService.GetOrders()
+                FilteredOrders = (await _orderService.GetOrders())
                     .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
                                 (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
@@ -106,30 +106,28 @@ namespace RenspandWebsite.Pages.Employee
             else
             {
                 // Hvis ingen søgeterm er angivet, returneres alle ordrer
-                FilteredOrders = _orderService.GetOrders().ToList(); // Konverter IEnumerable til List
+                FilteredOrders = (await _orderService.GetOrders()).ToList(); // Konverter IEnumerable til List
             }
         }
 
-        //TODO: use database istead og json
+       
         /// <summary>
         /// Saves a note to the order with the given orderId
         /// </summary>
         /// <param name="orderId"></param>
         /// <param name="note"></param>
-        //public void SaveNote(int orderId, string note)
-        //{
-        //    foreach (var order in _Orders)
-        //    {
-        //        if (order.Id == orderId)
-        //        {
-        //            order.EmployeeNote = note;
-        //            break;
-        //        }
-        //    }
-        //    JsonFileOrderService.SaveJsonObjects(_Orders);
-        //}
+        public async Task<IActionResult> OnPostSaveNote(int orderId, string note)
+        {
+           await _orderService.SaveNote(orderId, note);
+           return RedirectToPage();
 
-        // Kalder Orderservice metoden som skifter IsDone status på ordren og gemmer det i databasen
+        }
+
+        /// <summary>
+        /// Kalder Orderservice metoden som skifter IsDone status på ordren og gemmer det i databasen
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostToggleDoneAsync(int orderId)
         {
             await _orderService.ToggleDoneAsync(orderId);

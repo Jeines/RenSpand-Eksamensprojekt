@@ -54,24 +54,22 @@ namespace RenspandWebsite.Service.OrderServices
         /// Returnerer alle ordrer.
         /// </summary>
         /// <returns>Liste af ordrer</returns>
-        
-        public IEnumerable<Order> GetOrders()
+
+        public async Task<IEnumerable<Order>> GetOrders()
         {
+            try
             {
-                try
-                {
-                    return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
-                }
-                catch (AggregateException ex)
-                {
-                    Console.WriteLine("Fejl: " + ex.InnerException?.Message);
-                    Console.WriteLine("StackTrace: " + ex.InnerException?.StackTrace);
-                    throw;
-                }
+                var orders = await _orderDbService.GetOrdersWithJoinsAsync();
+                return orders.ToList();
             }
-            //return _orders;
-            //return _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+            catch (Exception ex)
+            {
+                Console.WriteLine("Fejl: " + ex.Message);
+                Console.WriteLine("StackTrace: " + ex.StackTrace);
+                throw;
+            }
         }
+
 
         /// <summary>
         /// Sætter status til Accepted for en ordre med et givent id og opdaterer ordren i databasen.
@@ -168,28 +166,33 @@ namespace RenspandWebsite.Service.OrderServices
             return totalPrice;
         }
 
-        
+
 
         /// <summary>
         /// Sætter en note til en ordre med et givent id og opdaterer ordren i databasen.
         /// </summary>
         /// <param name="Id">Ordre-id</param>
         /// <param name="note">Medarbejderens note</param>
-        //public void SaveNote(int Id, string note) 
-        //{
-        //    foreach (Order order in _orders)
-        //    {
-        //        if (order.Id == Id)
-        //        {
-        //            order.EmployeeNote = note;
-        //            _orderDbService.UpdateObjectAsync(order);
-        //            break;
-        //        }
-        //    }
-        //}
+        public async Task  SaveNote(int Id, string note)
+        {
+            foreach (Order order in _orders)
+            {
+                if (order.Id == Id)
+                {
+                    order.EmployeeNote = note;
+                    await _orderDbService.UpdateObjectAsync(order);
+                    break;
+                }
+            }
+        }
 
-        // ledder efter en ordre med et givet id og ændre IsDone status på ordren, hvis den er Accepted.
-        // Gemmer det i databasen
+        /// <summary>
+        /// ledder efter en ordre med et givet id og ændre IsDone status på ordren, hvis den er Accepted.
+        /// Gemmer det i databasen
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+
         public async Task ToggleDoneAsync(int orderId)
         {
             Order order = _orders.FirstOrDefault(o => o.Id == orderId);

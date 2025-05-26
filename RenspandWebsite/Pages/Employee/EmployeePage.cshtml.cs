@@ -14,15 +14,17 @@ namespace RenspandWebsite.Pages.Employee
         /// <summary>
         /// Indlæser alle ordrer, når siden indlæses med en GET-anmodning.
         /// </summary>
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Orders = _orderService.GetOrders().ToList();
+            Orders = (await _orderService.GetOrders()).ToList();
+
             foreach (var order in Orders)
             {
                 Console.WriteLine("Order ID: " + order.Id);
                 Console.WriteLine("Order Status: " + order.AcceptStatus);
             }
         }
+
 
         public EmployeePageModel(OrderService orderServices)
         {
