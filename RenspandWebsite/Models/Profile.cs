@@ -34,5 +34,14 @@ namespace RenspandWebsite.Models
         /// Initialiserer en ny instans af Profile uden angivne værdier.
         /// </summary>
         public Profile() { }
+
+        /// <summary>
+        /// Returnerer en strengrepræsentation af profilen, der inkluderer brugernavn, adgangskode og adresse.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Username: {Username}, Password: {Password}, Address: {Address?.ToString()}";
+        }
     }
 }
