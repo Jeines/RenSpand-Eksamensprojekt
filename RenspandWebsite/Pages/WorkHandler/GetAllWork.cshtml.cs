@@ -32,17 +32,10 @@ namespace RenspandWebsite.Pages.WorkHandler
 
 
         // Henter alle "Work"-objekter ved GET-request.
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Works = _workService.GetWorks();
+            Works = (List<Work>)await _workService.GetWorks();
         }
-
-        // Filtrerer "Work"-objekter baseret på prisinterval ved POST-request.
-        //public IActionResult OnPostPriceFilter()
-        //{
-        //    Works = _workService.PriceFilter(MaxPrice, MinPrice).ToList();
-        //    return Page();
-        //}
     }
 }
 

@@ -35,7 +35,7 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         [BindProperty]
         public string EmployeeQualificationsString { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsyc()
         {
             return Page();
         }

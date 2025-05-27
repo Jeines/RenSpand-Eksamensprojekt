@@ -36,9 +36,9 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// </summary>
         /// <param name="id">Id på produktet</param>
         /// <returns>Returnerer siden eller redirect hvis produktet ikke findes</returns>
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Product = _workService.GetWork(id);
+            Product = await _workService.GetWork(id);
             if (Product == null)
                 return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu
 
@@ -49,9 +49,11 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// Håndterer POST-anmodningen for at slette et produkt.
         /// </summary>
         /// <returns>Redirect til oversigt over produkter</returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            _workService.DeleteWork(Product.Id);
+            if (Product == null)
+                return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu
+            await _workService.DeleteWork(Product.Id);
             return RedirectToPage("GetAllProducts");
         }
     }

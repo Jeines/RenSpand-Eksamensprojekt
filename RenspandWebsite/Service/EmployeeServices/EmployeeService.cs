@@ -25,10 +25,15 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// Henter alle medarbejdere fra databasen.
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Employee>> GetEmployeesAsync()
+        
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync()
         {
-            return await _employeeDbService.GetAllEmployeesAsync();
+            return await _employeeDbService.GetObjectsAsync();
         }
+        //public async Task<List<Employee>> GetEmployeesAsync()
+        //{
+        //    return await _employeeDbService.GetObjectsAsync;
+        //}
 
         /// <summary>
         /// Henter en medarbejder fra databasen med det givne id.
@@ -37,7 +42,7 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task<Employee> GetEmployeeAsync(int id)
         {
-            return await _employeeDbService.GetEmployeeByIdAsync(id);
+            return await _employeeDbService.GetObjectByIdAsync(id);
         }
 
         /// <summary>
@@ -47,7 +52,7 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task AddEmployeeAsync(Employee employee)
         {
-            await _employeeDbService.AddEmployeeAsync(employee);
+            await _employeeDbService.AddObjectAsync(employee);
         }
 
         /// <summary>
@@ -57,7 +62,7 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            await _employeeDbService.UpdateEmployeeAsync(employee);
+            await _employeeDbService.UpdateObjectAsync(employee);
         }
 
         /// <summary>
@@ -67,7 +72,7 @@ namespace RenspandWebsite.Service.EmployeeServices
         /// <returns></returns>
         public async Task DeleteEmployeeAsync(int id)
         {
-            await _employeeDbService.DeleteEmployeeAsync(id);
+            await _employeeDbService.DeleteObjectAsync(id);
         }
 
     }

@@ -36,9 +36,9 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// </summary>
         /// <param name="id">Produktets id</param>
         /// <returns>Viser siden eller redirecter til NotFound</returns>
-        public IActionResult OnGet(int id)
+        public async  Task<IActionResult> OnGetAsync(int id)
         {
-            Product = _workService.GetWork(id);
+            Product = await _workService.GetWork(id);
             if (Product == null)
                 return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu
 
@@ -49,14 +49,16 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// Håndterer POST-anmodningen for at redigere et produkt.
         /// </summary>
         /// <returns>Redirecter til oversigtssiden hvis succes, ellers vises siden igen</returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            _workService.UpdateWork(Product);
+            if (Product == null)
+                return RedirectToPage("/NotFound"); // NotFound er ikke defineret endnu
+            // Opdater produktet i databasen
+            await _workService.UpdateWork(Product);
             return RedirectToPage("GetAllProducts");
         }
     }
