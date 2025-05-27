@@ -16,6 +16,7 @@ header {
 footer {
     /* farve til foooter */
     background-color: #32736D;
+    position: relative;
 }
 
 .BottonBackgroundColor {

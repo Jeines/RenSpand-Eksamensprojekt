@@ -47,6 +47,22 @@ namespace RenspandWebsite.Service.OrderServices
         }
 
         /// <summary>
+        /// Henter alle arbejder fra databasen asynkront, hvis de ikke allerede er hentet.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Work>> GetWorksAsync()
+        {
+            // Hvis Works er null, hent dem asynkront
+            if (Works == null)
+            {
+                // Hent works fra databasen
+                Works = await _orderDbService.GetAllWorksAsync();
+            }
+            // Returner listen af works
+            return await _orderDbService.GetAllWorksAsync();
+        }
+
+        /// <summary>
         /// Søger i listen af ordrer med parametrene navn, telefonnummer eller adresse.
         /// </summary>
         /// <param name="searchTerm">Søgetekst</param>

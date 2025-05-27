@@ -5,6 +5,7 @@ using RenspandWebsite.Models;
 using RenspandWebsite.Service.OrderServices;
 using RenspandWebsite.Service.ProfileServices;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 
 
@@ -86,7 +87,7 @@ namespace RenspandWebsite.Pages.OrderHandling
         /// <summary>
         /// Sætter værdierne for DateStart og TrashCanEmptyDate til dags dato og henter listen af arbejder fra OrderService.
         /// </summary>
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             // Henter Profil data hvis logget ind
             if (User.Identity.IsAuthenticated)
@@ -102,7 +103,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             DateStart = DateTime.Today;
             TrashCanEmptyDate = DateTime.Today;
 
-            WorkList = _orderService.Works;
+            WorkList = await _orderService.GetWorksAsync();
             WorkSelectList = WorkList.Select(s => new SelectListItem
             {
                 Value = s.Id.ToString(),
@@ -114,12 +115,12 @@ namespace RenspandWebsite.Pages.OrderHandling
         /// Håndterer POST-request fra formularen. Validerer model, gemmer OrderDraft i session og viderestiller til FinalizeOrder-siden.
         /// </summary>
         /// <returns>Redirect til FinalizeOrder eller returnerer siden ved fejl</returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 // Hvis model state er ugyldig, genopbyg WorkSelectList og returner til siden
-                WorkList = _orderService.Works;
+                WorkList = await _orderService.GetWorksAsync();
                 WorkSelectList = WorkList.Select(s => new SelectListItem
                 {
                     Value = s.Id.ToString(),
