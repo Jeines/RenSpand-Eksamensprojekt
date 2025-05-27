@@ -4,6 +4,7 @@ using RenspandWebsite.MockData;
 using RenspandWebsite.Models;
 using System.Linq.Expressions;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 
 namespace RenspandWebsite.Service.ProfileServices
 {
@@ -88,8 +89,39 @@ namespace RenspandWebsite.Service.ProfileServices
         /// <param name="profile">Profil objekt</param>
         public void AddProfile(Profile profile)
         {
-            Profiles.Add(profile);
-            _profileDbService.AddObjectAsync(profile).Wait();           
+            // Tjekker om brugeren allerede eksisterer
+            if (Profiles.Any(p => p.Username == profile.Username))
+            {
+                throw new InvalidUsernameException("Brugernavn findes allerede");
+            }
+
+            // Tjekker om Brugernavn er over 6 karakterer
+            if (profile.Username.Length < 6)
+            {
+                throw new InvalidUsernameException("Brugernavn skal være længere end 6 karakterer");
+            }
+
+            // Tjekker om password er længere end 8 karakterer
+            if (profile.Password.Length < 8)
+            {
+                throw new InvalidPasswordException("Password skal være længere end 8 karakterer");
+            }
+
+            // Tjekker om Email er i valid format
+            Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
+            if (!validateEmailRegex.IsMatch(profile.Email))
+            {
+                throw new InvalidEmailException("Email er ikke i korrekt format");
+            }
+            try
+            {
+                Profiles.Add(profile);
+                _profileDbService.AddObjectAsync(profile).Wait();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         /// <summary>

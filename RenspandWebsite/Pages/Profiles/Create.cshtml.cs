@@ -52,50 +52,46 @@ namespace RenspandWebsite.Pages.Profiles
         /// <returns>Redirect til profilside eller returnerer siden med fejl</returns>
         public IActionResult OnPost()
         {
-            // Tjekker om brugeren allerede eksisterer
-            if (_profileService.Profiles.Any(p => p.Username == UserName))
-            {
-                ModelState.AddModelError("UserName", "Username already exists.");
-                return Page();
-            }
-
-            // Tjekker om Brugernavn er over 6 karakterer
-            if (UserName.Length < 6)
-            {
-                ModelState.AddModelError("UserName", "Username must be at least 6 characters long.");
-                return Page();
-            }
-
-            // Tjekker om password er længere end 8 karakterer
-            if (Password.Length < 8)
-            {
-                ModelState.AddModelError("Password", "Password must be at least 8 characters long.");
-                return Page();
-            }
-
-            // Tjekker om Email er i valid format
-            Regex validateEmailRegex = new Regex("^\\S+@\\S+\\.\\S+$");
-            if (!validateEmailRegex.IsMatch(Email))
-            {
-                ModelState.AddModelError("Email", "Invalid email format.");
-                return Page();
-            }
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            Profile newProfile = new Profile
+            try
             {
-                Username = UserName,
-                Email = Email,
-                Role = RoleEnum.Private,
-                Password = passwordHasher.HashPassword(null, Password)
-            };
+                Profile newProfile = new Profile
+                {
+                    Username = UserName,
+                    Email = Email,
+                    Role = RoleEnum.Private,
+                    Password = passwordHasher.HashPassword(null, Password)
+                };
 
-            _profileService.AddProfile(newProfile);
+                _profileService.AddProfile(newProfile);
+            }
+            catch (InvalidUsernameException ex)
+            {
+                ModelState.AddModelError("UserName", ex.Message);
+                return Page();
 
+            }
+
+            catch (InvalidPasswordException ex)
+            {
+                ModelState.AddModelError("Password", ex.Message);
+                return Page();
+            }
+
+            catch (InvalidEmailException ex)
+            {
+                ModelState.AddModelError("Email", ex.Message);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return Page();
+            }
             return RedirectToPage("/Profiles/ProfileRedirection");
         }
     }
