@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RenspandWebsite.EFDbContext;
+using RenspandWebsite.Exceptions;
 using RenspandWebsite.MockData;
 using RenspandWebsite.Models;
 using System.Linq.Expressions;
@@ -8,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace RenspandWebsite.Service.ProfileServices
 {
-    public class ProfileService
+    public class ProfileService : IProfileService
     {
         public List<Profile> Profiles { get; set; }
 
