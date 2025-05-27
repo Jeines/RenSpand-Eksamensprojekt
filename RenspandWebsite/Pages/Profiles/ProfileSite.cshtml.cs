@@ -10,6 +10,7 @@ using System.Data;
 using System.Security.Claims;
 using RenspandWebsite.Service.ProfileServices;
 using RenspandWebsite.Models;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Profiles
 {
@@ -117,7 +118,7 @@ namespace RenspandWebsite.Pages.Profiles
         /// Opdaterer brugerens adgangskode.
         /// </summary>
         /// <returns>En IActionResult, der enten genindlæser siden eller viser valideringsfejl.</returns>
-        public IActionResult OnPostChangePassword()
+        public async Task<IActionResult> OnPostChangePassword()
         {
             // Fjerner validering for felter, der ikke er relevante for denne handling
             ModelState.Remove(nameof(Name));
@@ -135,7 +136,7 @@ namespace RenspandWebsite.Pages.Profiles
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Tjekker om den nuværende adgangskode er korrekt
-            bool validPassword = _profileService.ValidatePassword(userId, CurrentPassword);
+            bool validPassword = await _profileService.ValidatePassword(userId, CurrentPassword);
 
             // Hvis den nuværende adgangskode ikke er korrekt, tilføj en fejl til ModelState
             if (!validPassword)

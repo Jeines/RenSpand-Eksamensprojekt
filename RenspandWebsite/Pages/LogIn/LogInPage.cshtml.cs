@@ -27,7 +27,7 @@ namespace RenspandWebsite.Pages.LogIn
             _profileService = profileService;
         }
 
-        public void OnGet() { }
+        public async Task OnGetAsync() { }
         /// <summary>  
         /// Håndterer POST-anmodningen for login-siden.  
         /// Validerer brugerens legitimationsoplysninger og logger brugeren ind, hvis de er korrekte.  
@@ -36,7 +36,8 @@ namespace RenspandWebsite.Pages.LogIn
         public async Task<IActionResult> OnPost()
         {
             // Finder profilen ud fra brugernavnet og tjekker, om den eksisterer  
-            var profile = _profileService.Profiles.FirstOrDefault(p => p.Username == Username);
+            var profiles = await _profileService.GetProfilesAsync();
+            var profile = profiles.FirstOrDefault(p => p.Username == Username);
             if (profile == null)
             {
                 ErrorMessage = "Invalid attempt";

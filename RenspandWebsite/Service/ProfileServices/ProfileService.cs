@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace RenspandWebsite.Service.ProfileServices
 {
-    public class ProfileService : IProfileService
+    public class ProfileService
     {
         public List<Profile> Profiles { get; set; }
 
@@ -20,19 +20,27 @@ namespace RenspandWebsite.Service.ProfileServices
             _profileDbService = dbService;
 
             // Henter profilerne fra databasen
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            //Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
             
         }
+
+        public async Task<IEnumerable<Profile>> GetProfilesAsync()
+        {
+            // Henter profilerne fra databasen
+            return await _profileDbService.GetObjectsAsync();
+        }
+
+
         /// <summary>
         /// Validerer om passworded til en bruger er korrekt.
         /// </summary>
         /// <param name="id">Id'et på Profilen </param>
         /// <param name="inputPassword">Adgangskode i hash'et format</param>
         /// <returns></returns>
-        public bool ValidatePassword(int id, string inputPassword)
+        public async Task<bool> ValidatePassword(int id, string inputPassword)
         {
             // opdaterer listen af profiler
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            Profiles = (List<Profile>)await GetProfilesAsync();
 
             // Finder profilen med det givne id
             Profile profile = Profiles.FirstOrDefault(p => p.Id == id);
