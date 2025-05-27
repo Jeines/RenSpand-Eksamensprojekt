@@ -35,6 +35,7 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// Håndterer GET-anmodningen for at oprette et nyt produkt.
         /// </summary>
         /// <returns></returns>
+        
         public IActionResult OnGet()
         {
             return Page();
@@ -44,13 +45,13 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// Håndterer POST-anmodningen for at oprette et nyt produkt.
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _workService.AddWork(Product);
+            await _workService.AddWork(Product);
             return RedirectToPage("GetAllProducts");
         }
     }

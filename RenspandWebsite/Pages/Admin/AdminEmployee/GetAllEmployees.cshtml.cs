@@ -29,7 +29,8 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// </summary>
         public async Task OnGetAsync()
         {
-            Employees = await _employeeService.GetEmployeesAsync();
+            // Hent alle medarbejdere fra databasen
+            Employees = (List<Models.Employee>)await _employeeService.GetEmployeesAsync();
         }
     }
 }

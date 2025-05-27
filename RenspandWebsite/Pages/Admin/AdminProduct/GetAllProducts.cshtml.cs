@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Models;
 using RenspandWebsite.Service;
+using RenspandWebsite.Service.EmployeeServices;
 using RenspandWebsite.Service.WorkServices;
 
 namespace RenspandWebsite.Pages.Admin.AdminProduct
@@ -47,9 +48,10 @@ namespace RenspandWebsite.Pages.Admin.AdminProduct
         /// <summary>
         /// Håndterer GET-anmodningen for at hente alle produkter.
         /// </summary>
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Products = _workService.GetWorks();
+            // Hent alle produkter fra databasen
+            Products =  (List<Work>)await _workService.GetWorks();
         }
 
         /// <summary>

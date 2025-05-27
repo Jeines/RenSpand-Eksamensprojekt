@@ -53,25 +53,10 @@ namespace RenspandWebsite.Pages.Admin.AdminEmployee
         /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
-            // Validering af model
-            if (!ModelState.IsValid)
-            {
-                // Log fejlene
-                foreach (var modelState in ModelState)
-                {
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Fejl i felt '{modelState.Key}': {error.ErrorMessage}");
-                    }
-                }
-                return Page();
-            }
-            // Hent medarbejderen fra databasen
-            var employee = await _employeeService.GetEmployeeAsync(Employee.Id);
 
             // Hvis medarbejderen ikke findes, returner til NotFound siden
-            if (employee == null)
-                return RedirectToPage("/NotFound"); // Husk at oprette denne side
+            if (Employee == null)
+                return RedirectToPage("/NotFound"); // TODO: Husk at oprette denne side
 
             // Slet medarbejderen
             await _employeeService.DeleteEmployeeAsync(Employee.Id);

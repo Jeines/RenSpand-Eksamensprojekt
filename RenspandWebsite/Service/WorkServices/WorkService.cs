@@ -24,9 +24,10 @@ namespace RenspandWebsite.Service.WorkServices
         /// Henter alle Work-objekter fra databasen.
         /// </summary>
         /// <returns>Liste af Work-objekter.</returns>
-        public List<Work> GetWorks()
+        
+        public async Task<IEnumerable<Work>> GetWorks()
         {
-            return _workDbService.GetObjectsAsync().Result.ToList();
+            return await _workDbService.GetObjectsAsync();
         }
 
         /// <summary>
@@ -34,36 +35,36 @@ namespace RenspandWebsite.Service.WorkServices
         /// </summary>
         /// <param name="id">Id på Work-objektet.</param>
         /// <returns>Work-objektet.</returns>
-        public Work GetWork(int id)
+        public async Task<Work> GetWork(int id)
         {
-            return _workDbService.GetObjectByIdAsync(id).Result;
+            return await _workDbService.GetObjectByIdAsync(id);
         }
 
         /// <summary>
         /// Opdaterer et eksisterende Work-objekt i databasen.
         /// </summary>
         /// <param name="work">Work-objektet der skal opdateres.</param>
-        public void UpdateWork(Work work)
+        public async Task UpdateWork(Work work)
         {
-            _workDbService.UpdateObjectAsync(work).Wait();
+            await _workDbService.UpdateObjectAsync(work);
         }
 
         /// <summary>
         /// Tilføjer et nyt Work-objekt til databasen.
         /// </summary>
         /// <param name="work">Work-objektet der skal tilføjes.</param>
-        public void AddWork(Work work)
+        public async Task AddWork(Work work)
         {
-            _workDbService.AddObjectAsync(work).Wait();
+            await _workDbService.AddObjectAsync(work);
         }
 
         /// <summary>
         /// Sletter et Work-objekt fra databasen ud fra dets id.
         /// </summary>
         /// <param name="id">Id på Work-objektet der skal slettes.</param>
-        public void DeleteWork(int id)
+        public async Task DeleteWork(int id)
         {
-            _workDbService.DeleteObjectAsync(id).Wait();
+           await _workDbService.DeleteObjectAsync(id);
         }
 
         /// <summary>
