@@ -28,5 +28,14 @@
         /// Default konstruktør til at initialisere en FAQ instans.
         /// </summary>
         public FAQ() { }
+
+        /// <summary>
+        /// Returnerer en strengrepræsentation af FAQ'en, der inkluderer id, spørgsmål og svar.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Id: {Id}, Spørgsmål: {Question}, Svar: {Answer}";
+        }
     }
 }

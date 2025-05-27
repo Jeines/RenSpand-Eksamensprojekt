@@ -37,5 +37,14 @@ namespace RenspandWebsite.Models
         /// Default konstruktør til at initialisere en Work instans.
         /// </summary>
         public Work() { }
+
+        /// <summary>
+        /// Returnerer en strengrepræsentation af arbejdet, der inkluderer id, navn, beskrivelse og pris.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Id: {Id}, Navn: {Name}, Beskrivelse: {Description}, Pris: {Price}";
+        }
     }
 }
