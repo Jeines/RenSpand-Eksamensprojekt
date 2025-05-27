@@ -35,5 +35,14 @@ namespace RenspandWebsite.Models
         }
 
         public Address() { }
+
+        /// <summary>
+        /// Returnerer en strengrepræsentation af adressen, der inkluderer gadenavn, by og postnummer.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Gade: {Street}, By: {City}, Post Nummer: {ZipCode}";
+        }
     }
 }
