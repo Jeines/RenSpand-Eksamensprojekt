@@ -21,7 +21,7 @@ namespace RenSpandTest
         }
 
         [TestMethod]
-        public void ValidInput_AddsProfileSuccessfully()
+        public void ValidInput()
         {
             // Arrange
             var profile = new Profile
