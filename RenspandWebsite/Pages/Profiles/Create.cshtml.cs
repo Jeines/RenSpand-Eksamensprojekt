@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.EFDbContext;
+using RenspandWebsite.Exceptions;
 using RenspandWebsite.Models;
 using RenspandWebsite.Service;
 using RenspandWebsite.Service.ProfileServices;

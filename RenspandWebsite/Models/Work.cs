@@ -46,4 +46,5 @@ namespace RenspandWebsite.Models
         {
             return $"Id: {Id}, Navn: {Name}, Beskrivelse: {Description}, Pris: {Price}";
         }
+    }
 }

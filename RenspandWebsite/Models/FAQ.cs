@@ -37,4 +37,5 @@
         {
             return $"Id: {Id}, Spørgsmål: {Question}, Svar: {Answer}";
         }
+    }
 }
