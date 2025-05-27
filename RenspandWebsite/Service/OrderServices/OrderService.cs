@@ -19,15 +19,30 @@ namespace RenspandWebsite.Service.OrderServices
         public OrderService(OrderDbService orderDbService)
         {
             _orderDbService = orderDbService;
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result; // Use .Result to resolve the Task
-            Works = _orderDbService.GetAllWorksAsync().Result; // Use .Result to resolve the Task
         }
 
+        /// <summary>
+        /// Initialiserer OrderService ved at hente ordrer og arbejder fra databasen asynkront.
+        /// </summary>
+        /// <returns></returns>
+        public async Task InitAsync()
+        {
+            // Initialiserer _orders og Works asynkront
+            _orders = await _orderDbService.GetOrdersWithJoinsAsync();
+            Works = await _orderDbService.GetAllWorksAsync();
+
+        }
+
+        /// <summary>
+        /// Opretter en ny instans af OrderService og initialiserer den asynkront med en OrderDbService.
+        /// </summary>
+        /// <param name="orderDbService"></param>
+        /// <returns></returns>
         public static async Task<OrderService> CreateAsync(OrderDbService orderDbService)
         {
+            
             var service = new OrderService(orderDbService);
-            service._orders = await orderDbService.GetOrdersWithJoinsAsync();
-            service.Works = await orderDbService.GetAllWorksAsync();
+            await service.InitAsync();
             return service;
         }
 
@@ -64,6 +79,7 @@ namespace RenspandWebsite.Service.OrderServices
             }
             catch (Exception ex)
             {
+                // TODO: Log fejl her
                 Console.WriteLine("Fejl: " + ex.Message);
                 Console.WriteLine("StackTrace: " + ex.StackTrace);
                 throw;
@@ -75,33 +91,52 @@ namespace RenspandWebsite.Service.OrderServices
         /// Sætter status til Accepted for en ordre med et givent id og opdaterer ordren i databasen.
         /// </summary>
         /// <param name="id">Ordre-id</param>
-        public void AcceptOrder(int id)
+        public async Task AcceptOrder(int id)
         {
-            foreach (Order order in _orders)
+            // Hvis _orders er null, hent ordrer asynkront
+            if (_orders == null)
             {
-                if (order.Id == id)
-                {
-                    order.AcceptStatus = AcceptStatusEnum.Accepted;
-                    _orderDbService.UpdateObjectAsync(order);
-                    break;
-                }
+                // Hent ordrer fra databasen
+                _orders = await _orderDbService.GetOrdersWithJoinsAsync();
             }
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
+            // Find ordren med det givne id
+            var order = _orders.FirstOrDefault(o => o.Id == id);
+            // Hvis ordren findes, opdater AcceptStatus og gem den i databasen
+            if (order != null)
+            {
+                // Sæt AcceptStatus til Accepted
+                order.AcceptStatus = AcceptStatusEnum.Accepted;
+                // Opdater ordren i databasen
+                await _orderDbService.UpdateObjectAsync(order);
+                // Genindlæs ordrer asynkront
+                _orders = await _orderDbService.GetOrdersWithJoinsAsync();
+            }
         }
 
         /// <summary>
         /// Sætter status til Rejected for en ordre med et givent id og opdaterer ordren i databasen.
         /// </summary>
         /// <param name="id">Ordre-id</param>
-        public void RejectOrder(int id)
+        public async Task RejectOrder(int id)
         {
-            Order order = _orders.FirstOrDefault(o => o.Id == id);
+            // Hvis _orders er null, hent ordrer asynkront
+            if (_orders == null)
+            {
+                // Hent ordrer fra databasen
+                _orders = await _orderDbService.GetOrdersWithJoinsAsync();
+            }
+            // Find ordren med det givne id
+            var order = _orders.FirstOrDefault(o => o.Id == id);
+            // Hvis ordren findes, opdater AcceptStatus og gem den i databasen
             if (order != null)
             {
+                // Sæt AcceptStatus til Rejected
                 order.AcceptStatus = AcceptStatusEnum.Rejected;
-                _orderDbService.UpdateObjectAsync(order);
+                // Opdater ordren i databasen
+                await _orderDbService.UpdateObjectAsync(order);
+                // Genindlæs ordrer asynkront
+                _orders = await _orderDbService.GetOrdersWithJoinsAsync();
             }
-            _orders = _orderDbService.GetOrdersWithJoinsAsync().Result.ToList();
         }
 
         /// <summary>

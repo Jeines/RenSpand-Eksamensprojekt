@@ -34,7 +34,7 @@ namespace RenspandWebsite.Pages.Employee
         /// - Adresselisten (gade, by og postnummer)
         /// Hvis søgetermen er tom eller null, returneres alle ordrer.
         /// </remarks>
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             Orders = (await _orderService.GetOrders()).ToList();
         }
@@ -46,7 +46,7 @@ namespace RenspandWebsite.Pages.Employee
         /// <returns>En omdirigering til den aktuelle side.</returns>  
         public async Task<IActionResult> OnPostAcceptOrder(int orderId)
         {
-            _orderService.AcceptOrder(orderId);
+            await _orderService.AcceptOrder(orderId);
             Orders = (await _orderService.GetOrders()).ToList();
             return RedirectToPage();
         }
@@ -59,7 +59,7 @@ namespace RenspandWebsite.Pages.Employee
         /// <returns>En omdirigering til den aktuelle side.</returns>
         public async Task<IActionResult> OnPostRejectOrder(int orderId)
         {
-            _orderService.RejectOrder(orderId);
+            await _orderService.RejectOrder(orderId);
             Orders = (await _orderService.GetOrders()).ToList();
             return RedirectToPage();
         }
