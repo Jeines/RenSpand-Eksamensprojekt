@@ -54,6 +54,7 @@ namespace RenspandWebsite.Pages.Profiles
         {
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("!ModelState.IsValid");
                 return Page();
             }
 
@@ -68,27 +69,33 @@ namespace RenspandWebsite.Pages.Profiles
                 };
 
                 _profileService.AddProfile(newProfile);
+                Console.WriteLine(newProfile);
             }
             catch (InvalidUsernameException ex)
             {
+                Console.WriteLine(ex.Message);
                 ModelState.AddModelError("UserName", ex.Message);
                 return Page();
+
 
             }
 
             catch (InvalidPasswordException ex)
             {
+                Console.WriteLine(ex.Message);
                 ModelState.AddModelError("Password", ex.Message);
                 return Page();
             }
 
             catch (InvalidEmailException ex)
             {
+                Console.WriteLine(ex.Message);
                 ModelState.AddModelError("Email", ex.Message);
                 return Page();
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ModelState.AddModelError("", ex.Message);
                 return Page();
             }
