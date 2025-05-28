@@ -108,3 +108,24 @@ footer {
     box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.1);
     background-color: #f8f9fa;
 }
+
+.status-pending {
+    background-color: #fff3cd;
+}
+
+.status-accepted {
+    background-color: #d4edda;
+}
+
+.status-rejected {
+    background-color: #f8d7da;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.custom-navbar {
+    background-color: #32736D !important;
+    color: white !important;
+}

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Models;
 using RenspandWebsite.Service.OrderServices;
+using System.Linq;
 
 namespace RenspandWebsite.Pages.Employee
 {
@@ -37,6 +38,7 @@ namespace RenspandWebsite.Pages.Employee
         public async Task OnGetAsync()
         {
             Orders = (await _orderService.GetOrders()).ToList();
+            Orders = Orders.OrderByDescending(o => o.Id).ToList(); // Sorter ordrer efter CreatedAt i faldende rækkefølge
         }
 
         /// <summary>  

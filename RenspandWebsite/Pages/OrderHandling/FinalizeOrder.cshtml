@@ -1,7 +1,7 @@
 ﻿@page
 @model RenspandWebsite.Pages.OrderHandling.FinalizeOrderModel
 
-<h1>Finalize Your Order</h1>
+<h1>Færdiggøre din Order</h1>
 
 <form method="post">
     @for (int i = 0; i < Model.SelectedWorks.Count; i++)
@@ -10,15 +10,15 @@
         <div>
             <h3>@work.Name</h3>
             <p>@work.Description</p>
-            <p>Price: @work.Price kr.</p>
+            <p>Pris: @work.Price kr.</p>
 
             <input type="hidden" name="WorkAndAmount[@i][0]" value="@work.Id" />
-            <label for="workAmount_@i">Amount for @work.Name:</label>
+            <label for="workAmount_@i">Antal af @work.Name:</label>
             <input type="number" id="workAmount_@i" name="WorkAndAmount[@i][1]" min="1" value="1" />
         </div>
     }
     <div class="form-group mt-4">
-        <label for="customerNote">Ekstra noter til Order (Optional):</label>
+        <label for="customerNote">Ekstra noter til Order (Valgfrit):</label>
         <textarea id="customernote"
             name="CustomerNote"
             class="form-control"
@@ -29,5 +29,5 @@
     </div>
 
 
-    <button type="submit">Complete Order</button>
+    <button class="btn-success" type="submit">Færdiggøre Order</button>
 </form>

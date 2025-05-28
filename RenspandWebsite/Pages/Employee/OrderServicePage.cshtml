@@ -2,106 +2,115 @@
 @using RenspandWebsite.Models
 @model RenspandWebsite.Pages.Employee.OrderServicePageModel
 <link rel="stylesheet" href="~/css/OrderServiceStyleSheet.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-<h1>Ordreliste</h1>
+<div class="row mb-5">
+    <div class="col-md-12">
+        
+    <h1 class="mb-4">Ordreliste</h1>
 
-<form method="post" asp-page-handler="Search"  class="search-form">
-    <input type="text" name="searchTerm" value="@Model.SearchTerm" placeholder="Søg efter navn, telefon eller adresse..." class="search-input" />
-    <button type="submit" class="search-button">Søg</button>
-</form>
-
-@if (Model.Orders.Count <= 0)
-{
-    <p>Ingen ordrer fundet.</p>
-}
-else
-{
-    <table class="order-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Køber</th>
-                <th>Services</th>
-                <th>Adresse</th>
-                <th>Pris</th>
-                <th>Startdato</th>
-                <th>Slutdato</th>
-                <th>Status</th>
-                <th>Noter (Medarbejder)</th>
-                <th>Noter (Bruger)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model.Orders)
-            {
-                var rowClass = order.AcceptStatus switch
-                {
-                    AcceptStatusEnum.Pending => "status-pending",
-                    AcceptStatusEnum.Accepted => "status-accepted",
-                    AcceptStatusEnum.Rejected => "status-rejected",
-                    _ => "status-unknown"
-                };
-
-                <tr class="@rowClass">
-                    <td>@order.Id</td>
-                    <td>@order.Buyer?.Name</td>
-                    <td>
-                        @foreach (var service in order.ServiceItems)
+    <form method="post" asp-page-handler="Search" class="form-inline mb-4">
+        <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control mr-2 flex-grow-1" placeholder="Søg efter navn, telefon eller adresse..." />
+        <button type="submit" class="btn btn-primary">Søg</button>
+    </form>
+    @if (Model.Orders.Count <= 0)
+    {
+        <div class="alert alert-info">Ingen ordrer fundet.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Køber</th>
+                        <th>Services</th>
+                        <th>Adresse</th>
+                        <th>Pris</th>
+                        <th>Startdato</th>
+                        <th>Slutdato</th>
+                        <th>Status</th>
+                        <th>Afslut</th>
+                        <th>Noter (Medarbejder)</th>
+                        <th>Noter (Bruger)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        string statusClass = order.AcceptStatus switch
                         {
-                            <span>@service.ServiceWork?.Name</span>
-                            <br />
-                        }
-                    </td>
-                    <td>
-                         @foreach (var address in order.AddressItems)
-                         {
-                             <span>@address.Address.Street, @address.Address.City, @address.Address.ZipCode</span>
+                            AcceptStatusEnum.Pending => "badge badge-warning",
+                            AcceptStatusEnum.Accepted => "badge badge-success",
+                            AcceptStatusEnum.Rejected => "badge badge-danger",
+                            _ => "badge badge-secondary"
+                        };
 
-                             <br />
-                        }
-                    </td>
-                    <td>@order.TotalPrice.ToString("C")</td>
-                    <td>@order.DateStart.ToString("dd-MM-yyyy")</td>
-                    <td>@order.DateDone.ToString("dd-MM-yyyy")</td>
-                    <td>
-                        @if (order.AcceptStatus == AcceptStatusEnum.Pending)
-                        {
-                            <form method="post" asp-page-handler="AcceptOrder">
-                                <input type="hidden" name="orderId" value="@order.Id" />
-                                <button class="btn btn-success btn-sm" type="submit" title="Accept">
-                                    <i class="fa fa-check"></i> Accept
-                                </button>
-                            </form>
-
-                            <form method="post" asp-page-handler="RejectOrder">
-                                <input type="hidden" name="orderId" value="@order.Id" />
-                                <button class="btn btn-danger btn-sm" type="submit" title="Reject">
-                                    <i class="fa fa-trash"></i> Reject
-                                </button>
-                            </form>
-                        }
-
-                    </td>
-                    <td>
-                        <form method="post" asp-page-handler="ToggleDone">
-                            <input type="hidden" name="orderId" value="@order.Id" />
-                            <button type="submit" class="btn btn-sm @(order.IsDone ? "btn-success" : "btn-warning")">
-                                @(order.IsDone ? "Færdig" : "Ikke færdig - klik for at færdiggøre")
-                            </button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" asp-page-handler="SaveNote">
-                            <input type="hidden" name="orderId" value="@order.Id" />
-                            <textarea name="note" class="form-control">@order.EmployeeNote</textarea>
-                            <button class="btn btn-primary btn-sm mt-1" type="submit">Save Notes</button>
-                        </form>
-                    </td>
-                    <td>
-                        <textarea class="form-control" readonly>@order.CustomerNote</textarea>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.Buyer?.Name</td>
+                            <td>
+                                @foreach (var service in order.ServiceItems)
+                                {
+                                    <div>@service.ServiceWork?.Name</div>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var address in order.AddressItems)
+                                {
+                                    <div>@address.Address.Street, @address.Address.City, @address.Address.ZipCode</div>
+                                }
+                            </td>
+                            <td>@order.TotalPrice.ToString("C")</td>
+                            <td>@order.DateStart.ToString("dd-MM-yyyy")</td>
+                            <td>@order.DateDone.ToString("dd-MM-yyyy")</td>
+                            <td>
+                                @if (order.AcceptStatus == AcceptStatusEnum.Pending)
+                                {
+                                    <div class="d-flex flex-column">
+                                        <form method="post" asp-page-handler="AcceptOrder" class="mb-1">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <button class="btn btn-success btn-sm" type="submit" title="Accept">
+                                                <i class="fa fa-check"></i> Accept
+                                            </button>
+                                        </form>
+                                        <form method="post" asp-page-handler="RejectOrder">
+                                            <input type="hidden" name="orderId" value="@order.Id" />
+                                            <button class="btn btn-danger btn-sm" type="submit" title="Reject">
+                                                <i class="fa fa-times"></i> Afvis
+                                            </button>
+                                        </form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="@statusClass">@order.AcceptStatus</span>
+                                }
+                            </td>
+                            <td>
+                                <form method="post" asp-page-handler="ToggleDone">
+                                    <input type="hidden" name="orderId" value="@order.Id" />
+                                    <button type="submit" class="btn btn-sm @(order.IsDone ? "btn-success" : "btn-warning")">
+                                        @(order.IsDone ? "Færdig" : "Ikke færdig")
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" asp-page-handler="SaveNote">
+                                    <input type="hidden" name="orderId" value="@order.Id" />
+                                    <textarea name="note" class="form-control mb-2" rows="2">@order.EmployeeNote</textarea>
+                                    <button class="btn btn-primary btn-sm" type="submit">Gem</button>
+                                </form>
+                            </td>
+                            <td>
+                                <textarea class="form-control" rows="2" readonly>@order.CustomerNote</textarea>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    </div>
+</div>
