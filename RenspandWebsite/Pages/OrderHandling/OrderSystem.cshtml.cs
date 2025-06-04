@@ -93,7 +93,7 @@ namespace RenspandWebsite.Pages.OrderHandling
             if (User.Identity.IsAuthenticated)
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var profile = _profileService.GetUserData(int.Parse(userIdClaim));
+                var profile = await _profileService.GetUserDataAsync(int.Parse(userIdClaim));
                 Name = profile.Name;
                 Email = profile.Email;
                 PhoneNumber = profile.PhoneNumber;

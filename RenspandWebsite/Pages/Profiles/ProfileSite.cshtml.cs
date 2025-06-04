@@ -55,7 +55,7 @@ namespace RenspandWebsite.Pages.Profiles
         {
             _profileService = profileService;
         }
-        public void OnGet()
+        public async void OnGetAsync()
         {
             //Tjekker om brugeren er logget ind
             if (!User.Identity.IsAuthenticated)
@@ -67,7 +67,7 @@ namespace RenspandWebsite.Pages.Profiles
             var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // Henter id'et fra brugeren der er logget ind
-            var user = _profileService.GetUserData(int.Parse(userIdClaim));
+            var user = await _profileService.GetUserDataAsync(int.Parse(userIdClaim));
 
             // sætter felter på siden til brugerens data
             Username = user.Username;

@@ -62,14 +62,15 @@ namespace RenspandWebsite.Service.ProfileServices
         /// </summary>
         /// <param name="id">Id'et på Profilen</param>
         /// <returns></returns>
-        public Profile GetUserData(int id)
+        public async Task<Profile> GetUserDataAsync(int id)
         {
-            // opdaterer listen af profiler
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            // Opdaterer listen af profiler
+            var profiles = await GetProfilesAsync();
 
             // Returnerer profilen med det givne id
-            return Profiles.FirstOrDefault(p => p.Id == id);
+            return profiles.FirstOrDefault(p => p.Id == id);
         }
+
 
         /// <summary>
         /// Opdaterer brugerens data i databasen og opdaterer listen af profiler.
