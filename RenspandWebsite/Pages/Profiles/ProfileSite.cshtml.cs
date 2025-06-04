@@ -55,7 +55,7 @@ namespace RenspandWebsite.Pages.Profiles
         {
             _profileService = profileService;
         }
-        public async void OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             //Tjekker om brugeren er logget ind
             if (!User.Identity.IsAuthenticated)
@@ -74,6 +74,8 @@ namespace RenspandWebsite.Pages.Profiles
             Email = user.Email;
             PhoneNumber = user.PhoneNumber;
             Name = user.Name;
+
+            return Page();
         }
 
         /// <summary>

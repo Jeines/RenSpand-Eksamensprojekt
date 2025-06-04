@@ -18,10 +18,6 @@ namespace RenspandWebsite.Service.ProfileServices
         public ProfileService(ProfileDbService dbService)
         {
             _profileDbService = dbService;
-
-            // Henter profilerne fra databasen
-            //Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
-            
         }
 
         public async Task<IEnumerable<Profile>> GetProfilesAsync()

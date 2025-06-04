@@ -20,47 +20,35 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-// add services profile
-builder.Services.AddSingleton<ProfileService, ProfileService>();
-builder.Services.AddTransient<DbService<Profile>, DbService<Profile>>(); // Assuming you have a DbService for Profile   
-builder.Services.AddTransient<ProfileDbService, ProfileDbService>();
-builder.Services.AddTransient<DbService<Profile>>();
+// Profile service intialization
+builder.Services.AddScoped<DbService<Profile>>();
+builder.Services.AddScoped<ProfileDbService>();
+builder.Services.AddScoped<ProfileService>();
 
-// add services employee
-builder.Services.AddTransient<DbService<Employee>, DbService<Employee>>(); // Assuming you have a DbService for Employee
-builder.Services.AddSingleton<EmployeeService, EmployeeService>();
-builder.Services.AddTransient<EmployeeDbService, EmployeeDbService>();
+// Employee service initialization
+builder.Services.AddScoped<DbService<Employee>>();
+builder.Services.AddScoped<EmployeeDbService>();
+builder.Services.AddScoped<EmployeeService>();
 
+// About Us service initialization
+builder.Services.AddScoped<DbService<AboutUs>>();
+builder.Services.AddScoped<AboutUsDbServices>();
+builder.Services.AddScoped<AboutUsService>();
 
+// FAQ service initialization
+builder.Services.AddScoped<DbService<FAQ>>();
+builder.Services.AddScoped<FaqDbService>();
+builder.Services.AddScoped<FaqService>();
 
-// add services aboutUs
-builder.Services.AddSingleton<AboutUsService, AboutUsService>();
-builder.Services.AddTransient<DbService<AboutUs>, DbService<AboutUs>>(); // Assuming you have a DbService for AboutUs
-builder.Services.AddTransient<AboutUsDbServices, AboutUsDbServices>();
+// Work service initialization
+builder.Services.AddScoped<DbService<Work>>();
+builder.Services.AddScoped<WorkDbService>();
+builder.Services.AddScoped<WorkService>();
 
-// add services FAQ
-builder.Services.AddTransient<DbService<FAQ>, DbService<FAQ>>();
-builder.Services.AddSingleton<FaqService, FaqService>();
-builder.Services.AddTransient<FaqDbService, FaqDbService>();
-
-// add services Work
-builder.Services.AddTransient<WorkService, WorkService>();
-builder.Services.AddTransient<WorkDbService, WorkDbService>();
-builder.Services.AddTransient<DbService<Work>, DbService<Work>>(); // Assuming you have a DbService for Work
-
-//builder.Services.AddTransient<DbService<Order>, DbService<Order>>();
-
-// add services Order
-builder.Services.AddSingleton<OrderService, OrderService>();
-builder.Services.AddTransient<OrderDbService, OrderDbService>();
-builder.Services.AddTransient<DbService<Order>, DbService<Order>>(); // Assuming you have a DbService for Order
-
-
-// add services JsonFileService
-builder.Services.AddSingleton<JsonFileService<Work>>();
-builder.Services.AddTransient<JsonFileService<Profile>>();
-builder.Services.AddTransient<JsonFileService<Employee>>();
-builder.Services.AddTransient<JsonFileService<Order>>();
+// Order service initialization
+builder.Services.AddScoped<DbService<Order>>();
+builder.Services.AddScoped<OrderDbService>();
+builder.Services.AddScoped<OrderService>();
 
 // Add session
 builder.Services.AddDistributedMemoryCache();
@@ -72,7 +60,7 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddSingleton<EmailServicecs, EmailServicecs>();
-builder.Services.AddScoped<EmailServicecs>();
+
 
 
 
