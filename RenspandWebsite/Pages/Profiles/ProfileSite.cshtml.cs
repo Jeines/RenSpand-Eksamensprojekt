@@ -87,6 +87,8 @@ namespace RenspandWebsite.Pages.Profiles
             // Fjerner validering for felter, der ikke er relevante for denne handling
             ModelState.Remove(nameof(Username));
             ModelState.Remove(nameof(Email));
+            ModelState.Remove(nameof(PhoneNumber));
+            ModelState.Remove(nameof(Name));
             ModelState.Remove(nameof(CurrentPassword));
             ModelState.Remove(nameof(NewPassword));
             ModelState.Remove(nameof(ConfirmPassword));

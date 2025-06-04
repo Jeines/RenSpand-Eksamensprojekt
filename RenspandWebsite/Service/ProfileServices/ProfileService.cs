@@ -11,7 +11,6 @@ namespace RenspandWebsite.Service.ProfileServices
 {
     public class ProfileService
     {
-        public List<Profile> Profiles { get; set; }
 
         private readonly ProfileDbService _profileDbService;
 
@@ -36,10 +35,10 @@ namespace RenspandWebsite.Service.ProfileServices
         public async Task<bool> ValidatePassword(int id, string inputPassword)
         {
             // opdaterer listen af profiler
-            Profiles = (List<Profile>)await GetProfilesAsync();
+            var profiles = (List<Profile>)await GetProfilesAsync();
 
             // Finder profilen med det givne id
-            Profile profile = Profiles.FirstOrDefault(p => p.Id == id);
+            Profile profile = profiles.FirstOrDefault(p => p.Id == id);
             // Hvis profilen findes, validerer vi adgangskoden
             if (profile != null)
             {
@@ -73,10 +72,11 @@ namespace RenspandWebsite.Service.ProfileServices
         /// </summary>
         /// <param name="id">Id'et på Profilen</param>
         /// <param name="profile"></param>
-        public void UpdateUserData(int id, Profile profile)
+        public async Task UpdateUserData(int id, Profile profile)
         {
+            var profiles = (List<Profile>)await GetProfilesAsync();
             // Find the profile with the given ID
-            RenspandWebsite.Models.Profile existingProfile = Profiles.FirstOrDefault(p => p.Id == id);
+            Profile existingProfile = profiles.FirstOrDefault(p => p.Id == id);
             if (existingProfile != null)
             {
                 existingProfile.PhoneNumber = profile.PhoneNumber;
@@ -85,18 +85,17 @@ namespace RenspandWebsite.Service.ProfileServices
 
                 _profileDbService.UpdateObjectAsync(existingProfile).Wait();
             }
-            // Opdaterer listen af profiler
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
         }
 
         /// <summary>
         /// tilføjer en ny profil til databasen og opdaterer listen af profiler.
         /// </summary>
         /// <param name="profile">Profil objekt</param>
-        public void AddProfile(Profile profile)
+        public async Task AddProfile(Profile profile)
         {
+            var profiles = (List<Profile>)await GetProfilesAsync();
             // Tjekker om brugeren allerede eksisterer
-            if (Profiles.Any(p => p.Username == profile.Username))
+            if (profiles.Any(p => p.Username == profile.Username))
             {
                 throw new InvalidUsernameException("Brugernavn findes allerede");
             }
@@ -121,8 +120,7 @@ namespace RenspandWebsite.Service.ProfileServices
             }
             try
             {
-                Profiles.Add(profile);
-                _profileDbService.AddObjectAsync(profile).Wait();
+                await _profileDbService.AddObjectAsync(profile);
             }
             catch (Exception ex)
             {
@@ -135,7 +133,7 @@ namespace RenspandWebsite.Service.ProfileServices
         /// </summary>
         /// <param name="id">Id'et på Profilen</param>
         /// <param name="newPassword">Nyt Password</param>
-        public void UpdatePassWord(int id, string newPassword)
+        public async Task UpdatePassWord(int id, string newPassword)
         {
             // Opretter en PasswordHasher
             var passwordHasher = new PasswordHasher<string>();
@@ -144,10 +142,7 @@ namespace RenspandWebsite.Service.ProfileServices
             var hashedPassword = passwordHasher.HashPassword(null, newPassword);
 
             // Opdaterer passwordet i databasen
-            _profileDbService.UpdatePasswordAsync(id, hashedPassword).Wait();
-
-            // Opdaterer listen af profiler
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            await _profileDbService.UpdatePasswordAsync(id, hashedPassword);
         }
 
         /// <summary>
@@ -164,13 +159,10 @@ namespace RenspandWebsite.Service.ProfileServices
         /// Fjerner en Profil fra Databasen ud fra profilens id.
         /// </summary>
         /// <param name="id">Id'et på Profilen</param>
-        public void RemoveProfile(int id)
+        public async Task RemoveProfile(int id)
         {
             // Fjerner Profilen fra databasen
-            _profileDbService.DeleteObjectAsync(id).Wait();
-
-            // Opdaterer listen af profiler
-            Profiles = _profileDbService.GetObjectsAsync().Result.ToList();
+            await _profileDbService.DeleteObjectAsync(id);
         }
     }
 }

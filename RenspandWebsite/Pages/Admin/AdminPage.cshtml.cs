@@ -27,7 +27,6 @@ namespace RenspandWebsite.Pages.Admin
         /// </summary>
         public void OnGet()
         {
-            var profiles = _profileService.Profiles;
         }
     }
 }
