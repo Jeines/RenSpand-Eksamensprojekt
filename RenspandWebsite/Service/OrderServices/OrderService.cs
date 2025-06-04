@@ -90,12 +90,12 @@ namespace RenspandWebsite.Service.OrderServices
         {
             try
             {
+                Console.WriteLine("try");
                 var orders = await _orderDbService.GetOrdersWithJoinsAsync();
                 return orders.ToList();
             }
             catch (Exception ex)
             {
-                // TODO: Log fejl her
                 Console.WriteLine("Fejl: " + ex.Message);
                 Console.WriteLine("StackTrace: " + ex.StackTrace);
                 throw;

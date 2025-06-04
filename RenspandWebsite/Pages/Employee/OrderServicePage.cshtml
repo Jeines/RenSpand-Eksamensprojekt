@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var order in Model.Orders)
+                    @foreach (var order in Model.FilteredOrders?.Any() == true ? Model.FilteredOrders : Model.Orders)
                     {
                         string statusClass = order.AcceptStatus switch
                         {

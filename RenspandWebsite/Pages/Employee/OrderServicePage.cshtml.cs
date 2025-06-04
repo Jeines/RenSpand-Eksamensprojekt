@@ -16,6 +16,7 @@ namespace RenspandWebsite.Pages.Employee
         }
 
         public List<Order> FilteredOrders { get; set; } = new List<Order>();
+        [BindProperty]
         public string SearchTerm { get; set; }
 
         public List<Order> Orders { get; set; } = new List<Order>();
@@ -66,53 +67,89 @@ namespace RenspandWebsite.Pages.Employee
             return RedirectToPage();
         }
 
-        public async Task OnPostSearch(string searchTerm)
+        /// <summary>  
+        /// StringComparison.OrdinalIgnoreCase er en enum-værdi, der bruges til at angive  
+        /// en case-insensitiv sammenligning af strenge.  
+        ///  
+        /// - "Ordinal" betyder, at sammenligningen er baseret på den numeriske værdi af hver karakter  
+        ///   i strengen, som er dens Unicode-værdi.  
+        /// - "IgnoreCase" sikrer, at sammenligningen ignorerer forskelle i store og små bogstaver.  
+        ///  
+        /// Hvad er Unicode-værdier?  
+        /// Unicode er en standard, der tildeler en unik numerisk værdi (kaldet en "kodepunkt") til hver karakter  
+        /// i forskellige sprog og symboler. For eksempel:  
+        /// - 'A' har Unicode-værdien 65  
+        /// - 'a' har Unicode-værdien 97  
+        /// - 'Æ' har Unicode-værdien 198  
+        ///  
+        /// Dette er nyttigt, når du vil sammenligne strenge uden at bekymre dig om  
+        /// forskelle i store og små bogstaver.  
+        ///  
+        /// For mere info vedrørende "Stringcomparison" tjek link fra microsoft:
+        /// 
+        /// https://learn.microsoft.com/en-us/dotnet/api/system.stringcomparison
+        /// </summary>
+        /// 
+
+        //public async Task OnPostSearch(string searchTerm)
+        //{
+        //    // Gem søgetermen for brug i visningen
+        //    SearchTerm = searchTerm;
+
+        //    // Filtrer ordrer baseret på søgetermen
+        //    if (!string.IsNullOrEmpty(SearchTerm))
+        //    {
+        //        Console.WriteLine("søg");
+
+        //        FilteredOrders = (await _orderService.GetOrders())
+        //            .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        //                        (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+        //                        (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+        //                                                 a.Address.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+        //                                                 a.Address.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
+        //            .ToList();
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("NO search");
+        //        // Hvis ingen søgeterm er angivet, returneres alle ordrer
+        //        FilteredOrders = (await _orderService.GetOrders()).ToList(); // Konverter IEnumerable til List
+        //    }
+        //}
+
+        public async Task<IActionResult> OnPostSearchAsync()
         {
-            // Gem søgetermen for brug i visningen
-            SearchTerm = searchTerm;
+            // Henter ordre
+            Orders = (await _orderService.GetOrders()).ToList();
+            // sortere ordre
+            Orders = Orders.OrderByDescending(o => o.Id).ToList();
 
-            /// <summary>  
-            /// StringComparison.OrdinalIgnoreCase er en enum-værdi, der bruges til at angive  
-            /// en case-insensitiv sammenligning af strenge.  
-            ///  
-            /// - "Ordinal" betyder, at sammenligningen er baseret på den numeriske værdi af hver karakter  
-            ///   i strengen, som er dens Unicode-værdi.  
-            /// - "IgnoreCase" sikrer, at sammenligningen ignorerer forskelle i store og små bogstaver.  
-            ///  
-            /// Hvad er Unicode-værdier?  
-            /// Unicode er en standard, der tildeler en unik numerisk værdi (kaldet en "kodepunkt") til hver karakter  
-            /// i forskellige sprog og symboler. For eksempel:  
-            /// - 'A' har Unicode-værdien 65  
-            /// - 'a' har Unicode-værdien 97  
-            /// - 'Æ' har Unicode-værdien 198  
-            ///  
-            /// Dette er nyttigt, når du vil sammenligne strenge uden at bekymre dig om  
-            /// forskelle i store og små bogstaver.  
-            ///  
-            /// For mere info vedrørende "Stringcomparison" tjek link fra microsoft:
-            /// 
-            /// https://learn.microsoft.com/en-us/dotnet/api/system.stringcomparison  
-            /// </summary>
-
-            // Filtrer ordrer baseret på søgetermen
-            if (!string.IsNullOrEmpty(SearchTerm))
+            // viser alle ordre hvis søgterm er tom
+            if (string.IsNullOrWhiteSpace(SearchTerm))
             {
-                FilteredOrders = (await _orderService.GetOrders())
-                    .Where(o => (o.Buyer?.Name?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                                (o.Buyer?.PhoneNumber?.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
-                                (o.AddressItems?.Any(a => a.Address.Street.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.Address.City.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase) ||
-                                                         a.Address.ZipCode.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)) ?? false))
-                    .ToList();
+                FilteredOrders = Orders;
             }
             else
             {
-                // Hvis ingen søgeterm er angivet, returneres alle ordrer
-                FilteredOrders = (await _orderService.GetOrders()).ToList(); // Konverter IEnumerable til List
+                //laver søgeterm til lower og fjerner whitespace
+                string lowerSearchTerm = SearchTerm.Trim().ToLower();
+
+                //finder ordre med denne søgeterm
+                FilteredOrders = Orders.Where(order =>
+                    (order.Buyer?.Name?.ToLower().Contains(lowerSearchTerm) ?? false) ||
+                    (order.Buyer?.PhoneNumber?.ToLower().Contains(lowerSearchTerm) ?? false) ||
+                    order.AddressItems.Any(addr =>
+                        (addr.Address?.Street?.ToLower().Contains(lowerSearchTerm) ?? false) ||
+                        (addr.Address?.City?.ToLower().Contains(lowerSearchTerm) ?? false) ||
+                        (addr.Address?.ZipCode?.ToString().ToLower().Contains(lowerSearchTerm) ?? false))
+                ).ToList();
             }
+            // opdaterer side
+            return Page();
         }
 
-       
+
+
         /// <summary>
         /// Saves a note to the order with the given orderId
         /// </summary>
