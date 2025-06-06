@@ -37,7 +37,7 @@ builder.Services.AddScoped<AboutUsService>();
 
 // FAQ service initialization
 builder.Services.AddScoped<DbService<FAQ>>();
-builder.Services.AddScoped<FaqDbService>();
+builder.Services.AddScoped<FaqService>();
 builder.Services.AddScoped<FaqService>();
 
 // Work service initialization

@@ -82,7 +82,7 @@ namespace RenspandWebsite.Pages.Profiles
         /// Opdaterer brugerens profiloplysninger.
         /// </summary>
         /// <returns>En IActionResult, der enten genindlæser siden eller viser valideringsfejl.</returns>
-        public IActionResult OnPostSaveChanges()
+        public async Task<IActionResult> OnPostSaveChanges()
         {
             // Fjerner validering for felter, der ikke er relevante for denne handling
             ModelState.Remove(nameof(Username));
@@ -112,7 +112,7 @@ namespace RenspandWebsite.Pages.Profiles
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             // Opdaterer brugerens data i databasen
-            _profileService.UpdateUserData(userId, updatedProfile);
+            await _profileService.UpdateUserData(userId, updatedProfile);
 
             return RedirectToPage();
         }

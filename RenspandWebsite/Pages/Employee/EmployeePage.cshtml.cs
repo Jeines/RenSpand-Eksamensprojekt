@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Models;
 using RenspandWebsite.Service.OrderServices;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Employee
 {
@@ -48,10 +49,10 @@ namespace RenspandWebsite.Pages.Employee
         /// </summary>
         /// <param name="orderId">Id på ordren der skal afvises</param>
         /// <returns>Redirect til siden</returns>
-        public IActionResult OnPostRejectOrder(int orderId)
+        public async Task<IActionResult> OnPostRejectOrder(int orderId)
         {
             Console.WriteLine("RejectOrder");
-            _orderService.RejectOrder(orderId);
+            await _orderService.RejectOrder(orderId);
             return RedirectToPage();
         }
 

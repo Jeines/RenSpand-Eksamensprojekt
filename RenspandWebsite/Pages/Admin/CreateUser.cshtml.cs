@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Models;
 using RenspandWebsite.Service.ProfileServices;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin
 {
@@ -46,7 +47,7 @@ namespace RenspandWebsite.Pages.Admin
         /// Validerer model, opretter profil og tilføjer den via ProfileService.
         /// </summary>
         /// <returns>Redirect til forsiden hvis succes, ellers vises siden igen.</returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +61,7 @@ namespace RenspandWebsite.Pages.Admin
                 Password = passwordHasher.HashPassword(null, Password)
             };
 
-            _profileService.AddProfile(newProfile);
+            await _profileService.AddProfile(newProfile);
             return RedirectToPage("/Index");
         }
     }

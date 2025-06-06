@@ -2,73 +2,76 @@
 using RenspandWebsite.Models;
 using RenspandWebsite.EFDbContext;
 
+
 namespace RenspandWebsite.Service.FaqServices
 {
 
     public class FaqService
-    {
+    { 
+        private readonly DbService<FAQ> _faqDbService;
+        
         public List<FAQ> FAQs { get; }
-
         private readonly List<FAQ> _faqs;
-        private readonly FaqDbService _faqDbService;
+       
 
-        public FaqService(FaqDbService faqDbService)
+        public FaqService(DbService<FAQ> faqDbService)
         {
             _faqDbService = faqDbService;
-            _faqs = _faqDbService.GetAllFAQsAsync().Result.ToList();
+            _faqs = new List<FAQ>();
             FAQs = _faqs;
         }
 
         /// <summary>
         /// Henter alle FAQs
         /// </summary>
-        public IEnumerable<FAQ> GetFAQs()
+        public async Task<IEnumerable<FAQ>> GetFAQsAsync()
         {
-            return _faqs;
+            return await _faqDbService.GetObjectsAsync();
         }
 
         /// <summary>
         /// Henter en FAQ baseret på ID
         /// </summary>
-        public FAQ? GetFAQById(int id)
+        public async Task<FAQ> GetFAQByIdAsync(int id)
         {
-            return _faqs.FirstOrDefault(f => f.Id == id);
+            return await _faqDbService.GetObjectByIdAsync(id);
         }
 
         /// <summary>
         /// Tilføjer en ny FAQ og opdaterer listen
         /// </summary>
-        public void AddFAQ(string question, string answer)
+        public async Task AddFAQAsync(string question, string answer)
         {
-            _faqDbService.AddFAQAsync(question, answer).Wait();
-            RefreshFAQList();
+           var newFAQ = new FAQ { Question = question, Answer = answer };
+           await _faqDbService.AddObjectAsync(newFAQ);
         }
 
         /// <summary>
         /// Opdaterer en eksisterende FAQ og opdaterer listen
         /// </summary>
-        public void UpdateFAQ(int id, string question, string answer)
+        public async Task UpdateFAQAsync(FAQ UpdatedFAQ)
         {
-            _faqDbService.UpdateFAQAsync(id, question, answer).Wait();
-            RefreshFAQList();
+            await _faqDbService.UpdateObjectAsync(UpdatedFAQ);
+            RefreshFAQListAsync();
         }
+       
 
         /// <summary>
         /// Sletter en FAQ og opdaterer listen
         /// </summary>
-        public void DeleteFAQ(int id)
+        public async Task DeleteFAQ(int id)
         {
-            _faqDbService.DeleteFAQAsync(id).Wait();
-            RefreshFAQList();
+            await _faqDbService.DeleteObjectAsync(id);
         }
 
         /// <summary>
         /// Opdaterer den interne liste med de nyeste data
         /// </summary>
-        private void RefreshFAQList()
+        private async Task RefreshFAQListAsync()
         {
             _faqs.Clear();
-            _faqs.AddRange(_faqDbService.GetAllFAQsAsync().Result);
+            var faqsFromDb = await _faqDbService.GetObjectsAsync();
+            _faqs.AddRange(faqsFromDb);
         }
     }
 }

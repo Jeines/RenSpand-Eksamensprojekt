@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RenspandWebsite.Service.FaqServices;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
 {
@@ -38,12 +39,12 @@ namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
         /// Håndterer POST-anmodninger for at oprette en ny FAQ.
         /// </summary>
         /// <returns>Redirect til FAQ-oversigten ved succes, ellers vises siden igen.</returns>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
                 return Page();
 
-            _faqService.AddFAQ(Question, Answer);
+            await _faqService.AddFAQAsync(Question, Answer);
             return RedirectToPage("AdminFaq");
         }
     }
