@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using RenspandWebsite.Service.FaqServices;
 using RenspandWebsite.Models;
+using System.Threading.Tasks;
 
 namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
 {
@@ -39,20 +40,21 @@ namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
         /// <summary>
         /// Henter og viser alle FAQ'er ved indlæsning af siden.
         /// </summary>
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Faqs = _faqService.GetFAQs().ToList();
+            var faqs = await _faqService.GetFAQsAsync();
+            Faqs = faqs.ToList(); 
         }
 
         /// <summary>
         /// Tilføjer en ny FAQ, hvis både spørgsmål og svar er udfyldt.
         /// </summary>
         /// <returns>Redirect til siden efter tilføjelse.</returns>
-        public IActionResult OnPostAdd()
+        public async Task<IActionResult> OnPostAdd()
         {
             if (!string.IsNullOrWhiteSpace(NewFaq.Question) && !string.IsNullOrWhiteSpace(NewFaq.Answer))
             {
-                _faqService.AddFAQ(NewFaq.Question, NewFaq.Answer);
+                await _faqService.AddFAQAsync(NewFaq.Question, NewFaq.Answer);
             }
 
             return RedirectToPage();
@@ -63,9 +65,9 @@ namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
         /// </summary>
         /// <param name="id">ID på FAQ der skal slettes.</param>
         /// <returns>Redirect til siden efter sletning.</returns>
-        public IActionResult OnPostDelete(int id)
+        public async Task<IActionResult> OnPostDelete(int id)
         {
-            _faqService.DeleteFAQ(id);
+            await _faqService.DeleteFAQ(id);
             return RedirectToPage();
         }
 
@@ -76,9 +78,15 @@ namespace RenspandWebsite.Pages.Admin.AdminManageFAQ
         /// <param name="question">Nyt spørgsmål.</param>
         /// <param name="answer">Nyt svar.</param>
         /// <returns>Redirect til siden efter opdatering.</returns>
-        public IActionResult OnPostUpdate(int id, string question, string answer)
+        public async Task<IActionResult> OnPostUpdate(int id, string question, string answer)
         {
-            _faqService.UpdateFAQ(id, question, answer);
+            var existingFaq = await _faqService.GetFAQByIdAsync(id); // Await the Task to get the FAQ object
+            if (existingFaq != null)
+            {
+                existingFaq.Question = question;
+                existingFaq.Answer = answer;
+                await _faqService.UpdateFAQAsync(existingFaq); // Pass the FAQ object directly
+            }
             return RedirectToPage();
         }
     }
